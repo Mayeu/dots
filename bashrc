@@ -12,7 +12,7 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 
 ## Path variable
-export PATH=$PATH:~/script/:~/script/python/
+export PATH=$PATH:~/script/:~/script/python/:~/bin/
 
 ## Ledger
 export LEDGER_FILE=~/account.ldg
@@ -85,7 +85,7 @@ alias r='ruby'
 alias ra='rails'
 
 # General function
-function git_diff() {
+git_diff() {
   git diff --no-ext-diff -w "$@" | vim -R -
 }
 
@@ -124,11 +124,6 @@ elif [ `hostname -s` == "nyarlathothep" ] ; then
    # General alias
    alias udd='sudo umount /media/THE\ NEW\ FAT/ /media/Save/ /media/Mac\ OS\ X/ /media/HD/'
    alias cp='vcp'
-
-   # Function
-   function git_diff_wrapper() {
-      mvim -d $1 $2
-   }
 fi
 
 ## Prompt
