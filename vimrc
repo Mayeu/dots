@@ -5,7 +5,9 @@ let mapleader=','
 syntax on
 
 "Colorscheme
-colorscheme vividchalk
+set t_Co=256
+"colorscheme vividchalk
+colorscheme underwater-mod256
 
 " General stuff
 set nocompatible
@@ -16,9 +18,9 @@ set incsearch " incremental search
 set hlsearch " highlight search
 set ignorecase
 set smartcase
-set fdm=syntax "Folding by syntax
+"set fdm=syntax "Folding by syntax
 set showcmd "Show the command currently typed
-set tw=80 "End of line at 80 char
+"set tw=80 "End of line at 80 char
 
 " Indentation stuff
 set autoindent "Auto indent
@@ -50,6 +52,7 @@ set undoreload=10000
 nnoremap / /\v
 vnoremap / /\v
 
+
 "------------------------------------------------
 " Statut line
 
@@ -57,7 +60,7 @@ vnoremap / /\v
 set laststatus=2
 
 " Stalut line configuration
-set statusline=%a\ %t%1*%m%*\ l:%l/%2*%L%*%6c%V
+set statusline=%a\ %t%1*%m%*\ %{fugitive#statusline()}\ l:%l/%2*%L%*%6c%V
 
 "%a si vous avez ouvert plusieurs fichiers, affiche le numéro de buffer sous la forme (1 of 4) pour le premier des quatre fichiers ;
 "%t pour le nom du fichier sans le chemin ;
