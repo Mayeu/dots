@@ -84,6 +84,11 @@ alias more='less'
 alias r='ruby'
 alias ra='rails'
 
+# General function
+function git_diff() {
+  git diff --no-ext-diff -w "$@" | vim -R -
+}
+
 # Host specific
 ############### Argon ################
 if [ `hostname -s` == "argon" ] ; then
@@ -114,10 +119,16 @@ elif [ `hostname -s` == "nyarlathothep" ] ; then
    alias vim='mvim'
    alias vi="mvim"
    alias :e="mvim"
+   alias vimdiff="mvim -d"
 
    # General alias
    alias udd='sudo umount /media/THE\ NEW\ FAT/ /media/Save/ /media/Mac\ OS\ X/ /media/HD/'
    alias cp='vcp'
+
+   # Function
+   function git_diff_wrapper() {
+      mvim -d $1 $2
+   }
 fi
 
 ## Prompt
