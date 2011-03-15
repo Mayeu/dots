@@ -5,12 +5,12 @@
 
 REPLACE_ALL=false
 
-function Overwrite {
-rm -rf $2
-ln -sv $1 $2
+function Overwrite() {
+   rm -rf $2
+   ln -sv $1 $2
 }
 
-function Deploy {
+function Deploy() {
 if test -e $2 ; then
    if $REPLACE_ALL ; then
       Overwrite $1 $2

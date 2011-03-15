@@ -84,11 +84,6 @@ alias more='less'
 alias r='ruby'
 alias ra='rails'
 
-# General function
-function git_diff() {
-  git diff --no-ext-diff -w "$@" | vim -R -
-}
-
 # Host specific
 ############### Argon ################
 if [ `hostname -s` == "argon" ] ; then
