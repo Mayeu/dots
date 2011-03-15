@@ -29,9 +29,5 @@
    br = branch
    co = checkout
    a = add
+   d = diff
 
-[diff]
-   external = git_diff_wrapper
-
-[pager]
-   diff =
