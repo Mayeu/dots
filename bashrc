@@ -123,6 +123,10 @@ elif [ `hostname -s` == "nyarlathothep" ] ; then
    # General alias
    alias udd='sudo umount /media/THE\ NEW\ FAT/ /media/Save/ /media/Mac\ OS\ X/ /media/HD/'
    alias cp='vcp'
+
+   if [ -f `brew --prefix`/etc/bash_completion ]; then
+      . `brew --prefix`/etc/bash_completion
+   fi
 fi
 
 ## Prompt
