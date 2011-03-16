@@ -45,7 +45,6 @@ alias pd='pushd'
 alias pd2='pushd +2'
 alias pd3='pushd +3'
 alias pd4='pushd +4'
-alias account="vim ~/account.ldg"
 alias g='git'
 alias n='notes'
 alias h='heroku'
@@ -96,7 +95,6 @@ if [ `hostname -s` == "argon" ] ; then
    fi
 
    # Vim
-   alias vim='gvim'
    alias vimdiff='gvimdiff'
 
    # Less is vim
@@ -115,10 +113,13 @@ elif [ `hostname -s` == "nyarlathothep" ] ; then
    export CDPATH=$CDPATH:~/Documents/cours/:~/Documents/cours/esil_A3/:~/code/
 
    # Vim alias
-   alias vim='mvim'
+   alias vim="mvim"
    alias vi="mvim"
    alias :e="mvim"
    alias vimdiff="mvim -d"
+
+   # Ledger account
+   alias account="mvim ~/account.ldg"
 
    # General alias
    alias udd='sudo umount /media/THE\ NEW\ FAT/ /media/Save/ /media/Mac\ OS\ X/ /media/HD/'
