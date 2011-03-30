@@ -25,6 +25,7 @@ set showcmd "Show the command currently typed
 " Indentation stuff
 set autoindent "Auto indent
 set si "Smart indent
+set tabstop=3
 set expandtab "Convert tab to space
 set shiftwidth=3
 set softtabstop=3
