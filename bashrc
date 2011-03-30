@@ -5,6 +5,7 @@ case $- in *i*) ;; *) return;; esac
 shopt -s histappend # as inside vim
 PROMPT_COMMAND='history -a'
 export HISTCONTROL=ignoredups #ignore duplicate command in history
+export HISTSIZE=10000
 #export HISTIGNORE='&:[bf]g:exit:history*:rm*:cl:clear:resource:source*' #ignore some command
 
 ## default editor
@@ -109,6 +110,13 @@ if [ `hostname -s` == "argon" ] ; then
    }
 ################ Nyarlathothep #################
 elif [ `hostname -s` == "nyarlathothep" ] ; then
+
+   # LSCOLORS
+   export LSCOLORS="gxfxcxdxbxegedabagacad"
+
+   # EDITOR Git compatible
+   export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a iTerm"'
+
    # CDPATH
    export CDPATH=$CDPATH:~/Documents/cours/:~/Documents/cours/esil_A3/:~/code/
 
@@ -117,6 +125,9 @@ elif [ `hostname -s` == "nyarlathothep" ] ; then
    alias vi="mvim"
    alias :e="mvim"
    alias vimdiff="mvim -d"
+
+   # Sup alias
+   alias sup='cd /Users/lainux/code/sup && RUBY_INVOCATION="ruby -Ilib" ruby -Ilib bin/sup'
 
    # Ledger account
    alias account="mvim ~/account.ldg"
