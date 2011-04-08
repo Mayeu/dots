@@ -1,2 +1,2 @@
 "C colorscheme
-colorscheme vividchalk
+"colorscheme vividchalk
