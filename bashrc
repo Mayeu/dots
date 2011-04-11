@@ -102,7 +102,9 @@ if [ `hostname -s` == "argon" ] ; then
    alias less='/usr/share/vim/vim73/macros/less.sh'
 
    # Other app alias
-   alias sofa='/extra/Sofa/bin/runSofa'
+   export SOFA='/opt/Sofa-1.0'
+   alias sofa='/opt/Sofa-1.0/bin/runSofa'
+   alias oldsofa='/extra/Sofa/bin/runSofa'
 
    # function
    function evince() {
