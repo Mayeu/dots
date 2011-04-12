@@ -113,6 +113,8 @@ if [ `hostname -s` == "argon" ] ; then
 ################ Nyarlathothep #################
 elif [ `hostname -s` == "nyarlathothep" ] ; then
 
+   # Path
+   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
    # LSCOLORS
    export LSCOLORS="gxfxcxdxbxegedabagacad"
 
