@@ -160,6 +160,9 @@ Plug_Tex_InsertItem	latex-suite.txt	/*Plug_Tex_InsertItem*
 Plug_Tex_LeftRight	latex-suite.txt	/*Plug_Tex_LeftRight*
 Plug_Tex_MathBF	latex-suite.txt	/*Plug_Tex_MathBF*
 Plug_Tex_MathCal	latex-suite.txt	/*Plug_Tex_MathCal*
+ReloadAllSnippets()	snipMate.txt	/*ReloadAllSnippets()*
+ReloadSnippets()	snipMate.txt	/*ReloadSnippets()*
+ResetAllSnippets()	snipMate.txt	/*ResetAllSnippets()*
 ResetSnippets()	snipMate.txt	/*ResetSnippets()*
 Roman	latexhelp.txt	/*Roman*
 TClearCiteHist	latex-suite.txt	/*TClearCiteHist*
@@ -1601,6 +1604,7 @@ snipMate-expandtab	snipMate.txt	/*snipMate-expandtab*
 snipMate-features	snipMate.txt	/*snipMate-features*
 snipMate-filename	snipMate.txt	/*snipMate-filename*
 snipMate-indenting	snipMate.txt	/*snipMate-indenting*
+snipMate-license	snipMate.txt	/*snipMate-license*
 snipMate-placeholders	snipMate.txt	/*snipMate-placeholders*
 snipMate-remap	snipMate.txt	/*snipMate-remap*
 snipMate-settings	snipMate.txt	/*snipMate-settings*
