@@ -143,6 +143,11 @@ elif [ `hostname -s` == "nyarlathothep" ] ; then
    if [ -f `brew --prefix`/etc/bash_completion ]; then
       . `brew --prefix`/etc/bash_completion
    fi
+elif [ `hostname -s` == "endymion" ] ; then
+   # load some private stuff
+   if [ -f "$HOME/.priv_bashrc" ]; then
+      . "$HOME/.priv_bashrc"
+   fi
 fi
 
 ## Prompt
