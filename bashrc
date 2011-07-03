@@ -7,6 +7,7 @@ PROMPT_COMMAND='history -a'
 export HISTCONTROL=ignoredups #ignore duplicate command in history
 export HISTSIZE=10000
 #export HISTIGNORE='&:[bf]g:exit:history*:rm*:cl:clear:resource:source*' #ignore some command
+export HISTIGNORE='exit'
 
 ## default editor
 export EDITOR=vim
