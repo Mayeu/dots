@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#HOME='/Users/lainux'
+cp ${HOME}/account.ldg ${HOME}/.account.ldg.bak
+ledger -f ${HOME}/account.ldg -S d print > ${HOME}/account2.ldg
+mv ${HOME}/account2.ldg ${HOME}/account.ldg
+perl -pi -e 's/\s+;/ ;/' ${HOME}/account.ldg
