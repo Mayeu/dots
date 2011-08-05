@@ -14,7 +14,7 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 
 ## Path variable
-export PATH=$PATH:~/script/:~/script/python/:~/bin/
+export PATH=$PATH:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/
 
 ## Ledger
 export LEDGER_FILE=~/account.ldg
