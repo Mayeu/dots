@@ -7,7 +7,8 @@ syntax on
 "Colorscheme
 set t_Co=256
 "colorscheme vividchalk
-colorscheme underwater-mod256
+set background=dark
+colorscheme solarized
 
 " General stuff
 set nocompatible
