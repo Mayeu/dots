@@ -1,6 +1,14 @@
 # Stop the reading of the file if non-iteration case
 case $- in *i*) ;; *) return;; esac
 
+# Load bash completion
+if [ -f /etc/bash_completion   ] ; then
+   BASH_COMPLETION=/etc/bash_completion
+   BASH_COMPLETION_DIR=/etc/bash_completion.d
+   export BASH_COMPLETION BASH_COMPLETION_DIR
+   source /etc/bash_completion
+fi
+
 ## bash history config
 shopt -s histappend # as inside vim
 PROMPT_COMMAND='history -a'
@@ -87,12 +95,12 @@ alias ra='rails'
 ############### Argon ################
 if [ `hostname -s` == "argon" ] ; then
 
-   if [ -f /etc/bash_completion   ] ; then
-      BASH_COMPLETION=/etc/bash_completion
-      BASH_COMPLETION_DIR=/etc/bash_completion.d
-      export BASH_COMPLETION BASH_COMPLETION_DIR
-      source /etc/bash_completion
-   fi
+#   if [ -f /etc/bash_completion   ] ; then
+#      BASH_COMPLETION=/etc/bash_completion
+#      BASH_COMPLETION_DIR=/etc/bash_completion.d
+#      export BASH_COMPLETION BASH_COMPLETION_DIR
+#      source /etc/bash_completion
+#   fi
 
    # Vim
    alias vimdiff='gvimdiff'
