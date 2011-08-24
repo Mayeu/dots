@@ -113,12 +113,12 @@ snippet section
 	${1:Section}~\ref{${2:sec:}}${3}
 snippet page
 	${1:page}~\pageref{${2}}${3}
-snippet eqna
-	\begin{eqnarray}
-	${1}
-	\end{eqnarray}
-snippet eqna*
-	\begin{eqnarray*}
-	${1}
-	\end{eqnarray*}
-
+# figure environement
+snippet fig
+	\begin{figure}[ht]
+		\begin{center}
+			\psfig{width=${1},figure=${2}}
+		\end{center}
+		\caption[${3}]{${4}}
+		\label{fig:${5}}
+	\end{figure}

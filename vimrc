@@ -98,4 +98,6 @@ filetype plugin indent on
 "let g:tex_flavor='latex'
 
 " Ledger files with .ldg extentions 
-autocmd BufNewFile,BufRead *.ldg,*.ledger  :setf ledger 
+autocmd BufNewFile,BufRead *.ldg,*.ledger set ft=ledger 
+" Some tex file are not detected as tex file but plaintex
+autocmd BufRead,BufNewFile *.tex set ft=tex
