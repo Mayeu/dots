@@ -1,0 +1,4 @@
+#! /bin/sh
+
+sudo umount $1
+hdiutil makehybrid -o $2 -iso $1
