@@ -141,6 +141,9 @@ elif [ `hostname -s` == "nyarlathothep" ] ; then
    # CDPATH
    export CDPATH=$CDPATH:~/Documents/cours/:~/Documents/cours/esil_A3/:~/code/
 
+   # GNUTERM
+   export GNUTERM='X11'
+
    # Vim alias
    alias vim="mvim"
    alias vi="mvim"
