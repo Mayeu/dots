@@ -119,6 +119,8 @@ if [ `hostname -s` == "argon" ] ; then
    }
 ################## Cthulhu #####################
 elif [ `hostname` == "cthulhu" ] ; then
+   # PATH
+   export PATH=$PATH:~/.cabal/bin
    # CDPATH
    export CDPATH=$CDPATH:~/code/
 
@@ -170,6 +172,8 @@ elif [ `hostname -s` == "endymion" ] ; then
       . "$HOME/.priv_bashrc"
    fi
 fi
+
+calc(){ awk "BEGIN { print $* }" ;}
 
 ## Prompt
 GIT_PS1_SHOWDIRTYSTATE=true
