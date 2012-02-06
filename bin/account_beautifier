@@ -2,7 +2,11 @@
 
 #HOME='/Users/lainux'
 # Ledger path
-LDG=`readlink -f ${LEDGER_FILE}`
+if [ `uname` == "Darwin" ] ; then
+   LDG=`readlink ${LEDGER_FILE}`
+else
+   LDG=`readlink -f ${LEDGER_FILE}`
+fi
 
 cp ${LDG} ${HOME}/.account.ldg.bak
 ledger -f ${LDG} -S d print > ${LDG}.clean
