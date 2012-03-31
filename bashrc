@@ -1,12 +1,9 @@
 # Stop the reading of the file if non-iteration case
 case $- in *i*) ;; *) return;; esac
 
-# Load bash completion
-if [ -f /etc/bash_completion   ] ; then
-   BASH_COMPLETION=/etc/bash_completion
-   BASH_COMPLETION_DIR=/etc/bash_completion.d
-   export BASH_COMPLETION BASH_COMPLETION_DIR
-   source /etc/bash_completion
+# Load git completion
+if [ -f /usr/share/git/completion/git-completion.bash ] ; then
+   source /usr/share/git/completion/git-completion.bash
 fi
 
 ## bash history config
@@ -26,6 +23,10 @@ export PATH=$PATH:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/
 
 ## Ledger
 export LEDGER_FILE=~/account.ldg
+
+# Todo.txt config
+export TODOTXT_DATE_ON_ADD=1
+export TODOTXT_AUTO_ARCHIVE=0
 
 # OS Specific
 if [ `uname` == "Darwin" ] ; then
@@ -230,3 +231,5 @@ PROMPT_COMMAND=prompt_command
 
 # Load rvm
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
