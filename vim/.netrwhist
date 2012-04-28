@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/home/lainux/sites/aemea-cake/app'
 let g:netrw_dirhist_2='/home/lainux/download/signal-1.0.11/inst'
 let g:netrw_dirhist_3='/home/lainux/code/dotspriv'
+let g:netrw_dirhist_4='/home/lainux/code/0x10cfan/layouts'

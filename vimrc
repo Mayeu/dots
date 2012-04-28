@@ -6,7 +6,6 @@ syntax on
 
 "Colorscheme
 set t_Co=256
-"colorscheme vividchalk
 set background=dark
 colorscheme solarized
 
@@ -33,6 +32,7 @@ set softtabstop=3
 
 " File encoding of new & saved file
 set fileencoding=utf8
+set fileencodings=utf-8,ucs-bom,default,latin1
 
 " Some stuff about windows
 set splitbelow " Horizontal split below
