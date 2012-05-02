@@ -94,30 +94,30 @@ alias ra='rails'
 
 # Host specific
 ############### Argon ################
-if [ `hostname -s` == "argon" ] ; then
+if [ `hostname -s` == "Rifter" ] ; then
 
-#   if [ -f /etc/bash_completion   ] ; then
-#      BASH_COMPLETION=/etc/bash_completion
-#      BASH_COMPLETION_DIR=/etc/bash_completion.d
-#      export BASH_COMPLETION BASH_COMPLETION_DIR
-#      source /etc/bash_completion
-#   fi
+   if [ -f /etc/bash_completion.d/git   ] ; then
+      #BASH_COMPLETION=/etc/bash_completion
+      #BASH_COMPLETION_DIR=/etc/bash_completion.d
+      #export BASH_COMPLETION BASH_COMPLETION_DIR
+      source /etc/bash_completion.d/git
+   fi
 
    # Vim
    alias vimdiff='gvimdiff'
 
    # Less is vim
-   alias less='/usr/share/vim/vim73/macros/less.sh'
+   # alias less='/usr/share/vim/vim73/macros/less.sh'
 
    # Other app alias
-   export SOFA='/opt/Sofa-1.0'
-   alias sofa='/opt/Sofa-1.0/bin/runSofa'
-   alias oldsofa='/extra/Sofa/bin/runSofa'
+   # export SOFA='/opt/Sofa-1.0'
+   # alias sofa='/opt/Sofa-1.0/bin/runSofa'
+   # alias oldsofa='/extra/Sofa/bin/runSofa'
 
    # function
-   function evince() {
-      /usr/bin/evince $@ &> /dev/null
-   }
+   #function evince() {
+   #   /usr/bin/evince $@ &> /dev/null
+   #}
 ################## Cthulhu #####################
 elif [ `hostname` == "cthulhu" ] ; then
    # PATH
