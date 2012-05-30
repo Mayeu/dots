@@ -114,6 +114,8 @@ if [ `hostname -s` == "Rifter" ] ; then
    # alias sofa='/opt/Sofa-1.0/bin/runSofa'
    # alias oldsofa='/extra/Sofa/bin/runSofa'
 
+   alias kdvp='setxkbmap -layout us -variant dvp -option compose:caps -option keypad:atm -option numpad:shift3 -option kpdl:semi'
+
    # function
    #function evince() {
    #   /usr/bin/evince $@ &> /dev/null
