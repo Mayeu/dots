@@ -54,6 +54,11 @@ set undoreload=10000
 nnoremap / /\v
 vnoremap / /\v
 
+"------------------------------------------------
+" Command
+
+" su-write
+command W w !sudo tee % > /dev/null
 
 "------------------------------------------------
 " Statut line
