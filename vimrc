@@ -106,3 +106,7 @@ filetype plugin indent on
 autocmd BufNewFile,BufRead *.ldg,*.ledger set ft=ledger 
 " Some tex file are not detected as tex file but plaintex
 autocmd BufRead,BufNewFile *.tex set ft=tex
+
+" perl tidy
+au Filetype perl nmap <C-F6> :%!perltidy<CR>
+
