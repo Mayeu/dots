@@ -58,6 +58,7 @@ alias pd4='pushd +4'
 alias g='git'
 alias n='notes'
 alias h='heroku'
+alias tstamp='date +%s'
 
 # Old Arch alias 
 #alias spotify='wine "C:\Program Files\Spotify\spotify.exe"'
