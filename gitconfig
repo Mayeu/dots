@@ -31,3 +31,5 @@
    a = add
    d = diff
 
+[diff]
+	tool = vimdiff
