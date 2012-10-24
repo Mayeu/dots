@@ -59,6 +59,9 @@ set undoreload=10000
 nnoremap / /\v
 vnoremap / /\v
 
+" Read my bashrc you filthy little shelly !
+set shell=bash\ -l
+
 "------------------------------------------------
 " Command
 
@@ -115,3 +118,6 @@ autocmd BufRead,BufNewFile *.tex set ft=tex
 " perl tidy
 au Filetype perl nmap <C-F6> :%!perltidy<CR>
 
+" YAML file
+autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml
+"autocmd BufNewFile,BufRead *.yaml,*.yml so ~/.vim/ftplugin/yaml.vim
