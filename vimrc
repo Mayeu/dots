@@ -60,7 +60,8 @@ nnoremap / /\v
 vnoremap / /\v
 
 " Read my bashrc you filthy little shelly !
-set shell=bash\ -l
+set shell=bash\ -l " like a login shell
+set shellcmdflag=-ic " the shell is now interactive
 
 "------------------------------------------------
 " Command
