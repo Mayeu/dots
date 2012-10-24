@@ -1,3 +1,8 @@
+" Load pathogen
+runtime bundle/pathogen/autoload/pathogen.vim
+" Pathogen infection
+call pathogen#infect()
+
 "mapleader
 let mapleader=','
 
