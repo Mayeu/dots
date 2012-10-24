@@ -1,6 +1,9 @@
+" First shit
+set nocompatible
+
 " Load pathogen
 runtime bundle/pathogen/autoload/pathogen.vim
-" Pathogen infection
+" Infect vim
 call pathogen#infect()
 
 "mapleader
@@ -15,7 +18,6 @@ set background=dark
 colorscheme solarized
 
 " General stuff
-set nocompatible
 set nu "Numbered Line
 "set cursorcolumn " highlight the current column
 "set cursorline " highlight current line
@@ -47,7 +49,11 @@ let g:netrw_altv=1 " Vertical split on the right with netrw
 
 " Visual space and tab
 set list
-set listchars=tab:>.
+set listchars=tab:>.,eol:¬,trail:-
+
+"Invisible character colors (listchars related)
+"highlight NonText guifg=#4a4a59
+"highlight SpecialKey guifg=#4a4a59
 
 " Persistent undo
 set undodir=~/.vim/undodir/
@@ -122,3 +128,10 @@ au Filetype perl nmap <C-F6> :%!perltidy<CR>
 " YAML file
 autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml
 "autocmd BufNewFile,BufRead *.yaml,*.yml so ~/.vim/ftplugin/yaml.vim
+
+" Autoloading the vimrc when changed
+" ----------------------------------
+augroup VimrcReload
+   au!
+   autocmd bufwritepost .vimrc source ~/.vimrc
+augroup END
