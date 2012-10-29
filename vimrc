@@ -1,10 +1,17 @@
 " First shit
 set nocompatible
 
+" Filtype off before infection
+filetype off
+
 " Load pathogen
 runtime bundle/pathogen/autoload/pathogen.vim
 " Infect vim
 call pathogen#infect()
+
+" Filetype force reload
+filetype on
+filetype plugin indent on 
 
 "mapleader
 let mapleader=','
@@ -94,10 +101,6 @@ set statusline=%a\ %t%1*%m%*\ %{fugitive#statusline()}\ l:%l/%2*%L%*%6c%V
 "%V le numéro de colonne virtuelle (tient compte de la place réellement occupée par les multi-caractères comme la tabulation, l'espace insécable, etc.)
 "-------- Source http://www.point-libre.org/~dimitri/blog/index.php/2006/08/01/138
 
-"------------------------------------------------
-" Plugin
-
-filetype plugin indent on 
 
 "------------------------------------------------
 " LaTeX plugins
