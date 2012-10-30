@@ -11,5 +11,7 @@ inoremap    <buffer>  {<CR>  {<CR>}<Esc>O
 vnoremap    <buffer>  {<CR> s{<CR>}<Esc>kp=iB
 
 " Tabulation
+set tabstop=4
+set expandtab
 set shiftwidth=4
 set softtabstop=4
