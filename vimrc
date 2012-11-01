@@ -1,3 +1,18 @@
+" First shit
+set nocompatible
+
+" Filtype off before infection
+filetype off
+
+" Load pathogen
+runtime bundle/pathogen/autoload/pathogen.vim
+" Infect vim
+call pathogen#infect()
+
+" Filetype force reload
+filetype on
+filetype plugin indent on 
+
 "mapleader
 let mapleader=','
 
@@ -10,7 +25,6 @@ set background=dark
 colorscheme solarized
 
 " General stuff
-set nocompatible
 set nu "Numbered Line
 "set cursorcolumn " highlight the current column
 "set cursorline " highlight current line
@@ -42,7 +56,11 @@ let g:netrw_altv=1 " Vertical split on the right with netrw
 
 " Visual space and tab
 set list
-set listchars=tab:>.
+set listchars=tab:>.,eol:¬,trail:-
+
+"Invisible character colors (listchars related)
+"highlight NonText guifg=#4a4a59
+"highlight SpecialKey guifg=#4a4a59
 
 " Persistent undo
 set undodir=~/.vim/undodir/
@@ -53,6 +71,10 @@ set undoreload=10000
 " Perl regex for god sake!
 nnoremap / /\v
 vnoremap / /\v
+
+" Read my bashrc you filthy little shelly !
+set shell=bash\ -l " like a login shell
+set shellcmdflag=-ic " the shell is now interactive
 
 "------------------------------------------------
 " Command
@@ -79,10 +101,6 @@ set statusline=%a\ %t%1*%m%*\ %{fugitive#statusline()}\ l:%l/%2*%L%*%6c%V
 "%V le numéro de colonne virtuelle (tient compte de la place réellement occupée par les multi-caractères comme la tabulation, l'espace insécable, etc.)
 "-------- Source http://www.point-libre.org/~dimitri/blog/index.php/2006/08/01/138
 
-"------------------------------------------------
-" Plugin
-
-filetype plugin indent on 
 
 "------------------------------------------------
 " LaTeX plugins
@@ -110,3 +128,13 @@ autocmd BufRead,BufNewFile *.tex set ft=tex
 " perl tidy
 au Filetype perl nmap <C-F6> :%!perltidy<CR>
 
+" YAML file
+autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml
+"autocmd BufNewFile,BufRead *.yaml,*.yml so ~/.vim/ftplugin/yaml.vim
+
+" Autoloading the vimrc when changed
+" ----------------------------------
+augroup VimrcReload
+   au!
+   autocmd bufwritepost .vimrc source ~/.vimrc
+augroup END

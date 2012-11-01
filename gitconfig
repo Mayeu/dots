@@ -32,4 +32,10 @@
    d = diff
 
 [push]
-	default = current
+   default = current
+
+[diff]
+   tool = vimdiff
+
+[core]
+   excludesfile = ~/.cvsignore
