@@ -1,1 +1,0 @@
-let g:netrw_bookmarklist= ['scp://envdevlrs@leroomservice//var/www/news/', 'scp://envdevlrs@leroomservice//var/www/news/mod/']
