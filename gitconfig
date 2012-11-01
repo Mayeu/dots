@@ -31,7 +31,11 @@
    a = add
    d = diff
 
+[push]
+   default = current
+
 [diff]
-	tool = vimdiff
+   tool = vimdiff
+
 [core]
-	excludesfile = ~/.cvsignore
+   excludesfile = ~/.cvsignore
