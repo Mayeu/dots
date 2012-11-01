@@ -82,8 +82,9 @@ set shellcmdflag=-ic " the shell is now interactive
 " su-write
 command W w !sudo tee % > /dev/null
 
-"------------------------------------------------
+"------------
 " Statut line
+" -----------
 
 " Show the statut line
 set laststatus=2
@@ -102,23 +103,9 @@ set statusline=%a\ %t%1*%m%*\ %{fugitive#statusline()}\ l:%l/%2*%L%*%6c%V
 "-------- Source http://www.point-libre.org/~dimitri/blog/index.php/2006/08/01/138
 
 
-"------------------------------------------------
-" LaTeX plugins
-
-" IMPORTANT: win32 users will need to have 'shellslash' set so that latex 
-" can be called correctly. 
-"set shellslash 
-" IMPORTANT: grep will sometimes skip displaying the file name if you 
-" search in a singe file. This will confuse Latex-Suite. Set your grep 
-" program to always generate a file-name. 
-"set grepprg=grep\ -nH\ $* 
-" OPTIONAL: This enables automatic indentation as you type. 
-"filetype indent on 
-
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" " The following changes the default filetype back to 'tex':
-"let g:tex_flavor='latex'
+" --------------
+" File detection
+" --------------
 
 " Ledger files with .ldg extentions 
 autocmd BufNewFile,BufRead *.ldg,*.ledger set ft=ledger 
@@ -130,7 +117,21 @@ au Filetype perl nmap <C-F6> :%!perltidy<CR>
 
 " YAML file
 autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml
-"autocmd BufNewFile,BufRead *.yaml,*.yml so ~/.vim/ftplugin/yaml.vim
+
+" --------------------
+" Plugin configuration
+" --------------------
+
+" UltiSnips
+" ---------
+
+" Snip folder
+let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
+
+" Windows openning
+" ---------------
+
+let g:UltiSnipsEditSplit='vertical'
 
 " Autoloading the vimrc when changed
 " ----------------------------------
