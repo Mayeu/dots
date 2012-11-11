@@ -129,9 +129,12 @@ autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 
 " Windows openning
-" ---------------
-
 let g:UltiSnipsEditSplit='vertical'
+
+" Trigger
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Autoloading the vimrc when changed
 " ----------------------------------
