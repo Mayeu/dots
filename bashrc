@@ -95,7 +95,7 @@ alias ra='rails'
 
 # Host specific
 ############### Argon ################
-if [ `hostname -s` == "Rifter" ] ; then
+if [ `hostname -s` == "rifter" ] ; then
 
    if [ -f /etc/bash_completion.d/git   ] ; then
       #BASH_COMPLETION=/etc/bash_completion
