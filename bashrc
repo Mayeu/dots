@@ -1,4 +1,4 @@
-# Stop the reading of the file if non-iteration case
+# Stop the reading of the file if non-interactive case
 case $- in *i*) ;; *) return;; esac
 
 # Load git completion

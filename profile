@@ -15,3 +15,6 @@ if [ -n "$BASH_VERSION" ]; then
 	. "$HOME/.bashrc"
     fi
 fi
+
+# Startx if there is no screen
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
