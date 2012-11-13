@@ -99,6 +99,10 @@ bindsym Mod4+Shift+8 move workspace 8
 bindsym Mod4+Shift+9 move workspace 9
 bindsym Mod4+Shift+0 move workspace 10
 
+# Move workspace amoung screen Mod1 = Alt
+bindsym Mod4+Shift+Mod1+Left move workspace to output left
+bindsym Mod4+Shift+Mod1+Right move workspace to output right
+
 # reload the configuration file
 bindsym Mod4+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
