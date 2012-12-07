@@ -113,7 +113,7 @@ autocmd BufNewFile,BufRead *.ldg,*.ledger set ft=ledger
 autocmd BufRead,BufNewFile *.tex set ft=tex
 
 " perl tidy
-au Filetype perl nmap <C-F6> :%!perltidy<CR>
+au Filetype perl nmap <F6> :%!perltidy<CR>
 
 " YAML file
 autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml
