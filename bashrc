@@ -107,6 +107,9 @@ if [ `hostname -s` == "rifter" ] ; then
    # Vim
    alias vimdiff='gvimdiff'
 
+   # ssh
+   alias ssh='eval $(/usr/bin/keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa ~/.ssh/rifter_github_rsa) && ssh'
+
    # Less is vim
    # alias less='/usr/share/vim/vim73/macros/less.sh'
 
