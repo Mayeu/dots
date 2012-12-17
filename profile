@@ -16,5 +16,3 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# Startx if there is no screen
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
