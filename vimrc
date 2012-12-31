@@ -142,3 +142,8 @@ augroup VimrcReload
    au!
    autocmd bufwritepost .vimrc source ~/.vimrc
 augroup END
+
+" Notmuch stuff
+let g:notmuch_rb_custom_search_maps = {
+   \ 'd':            'search_tag("+delete")',
+   \ }
