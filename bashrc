@@ -6,6 +6,13 @@ if [ -f /usr/share/git/completion/git-completion.bash ] ; then
    source /usr/share/git/completion/git-completion.bash
 fi
 
+if [ -f "${HOME}/.gnupg/gpg-agent.env" ]; then
+   . "${HOME}/.gnupg/gpg-agent.env"
+   export GPG_AGENT_INFO
+   export SSH_AUTH_SOCK
+   export SSH_AGENT_PID
+fi
+
 ## bash history config
 shopt -s histappend # as inside vim
 PROMPT_COMMAND='history -a'
@@ -19,7 +26,7 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 
 ## Path variable
-export PATH=$PATH:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/
+export PATH=$PATH:~/.gem/ruby/1.9.1/bin/:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/
 
 ## Ledger
 export LEDGER_FILE=~/account.ldg
@@ -103,9 +110,6 @@ if [ `hostname -s` == "rifter" ] ; then
       #export BASH_COMPLETION BASH_COMPLETION_DIR
       source /etc/bash_completion.d/git
    fi
-
-   # ssh
-   alias ssh='eval $(/usr/bin/keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa ~/.ssh/rifter_github_rsa) && ssh'
 
    # Less is vim
    # alias less='/usr/share/vim/vim73/macros/less.sh'
