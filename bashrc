@@ -112,6 +112,8 @@ if [ `hostname` == "rifter" ] ; then
       source /usr/share/git/completion/git-prompt.sh
    fi
 
+   complete -o default -o nospace -F _git g
+
    # Less is vim
    # alias less='/usr/share/vim/vim73/macros/less.sh'
 
