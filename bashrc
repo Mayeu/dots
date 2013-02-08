@@ -102,13 +102,14 @@ alias ra='rails'
 
 # Host specific
 ############### Argon ################
-if [ `hostname -s` == "rifter" ] ; then
+if [ `hostname` == "rifter" ] ; then
 
-   if [ -f /etc/bash_completion.d/git   ] ; then
+   if [ -f /usr/share/git/completion/git-completion.bash   ] ; then
       #BASH_COMPLETION=/etc/bash_completion
       #BASH_COMPLETION_DIR=/etc/bash_completion.d
       #export BASH_COMPLETION BASH_COMPLETION_DIR
-      source /etc/bash_completion.d/git
+      source /usr/share/git/completion/git-completion.bash
+      source /usr/share/git/completion/git-prompt.sh
    fi
 
    # Less is vim
@@ -143,7 +144,7 @@ elif [ `hostname` == "cthulhu" ] ; then
    # Alias
    alias kdvp='setxkbmap -layout us -variant dvp -option compose:caps -option keypad:atm -option numpad:shift3 -option kpdl:semi'
 ################ Nyarlathothep #################
-elif [ `hostname -s` == "nyarlathothep" ] ; then
+elif [ `hostname` == "nyarlathothep" ] ; then
 
    # Path
    export PATH=/usr/local/bin:/usr/local/sbin:$PATH
@@ -178,19 +179,13 @@ elif [ `hostname -s` == "nyarlathothep" ] ; then
    if [ -f `brew --prefix`/etc/bash_completion ]; then
       . `brew --prefix`/etc/bash_completion
    fi
-################### Endymion ###################
-elif [ `hostname -s` == "endymion" ] ; then
-   # load some private stuff
-   if [ -f "$HOME/.priv_bashrc" ]; then
-      . "$HOME/.priv_bashrc"
-   fi
 fi
 
 calc(){ awk "BEGIN { print $* }" ;}
 
 ## Prompt
 GIT_PS1_SHOWDIRTYSTATE=true
-hostnam=$(hostname -s)
+hostnam=$(hostname)
 usernam=$(whoami)
 #PIPE="\[\033[1;30m\]"
 NCOL="\[\033[0m\]"
