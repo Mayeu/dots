@@ -26,7 +26,7 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 
 ## Path variable
-export PATH=$PATH:~/.gem/ruby/1.9.1/bin/:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/
+export PATH=$PATH:/home/mayeu/.gem/ruby/1.9.1/bin/:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/
 
 ## Ledger
 export LEDGER_FILE=~/account.ldg
@@ -183,7 +183,9 @@ elif [ `hostname` == "nyarlathothep" ] ; then
    fi
 fi
 
-calc(){ awk "BEGIN { print $* }" ;}
+# Calc shit
+calc() { echo "scale=4; $*" | bc -l; }
+
 
 ## Prompt
 GIT_PS1_SHOWDIRTYSTATE=true
