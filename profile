@@ -16,3 +16,11 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+# rbenv part
+# ----------
+
+# rbenv path
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+# rbenv init
+eval "$(rbenv init -)"
