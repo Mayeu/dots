@@ -26,7 +26,7 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 
 ## Path variable
-export PATH=$PATH:/home/mayeu/.gem/ruby/1.9.1/bin/:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/
+export PATH=$PATH:/home/mayeu/.gem/ruby/1.9.1/bin/:/home/mayeu/.gem/ruby/2.0.0/bin:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/
 
 ## Ledger
 export LEDGER_FILE=~/account.ldg
