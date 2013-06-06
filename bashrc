@@ -99,6 +99,8 @@ alias more='less'
 # Alias Ruby
 alias r='ruby'
 alias ra='rails'
+alias beep='bundle exec pry'
+alias beer='bundle exec rails'
 
 # Host specific
 ############### Argon ################
