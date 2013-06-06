@@ -1,3 +1,20 @@
+! urxvt
+URxvt*buffered: true
+URxvt*cursorBlink: true
+URxvt*underlineColor: yellow
+URxvt*font: xft:inconsolata:size=12:antialias=true
+URxvt*depth: 32
+URxvt*borderless: 1
+URxvt*scrollBar: false
+URxvt*loginShell: true
+Urxvt*secondaryScroll: true # Enable Shift-PageUp/Down in screen
+URxvt*saveLines: 5000
+! URxvt*termName: rxvt-unicode
+! URxvt.perl-ext-common: default,matcher
+! URxvt.urlLauncher: firefox
+! URxvt.matcher.button: 1
+URxvt*intensityStyles: false
+
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 
 !!SOLARIZED HEX     16/8 TERMCOL  XTERM/HEX   L*A*B      RGB         HSB
@@ -75,3 +92,6 @@
 !! white dark/light
 *color7:                S_base2
 *color15:               S_base3
+
+!! Urxvt
+*URxvt.intensityStyles: false
