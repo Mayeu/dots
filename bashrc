@@ -145,42 +145,6 @@ elif [ `hostname` == "cthulhu" ] ; then
 
    # Alias
    alias kdvp='setxkbmap -layout us -variant dvp -option compose:caps -option keypad:atm -option numpad:shift3 -option kpdl:semi'
-################ Nyarlathothep #################
-elif [ `hostname` == "nyarlathothep" ] ; then
-
-   # Path
-   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-   # LSCOLORS
-   export LSCOLORS="gxfxcxdxbxegedabagacad"
-
-   # EDITOR Git compatible
-   export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a iTerm"'
-
-   # CDPATH
-   export CDPATH=$CDPATH:~/Documents/cours/:~/Documents/cours/esil_A3/:~/code/
-
-   # GNUTERM
-   export GNUTERM='X11'
-
-   # Vim alias
-   alias vim="mvim"
-   alias vi="mvim"
-   alias :e="mvim"
-   alias vimdiff="mvim -d"
-
-   # Sup alias
-   alias sup='cd /Users/lainux/code/sup && RUBY_INVOCATION="ruby -Ilib" ruby -Ilib bin/sup'
-
-   # Ledger account
-   alias account="mvim ~/account.ldg"
-
-   # General alias
-   alias udd='sudo umount /media/THE\ NEW\ FAT/ /media/Save/ /media/Mac\ OS\ X/ /media/HD/'
-   alias cp='vcp'
-
-   if [ -f `brew --prefix`/etc/bash_completion ]; then
-      . `brew --prefix`/etc/bash_completion
-   fi
 fi
 
 # Calc shit
