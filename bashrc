@@ -6,9 +6,13 @@ if [ -f /usr/share/git/completion/git-completion.bash ] ; then
    source /usr/share/git/completion/git-completion.bash
 fi
 
+# GPG agent
+# ---------
+
 if [ -f "${HOME}/.gnupg/gpg-agent.env" ]; then
    . "${HOME}/.gnupg/gpg-agent.env"
    export GPG_AGENT_INFO
+   export GPG_TTY=$(tty)
    export SSH_AUTH_SOCK
    export SSH_AGENT_PID
 fi
