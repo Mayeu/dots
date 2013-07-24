@@ -11,7 +11,11 @@ call pathogen#infect()
 
 " Filetype force reload
 filetype on
-filetype plugin indent on 
+filetype plugin on 
+filetype indent on 
+
+" Compiler support
+compiler ruby
 
 "mapleader
 let mapleader=','
