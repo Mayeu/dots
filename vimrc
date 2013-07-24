@@ -77,6 +77,8 @@ nnoremap / /\v
 vnoremap / /\v
 
 " Read my bashrc you filthy little shelly !
+" not sure it is a good solution. Got some weird return
+" and weird things...
 set shell=bash\ -l " like a login shell
 set shellcmdflag=-ic " the shell is now interactive
 
