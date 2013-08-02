@@ -214,3 +214,8 @@ PROMPT_COMMAND=prompt_command
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# Load private dots
+if [ -f ~/.priv_dots ] ; then
+   source ~/.priv_dots
+fi

@@ -37,3 +37,6 @@
 
 [core]
    excludesfile = ~/.cvsignore
+
+[github]
+   user = Mayeu
