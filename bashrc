@@ -39,12 +39,8 @@ export LEDGER_FILE=~/account.ldg
 export TODOTXT_DATE_ON_ADD=1
 export TODOTXT_AUTO_ARCHIVE=0
 
-# OS Specific
-if [ `uname` == "Darwin" ] ; then
-	LS_ARG='-G'
-elif [ `uname` == "Linux" ] ; then
-	LS_ARG='--color=auto'
-fi
+# LS_Option
+export LS_ARG='--color=auto'
 
 ## Alias
 alias pseg='ps -e | grep '
@@ -71,13 +67,6 @@ alias n='notes'
 alias h='heroku'
 alias tstamp='date +%s'
 
-# Old Arch alias 
-#alias spotify='wine "C:\Program Files\Spotify\spotify.exe"'
-#alias kc='killall chromium'
-#alias xsset='xrandr --output LVDS1 --auto --output VGA1 --auto --right-of LVDS1'
-#alias xsoff='xrandr --output LVDS1 --auto --output VGA1 --off'
-#alias cp='vcp'
-
 # Vim alias
 alias vi="vim"
 alias :e="vim"
@@ -94,9 +83,6 @@ alias sw='swatch what'
 # Todo
 alias t='todo.sh'
 
-# Python
-alias p='python'
-
 # More is less
 alias more='less'
 
@@ -108,34 +94,7 @@ alias beer='bundle exec rails'
 
 # Host specific
 ############### Argon ################
-if [ `hostname` == "rifter" ] ; then
-
-   if [ -f /usr/share/git/completion/git-completion.bash   ] ; then
-      #BASH_COMPLETION=/etc/bash_completion
-      #BASH_COMPLETION_DIR=/etc/bash_completion.d
-      #export BASH_COMPLETION BASH_COMPLETION_DIR
-      source /usr/share/git/completion/git-completion.bash
-      source /usr/share/git/completion/git-prompt.sh
-   fi
-
-   complete -o default -o nospace -F _git g
-
-   # Less is vim
-   # alias less='/usr/share/vim/vim73/macros/less.sh'
-
-   # Other app alias
-   # export SOFA='/opt/Sofa-1.0'
-   # alias sofa='/opt/Sofa-1.0/bin/runSofa'
-   # alias oldsofa='/extra/Sofa/bin/runSofa'
-
-   alias kdvp='setxkbmap -layout us -variant dvp -option compose:caps -option keypad:atm -option numpad:shift3 -option kpdl:semi'
-
-   # function
-   #function evince() {
-   #   /usr/bin/evince $@ &> /dev/null
-   #}
-################## Cthulhu #####################
-elif [ `hostname` == "cthulhu" ] ; then
+if [ `hostname` == "cthulhu" ] ; then
    # PATH
    export PATH=$PATH:~/.cabal/bin
    # CDPATH
@@ -146,16 +105,12 @@ elif [ `hostname` == "cthulhu" ] ; then
       .  /usr/share/git/git-prompt.sh
    fi
 
-   # LSCOLORS
-   export LS_COLORS='rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:'
-
    # Alias
    alias kdvp='setxkbmap -layout us -variant dvp -option compose:caps -option keypad:atm -option numpad:shift3 -option kpdl:semi'
 fi
 
 # Calc shit
 calc() { echo "scale=4; $*" | bc -l; }
-
 
 ## Prompt
 GIT_PS1_SHOWDIRTYSTATE=true
@@ -168,9 +123,9 @@ NCOL="\[\033[0m\]"
 function prompt_command {
 
 if [[ $? != 0 ]] ; then
-	PIPE="\[\033[0;31m\]"
+   PIPE="\[\033[0;31m\]"
 else
-	PIPE="\[\033[1;30m\]"
+   PIPE="\[\033[1;30m\]"
 fi
 
 #   Find the width of the prompt:
@@ -182,21 +137,21 @@ local temp="--(${usernam}@${hostnam}:${PWD})---$(__git_ps1 | sed -e 's/ (\(.*\))
 let fillsize=${TERMWIDTH}-${#temp}
 if [ "$fillsize" -gt "0" ]
 then
-	fill="qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
-	#   It's theoretically possible someone could need more 
-	#   dashes than above, but very unlikely!  HOWTO users, 
-	#   the above should be ONE LINE, it may not cut and
-	#   paste properly
-	#   q because in octal q give a nice dash :)
-	fill="${fill:0:${fillsize}}"
-	newPWD="${PWD}"
+   fill="qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+   #   It's theoretically possible someone could need more 
+   #   dashes than above, but very unlikely!  HOWTO users, 
+   #   the above should be ONE LINE, it may not cut and
+   #   paste properly
+   #   q because in octal q give a nice dash :)
+   fill="${fill:0:${fillsize}}"
+   newPWD="${PWD}"
 fi
 
 if [ "$fillsize" -lt "0" ]
 then
-	fill=""
-	let cut=3-${fillsize}
-	newPWD="../${PWD:${cut}}"
+   fill=""
+   let cut=3-${fillsize}
+   newPWD="../${PWD:${cut}}"
 fi
 
 export PS1="\n$PIPE\[\033(0\]lu\[\033(B\]$NCOL\
