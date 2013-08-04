@@ -1,18 +1,52 @@
+" Plugin names found in "~/.vim-addons" are activated on startup.
+" Update manager and addons with ":UpdateAddons".
+" Find addons with ":AddonsInfo <Tab>".
+"
+" VimKickStartR: https://github.com/v0n/vimkickstartr
+" VAM: https://github.com/MarcWeber/vim-addon-manager
+
+" Addon Manager Setup {{{
+" You don't need to edit the following function.
+" See ":help VAM-installation" for alternatives.
+function! SetupVAM()
+   let l:vam_install_path = expand('$HOME').'/.vim/vim-addons'
+   let l:addons_file = expand('$HOME').'/.vim-addons'
+   let l:addons = []
+   let g:vim_addon_manager = {}
+   let g:vim_addon_manager['auto_install'] = 1
+   let g:vim_addon_manager['shell_commands_run_method'] = 'system'
+   set nomore
+   if !isdirectory(l:vam_install_path.'/vim-addon-manager/autoload')
+      call mkdir(l:vam_install_path, 'p')
+      let l:repo = 'https://github.com/MarcWeber/vim-addon-manager.git'
+      let l:path = shellescape(l:vam_install_path, 1).'/vim-addon-manager'
+      let l:doc = fnameescape(l:vam_install_path.'/vim-addon-manager/doc')
+      silent execute '!git clone --depth=1' l:repo l:path
+      execute 'helptags' doc
+   endif
+   execute 'set runtimepath+='.l:vam_install_path.'/vim-addon-manager'
+   if filereadable(l:addons_file)
+      let l:content = readfile(l:addons_file)
+      call extend(l:addons, filter(l:content, 'v:val !~ "^\\s*$\\|^\""'))
+   endif
+   call vam#ActivateAddons(l:addons)
+endfunction
+call SetupVAM()
+" }}}
+
+" Type ":help <option>" for details
+
 " First shit
 set nocompatible
 
-" Filtype off before infection
-filetype off
-
-" Load pathogen
-runtime bundle/pathogen/autoload/pathogen.vim
-" Infect vim
-call pathogen#infect()
-
-" Filetype force reload
 filetype on
 filetype plugin on 
 filetype indent on 
+
+" File encoding of new & saved file
+set encoding=utf8
+set fileencoding=utf8
+set fileencodings=utf-8,ucs-bom,default,latin1
 
 " Compiler support
 compiler ruby
@@ -31,13 +65,13 @@ colorscheme solarized
 " General stuff
 set nu "Numbered Line
 "set cursorcolumn " highlight the current column
-"set cursorline " highlight current line
+set cursorline " highlight current line
 set incsearch " incremental search
 set hlsearch " highlight search
 set ignorecase
 set smartcase
-"set fdm=syntax "Folding by syntax
 set showcmd "Show the command currently typed
+set scrolloff=7
 "set tw=80 "End of line at 80 char
 
 " Indentation stuff
@@ -47,10 +81,7 @@ set tabstop=3
 set expandtab "Convert tab to space
 set shiftwidth=3
 set softtabstop=3
-
-" File encoding of new & saved file
-set fileencoding=utf8
-set fileencodings=utf-8,ucs-bom,default,latin1
+set smarttab
 
 " Some stuff about windows
 set splitbelow " Horizontal split below
@@ -113,7 +144,7 @@ set statusline=%a\ %t%1*%m%*\ %{fugitive#statusline()}\ l:%l/%2*%L%*%6c%V
 " File detection
 " --------------
 
-" Ledger files with .ldg extentions 
+" Ledger files with .ldg extentions
 autocmd BufNewFile,BufRead *.ldg,*.ledger set ft=ledger 
 " Some tex file are not detected as tex file but plaintex
 autocmd BufRead,BufNewFile *.tex set ft=tex
