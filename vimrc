@@ -153,6 +153,9 @@ autocmd BufRead,BufNewFile *.tex set ft=tex
 " YAML file
 autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml
 
+" strip file on save
+"au BufWritePre * :%!git stripspace < % <CR>
+
 " --------------------
 " Plugin configuration
 " --------------------
