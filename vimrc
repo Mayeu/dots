@@ -140,17 +140,15 @@ set statusline=%a\ %t%1*%m%*\ %{fugitive#statusline()}\ l:%l/%2*%L%*%6c%V
 "-------- Source http://www.point-libre.org/~dimitri/blog/index.php/2006/08/01/138
 
 
-" --------------
-" File detection
-" --------------
+" -----------
+" Autocommand
+" -----------
 
 " Ledger files with .ldg extentions
 autocmd BufNewFile,BufRead *.ldg,*.ledger set ft=ledger 
+
 " Some tex file are not detected as tex file but plaintex
 autocmd BufRead,BufNewFile *.tex set ft=tex
-
-" perl tidy
-au Filetype perl nmap <F6> :%!perltidy<CR>
 
 " YAML file
 autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml

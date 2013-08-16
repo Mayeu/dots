@@ -15,3 +15,6 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+
+" perl tidy
+au Filetype perl nmap <F6> :%!perltidy<CR>
