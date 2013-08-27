@@ -91,6 +91,9 @@ alias ra='rails'
 alias beep='bundle exec pry'
 alias beer='bundle exec rails'
 
+# Alias
+alias kdvp='setxkbmap -layout us -variant dvp -option compose:caps -option keypad:atm -option numpad:shift3 -option kpdl:semi'
+
 # Host specific
 ############### Argon ################
 if [ `hostname` == "cthulhu" ] ; then
@@ -104,8 +107,6 @@ if [ `hostname` == "cthulhu" ] ; then
       .  /usr/share/git/git-prompt.sh
    fi
 
-   # Alias
-   alias kdvp='setxkbmap -layout us -variant dvp -option compose:caps -option keypad:atm -option numpad:shift3 -option kpdl:semi'
 fi
 
 # Calc shit
