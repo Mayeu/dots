@@ -1,8 +1,9 @@
-Solarized
-fugitive
 UltiSnips
 github:vim-ruby/vim-ruby
 github:tpope/vim-markdown
 github:slim-template/vim-slim
 github:elixir-lang/vim-elixir
 github:ngmy/vim-rubocop
+github:tpope/vim-fugitive
+github:altercation/vim-colors-solarized
+
