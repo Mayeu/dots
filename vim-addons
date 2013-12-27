@@ -9,3 +9,4 @@ github:altercation/vim-colors-solarized
 github:jnwhiteh/vim-golang
 github:ledger/vim-ledger
 github:bling/vim-airline
+github:scrooloose/syntastic
