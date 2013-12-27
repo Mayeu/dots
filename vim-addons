@@ -6,3 +6,6 @@ github:elixir-lang/vim-elixir
 github:ngmy/vim-rubocop
 github:tpope/vim-fugitive
 github:altercation/vim-colors-solarized
+github:jnwhiteh/vim-golang
+github:ledger/vim-ledger
+github:bling/vim-airline

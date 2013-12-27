@@ -91,7 +91,8 @@ let g:netrw_altv=1 " Vertical split on the right with netrw
 
 " Visual space and tab
 set list
-set listchars=tab:>.,eol:¬,trail:-
+set listchars=tab:│\ ,trail:•,extends:❯,precedes:❮
+"set listchars=tab:>.,eol:¬,trail:-
 
 "Invisible character colors (listchars related)
 "highlight NonText guifg=#4a4a59
@@ -127,7 +128,7 @@ command W w !sudo tee % > /dev/null
 set laststatus=2
 
 " Stalut line configuration
-set statusline=%a\ %t%1*%m%*\ %{fugitive#statusline()}\ l:%l/%2*%L%*%6c%V
+"set statusline=%a\ %t%1*%m%*\ %{fugitive#statusline()}\ l:%l/%2*%L%*%6c%V
 
 "%a si vous avez ouvert plusieurs fichiers, affiche le numéro de buffer sous la forme (1 of 4) pour le premier des quatre fichiers ;
 "%t pour le nom du fichier sans le chemin ;
@@ -139,6 +140,7 @@ set statusline=%a\ %t%1*%m%*\ %{fugitive#statusline()}\ l:%l/%2*%L%*%6c%V
 "%V le numéro de colonne virtuelle (tient compte de la place réellement occupée par les multi-caractères comme la tabulation, l'espace insécable, etc.)
 "-------- Source http://www.point-libre.org/~dimitri/blog/index.php/2006/08/01/138
 
+let g:airline_powerline_fonts = 1
 
 " -----------
 " Autocommand
