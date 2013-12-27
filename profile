@@ -26,12 +26,3 @@ if test -f "$envfile" && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2
 else
    eval "$(gpg-agent -s --enable-ssh-support --daemon --write-env-file "$envfile")"
 fi
-
-# rbenv part
-# ----------
-
-# rbenv path
-export PATH="$HOME/.rbenv/bin:$PATH"
-
-# rbenv init
-eval "$(rbenv init -)"

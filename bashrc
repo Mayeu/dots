@@ -34,7 +34,7 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 
 ## Path variable
-export PATH=~/.gem/bin:/home/mayeu/.gem/ruby/1.9.1/bin/:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/:$PATH
+export PATH=~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/:$PATH
 
 ## Ledger
 export LEDGER_FILE=~/account.ldg
@@ -172,10 +172,9 @@ export PS2="  $PIPE\[\033(0\]x\[\033(B\]$NCOL"
 
 PROMPT_COMMAND=prompt_command
 
-# Load rvm
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-
-PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+# Chruby
+source /usr/local/share/chruby/chruby.sh
+chruby ruby-2.1.0
 
 # Load private dots
 if [ -f ~/.priv_dots ] ; then
