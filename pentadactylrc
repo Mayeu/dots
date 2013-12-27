@@ -1,2 +1,5 @@
 " Set duckduckgo as search engine
 set defsearch=duckduckgo
+
+" Twitter, stop focusing on you ffs
+set strictfocus='chrome:*':laissez-faire,'twitter.com':despotic,*:moderate
