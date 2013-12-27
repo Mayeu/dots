@@ -17,6 +17,10 @@ if [ -f "${HOME}/.gnupg/gpg-agent.env" ]; then
    export SSH_AGENT_PID
 fi
 
+# Go
+export GOPATH=~/go
+export PATH=$PATH:/usr/lib/go/site/bin
+
 ## bash history config
 shopt -s histappend # as inside vim
 PROMPT_COMMAND='history -a'
@@ -90,6 +94,9 @@ alias r='ruby'
 alias ra='rails'
 alias beep='bundle exec pry'
 alias beer='bundle exec rails'
+
+# Alias go
+alias gr='go run'
 
 # Alias
 alias kdvp='setxkbmap -layout us -variant dvp -option compose:caps -option keypad:atm -option numpad:shift3 -option kpdl:semi'
