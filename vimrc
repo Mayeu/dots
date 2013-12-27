@@ -108,12 +108,6 @@ set undoreload=10000
 nnoremap / /\v
 vnoremap / /\v
 
-" Read my bashrc you filthy little shelly !
-" not sure it is a good solution. Got some weird return
-" and weird things...
-"set shell=bash\ -l " like a login shell
-"set shellcmdflag=-ic " the shell is now interactive
-
 "------------------------------------------------
 " Command
 
@@ -127,19 +121,6 @@ command W w !sudo tee % > /dev/null
 " Show the statut line
 set laststatus=2
 
-" Stalut line configuration
-"set statusline=%a\ %t%1*%m%*\ %{fugitive#statusline()}\ l:%l/%2*%L%*%6c%V
-
-"%a si vous avez ouvert plusieurs fichiers, affiche le numéro de buffer sous la forme (1 of 4) pour le premier des quatre fichiers ;
-"%t pour le nom du fichier sans le chemin ;
-"%1* ce qui suit est affiché suivant le schéma de coloration User1 jusqu'au prochain motif %* (idem pour %2* et User2) ;
-"%m affiche [+] lorsque le fichier est modifié et [-] s'il n'est pas modifiable ;
-"%10l le numéro de ligne courante occupant au minimum la place de 10 caractères (c'est juste pour la mise en forme) ;
-"%L le nombre de lignes du fichier ;
-"%6c le numéro de la colonne courante sur 6 caractères ;
-"%V le numéro de colonne virtuelle (tient compte de la place réellement occupée par les multi-caractères comme la tabulation, l'espace insécable, etc.)
-"-------- Source http://www.point-libre.org/~dimitri/blog/index.php/2006/08/01/138
-
 let g:airline_powerline_fonts = 1
 
 " -----------
@@ -147,7 +128,7 @@ let g:airline_powerline_fonts = 1
 " -----------
 
 " Ledger files with .ldg extentions
-autocmd BufNewFile,BufRead *.ldg,*.ledger set ft=ledger 
+autocmd BufNewFile,BufRead *.ldg,*.ledger set ft=ledger
 
 " Some tex file are not detected as tex file but plaintex
 autocmd BufRead,BufNewFile *.tex set ft=tex
