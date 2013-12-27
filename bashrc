@@ -34,7 +34,7 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 
 ## Path variable
-export PATH=$PATH:~/.gem/bin:/home/mayeu/.gem/ruby/1.9.1/bin/:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/
+export PATH=~/.gem/bin:/home/mayeu/.gem/ruby/1.9.1/bin/:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/:$PATH
 
 ## Ledger
 export LEDGER_FILE=~/account.ldg
@@ -175,7 +175,7 @@ PROMPT_COMMAND=prompt_command
 # Load rvm
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 
 # Load private dots
 if [ -f ~/.priv_dots ] ; then
