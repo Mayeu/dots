@@ -4,3 +4,6 @@ vim/undodir/*
 _.*
 vim/.netrwhist
 vim/.VimballRecord
+*.weechatlog
+*.log
+weechat_fifo*
