@@ -51,7 +51,7 @@ alias pseg='ps -e | grep '
 alias l='ls -F ${LS_ARG}'
 alias la='ls -FAC ${LS_ARG}'
 alias ll='ls -Fl ${LS_ARG}'
-alias lla='ls -Fla ${LS_ARG}'
+alias lla='ls -FlA ${LS_ARG}'
 alias ls='ls -F ${LS_ARG}'
 alias d='date'
 #alias cd='set old="$cwd"; chdir \!*'
@@ -171,10 +171,6 @@ export PS2="  $PIPE\[\033(0\]x\[\033(B\]$NCOL"
 }
 
 PROMPT_COMMAND=prompt_command
-
-# Chruby
-source /usr/local/share/chruby/chruby.sh
-chruby ruby-2.1.0
 
 # Load private dots
 if [ -f ~/.priv_dots ] ; then
