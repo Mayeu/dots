@@ -10,7 +10,8 @@
 #
 
 # font for window titles. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Hermit 10
 
 # use Mouse+Mod4 to drag floating windows to their wanted position
 floating_modifier Mod4
