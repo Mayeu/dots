@@ -31,6 +31,7 @@
    a = add
    d = diff
    vimdiff = difftool -y -t vimdiff
+   fetch-pr = "!f() { git fetch $1 refs/pull/$2/head:refs/remotes/pr/$2; }; f"
 
 [push]
    default = current
