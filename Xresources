@@ -1,8 +1,17 @@
+! Xft
+Xft*antialias: 1
+Xft*hinting: 1
+Xft*hintstyle: hintfull
+Xft*rgba: rgb
+
 ! urxvt
 URxvt*buffered: true
 URxvt*cursorBlink: true
 URxvt*underlineColor: yellow
-URxvt*font: xft:Hermit:size=11:antialiasing=true
+URxvt*font: xft:Hermit:Medium:size=12
+URxvt*boldFont: xft:Hermit:Bold:size=12:style=medium
+URxvt*italicFont: xft:Hermit:Medium:size=12:style=medium
+URxvt*boldItalicFont: xft:Hermit:Bold:size=12:style=medium
 URxvt*depth: 32
 URxvt*borderless: 1
 URxvt*scrollBar: false
