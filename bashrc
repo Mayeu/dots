@@ -98,8 +98,9 @@ alias beer='bundle exec rails'
 # Alias go
 alias gr='go run'
 
-# Alias
+# Keyboard alias
 alias kdvp='setxkbmap -layout us -variant dvp -option compose:caps -option keypad:atm -option numpad:shift3 -option kpdl:semi'
+alias kus='setxkbmap -layout us'
 
 # Host specific
 ############### Argon ################
