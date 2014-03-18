@@ -41,3 +41,9 @@
 
 [github]
    user = Mayeu
+[identity "cast"]
+	name = Cast
+	email = cast@nothing.ch
+[identity "mayeu"]
+	name = Mayeu
+	email = m@6x9.fr
