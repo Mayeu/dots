@@ -147,7 +147,8 @@ autocmd BufNewFile,BufRead *.yaml,*.yml set ft=yaml
 " ---------
 
 " Snip folder
-let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
+"let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 " Windows openning
 let g:UltiSnipsEditSplit='vertical'
