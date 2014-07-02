@@ -34,7 +34,7 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 
 ## Path variable
-export PATH=~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/:$PATH
+export PATH=~/.gem/ruby/2.1.0/bin:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/:$PATH
 
 ## Ledger
 export LEDGER_FILE=~/account.ldg
@@ -94,6 +94,9 @@ alias r='ruby'
 alias ra='rails'
 alias beep='bundle exec pry'
 alias beer='bundle exec rails'
+
+# Alias elixir
+alias mdg='mix deps.get && mix deps.compile'
 
 # Alias go
 alias gr='go run'

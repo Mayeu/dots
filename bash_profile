@@ -35,4 +35,4 @@ elif [ -f "/usr/share/chruby/chruby.sh" ]; then
    source /usr/share/chruby/chruby.sh
 fi
 
-chruby ruby-2.1.0
+chruby system
