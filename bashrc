@@ -95,6 +95,9 @@ alias ra='rails'
 alias beep='bundle exec pry'
 alias beer='bundle exec rails'
 
+# Alias haskell
+alias rh='runhaskell -Wall'
+
 # Alias elixir
 alias mdg='mix deps.get && mix deps.compile'
 
