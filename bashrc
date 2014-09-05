@@ -95,8 +95,10 @@ alias ra='rails'
 alias beep='bundle exec pry'
 alias beer='bundle exec rails'
 
-# Alias haskell
-alias rh='runhaskell -Wall'
+# Alias & PATH haskell
+alias rh='runhaskell -Wall -Werror'
+PATH=~/.cabal/bin/:$PATH
+
 
 # Alias elixir
 alias mdg='mix deps.get && mix deps.compile'
