@@ -25,7 +25,6 @@
 [alias]
    s = status
    c = commit
-   ci = commit -a
    br = branch
    co = checkout
    a = add
