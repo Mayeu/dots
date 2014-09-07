@@ -53,9 +53,11 @@
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t) ;; When switching to done, log the time
-(setq org-agenda-files (list "~/org/OrgTutorial.org"))
+(setq org-log-done t) ;; When switching to done, log the done time
 
-;; Load evil-org-mode
-(add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
-(require 'evil-org)
+;; Replace the default OVERVIEW folding by the CONTENT one
+(setq org-startup-folded 'content)
+(setq org-startup-indented 'indent)
+
+;; Setup all my org files
+(setq org-agenda-files (list "~/org/perso.org"))
