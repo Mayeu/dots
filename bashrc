@@ -6,6 +6,12 @@ if [ -f /usr/share/git/completion/git-completion.bash ] ; then
    source /usr/share/git/completion/git-completion.bash
 fi
 
+# Load git prompt
+if [ -f /usr/share/git/completion/git-prompt.sh ] ; then
+   source /usr/share/git/completion/git-prompt.sh
+fi
+
+
 # GPG agent
 # ---------
 
