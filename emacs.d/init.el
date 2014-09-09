@@ -23,41 +23,16 @@
 
 ;; Look-n-feel
 (set-default-font "Hermit-12")
+(setq-default indent-tabs-mode nil) ; tabs are evil
 
-;; Package thingy, for installing extension
-(require 'package)
+;; Change the load path
+(add-to-list 'load-path (concat user-emacs-directory "init.d"))
 
-(setq package-archives
-      '(("gnu"    . "http://elpa.gnu.org/packages/")
-        ("melpa"  . "http://melpa.milkbox.net/packages/")))
+;; Helper function for the packages
+(load "packages.el")
 
-(package-initialize)
-
-;; Look for evil and install it
-(when (not (package-installed-p 'evil))
-  (package-refresh-contents)
-  (package-install 'evil))
-
-(evil-mode 1)
-
-;; Powerline things, to feel more at home
-(when (not (package-installed-p 'powerline))
-  (package-refresh-contents)
-  (package-install 'powerline))
-
-(require 'powerline)
-
-(powerline-default-theme)
-
-;; Org mode
-(require 'org)
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t) ;; When switching to done, log the done time
-
-;; Replace the default OVERVIEW folding by the CONTENT one
-(setq org-startup-folded 'content)
-(setq org-startup-indented 'indent)
-
-;; Setup all my org files
-(setq org-agenda-files (list "~/org/perso.org"))
+;; Package and associated configuration loader
+(load "evil.el")
+(load "powerline.el")
+(load "yaml.el")
+(load "org.el")
