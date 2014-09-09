@@ -18,6 +18,7 @@ floating_modifier Mod4
 
 # start a terminal
 bindsym Mod4+Return exec /usr/bin/urxvt
+bindsym Mod4+e exec emacs
 
 # kill focused window
 bindsym Mod4+Shift+q kill
@@ -62,7 +63,7 @@ bindsym Mod4+f fullscreen
 # change container layout (stacked, tabbed, default)
 #bindsym Mod4+s layout stacking
 #bindsym Mod4+w layout tabbed
-bindsym Mod4+e layout default
+#bindsym Mod4+e layout default
 
 # toggle tiling / floating
 bindsym Mod4+Shift+space floating toggle
