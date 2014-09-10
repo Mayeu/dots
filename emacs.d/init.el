@@ -41,14 +41,39 @@
 
 ;; Packages and associated configuration
 
+;; Evil configuration
+;; ------------------
+
 (package-require 'evil)
+(package-require 'evil-leader)
 (require 'evil)
+(require 'evil-leader)
+
+(evil-leader/set-leader ",")
+(global-evil-leader-mode)
+
+;; Deactivate arrow key
+(define-key evil-insert-state-map [left] 'undefined)
+(define-key evil-insert-state-map [right] 'undefined)
+(define-key evil-insert-state-map [up] 'undefined)
+(define-key evil-insert-state-map [down] 'undefined)
+
+(define-key evil-motion-state-map [left] 'undefined)
+(define-key evil-motion-state-map [right] 'undefined)
+(define-key evil-motion-state-map [up] 'undefined)
+(define-key evil-motion-state-map [down] 'undefined)
 
 (evil-mode 1)
+
+;; Powerline configuration
+;; -----------------------
 
 (package-require 'powerline)
 (require 'powerline)
 (powerline-default-theme)
+
+;; YAML configuration
+;; ------------------
 
 (package-require 'yaml-mode)
 (require 'yaml-mode)
@@ -65,6 +90,10 @@
                       (setq evil-shift-width 2))))
 
 ;; Org-mode configuration
+;; ----------------------
+
+(add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
+(require 'evil-org)
 (require 'org)
 
 ;; define some keybinding
@@ -78,3 +107,32 @@
 
 ;; Setup all my org files
 (setq org-agenda-files (list "~/org/perso.org"))
+
+(evil-leader/set-key-for-mode 'org-mode
+  "t" 'org-todo
+  "h" '(lambda ()
+         (interactive)
+         (evil-org-eol-call (lambda()
+                              (org-insert-todo-heading nil))))
+  "st" 'org-show-todo-tree
+  "ci" 'org-clock-in
+  "co" 'org-clock-out)
+
+;; Relative line-number
+;; --------------------
+(package-require 'linum-relative)
+(require 'linum-relative)
+
+(setq linum-relative-current-symbol "->")
+
+(linum-on)
+
+;; Global keybinding
+;; -----------------
+
+(global-set-key [f6] (lambda () (interactive) (find-file "~/org/perso.org")))
+(global-set-key [f7] (lambda () (interactive) (find-file user-init-file)))
+
+;; Function aliases
+;; ----------------
+(defalias 'eb 'eval-buffer)

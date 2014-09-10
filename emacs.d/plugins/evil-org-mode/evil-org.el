@@ -1,12 +1,12 @@
-;;; evil-org-mode.el --- evil keybindings for org-mode
+;;; evil-org.el --- evil keybindings for org-mode
 
 ;; Copyright (C) 2012-2013 by Edward Tjörnhammar
 ;; Author: Edward Tjörnhammar
 ;; URL: https://github.com/edwtjo/evil-org-mode.git
 ;; Git-Repository; git://github.com/edwtjo/evil-org-mode.git
 ;; Created: 2012-06-14
-;; Version: 0.1.0
-;; Package-Requires: ((evil "0"))
+;; Version: 0.1.1
+;; Package-Requires: ((evil "0") (org "0"))
 ;; Keywords: evil vim-emulation org-mode key-bindings presets
 
 ;; This file is not part of GNU Emacs
@@ -39,10 +39,10 @@
 
 (add-hook 'org-mode-hook 'evil-org-mode) ;; only load with org-mode
 
-(defun always-insert-item ()
-  "Force insertion of org item"
+(defun clever-insert-item ()
+  "Clever insertion of org item"
   (if (not (org-in-item-p))
-      (insert "\n- ")
+      (insert "\n")
     (org-insert-item))
   )
 
@@ -67,14 +67,19 @@
   "T" '(lambda () (interactive) (evil-org-eol-call (lambda() (org-insert-todo-heading nil))))
   "H" 'org-beginning-of-line
   "L" 'org-end-of-line
-  ";t" 'org-show-todo-tree
   "$" 'org-end-of-line
   "^" 'org-beginning-of-line
   "<" 'org-metaleft
   ">" 'org-metaright
-  ";a" 'org-agenda
   "-" 'org-cycle-list-bullet
   (kbd "TAB") 'org-cycle)
+
+;; leader maps
+(evil-leader/set-key
+  "t"  'org-show-todo-tree
+  "a"  'org-agenda
+  "x"  'org-archive-subtree
+)
 
 ;; normal & insert state shortcuts.
 (mapc (lambda (state)
