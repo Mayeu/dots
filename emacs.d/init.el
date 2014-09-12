@@ -128,6 +128,14 @@
 
 (linum-on)
 
+;; Haskell-mode
+;; ------------
+
+(package-require 'haskell-mode)
+(require 'haskell-mode)
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
 ;; Global keybinding
 ;; -----------------
 
