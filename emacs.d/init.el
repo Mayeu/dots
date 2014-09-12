@@ -106,7 +106,8 @@
 (setq org-startup-indented 'indent) ;; Indented style by default
 
 ;; Setup all my org files
-(setq org-agenda-files (list "~/org/perso.org"))
+(setq org-agenda-files (list "~/org/perso.org"
+                             "~/org/aide.org"))
 
 (evil-leader/set-key-for-mode 'org-mode
   "t" 'org-todo
