@@ -11,7 +11,6 @@ if [ -f /usr/share/git/completion/git-prompt.sh ] ; then
    source /usr/share/git/completion/git-prompt.sh
 fi
 
-
 # GPG agent
 # ---------
 
@@ -22,10 +21,6 @@ if [ -f "${HOME}/.gnupg/gpg-agent.env" ]; then
    export SSH_AUTH_SOCK
    export SSH_AGENT_PID
 fi
-
-# Go
-export GOPATH=~/go
-export PATH=$PATH:/usr/lib/go/site/bin
 
 ## bash history config
 shopt -s histappend # as inside vim
@@ -42,12 +37,12 @@ export SVN_EDITOR=vim
 ## Path variable
 export PATH=~/.gem/ruby/2.1.0/bin:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/:$PATH
 
+# Go
+export GOPATH=~/go
+export PATH=$PATH:/usr/lib/go/site/bin
+
 ## Ledger
 export LEDGER_FILE=~/account.ldg
-
-# Todo.txt config
-export TODOTXT_DATE_ON_ADD=1
-export TODOTXT_AUTO_ARCHIVE=0
 
 # LS_Option
 export LS_ARG='--color=auto'
@@ -73,7 +68,6 @@ alias pd3='pushd +3'
 alias pd4='pushd +4'
 alias g='git'
 alias n='notes'
-alias h='heroku'
 alias tstamp='date +%s'
 
 # Vim alias
@@ -83,14 +77,6 @@ alias :e="vim"
 # lp
 alias lpstep1='lp -o page-set=odd -o outputorder=reverse'
 alias lpstep2='lp -o page-set=even -o outputorder=reverse'
-
-# Swatch
-alias s='swatch'
-alias so='swatch out'
-alias sw='swatch what'
-
-# Todo
-alias t='todo.sh'
 
 # More is less
 alias more='less'
@@ -104,7 +90,6 @@ alias beer='bundle exec rails'
 # Alias & PATH haskell
 alias rh='runhaskell -Wall -Werror'
 PATH=~/.cabal/bin/:$PATH
-
 
 # Alias elixir
 alias mdg='mix deps.get && mix deps.compile'
@@ -123,12 +108,6 @@ if [ `hostname` == "cthulhu" ] ; then
    export PATH=$PATH:~/.cabal/bin
    # CDPATH
    export CDPATH=$CDPATH:~/code/
-
-   # Source the git prompt
-   if [ -f /usr/share/git/git-prompt.sh ]; then
-      .  /usr/share/git/git-prompt.sh
-   fi
-
 fi
 
 # Calc shit
@@ -140,7 +119,6 @@ hostnam=$(hostname)
 usernam=$(whoami)
 #PIPE="\[\033[1;30m\]"
 NCOL="\[\033[0m\]"
-
 
 function prompt_command {
 
