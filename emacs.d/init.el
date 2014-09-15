@@ -99,16 +99,37 @@
 ;; define some keybinding
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cb" 'org-iswitchb)
 
 ;; Behavior configuration
 (setq org-log-done t) ;; When switching to done, log the done time
 (setq org-startup-folded 'content) ;; Replace the default folding by CONTENT
 (setq org-startup-indented 'indent) ;; Indented style by default
 
+;; Keywords
+(setq org-todo-keywords
+      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
+
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "red" :weight bold)
+              ("NEXT" :foreground "blue" :weight bold)
+              ("DONE" :foreground "forest green" :weight bold)
+              ("WAITING" :foreground "orange" :weight bold)
+              ("HOLD" :foreground "magenta" :weight bold)
+              ("CANCELLED" :foreground "forest green" :weight bold)
+              ("MEETING" :foreground "forest green" :weight bold)
+              ("PHONE" :foreground "forest green" :weight bold))))
+
+
 ;; Setup all my org files
 (setq org-agenda-files (list "~/org/perso.org"
                              "~/org/aide.org"))
 
+;; Regular saving of all the org buffer
+(run-at-time "00:59" 3600 'org-save-all-org-buffers)
+
+;; Setting up leader command
 (evil-leader/set-key-for-mode 'org-mode
   "t" 'org-todo
   "h" '(lambda ()
@@ -117,7 +138,9 @@
                               (org-insert-todo-heading nil))))
   "st" 'org-show-todo-tree
   "ci" 'org-clock-in
-  "co" 'org-clock-out)
+  "co" 'org-clock-out
+  ;; Switch org buffer
+  "b"  'org-iswitchb)
 
 ;; Relative line-number
 ;; --------------------
