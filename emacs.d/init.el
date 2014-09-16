@@ -159,6 +159,15 @@
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
+;; Scala-mode
+;; ----------
+
+(package-require 'scala-mode2)
+(require 'scala-mode2)
+
+(package-require 'sbt-mode)
+(require 'sbt-mode)
+
 ;; Global keybinding
 ;; -----------------
 
