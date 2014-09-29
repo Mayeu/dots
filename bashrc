@@ -165,6 +165,9 @@ export PS2="  $PIPE\[\033(0\]x\[\033(B\]$NCOL"
 
 PROMPT_COMMAND=prompt_command
 
+# Make bash check its window size after a process completes
+shopt -s checkwinsize
+
 # Load private dots
 if [ -f ~/.priv_dots ] ; then
    source ~/.priv_dots
