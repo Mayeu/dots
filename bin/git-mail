@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+# Quick and simple download then commit emails
+offlineimap -o
+git -C $HOME/Maildir add .
+git -C $HOME/Maildir commit -m "Add new mails"
