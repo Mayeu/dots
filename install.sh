@@ -54,6 +54,10 @@ for FILE in * ; do
          LINK=$HOME/$FILE
          Deploy $SRC $LINK
          ;;
+      etc)
+         LINK=$HOME/$FILE
+         Deploy $SRC $LINK
+         ;;
       *)
          Deploy $SRC $LINK
          ;;

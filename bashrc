@@ -11,6 +11,13 @@ if [ -f /usr/share/git/completion/git-prompt.sh ] ; then
    source /usr/share/git/completion/git-prompt.sh
 fi
 
+# Load all other local completion
+if [ -d ~/etc/bash_completion.d ] ; then
+   for file in `ls ~/etc/bash_completion.d` ; do
+      source ~/etc/bash_completion.d/$file
+   done
+fi
+
 # GPG agent
 # ---------
 
