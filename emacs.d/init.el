@@ -41,6 +41,12 @@
 
 ;; Packages and associated configuration
 
+;; Solarized
+;; ---------
+
+(package-require 'color-theme-solarized)
+(load-theme 'solarized-light t)
+
 ;; Evil configuration
 ;; ------------------
 
