@@ -13,6 +13,28 @@
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 font pango:Hermit 9
 
+# Solarized light theme
+set $base03 #002B36
+set $base02 #073642
+set $base01 #586e75
+set $base00 #657b83
+set $base0 #839496
+set $base1 #93a1a1
+set $base2 #eee8d5
+set $yellow #b58900
+set $orange #cb4b16
+set $red #dc322f
+set $magenta #d33682
+set $violet #6c71c4
+set $blue #268bd2
+set $cyan #2aa198
+set $green #859900
+#client.focused #073642 #073642 #fdf6e3 #dc322f
+client.focused #073642 #586e75 #fdf6e3 #dc322f
+client.focused_inactive #002b36 #002b36 #fdf6e3 #dc322f
+client.unfocused #002b36 #002b36 #fdf6e3 #dc322f
+client.background #002b36
+
 # use Mouse+Mod4 to drag floating windows to their wanted position
 floating_modifier Mod4
 
@@ -111,6 +133,8 @@ bindsym Mod4+Shift+c reload
 bindsym Mod4+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym Mod4+Shift+e exit
+# lock the screen
+bindsym Mod1+Shift+l exec i3lock -d -c 0c0c0c
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -156,6 +180,16 @@ bindsym Mod4+r mode "resize"
 # finds out, if available)
 bar {
 	status_command i3status
+   colors {
+      background #002b36
+      statusline #fdf6e3
+      separator $base1
+     # border background text
+      focused_workspace  #002b36 #93a1a1 #fdf6e3
+      active_workspace   #002b36 #93a1a1 #fdf6e3
+      inactive_workspace #002b36 #586e75 #fdf6e3
+      urgent_workspace   #002b36 $red #fdf6e3
+   }
 }
 
 for_window [class="Steam"] floating enable
