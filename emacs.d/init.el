@@ -174,6 +174,50 @@
 (package-require 'sbt-mode)
 (require 'sbt-mode)
 
+;; Notmuch
+;; -------
+(require 'notmuch)
+
+;; Change the order of element showed in search
+(setq notmuch-search-result-format '(("date" . "%12s ")
+                                     ("count" . "%-7s ")
+                                     ("authors" . "%-20s ")
+                                     ("tags" . "(%s)")
+                                     ("subject" . "%s ")))
+
+;; 'd' delete stuff
+(define-key notmuch-show-mode-map "d"
+    (lambda ()
+        (interactive)
+        (notmuch-show-tag (list "+deleted" "-inbox"))
+        (notmuch-bury-or-kill-this-buffer)
+        (notmuch-refresh-this-buffer)))
+(define-key notmuch-search-mode-map "d"
+    (lambda ()
+        (interactive)
+        (notmuch-search-tag (list "+deleted" "-inbox"))
+        (next-line)))
+
+;; set the default order to newest first
+(setq notmuch-search-oldest-first nil)
+
+;; Hello screen
+(add-hook 'notmuch-hello-refresh-hook
+          (lambda ()
+            (if (and (eq (point) (point-min))
+                     (search-forward "Saved searches:" nil t))
+                (progn
+                  (forward-line)
+                  (widget-forward 1))
+              (if (eq (widget-type (widget-at)) 'editable-field)
+                  (beginning-of-line)))))
+
+(setq notmuch-saved-searches
+  '((:name "inbox" :query "tag:inbox AND NOT tag:nothing" :count-query "tag:inbox AND tag:unread AND NOT tag:nothing" :sort-order 'newest-first)
+    (:name "nothing" :query "tag:inbox AND tag:nothing" :count-query "tag:inbox AND tag:nothing AND tag:unread" :sort-order 'newest-first)
+    (:name "ml" :query "tag:ml" :query "tag:ml AND tag:unread" :sort-order 'newest-first)
+    (:name "notmuch" :query "tag:inbox AND to:notmuchmail.org")))
+
 ;; Global keybinding
 ;; -----------------
 
@@ -183,3 +227,5 @@
 ;; Function aliases
 ;; ----------------
 (defalias 'eb 'eval-buffer)
+
+
