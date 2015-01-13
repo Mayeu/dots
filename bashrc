@@ -31,11 +31,11 @@ fi
 
 ## bash history config
 shopt -s histappend # as inside vim
-PROMPT_COMMAND='history -a'
 export HISTCONTROL=ignoredups #ignore duplicate command in history
 export HISTSIZE=10000
 #export HISTIGNORE='&:[bf]g:exit:history*:rm*:cl:clear:resource:source*' #ignore some command
-export HISTIGNORE='exit'
+export HISTIGNORE='exit:history:' #ignore some command
+
 
 ## default editor
 export EDITOR=vim
@@ -174,6 +174,9 @@ PROMPT_COMMAND=prompt_command
 
 # Make bash check its window size after a process completes
 shopt -s checkwinsize
+
+# Append history instead of making it postsession
+export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # Load private dots
 if [ -f ~/.priv_dots ] ; then
