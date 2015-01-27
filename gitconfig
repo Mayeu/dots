@@ -46,3 +46,5 @@
 [identity "mayeu"]
 	name = Mayeu
 	email = m@6x9.fr
+[svn]
+	rmdir = true
