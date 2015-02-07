@@ -42,7 +42,7 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 
 ## Path variable
-export PATH=~/.gem/ruby/2.1.0/bin:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/:$PATH
+export PATH=~/.gem/ruby/2.2.0/bin:~/.gem/ruby/2.1.0/bin:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/:$PATH
 
 # Go
 export GOPATH=~/go
@@ -93,6 +93,32 @@ alias r='ruby'
 alias ra='rails'
 alias beep='bundle exec pry'
 alias beer='bundle exec rails'
+
+# Will obviously fail if there is no bin/exec
+function try_local_bin {
+  bin=$1
+  shift
+  # Is there a "springified" bin/rake at the top?
+  top_exec=$(git rev-parse --show-toplevel 2> /dev/null)
+  if test ! $top_exec = "";
+  then
+     ${top_exec}/bin/$bin $@
+  else
+     env $bin $@
+  fi
+}
+
+function rake {
+  try_local_bin rake $@
+}
+
+function rails {
+  try_local_bin rails $@
+}
+
+function spring {
+  try_local_bin spring $@
+}
 
 # Alias & PATH haskell
 alias rh='runhaskell -Wall -Werror'
