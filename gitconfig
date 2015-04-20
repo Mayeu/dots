@@ -48,3 +48,5 @@
 	email = m@6x9.fr
 [svn]
 	rmdir = true
+[credential]
+	helper = cache --timeout=3600
