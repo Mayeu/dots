@@ -71,13 +71,6 @@
 
 (evil-mode 1)
 
-;; Powerline configuration
-;; -----------------------
-
-(package-require 'powerline)
-(require 'powerline)
-(powerline-default-theme)
-
 ;; YAML configuration
 ;; ------------------
 
@@ -845,6 +838,13 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
 (global-set-key [f6] (lambda () (interactive) (find-file "~/org/perso.org")))
 (global-set-key [f7] (lambda () (interactive) (find-file user-init-file)))
 
+;; Powerline configuration
+;; -----------------------
+
+(package-require 'powerline)
+(require 'powerline)
+(powerline-default-theme)
+
 ;; Function aliases
 ;; ----------------
 (defalias 'eb 'eval-buffer)
@@ -860,3 +860,4 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
