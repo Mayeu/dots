@@ -22,7 +22,7 @@
 (setq vc-make-backup-files t)
 
 ;; Look-n-feel
-(set-default-font "Hermit-12")
+;;(set-default-font "Hermit-12")
 (setq-default indent-tabs-mode nil) ; tabs are evil
 
 ;; Package thingy, for installing extension
@@ -98,6 +98,7 @@
 ;; Org-mode configuration
 ;; ----------------------
 
+(add-to-list 'load-path "~/code/org-mode/contrib/lisp")
 (add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
 (require 'evil-org)
 (require 'org)
@@ -200,6 +201,8 @@
 (setq org-clock-out-when-done t)
 ;; Save the running clock and all clock history when exiting Emacs, load it on startup
 (setq org-clock-persist t)
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
 ;; Do not prompt to resume an active clock
 ;;(setq org-clock-persist-query-resume nil)
 ;; Enable auto clock resolution for finding open clocks
@@ -460,6 +463,30 @@ as the default task."
                        (org-tags-match-list-sublevels nil))))
                nil))))
 
+; Determine if it is archivable or not
+(defun bh/skip-non-archivable-tasks ()
+  "Skip trees that are not available for archiving"
+  (save-restriction
+    (widen)
+    ;; Consider only tasks with done todo headings as archivable candidates
+    (let ((next-headline (save-excursion (or (outline-next-heading) (point-max))))
+          (subtree-end (save-excursion (org-end-of-subtree t))))
+      (if (member (org-get-todo-state) org-todo-keywords-1)
+          (if (member (org-get-todo-state) org-done-keywords)
+              (let* ((daynr (string-to-int (format-time-string "%d" (current-time))))
+                     (a-month-ago (* 60 60 24 (+ daynr 1)))
+                     (last-month (format-time-string "%Y-%m-" (time-subtract (current-time) (seconds-to-time a-month-ago))))
+                     (this-month (format-time-string "%Y-%m-" (current-time)))
+                     (subtree-is-current (save-excursion
+                                           (forward-line 1)
+                                           (and (< (point) subtree-end)
+                                                (re-search-forward (concat last-month "\\|" this-month) subtree-end t)))))
+                (if subtree-is-current
+                    subtree-end ; Has a date in this month or last month, skip it
+                  nil))  ; available to archive
+            (or subtree-end (point-max)))
+        next-headline))))
+
 ; utility function for the agenda
 (defun bh/find-project-task ()
   "Move point to the parent (project) task if any"
@@ -714,6 +741,14 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
         nil
       next-headline)))
 
+;; Archiving
+(setq org-archive-mark-done nil)
+(setq org-archive-location "%s_archive::* Archived Tasks")
+
+;; Regular checklist endling
+;; Allow to automatically reset checkbox in regular task when done
+(require 'org-checklist)
+
 ;; Relative line-number
 ;; --------------------
 (package-require 'linum-relative)
@@ -781,23 +816,28 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
 (setq notmuch-saved-searches
   '((:name "inbox" :query "tag:inbox AND NOT tag:nothing" :count-query "tag:inbox AND tag:unread AND NOT tag:nothing" :sort-order 'newest-first)
     (:name "nothing" :query "tag:inbox AND tag:nothing" :count-query "tag:inbox AND tag:nothing AND tag:unread" :sort-order 'newest-first)
-    (:name "ml" :query "tag:ml" :query "tag:ml AND tag:unread" :sort-order 'newest-first)
+    (:name "ml" :query "tag:inbox AND tag:ml" :count-query "tag:ml AND tag:unread" :sort-order 'newest-first)
     (:name "notmuch" :query "tag:inbox AND to:notmuchmail.org")))
 
 ;; GPG
 (setq notmuch-crypto-process-mime t)
 
-;; w3m
-(package-require 'w3m)
-(require 'w3m)
-(setq mm-text-html-renderer 'w3m) ;; Render html mail with w3m
-(setq mime-w3m-display-inline-images t) ;; Yes, do render inline images
-(setq mm-inline-text-html-with-images t)
+(setq message-kill-buffer-on-exit t) ; kill buffer after sending mail)
+(setq mail-specify-envelope-from t) ; Settings to work with msmtp
+(setq message-sendmail-envelope-from 'header)
+(setq mail-envelope-from 'header)
 
-;; test
-;;(setq gnus-inhibit-images nil)
-(setq mm-inline-large-images t)
-(setq mime-w3m-inline-large-images t)
+;; w3m
+;; (package-require 'w3m)
+;; (require 'w3m)
+;; (setq mm-text-html-renderer 'w3m) ;; Render html mail with w3m
+;; (setq mime-w3m-display-inline-images t) ;; Yes, do render inline images
+;; (setq mm-inline-text-html-with-images t)
+;; 
+;; ;; test
+;; ;;(setq gnus-inhibit-images nil)
+;; (setq mm-inline-large-images t)
+;; (setq mime-w3m-inline-large-images t)
 
 ;; Global keybinding
 ;; -----------------
@@ -808,3 +848,15 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
 ;; Function aliases
 ;; ----------------
 (defalias 'eb 'eval-buffer)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(send-mail-function (quote sendmail-send-it)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
