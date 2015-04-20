@@ -22,13 +22,3 @@ envfile="${HOME}/.gnupg/gpg-agent.env"
 if test -f "$envfile" && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
    eval "$(cat "$envfile")"
 fi
-
-# Chruby
-if [ -f "/usr/local/share/chruby/chruby.sh" ]; then
-   source /usr/local/share/chruby/chruby.sh
-# Archlinux convention:
-elif [ -f "/usr/share/chruby/chruby.sh" ]; then
-   source /usr/share/chruby/chruby.sh
-fi
-
-chruby system
