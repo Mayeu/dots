@@ -42,11 +42,7 @@ export EDITOR=vim
 export SVN_EDITOR=vim
 
 ## Path variable
-export PATH=~/.gem/ruby/2.2.0/bin:~/.gem/ruby/2.1.0/bin:~/script/:~/script/python/:~/bin/:/usr/bin/vendor_perl/:$PATH
-
-# Go
-export GOPATH=~/go
-export PATH=$PATH:/usr/lib/go/site/bin
+export PATH=~/script/:~/script/python/:~/bin/:$PATH
 
 ## Ledger
 export LEDGER_FILE=~/account.ldg
@@ -76,6 +72,7 @@ alias pd4='pushd +4'
 alias g='git'
 alias n='notes'
 alias tstamp='date +%s'
+alias serverup='python2 -m SimpleHTTPServer'
 
 # Vim alias
 alias vi="vim"
@@ -108,21 +105,8 @@ function try_local_bin {
   fi
 }
 
-function rake {
-  try_local_bin rake $@
-}
-
-function rails {
-  try_local_bin rails $@
-}
-
-function spring {
-  try_local_bin spring $@
-}
-
 # Alias & PATH haskell
 alias rh='runhaskell -Wall -Werror'
-PATH=~/.cabal/bin/:$PATH
 
 # Alias elixir
 alias mdg='mix deps.get && mix deps.compile'
