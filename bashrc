@@ -133,6 +133,7 @@ alias gr='go run'
 # Keyboard alias
 alias kdvp='setxkbmap -layout us -variant dvp -option compose:caps -option keypad:atm -option numpad:shift3 -option kpdl:semi'
 alias kus='setxkbmap -layout us'
+alias kch='setxkbmap -layout ch'
 
 # Host specific
 ############### Argon ################
