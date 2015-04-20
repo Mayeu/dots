@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -f $HOME/.dmenurc ]; then
    . $HOME/.dmenurc
 else
-   DMENU='dmenu -i'
+   DMENU='dmenu_run -i'
 fi
 
 TERMI='urxvt -e bash -lic'
