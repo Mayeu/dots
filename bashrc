@@ -193,3 +193,6 @@ export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 if [ -f ~/.priv_dots ] ; then
    source ~/.priv_dots
 fi
+
+# Add my fork to nixpath
+export NIX_PATH=mynixpkgs=$HOME/nixpkgs:$NIX_PATH
