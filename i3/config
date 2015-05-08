@@ -193,6 +193,7 @@ bar {
 }
 
 for_window [class="Steam"] floating enable
+for_window [title="game-demo"] floating enable
 
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
