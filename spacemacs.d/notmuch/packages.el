@@ -40,10 +40,10 @@ which require an initialization must be listed explicitly in the list.")
               (completing-read prompt (cons initial-input collection) nil t nil 'notmuch-address-history)))
 
                                         ;(evil-leader/set-key)
-      (evilify notmuch-hello-mode notmuch-hello-mode-map)
-      (evilify notmuch-show-mode notmuch-show-mode-map
-               (kbd "N") 'notmuch-show-next-message
-               (kbd "n") 'notmuch-show-next-open-message)
+      ;(evilify notmuch-hello-mode notmuch-hello-mode-map)
+      ;(evilify notmuch-show-mode notmuch-show-mode-map
+      ;         (kbd "N") 'notmuch-show-next-message
+      ;         (kbd "n") 'notmuch-show-next-open-message)
       (evilify notmuch-tree-mode notmuch-tree-mode-map)
       (evilify notmuch-search-mode notmuch-search-mode-map)
 

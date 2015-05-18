@@ -20,6 +20,7 @@
   '(
     ;; post extension my-orgs go here
     org-checklist ;; For automatic reset of checkbox
+    org-notmuch   ;; Notmuch integration
     )
   "List of all extensions to load after the packages.")
 
@@ -35,3 +36,6 @@
 
 (defun my-org/init-org-checklist ()
   (require 'org-checklist))
+
+(defun my-org/init-org-notmuch ()
+  (require 'org-notmuch))

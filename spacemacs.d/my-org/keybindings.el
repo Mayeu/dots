@@ -7,6 +7,8 @@
 ;;(global-set-key (kbd "<f12>") 'org-agenda)
 ;; I use C-c c to start capture mode
 (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c l") 'org-store-link)
 
 ;;; Clocking keybindings
 ;;
