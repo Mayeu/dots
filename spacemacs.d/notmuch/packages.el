@@ -51,13 +51,13 @@ which require an initialization must be listed explicitly in the list.")
       (define-key notmuch-show-mode-map "d"
         (lambda ()
           (interactive)
-          (notmuch-show-tag (list "+deleted" "-inbox"))
+          (notmuch-show-tag (list "+deleted" "-inbox" "-unread"))
           (notmuch-bury-or-kill-this-buffer)
           (notmuch-refresh-this-buffer)))
       (define-key notmuch-search-mode-map "d"
         (lambda ()
           (interactive)
-          (notmuch-search-tag (list "+deleted" "-inbox"))
+          (notmuch-search-tag (list "+deleted" "-inbox" "-unread"))
           (next-line)))
       )))
 
