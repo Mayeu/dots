@@ -196,3 +196,6 @@ fi
 
 # Add my fork to nixpath
 export NIX_PATH=mynixpkgs=$HOME/nixpkgs:$NIX_PATH
+
+# sync fitbit
+alias syncfitbit='cd ~/code/libfitbit/python/ && python2 fitbit_client.py --once && cd ~/.fitbit/23VGFT/csv/ && git commit -a -m "Update"'
