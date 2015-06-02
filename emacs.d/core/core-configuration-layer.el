@@ -18,7 +18,8 @@
 (unless package--initialized
   (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
                            ("gnu" . "http://elpa.gnu.org/packages/")
-                           ("melpa" . "http://melpa.org/packages/")))
+                           ("melpa" . "http://melpa.org/packages/")
+                           ("org" . "http://orgmode.org/elpa/")))
   ;; optimization, no need to activate all the packages so early
   (setq package-enable-at-startup nil)
   (package-initialize 'noactivate)
@@ -96,16 +97,19 @@ symbol and the value is an odered list of initialization functions to execute.")
 (defvar configuration-layer-all-post-extensions-sorted '()
   "Sorted list of all post extensions symbols.")
 
-(defvar configuration-layer-contrib-categories '("config"
-                                                 "fun"
-                                                 "irc"
-                                                 "lang"
-                                                 "usr")
+(defvar configuration-layer-contrib-categories '("!config"
+                                                 "!email"
+                                                 "!fun"
+                                                 "!irc"
+                                                 "!lang"
+                                                 "!tools"
+                                                 "!usr"
+                                                 "!vim"
+                                                 "!window-management")
   "List of strings corresponding to category names. A category is a
 sub-directory of the contribution directory.")
 
-(defvar configuration-layer-excluded-packages '()
-  "List of all excluded packages declared at the layer level.")
+(defvar configuration-layer-excluded-packages '())
 
 (defun configuration-layer/sync ()
   "Synchronize declared layers in dotfile with spacemacs."
@@ -115,11 +119,32 @@ sub-directory of the contribution directory.")
   (when dotspacemacs-delete-orphan-packages
     (configuration-layer/delete-orphan-packages)))
 
-(defun configuration-layer/create-layer (name)
-  "Ask the user for a configuration layer name and create a layer with this
-name in the private layers directory."
-  (interactive "sConfiguration layer name: ")
-  (let ((layer-dir (configuration-layer//get-private-layer-dir name)))
+(defun configuration-layer/create-layer ()
+  "Ask the user for a configuration layer name and the layer
+directory to use. Create a layer with this name in the selected
+layer directory."
+  (interactive)
+  (let* ((current-layer-paths (mapcar (lambda (dir) (expand-file-name dir))
+                                      (cl-pushnew
+                               configuration-layer-private-directory
+                               dotspacemacs-configuration-layer-path)))
+         (other-choice "Another directory...")
+         (helm-lp-source
+          `((name . "Configuration Layer Paths")
+            (candidates . ,(append current-layer-paths
+                                   (list other-choice)))
+            (action . (lambda (c) c))))
+         (layer-path-sel (helm :sources helm-lp-source
+                               :prompt "Configuration layer path: "))
+         (layer-path (cond
+                      ((string-equal layer-path-sel other-choice)
+                       (read-directory-name "Other configuration layer path: " "~/" ))
+                      ((member layer-path-sel current-layer-paths)
+                       layer-path-sel)
+                      (t
+                       (error "Please select an option from the list"))))
+         (name (read-from-minibuffer "Configuration layer name: " ))
+         (layer-dir (concat layer-path "/" name)))
     (cond
      ((string-equal "" name)
       (message "Cannot create a configuration layer without a name."))
@@ -127,23 +152,25 @@ name in the private layers directory."
       (message "Cannot create configuration layer \"%s\", this layer already exists."
                name))
      (t
-      (make-directory layer-dir)
-      (configuration-layer//copy-template "extensions")
-      (configuration-layer//copy-template "packages")
-      (message "Configuration layer \"%s\" successfully created." name))
-  )))
+      (make-directory layer-dir t)
+      (configuration-layer//copy-template "extensions" layer-dir)
+      (configuration-layer//copy-template "packages" layer-dir)
+      (message "Configuration layer \"%s\" successfully created." name)))))
 
 (defun configuration-layer//get-private-layer-dir (name)
   "Return an absolute path the the private configuration layer with name
 NAME."
   (concat configuration-layer-private-directory name "/"))
 
-(defun configuration-layer//copy-template (template)
-  "Copy and replace special values of TEMPLATE to LAYER_DIR."
+(defun configuration-layer//copy-template (template &optional layer-dir)
+  "Copy and replace special values of TEMPLATE to LAYER_DIR. If
+LAYER_DIR is nil, the private directory is used."
   (let ((src (concat configuration-layer-template-directory
                      (format "%s.template" template)))
-        (dest (concat (configuration-layer//get-private-layer-dir name)
-                      (format "%s.el" template))))
+        (dest (if layer-dir
+                  (concat layer-dir "/" (format "%s.el" template))
+                (concat (configuration-layer//get-private-layer-dir name)
+                        (format "%s.el" template)))))
     (copy-file src dest)
     (find-file dest)
     (save-excursion
@@ -163,39 +190,50 @@ in `configuration-layer-contrib-categories'"
 (defun configuration-layer//discover-layers ()
   "Return a hash table where the key is the layer symbol and the value is its
 path."
-  (let ((cat-dirs (configuration-layer//get-contrib-category-dirs))
+  (let ((contrib-cat-dirs (configuration-layer//get-contrib-category-dirs))
+        (discovered '())
         (result (make-hash-table :size 256)))
+    (setq discovered
+          (append discovered (configuration-layer//discover-layers-in-dir
+                              configuration-layer-contrib-directory
+                              configuration-layer-contrib-categories)))
+    (dolist (dir (append contrib-cat-dirs
+                         dotspacemacs-configuration-layer-path))
+      (setq discovered
+            (append discovered (configuration-layer//discover-layers-in-dir
+                                dir))))
+    ;; load private layers at the end on purpose
+    ;; we asume that the user layers must have the final word
+    ;; on configuration choices.
+    (setq discovered
+          (append discovered (configuration-layer//discover-layers-in-dir
+                              configuration-layer-private-directory
+                              '("snippets"))))
     ;; add spacemacs layer
     (puthash 'spacemacs (expand-file-name user-emacs-directory) result)
-    (mapc (lambda (dir)
-            (let ((layers (configuration-layer//discover-layers-in-dir dir)))
-              (mapc (lambda (layer)
-                      (puthash (car layer) (cdr layer) result))
-                    layers)))
-          (append (list configuration-layer-contrib-directory)
-                  cat-dirs
-                  dotspacemacs-configuration-layer-path
-                  ;; load private layers at the end on purpose
-                  ;; we asume that the user layers must have the final word
-                  ;; on configuration choices.
-                  (list configuration-layer-private-directory)))
+    ;; add discovered
+    (mapc (lambda (l)
+            (if (ht-contains? result (car l))
+                (spacemacs-buffer/warning
+                 (concat "Duplicated layer %s detected in directory \"%s\", "
+                         "keeping only the layer in directory \"%s\"")
+                 (car l) (cdr l) (ht-get result (car l)))
+              (puthash (car l) (cdr l) result))) discovered)
     result))
 
-(defun configuration-layer//discover-layers-in-dir (dir)
-  "Return an alist where the key is a layer symbol and the value is the path
-for that layer."
+(defun configuration-layer//discover-layers-in-dir (dir &optional exclude)
+  "Return an alist of layer and absolute path in Dir."
   (spacemacs-buffer/message "Looking for configuration layers in %s" dir)
-  (ignore-errors
-    (let ((files (directory-files dir nil nil 'nosort))
-          (filter-out configuration-layer-contrib-categories)
-          result '())
-      (dolist (f files)
-        (when (and (file-directory-p (concat dir f))
-                   (not (member f filter-out))
-                   (not (equalp ?. (aref f 0))))  ;; Remove hidden, traversal
+  (let* ((files (directory-files dir nil nil 'nosort))
+         (result '()))
+    (dolist (f files)
+      (let ((full (file-name-as-directory (concat dir f))))
+        (when (and (not (string-prefix-p "." f))
+                   (not (and exclude (member f exclude)))
+                   (file-directory-p full))
           (spacemacs-buffer/message "-> Discovered configuration layer: %s" f)
-          (push (cons (intern f) dir) result)))
-      result)))
+          (push (cons (intern f) dir) result))))
+    result))
 
 (defun configuration-layer/init-layers ()
   "Declare default layers and user layers from the dotfile by filling the
@@ -242,12 +280,21 @@ the following keys:
   "Set the configuration variables for the passed LAYERS."
   (dolist (layer layers)
     (let ((variables (spacemacs/mplist-get layer :variables)))
-      (while variables
-        (let ((var (pop variables)))
-          (if (consp variables)
-              (set-default var (pop variables))
-            (spacemacs-buffer/warning "Missing value for variable %s !"
-                                      var)))))))
+          (while variables
+            (let ((var (pop variables)))
+              (if (consp variables)
+                  (condition-case err
+                      (set-default var (eval (pop variables)))
+                    ('error
+                     (configuration-layer//set-error)
+                     (spacemacs-buffer/append
+                      (format (concat "An error occurred while setting layer "
+                                      "variable %s "
+                                      "(error: %s). Be sure to quote the value "
+                                      "if needed.\n") var err))))
+                (spacemacs-buffer/warning "Missing value for variable %s !"
+                                          var)))))))
+
 
 (defun configuration-layer/package-usedp (pkg)
   "Return non-nil if PKG symbol corresponds to a used package."
@@ -296,6 +343,9 @@ the following keys:
     (setq configuration-layer-post-extensions-init-funcs
           (configuration-layer//filter-init-funcs configuration-layer-all-post-extensions t))
     ;; (message "package init-funcs: %s" configuration-layer-packages-init-funcs)
+    ;; Add additional packages not tied to a layer
+    (dolist (add-package dotspacemacs-additional-packages)
+      (puthash add-package nil configuration-layer-all-packages))
     ;; number of chuncks for the loading screen
     (let ((total (+ (ht-size configuration-layer-all-packages)
                     (ht-size configuration-layer-all-pre-extensions)
@@ -706,10 +756,10 @@ to select one."
 (defun configuration-layer//get-packages-dependencies ()
   "Returns a hash map where key is a dependency package symbol and value is
 a list of all packages which depend on it."
-  (let ((result (make-hash-table :size 256)))
+  (let ((result (make-hash-table :size 512)))
     (dolist (pkg package-alist)
       (let* ((pkg-sym (car pkg))
-             (deps (configuration-layer//get-package-dependencies pkg-sym)))
+             (deps (configuration-layer//get-package-dependencies-from-archive pkg-sym)))
         (dolist (dep deps)
           (let* ((dep-sym (car dep))
                  (value (ht-get result dep-sym)))
@@ -824,13 +874,21 @@ deleted safely."
    (t (let ((p (cadr (assq pkg package-alist))))
         (when p (package-delete p))))))
 
+(defun configuration-layer//filter-used-themes (orphans)
+  "Filter out used theme packages from ORPHANS candidates.
+Returns the filtered list."
+  (delq nil (mapcar (lambda (x)
+                      (and (not (memq x spacemacs-used-theme-packages))
+                           x)) orphans)))
+
 (defun configuration-layer/delete-orphan-packages ()
   "Delete all the orphan packages."
   (interactive)
   (let* ((dependencies (configuration-layer//get-packages-dependencies))
          (implicit-packages (configuration-layer//get-implicit-packages))
-         (orphans (configuration-layer//get-orphan-packages implicit-packages
-                                                  dependencies))
+         (orphans (configuration-layer//filter-used-themes
+                   (configuration-layer//get-orphan-packages implicit-packages
+                                                             dependencies)))
          (orphans-count (length orphans)))
     ;; (message "dependencies: %s" dependencies)
     ;; (message "implicit: %s" implicit-packages)

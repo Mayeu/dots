@@ -10,13 +10,8 @@
 ;;
 ;;; License: GPLv3
 
-(defvar slime-packages
-  '(slime)
-  "List of all packages to install and/or initialize. Built-in packages
-which require an initialization must be listed explicitly in the list.")
-
-(defvar slime-excluded-packages '()
-  "List of packages to exclude.")
+(setq slime-packages
+  '(slime))
 
 (defun slime/init-slime ()
   (use-package slime
@@ -34,7 +29,12 @@ which require an initialization must be listed explicitly in the list.")
       (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
 
       ;; enabel smartparen in code buffer and SLIME REPL
-      (add-hook 'slime-repl-mode-hook #'smartparens-strict-mode)
+      ;; (add-hook 'slime-repl-mode-hook #'smartparens-strict-mode)
+      (defun slime/disable-smartparens ()
+        (smartparens-strict-mode -1)
+        (turn-off-smartparens-mode))
+
+      (add-hook 'slime-repl-mode-hook #'slime/disable-smartparens)
 
       (add-to-hooks 'slime-mode '(lisp-mode-hook scheme-mode-hook)))
     :config

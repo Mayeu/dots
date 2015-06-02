@@ -42,7 +42,16 @@
   :tag " <Ev> "
   :enable (emacs)
   :message "-- EVILIFIED BUFFER --"
-  :cursor box)
+  :cursor box
+  (when (evil-evilified-state-p)
+    (when (bound-and-true-p evil-surround-mode)
+      (evil-surround-mode -1))
+    (setq-local evil-normal-state-map (cons 'keymap nil))
+    (setq-local evil-visual-state-map (cons 'keymap nil))
+    (add-hook 'evil-visual-state-entry-hook
+              (lambda () (interactive)
+                (local-set-key evil-visual-state-map "y" 'evil-yank))
+              nil 'local)))
 
 ;; default key bindings for all evilified buffers
 (define-key evil-evilified-state-map (kbd dotspacemacs-leader-key)
@@ -65,12 +74,13 @@
 BODY is a list of additional key bindings to apply for the given MAP in
 `evilified state'."
   (let ((defkey (when body `(evil-define-key 'evilified ,map ,@body))))
-    `(progn (unless (memq ',mode evil-evilified-state--modes)
-              (push ',mode evil-evilified-state--modes))
-            (unless (or (bound-and-true-p holy-mode)
-                        (memq ',mode evil-evilified-state-modes))
-              (delq ',mode evil-emacs-state-modes)
-              (push ',mode evil-evilified-state-modes))
+    `(progn (unless ,(null mode)
+              (unless (memq ',mode evil-evilified-state--modes)
+                (push ',mode evil-evilified-state--modes))
+              (unless (or (bound-and-true-p holy-mode)
+                          (memq ',mode evil-evilified-state-modes))
+                (delq ',mode evil-emacs-state-modes)
+                (push ',mode evil-evilified-state-modes)))
             (unless ,(null defkey) (,@defkey)))))
 
 (provide 'evil-evilified-state)

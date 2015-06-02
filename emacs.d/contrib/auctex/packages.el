@@ -1,9 +1,10 @@
-(defvar auctex-packages
+(setq auctex-packages
   '(
     auctex
     company
     company-auctex
     evil-matchit
+    flycheck
     ))
 
 (defun auctex/init-auctex ()
@@ -13,13 +14,12 @@
     (progn
       (defun auctex/build-view ()
         (interactive)
-        (if (buffer-modified-p)
-            (progn
-              (let ((TeX-save-query nil))
-                (TeX-save-document (TeX-master-file)))
-              (setq build-proc (TeX-command "LaTeX" 'TeX-master-file -1))
-              (set-process-sentinel  build-proc  'auctex/build-sentinel))
-          (TeX-view)))
+        (progn
+          (let ((TeX-save-query nil))
+            (TeX-save-document (TeX-master-file)))
+          (setq build-proc (TeX-command "LaTeX" 'TeX-master-file -1))
+          (set-process-sentinel  build-proc  'auctex/build-sentinel))
+        (TeX-view))
 
       (defun auctex/build-sentinel (process event)
         (if (string= event "finished\n")
@@ -61,6 +61,9 @@
 
 (defun auctex/post-init-evil-matchit ()
   (add-hook 'LaTeX-mode-hook 'evil-matchit-mode))
+
+(defun python/post-init-flycheck ()
+  (add-hook 'LaTeX-mode-hook 'flycheck-mode))
 
 (when (configuration-layer/layer-usedp 'auto-completion)
   (defun auctex/post-init-company ()

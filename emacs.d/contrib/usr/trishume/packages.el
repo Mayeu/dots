@@ -1,2 +1,0 @@
-(defvar trishume-packages
-  '())

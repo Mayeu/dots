@@ -1,9 +1,15 @@
-(defvar osx-packages
+(setq osx-packages
   '(
     pbcopy
-    )
-  "List of all packages to install and/or initialize. Built-in packages
-which require an initialization must be listed explicitly in the list.")
+    ))
+
+(if (executable-find "gls")
+    ;; maybe absolute or relative name of the `ls' program used by
+    ;; `insert-directory'.
+    ;; brew info coreutils
+    (setq insert-directory-program "gls"
+          dired-listing-switches "-aBhl --group-directories-first")
+  (setq dired-use-ls-dired nil))
 
 (defun osx/init-pbcopy ()
   (use-package pbcopy

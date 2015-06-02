@@ -14,6 +14,10 @@
 (setq echo-keystrokes 0.02)
 ;; auto-indent on RET
 (define-key global-map (kbd "RET") 'newline-and-indent)
+
+;; improve delete-other-windows
+(define-key global-map (kbd "C-x 1") 'toggle-maximize-buffer)
+
 ;; alternate binding to search next occurrence with isearch without
 ;; exiting isearch
 (define-key isearch-mode-map (kbd "S-<return>") 'isearch-repeat-forward)
@@ -48,26 +52,22 @@
   "ac"  'calc-dispatch
   "ad"  'dired
   "ap"  'proced
-  "ase" 'eshell
-  "asi" 'shell
   "au"  'undo-tree-visualize)
 ;; buffers --------------------------------------------------------------------
 (evil-leader/set-key
-  "b0"  'beginning-of-buffer
-  "b$"  'end-of-buffer
-  "bd"  'spacemacs/kill-this-buffer
-  "bb"  'spacemacs/alternate-buffer ;; switch back and forth between two last buffers
+  "bd"  'kill-this-buffer
   "TAB" 'spacemacs/alternate-buffer
   "bh"  'spacemacs/home
   "be"  'spacemacs/safe-erase-buffer
   "bK"  'kill-other-buffers
   "bk"  'ido-kill-buffer
   "b C-k" 'kill-matching-buffers-rudely
-  "bn"  'switch-to-next-buffer
-  "bp"  'switch-to-prev-buffer
+  "bP"  'copy-clipboard-to-whole-buffer
+  "bn"  'spacemacs/next-useful-buffer
+  "bp"  'spacemacs/previous-useful-buffer
   "bR"  'spacemacs/safe-revert-buffer
-  "br"  'rename-current-buffer-file
-  "bw"  'toggle-read-only)
+  "bY"  'copy-whole-buffer-to-clipboard
+  "bw"  'read-only-mode)
 ;; Cycling settings -----------------------------------------------------------
 (evil-leader/set-key "Tn" 'spacemacs/cycle-spacemacs-theme)
 ;; describe functions ---------------------------------------------------------
@@ -82,6 +82,7 @@ Ensure that helm is required before calling FUNC."
          (require 'helm)
          (call-interactively ',func))
        (evil-leader/set-key ,keys ',func-name))))
+(spacemacs||set-helm-key "hdb" describe-bindings)
 (spacemacs||set-helm-key "hdc" describe-char)
 (spacemacs||set-helm-key "hdf" describe-function)
 (spacemacs||set-helm-key "hdk" describe-key)
@@ -105,32 +106,29 @@ Ensure that helm is required before calling FUNC."
   "fes" 'find-spacemacs-file
   "fec" 'find-contrib-file
   "fed" 'find-dotfile
+  "feD" 'ediff-dotfile-and-template
+  "feR" 'dotspacemacs/sync-configuration-layers
   "fev" 'spacemacs/display-and-copy-version
-  "ff" 'ido-find-file
-  "fF" 'helm-find-files
   "fg" 'rgrep
   "fj" 'dired-jump
   "fo" 'spacemacs/open-in-external-app
+  "fR"  'rename-current-buffer-file
   "fS" 'evil-write-all
   "fs" 'evil-write
   "fy" 'show-and-copy-buffer-filename)
 ;; insert stuff ---------------------------------------------------------------
 (evil-leader/set-key
-  "ij"  (lambda (count)
-          "Insert a new line below with no identation."
-          (interactive "p")
-          (save-excursion
-            (evil-move-end-of-line)
-            (while (> count 0)
-              (insert "\n")
-              (setq count (1- count)))))
-  "ik" 'evil-insert-line-above)
+  "iJ" 'spacemacs/insert-line-below-no-indent 
+  "iK" 'spacemacs/insert-line-above-no-indent 
+  "ik" 'evil-insert-line-above
+  "ij" 'evil-insert-line-below)
 ;; format ---------------------------------------------------------------------
 ;; <SPC> j k key binding for a frequent action: go and indent line below the point
 ;; <SPC> J split the current line at point and indent it
 (evil-leader/set-key
   "J"  'sp-split-sexp
   "jj" 'sp-newline
+  "jo" 'open-line
   "j=" 'spacemacs/indent-region-or-buffer
   "jJ" 'spacemacs/split-and-new-line
   "jk" 'evil-goto-next-line-and-indent)
@@ -205,6 +203,12 @@ Ensure that helm is required before calling FUNC."
                       :on (toggle-frame-maximized)
                       :documentation "Maximize the current frame."
                       :evil-leader "TM")
+(spacemacs|add-toggle mode-line
+                      :status hidden-mode-line-mode
+                      :on (hidden-mode-line-mode)
+                      :off (hidden-mode-line-mode -1)
+                      :documentation "Toggle the visibility of modeline."
+                      :evil-leader "tmt")
 (spacemacs|add-toggle transparent-frame
                       :status nil
                       :on (toggle-transparency)
@@ -224,6 +228,18 @@ Ensure that helm is required before calling FUNC."
                       :off (menu-bar-mode -1)
                       :documentation "Display the menu bar."
                       :evil-leader "Tm")
+(spacemacs|add-toggle semantic-stickyfunc
+                      :status semantic-stickyfunc-mode
+                      :on (semantic-stickyfunc-mode)
+                      :off (semantic-stickyfunc-mode -1)
+                      :documentation "Enable semantic-stickyfunc."
+                      :evil-leader "Ts")
+(spacemacs|add-toggle semantic-stickfunc-globally
+                      :status global-semantic-stickyfunc-mode
+                      :on (global-semantic-stickyfunc-mode)
+                      :off (global-semantic-stickyfunc-mode -1)
+                      :documentation "Enable semantic-stickyfunc globally."
+                      :evil-leader "T C-s")
 ;; quit -----------------------------------------------------------------------
 (evil-leader/set-key
   "qs" 'spacemacs/save-buffers-kill-emacs
@@ -290,6 +306,11 @@ Ensure that helm is required before calling FUNC."
 ;; google translate -----------------------------------------------------------
 (evil-leader/set-key
   "xgl" 'set-google-translate-languages)
+;; shell ----------------------------------------------------------------------
+(eval-after-load "shell"
+  '(progn
+    (evil-define-key 'insert comint-mode-map [up] 'comint-previous-input)
+    (evil-define-key 'insert comint-mode-map [down] 'comint-next-input)))
 
 ;; ---------------------------------------------------------------------------
 ;; Micro-states
@@ -298,14 +319,15 @@ Ensure that helm is required before calling FUNC."
 ;; Buffer micro state
 
 (spacemacs|define-micro-state buffer
-  :doc "[n] next [N] previous [K] kill"
+  :doc "[n]ext [p]revious [K]ill [q]uit"
   :disable-evil-leader t
-  :use-minibuffer t
   :evil-leader "b."
   :bindings
-  ("K" spacemacs/kill-this-buffer)
-  ("n" spacemacs/next-real-buffer)
-  ("N" spacemacs/prev-real-buffer))
+  ("K" kill-this-buffer)
+  ("n" spacemacs/next-useful-buffer)
+  ("N" spacemacs/previous-useful-buffer)
+  ("p" spacemacs/previous-useful-buffer)
+  ("q" nil :exit t))
 
 ;; end of Buffer micro state
 
@@ -336,12 +358,12 @@ Ensure that helm is required before calling FUNC."
   "
   [?]                       display this help
   [0,9]                     go to numbered window
-  [-] [/] [s] [v] [S] [V]   split windows bellow|right and focus
+  [-] [/] [s] [v] [S] [V]   split windows below|right and focus
   [c] [C]                   close current|other windows
   [g]                       toggle golden-ratio
   [h] [j] [k] [l]           go to left|bottom|top|right
   [H] [J] [K] [L]           move windows to far/very left|bottom|top|right
-  [[] []] [{] [}]           shrink/enlarge horizontaly and verticaly respectively
+  [[] []] [{] [}]           shrink/enlarge horizontally and vertically respectively
   [o] [w]                   other frame|window
   [R]                       rotate windows
   [u] [U]                   restore previous|next window layout")
@@ -452,12 +474,12 @@ otherwise it is scaled down."
   (spacemacs/scale-up-or-down-font-size 0))
 
 (spacemacs|define-micro-state scale-font
-  :doc "[+] scale up [-] scale down [=] reset font"
+  :doc "[+] scale up [-] scale down [=] reset font [q]uit"
   :evil-leader "zx"
-  :use-minibuffer t
   :bindings
   ("+" spacemacs/scale-up-font)
   ("-" spacemacs/scale-down-font)
-  ("=" spacemacs/reset-font-size))
+  ("=" spacemacs/reset-font-size)
+  ("q" nil :exit t))
 
 ;; end of Text Manipulation Micro State

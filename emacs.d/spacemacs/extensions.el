@@ -12,23 +12,21 @@
 
 ;; Extensions are in emacs_paths/extensions
 ;; Pre extensions are loaded *before* the packages
-(defvar spacemacs-pre-extensions
+(setq spacemacs-pre-extensions
   '(
     evil-evilified-state
     holy-mode
     ))
 
 ;; Post extensions are loaded *after* the packages
-(defvar spacemacs-post-extensions
+(setq spacemacs-post-extensions
   '(
     centered-cursor
-    emoji-cheat-sheet
     helm-spacemacs
     solarized-theme
     spray
     zoom-frm
     ;; hack to be able to wrap built-in emacs modes in an init function
-    emacs-builtin-emacs-lisp
     emacs-builtin-process-menu
     ))
 
@@ -76,10 +74,6 @@
                                       evil-mouse-drag-region))))
       (spacemacs|diminish centered-cursor-mode " ⊝" " -"))))
 
-(defun spacemacs/init-emoji-cheat-sheet ()
-  (use-package emoji-cheat-sheet
-    :commands emoji-cheat-sheet))
-
 (defun spacemacs/init-holy-mode ()
   (use-package holy-mode
     :commands holy-mode
@@ -116,22 +110,23 @@
     :commands spray-mode
     :init
     (progn
-      (evil-leader/set-key "asr"
-        (lambda ()
-          (interactive)
-          (evil-insert-state)
-          (spray-mode t)
-          (evil-insert-state-cursor-hide))))
+      (defun spacemacs/start-spray ()
+        "Start spray speed reading on current buffer at current point."
+        (interactive)
+        (evil-insert-state)
+        (spray-mode t)
+        (evil-insert-state-cursor-hide))
+      (evil-leader/set-key "asr" 'spacemacs/start-spray)
+
+      (defadvice spray-quit (after spacemacs//quit-spray activate)
+        "Correctly quit spray."
+        (set-default-evil-insert-state-cursor)
+        (evil-normal-state)))
     :config
     (progn
       (define-key spray-mode-map (kbd "h") 'spray-backward-word)
       (define-key spray-mode-map (kbd "l") 'spray-forward-word)
-      (define-key spray-mode-map (kbd "q")
-        (lambda ()
-          (interactive)
-          (spray-quit)
-          (set-default-evil-insert-state-cursor)
-          (evil-normal-state))))))
+      (define-key spray-mode-map (kbd "q") 'spray-quit))))
 
 (defun spacemacs/init-solarized-theme ()
   (use-package solarized
@@ -166,10 +161,15 @@
         (let ((zoom-action (cond ((eq arg 0) 'zoom-frm-unzoom)
                                  ((< arg 0) 'zoom-frm-out)
                                  ((> arg 0) 'zoom-frm-in)))
+              (fm (cdr (assoc 'fullscreen (frame-parameters))))
               (fwp (* (frame-char-width) (frame-width)))
               (fhp (* (frame-char-height) (frame-height))))
+          (when (equal fm 'maximized)
+            (toggle-frame-maximized))
           (funcall zoom-action)
-          (set-frame-size nil fwp fhp t)))
+          (set-frame-size nil fwp fhp t)
+          (when (equal fm 'maximized)
+            (toggle-frame-maximized))))
 
       (defun spacemacs/zoom-frm-in ()
         "zoom in frame, but keep the same pixel size"
@@ -187,27 +187,8 @@
         (spacemacs//zoom-frm-do 0))
 
       ;; Font size, either with ctrl + mouse wheel
-      (global-set-key (kbd "C-<wheel-up>") 'spacemacs/zoom-frm-in)
-      (global-set-key (kbd "C-<wheel-down>") 'spacemacs/zoom-frm-out))))
-
-(defun spacemacs/init-emacs-builtin-emacs-lisp ()
-
-  (evil-leader/set-key-for-mode 'emacs-lisp-mode
-    "me$" 'lisp-state-eval-sexp-end-of-line
-    "meb" 'eval-buffer
-    "mec" 'spacemacs/eval-current-form
-    "mee" 'eval-last-sexp
-    "mer" 'spacemacs/eval-region
-    "mef" 'eval-defun
-    "mel" 'lisp-state-eval-sexp-end-of-line
-    "m,"  'lisp-state-toggle-lisp-state
-    "mtb" 'spacemacs/ert-run-tests-buffer
-    "mtq" 'ert)
-
-  (when (configuration-layer/layer-usedp 'auto-completion)
-    (push '(company-capf :with company-yasnippet)
-          company-backends-emacs-lisp-mode)
-    (spacemacs|add-company-hook emacs-lisp-mode)))
+      (global-set-key (kbd "<C-wheel-up>") 'spacemacs/zoom-frm-in)
+      (global-set-key (kbd "<C-wheel-down>") 'spacemacs/zoom-frm-out))))
 
 (defun spacemacs/init-emacs-builtin-process-menu ()
   (evilify process-menu-mode process-menu-mode-map))

@@ -1,0 +1,2 @@
+(setq trishume-packages
+  '())

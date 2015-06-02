@@ -144,6 +144,7 @@ the current state and point position."
       (setq counter (1- counter)))))
 
 ;; from Prelude
+;; TODO: dispatch these in the layers
 (defvar spacemacs-indent-sensitive-modes
   '(coffee-mode
     python-mode
@@ -155,6 +156,13 @@ the current state and point position."
     makefile-imake-mode
     makefile-bsdmake-mode)
   "Modes for which auto-indenting is suppressed.")
+
+(defcustom spacemacs-yank-indent-threshold 1000
+  "Threshold (# chars) over which indentation does not automatically occur."
+  :type 'number
+  :group 'spacemacs)
+
+
 (defun spacemacs/indent-region-or-buffer ()
   "Indent a region if selected, otherwise the whole buffer."
   (interactive)
@@ -250,10 +258,11 @@ the current state and point position."
 (defun toggle-maximize-buffer ()
   "Maximize buffer"
   (interactive)
-  (if (= 1 (length (window-list)))
+  (if (and (= 1 (length (window-list)))
+           (assoc'_ register-alist))
       (jump-to-register '_)
     (progn
-      (set-register '_ (list (current-window-configuration)))
+      (window-configuration-to-register '_)
       (delete-other-windows))))
 
 (defun toggle-maximize-centered-buffer ()
@@ -312,61 +321,72 @@ the current state and point position."
 
 ;; from magnars modified by ffevotte for dedicated windows support
 (defun rotate-windows (count)
- "Rotate your windows.
+  "Rotate your windows.
 Dedicated windows are left untouched. Giving a negative prefix
 argument takes the kindows rotate backwards."
- (interactive "p")
- (let* ((non-dedicated-windows (remove-if 'window-dedicated-p (window-list)))
-        (num-windows (length non-dedicated-windows))
-        (i 0)
-        (step (+ num-windows count)))
-   (cond ((not (> num-windows 1))
-          (message "You can't rotate a single window!"))
-         (t
-          (dotimes (counter (- num-windows 1))
-            (let* ((next-i (% (+ step i) num-windows))
+  (interactive "p")
+  (let* ((non-dedicated-windows (remove-if 'window-dedicated-p (window-list)))
+         (num-windows (length non-dedicated-windows))
+         (i 0)
+         (step (+ num-windows count)))
+    (cond ((not (> num-windows 1))
+           (message "You can't rotate a single window!"))
+          (t
+           (dotimes (counter (- num-windows 1))
+             (let* ((next-i (% (+ step i) num-windows))
 
-                   (w1 (elt non-dedicated-windows i))
-                   (w2 (elt non-dedicated-windows next-i))
+                    (w1 (elt non-dedicated-windows i))
+                    (w2 (elt non-dedicated-windows next-i))
 
-                   (b1 (window-buffer w1))
-                   (b2 (window-buffer w2))
+                    (b1 (window-buffer w1))
+                    (b2 (window-buffer w2))
 
-                   (s1 (window-start w1))
-                   (s2 (window-start w2)))
-              (set-window-buffer w1 b2)
-              (set-window-buffer w2 b1)
-              (set-window-start w1 s2)
-              (set-window-start w2 s1)
-              (setq i next-i)))))))
+                    (s1 (window-start w1))
+                    (s2 (window-start w2)))
+               (set-window-buffer w1 b2)
+               (set-window-buffer w2 b1)
+               (set-window-start w1 s2)
+               (set-window-start w2 s1)
+               (setq i next-i)))))))
 
 (defun rotate-windows-backward (count)
- "Rotate your windows backward."
+  "Rotate your windows backward."
   (interactive "p")
   (rotate-windows (* -1 count)))
 
-(defun spacemacs/next-real-buffer ()
-  "Swtich to the next buffer and avoid special buffers."
-  (interactive)
-  (switch-to-next-buffer)
-  (let ((i 0))
-    (while (and (< i 100) (string-equal "*" (substring (buffer-name) 0 1)))
-      (1+ i)
-      (switch-to-next-buffer))))
+(defun spacemacs/useless-buffer-p (buffer)
+  "Determines if a buffer is useful."
+  (let ((buf-paren-major-mode (get (with-current-buffer buffer
+                                     major-mode)
+                                   'derived-mode-parent))
+        (buf-name (buffer-name buffer)))
+    ;; first find if useful buffer exists, if so returns nil and don't check for
+    ;; useless buffers. If no useful buffer is found, check for useless buffers.
+    (unless (cl-loop for regexp in spacemacs-useful-buffers-regexp do
+                     (when (or (eq buf-paren-major-mode 'comint-mode)
+                               (string-match regexp buf-name))
+                       (return t)))
+      (cl-loop for regexp in spacemacs-useless-buffers-regexp do
+               (when (string-match regexp buf-name)
+                 (return t))))))
 
-(defun spacemacs/prev-real-buffer ()
-  "Swtich to the previous buffer and avoid special buffers."
+(defun spacemacs/next-useful-buffer ()
+  "Switch to the next buffer and avoid special buffers."
   (interactive)
-  (switch-to-prev-buffer)
-  (let ((i 0))
-    (while (and (< i 100) (string-equal "*" (substring (buffer-name) 0 1)))
-      (1+ i)
-      (switch-to-prev-buffer))))
+  (let ((start-buffer (current-buffer)))
+    (next-buffer)
+    (while (and (spacemacs/useless-buffer-p (current-buffer))
+                (not (eq (current-buffer) start-buffer)))
+      (next-buffer))))
 
-(defun spacemacs/kill-this-buffer ()
-  "Kill the current buffer."
+(defun spacemacs/previous-useful-buffer ()
+  "Switch to the previous buffer and avoid special buffers."
   (interactive)
-  (kill-buffer (current-buffer)))
+  (let ((start-buffer (current-buffer)))
+    (previous-buffer)
+    (while (and (spacemacs/useless-buffer-p (current-buffer))
+                (not (eq (current-buffer) start-buffer)))
+      (previous-buffer))))
 
 ;; from magnars
 (defun rename-current-buffer-file ()
@@ -380,6 +400,9 @@ argument takes the kindows rotate backwards."
         (cond ((get-buffer new-name)
                (error "A buffer named '%s' already exists!" new-name))
               (t
+               (let ((dir (file-name-directory new-name)))
+                 (when (and (not (file-exists-p dir)) (yes-or-no-p (format "Create directory '%s'?" dir)))
+                   (make-directory dir t)))
                (rename-file filename new-name 1)
                (rename-buffer new-name)
                (set-visited-file-name new-name)
@@ -496,6 +519,12 @@ argument takes the kindows rotate backwards."
   (interactive)
   (find-file-existing (dotspacemacs/location)))
 
+(defun ediff-dotfile-and-template ()
+  "ediff the current `dotfile' with the template"
+  (interactive)
+  (ediff-files (dotspacemacs/location)
+               (concat dotspacemacs-template-directory ".spacemacs.template")))
+
 (defun find-spacemacs-file ()
   (interactive)
   "Edit the `file' in the spacemacs base directory, in the current window."
@@ -508,20 +537,19 @@ argument takes the kindows rotate backwards."
 
 ;; From http://xugx2007.blogspot.ca/2007/06/benjamin-rutts-emacs-c-development-tips.html
 (setq compilation-finish-function
-   (lambda (buf str)
+      (lambda (buf str)
 
-     (if (or (string-match "exited abnormally" str)
-            (string-match "FAILED" (buffer-string)))
+        (if (or (string-match "exited abnormally" str)
+                (string-match "FAILED" (buffer-string)))
 
-         ;;there were errors
-         (message "There were errors. SPC-e-n to visit.")
-       (unless (or (string-match "Grep finished" (buffer-string))
-                  (string-match "Ag finished" (buffer-string))
-                  (string-match "nosetests" (buffer-name)))
+            ;; there were errors
+            (message "There were errors. SPC-e-n to visit.")
+          (unless (or (string-match "Grep finished" (buffer-string))
+                      (string-match "Ag finished" (buffer-string))
+                      (string-match "nosetests" (buffer-name)))
 
-         ;;no errors, make the compilation window go away in 0.5 seconds
-         (delete-windows-on buf)
-         (message "compilation ok.")))))
+            ;; no errors
+            (message "compilation ok.")))))
 
 ;; from https://gist.github.com/timcharper/493269
 (defun split-window-vertically-and-switch ()
@@ -622,6 +650,24 @@ For instance pass En as source for english."
   (interactive)
   (switch-to-buffer "*spacemacs*")
   )
+
+(defun spacemacs/insert-line-above-no-indent (count)
+  (interactive "p")
+  (save-excursion
+    (evil-previous-line)
+    (evil-move-end-of-line)
+    (while (> count 0)
+      (insert "\n")
+      (setq count (1- count)))))
+
+(defun spacemacs/insert-line-below-no-indent (count)
+  "Insert a new line below with no identation."
+  (interactive "p")
+  (save-excursion
+    (evil-move-end-of-line)
+    (while (> count 0)
+      (insert "\n")
+      (setq count (1- count)))))
 
 ;; from https://github.com/gempesaw/dotemacs/blob/emacs/dg-defun.el
 (defun kill-matching-buffers-rudely (regexp &optional internal-too)
@@ -761,6 +807,18 @@ If ASCII si not provided then UNICODE is used instead."
   "Diminish MODE name in mode line to LIGHTER."
   `(eval-after-load 'diminish '(diminish ',mode)))
 
+;; taken from Prelude: https://github.com/bbatsov/prelude
+(defmacro spacemacs|advise-commands (advice-name commands class &rest body)
+  "Apply advice named ADVICE-NAME to multiple COMMANDS.
+The body of the advice is in BODY."
+  `(progn
+     ,@(mapcar (lambda (command)
+                 `(defadvice ,command
+                      (,class ,(intern (format "%S-%s" command advice-name))
+                              activate)
+                    ,@body))
+               commands)))
+
 (defun disable-electric-indent-mode ()
   (if (fboundp 'electric-indent-local-mode)
       ;; for 24.4
@@ -810,7 +868,7 @@ If ASCII si not provided then UNICODE is used instead."
                        (dired-get-file-for-visit)
                      (buffer-file-name))))
     (cond
-     ((system-is-mswindows) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" file-path)))
+     ((system-is-mswindows) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\\\" file-path)))
      ((system-is-mac) (shell-command (format "open \"%s\"" file-path)))
      ((system-is-linux) (let ((process-connection-type nil))
                           (start-process "" nil "xdg-open" file-path))))))
@@ -841,3 +899,60 @@ If ASCII si not provided then UNICODE is used instead."
   (interactive)
   (let ((comint-buffer-maximum-size 0))
     (comint-truncate-buffer)))
+
+;; http://stackoverflow.com/a/10216338/4869
+(defun copy-whole-buffer-to-clipboard ()
+  "Copy entire buffer to clipboard"
+  (interactive)
+  (clipboard-kill-ring-save (point-min) (point-max)))
+
+
+(defun copy-clipboard-to-whole-buffer ()
+  "Copy clipboard and replace buffer"
+  (interactive)
+  (delete-region (point-min) (point-max))
+  (clipboard-yank)
+  (deactivate-mark))
+
+;; indent on paste
+;; from Prelude: https://github.com/bbatsov/prelude
+(defun yank-advised-indent-function (beg end)
+  "Do indentation, as long as the region isn't too large."
+  (if (<= (- end beg) spacemacs-yank-indent-threshold)
+      (indent-region beg end nil)))
+
+;; hide mode line
+;; from http://bzg.fr/emacs-hide-mode-line.html
+(defvar-local hidden-mode-line-mode nil)
+(define-minor-mode hidden-mode-line-mode
+  "Minor mode to hide the mode-line in the current buffer."
+  :init-value nil
+  :global t
+  :variable hidden-mode-line-mode
+  :group 'editing-basics
+  (if hidden-mode-line-mode
+      (setq hide-mode-line mode-line-format
+            mode-line-format nil)
+    (setq mode-line-format hide-mode-line
+          hide-mode-line nil))
+  (force-mode-line-update)
+  ;; Apparently force-mode-line-update is not always enough to
+  ;; redisplay the mode-line
+  (redraw-display)
+  (when (and (called-interactively-p 'interactive)
+             hidden-mode-line-mode)
+    (run-with-idle-timer
+     0 nil 'message
+     (concat "Hidden Mode Line Mode enabled.  "
+             "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
+
+(spacemacs|advise-commands
+ "indent" (yank yank-pop evil-paste-before evil-paste-after) after
+ "If current mode is not one of spacemacs-indent-sensitive-modes
+ indent yanked text (with universal arg don't indent)."
+ (if (and (not (equal '(4) (ad-get-arg 0)))
+          (not (member major-mode spacemacs-indent-sensitive-modes))
+          (or (derived-mode-p 'prog-mode)
+              (member major-mode spacemacs-indent-sensitive-modes)))
+     (let ((transient-mark-mode nil))
+       (yank-advised-indent-function (region-beginning) (region-end)))))

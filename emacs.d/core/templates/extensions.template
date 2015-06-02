@@ -10,17 +10,15 @@
 ;;
 ;;; License: GPLv3
 
-(defvar NAME-pre-extensions
-  '(
-    ;; pre extension names go here
-    )
-  "List of all extensions to load before the packages.")
+(setq NAME-pre-extensions
+      '(
+        ;; pre extension names go here
+        ))
 
-(defvar NAME-post-extensions
-  '(
-    ;; post extension names go here
-    )
-  "List of all extensions to load after the packages.")
+(setq NAME-post-extensions
+      '(
+        ;; post extension names go here
+        ))
 
 ;; For each extension, define a function NAME/init-<extension-name>
 ;;

@@ -1,5 +1,3 @@
-# Spacemacs Documentation
-
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
 **Table of Contents**
 
@@ -18,9 +16,11 @@
 - [Configuration layers](#configuration-layers)
     - [Structure](#structure)
     - [Extensions and Packages](#extensions-and-packages)
-        - [Declaration](#declaration)
-        - [Initialization](#initialization)
-        - [Exclusion](#exclusion)
+        - [Within a layer](#within-a-layer)
+            - [Declaration](#declaration)
+            - [Initialization](#initialization)
+            - [Exclusion](#exclusion)
+        - [Without a layer](#without-a-layer)
     - [Packages synchronization (Vundle like feature)](#packages-synchronization-vundle-like-feature)
     - [Types of configuration layers](#types-of-configuration-layers)
     - [Submitting a configuration layer upstream](#submitting-a-configuration-layer-upstream)
@@ -66,6 +66,7 @@
         - [Leader key](#leader-key)
     - [Reserved prefix command for user](#reserved-prefix-command-for-user)
     - [Helm](#helm)
+        - [C-z and Tab switch](#c-z-and-tab-switch)
         - [Helm micro-state](#helm-micro-state)
     - [Discovering](#discovering)
         - [Key bindings](#key-bindings)
@@ -88,6 +89,7 @@
         - [Buffers and Files](#buffers-and-files)
             - [Buffers manipulation key bindings](#buffers-manipulation-key-bindings)
             - [Buffers manipulation manipulation micro-state](#buffers-manipulation-manipulation-micro-state)
+            - [Special Buffers](#special-buffers)
             - [Files manipulations key bindings](#files-manipulations-key-bindings)
             - [Emacs and Spacemacs files](#emacs-and-spacemacs-files)
         - [Ido](#ido)
@@ -97,9 +99,6 @@
             - [Opening files with NeoTree](#opening-files-with-neotree)
             - [Other NeoTree key bindings](#other-neotree-key-bindings)
             - [NeoTree mode-line](#neotree-mode-line)
-        - [Shells](#shells)
-            - [Key bindings](#key-bindings)
-            - [Staying in insert state](#staying-in-insert-state)
         - [Bookmarks](#bookmarks)
         - [DocView mode](#docview-mode)
     - [Searching](#searching)
@@ -115,6 +114,8 @@
         - [Helm-swoop](#helm-swoop)
     - [Editing](#editing)
         - [Paste text](#paste-text)
+            - [Paste Micro-state](#paste-micro-state)
+            - [Auto-indent pasted text](#auto-indent-pasted-text)
         - [Text manipulation commands](#text-manipulation-commands)
         - [Smartparens Strict mode](#smartparens-strict-mode)
         - [Zooming](#zooming)
@@ -156,16 +157,16 @@
     - [Troubleshoot](#troubleshoot)
         - [Loading fails](#loading-fails)
         - [I have no file ~/.spacemacs](#i-have-no-file-spacemacs)
-- [Tips](#tips)
-    - [evil-lisp-state as default state](#evil-lisp-state-as-default-state)
 - [Achievements](#achievements)
     - [Issues](#issues)
     - [Merged Pull Requests](#merged-pull-requests)
-    - [Stars and forks](#stars-and-forks)
+    - [Stars, forks and watchers](#stars-forks-and-watchers)
     - [Specials](#specials)
 - [Thank you](#thank-you)
 
 <!-- markdown-toc end -->
+# Spacemacs Documentation
+
 
 # Core Pillars
 
@@ -334,7 +335,9 @@ repository, and `Extensions` are generally elisp code from git submodules.
 
 ## Extensions and Packages
 
-### Declaration
+### Within a layer
+
+#### Declaration
 
 `Extensions` and `Packages` are declared in variables `<layer>-pre-extensions`,
 `<layer>-post-extensions` and `<layer>-packages` where `<layer>` is the layer
@@ -347,14 +350,15 @@ some `eval-after-load` black magic.
 Example:
 
 ```elisp
-(defvar <layer>-packages
+(setq <layer>-packages
   '(
     package1
     package2
+    ...
     )
 ```
 
-### Initialization
+#### Initialization
 
 To initialize an extension or a package `xxx`, define a function with this
 format in `extensions.el` or `packages.el`:
@@ -367,7 +371,7 @@ format in `extensions.el` or `packages.el`:
 
 It is common to define the body with the [use-package][use-package] macro.
 
-### Exclusion
+#### Exclusion
 
 It is possible to exclude some packages from `Spacemacs` in a per layer basis.
 This is useful when a configuration layer aims to replace a stock package
@@ -379,9 +383,34 @@ To do so add the package names to exclude to the variable
 Example:
 
 ```elisp
-(defvar <layer>-excluded-packages
+(setq <layer>-excluded-packages
   '(
     package1
+    package2
+    ...
+    )
+```
+
+### Without a layer
+
+Sometimes a layer can be an unnecessary overhead, this is the case if you just
+want yo install a package without any configuration associated to it. A good
+example is some niche language where you are only interested syntax
+highlighting.
+
+You can install such packages by adding them to the variable
+`dotspacemacs-additional-packages` in your dotfile.
+
+If you want to add some configuration for them then consider to create a layer,
+or just put the configuration in the `dotspacemacs/config` function.
+
+Example to install `llvm-mode` and `dts-mode`:
+
+```elisp
+(setq dotspacemacs-additional-packages
+  '(
+    llvm-mode
+    dts-mode
     )
 ```
 
@@ -466,7 +495,7 @@ $ cp ~/.emacs.d/core/templates/.spacemacs.template ~/.spacemacs
 
 ## Synchronization of dotfile changes
 
-To apply the modifications made in `~/.spacemacs` press <kbd>SPC m c c</kbd>.
+To apply the modifications made in `~/.spacemacs` press <kbd>SPC f e R</kbd>.
 It will re-execute the `Spacemacs` initialization process.
 
 **Note:** A synchronization re-execute the functions `dotspacemacs/init` and
@@ -476,7 +505,7 @@ encounter some unwanted side effects. For instance if you use a toggle in
 whenever the dotfile is re-synchronize. To avoid these side-effects it is
 recommended to use `setq` expressions instead of toggle functions.
 It is also possible to _skip_ the execution of `dotspacemacs/config` with the
-universal argument (<kbd>SPC u SPC m c c</kbd>).
+universal argument (<kbd>SPC u SPC f e R</kbd>).
 
 ## Content
 
@@ -510,7 +539,7 @@ they can be set directly in the `dotspacemacs-configuration-layers` like this:
 
 ```elisp
 ;; List of configuration layers to load.
-dotspacemacs-configuration-layers '(company-mode
+dotspacemacs-configuration-layers '(auto-completion
                                     (git :variables
                                          git-magit-status-fullscreen t
                                          git-enable-github-support t
@@ -582,7 +611,7 @@ states.
 Vim leader key to the Emacs world.
 
 This leader key is commonly set to `,` by Vim users, in `Spacemacs` the leader
-key is set on <kbd>SPC</kbd> (space bar, this is why the name `spacemacs`).
+key is set on <kbd>SPC</kbd> (space bar, hence the name `spacemacs`).
 This key is the most accessible key on a keyboard and it is pressed with the
 thumb which is a good choice to lower the risk of [RSI][RSI].
 
@@ -621,7 +650,7 @@ Additional information may as well be displayed in the minibuffer.
 # Differences between Vim, Evil and Spacemacs
 
 - The `,` key does "repeat last `f`, `t`, `F`, or `T` command in opposite
-direction in `Vim`, but in `Spacemacs` it the major mode specific leader
+direction in `Vim`, but in `Spacemacs` it is the major mode specific leader
 key by default (which can be set on another key binding in the dotfile).
 
 Send a PR to add the differences you found in this section.
@@ -707,7 +736,11 @@ the variable `dotspacemacs-themes`. For instance, to specify `leuven` and
 <kbd>SPC T n</kbd>   | switch to next theme listed in `dotspacemacs-themes`.
 <kbd>SPC T h</kbd>   | select a theme using a `helm` buffer.
 
-**Note:** Due to the inner working of themes in Emacs, switching theme during
+**Note:**
+- You don't need to explicitly list in a layer the theme packages you are
+defining in `dotspacemacs-themes`, Spacemacs is smart enough to remove those
+packages from the list of orphans.
+- Due to the inner working of themes in Emacs, switching theme during
 the same session may have some weird side effects. Although these side effects
 should be pretty rare.
 
@@ -786,7 +819,7 @@ Some graphical UI indicators can be toggled on and off
     Key Binding         |                 Description
 ------------------------|------------------------------------------------------------
 <kbd>SPC t ~</kbd>      | display `~` in the fringe on empty lines
-<kbd>SPC t c</kbd>      | display the fill column (by default the fill column is set to 80)
+<kbd>SPC t f</kbd>      | display the fill column (by default the fill column is set to 80)
 <kbd>SPC t h h</kbd>    | toggle highlight of the current line
 <kbd>SPC t h i</kbd>    | toggle highlight indentation levels
 <kbd>SPC t h c</kbd>    | toggle highlight indentation current column
@@ -805,7 +838,7 @@ Some graphical UI indicators can be toggled on and off
 <kbd>SPC T T</kbd>      | toggle frame transparency
 
 **Note** These toggles are all available via the `helm-spacemacs` interface
-(press <kbd>SPC fe h</kbd> to display the `helm-spacemacs` buffer).
+(press <kbd>SPC f e h</kbd> to display the `helm-spacemacs` buffer).
 
 ### Mouse usage
 
@@ -848,6 +881,7 @@ Some elements can be dynamically toggled:
 <kbd>SPC t m m</kbd>   | toggle the minor mode lighters
 <kbd>SPC t m n</kbd>   | toggle the cat! (if `colors` layer is declared in your dotfile)
 <kbd>SPC t m p</kbd>   | toggle the point character position
+<kbd>SPC t m t</kbd>   | toggle the mode line itself
 <kbd>SPC t m v</kbd>   | toggle the new version lighter
 
 #### Flycheck integration
@@ -940,22 +974,23 @@ toggle can be reached using the `control` key.
 Key Binding          |   Unicode   |   ASCII    |                    Mode
 ---------------------|:-----------:|:----------:|----------------------------------------------------
 <kbd>SPC t -</kbd>   | `⊝`        | -          | [centered-cursor][] mode
-<kbd>SPC t C--</kbd> |            |            | global
+<kbd>SPC t C--</kbd> |            |            | global centered cursor
 <kbd>SPC t a</kbd>   | `ⓐ`        | a          | auto-completion
-<kbd>SPC t c</kbd>   | `ⓒ`        | c          | fill-column-indicator mode
+<kbd>SPC t c</kbd>   | `ⓒ`        | c          | camel case motion with subword mode
 `none`               | `ⓔ`        | e          | [evil-org][evil-org-mode] mode
-<kbd>SPC t f</kbd>   | `ⓕ`        | f          | flycheck mode
+<kbd>SPC t c</kbd>   |            |            | fill-column-indicator mode
 <kbd>SPC t F</kbd>   | `Ⓕ`        | F          | auto-fill mode
 <kbd>SPC t g</kbd>   | `ⓖ`        | g          | [golden-ratio][] mode
 <kbd>SPC t k</kbd>   | `Ⓖ`        | G          | guide-key mode
 <kbd>SPC t i</kbd>   | `ⓘ`        | i          | indentation guide
-<kbd>SPC t C-i</kbd> |             |            | global
+<kbd>SPC t C-i</kbd> |             |            | global indentation guide
 <kbd>SPC t I</kbd>   | `Ⓘ`        | I          | aggressive indent mode
 <kbd>SPC t p</kbd>   | `ⓟ`        | p          | [smartparens][sp] mode
-<kbd>SPC t C-p</kbd> |             |            | global
-<kbd>SPC t s</kbd>   | `ⓢ`        | s          | flyspell mode
+<kbd>SPC t C-p</kbd> |             |            | global smartparens
+<kbd>SPC t s</kbd>   | `ⓢ`        | s          | syntax checking (flycheck)
+<kbd>SPC t S</kbd>   | `Ⓢ`        | S          | spell checking (flyspell)
 <kbd>SPC t w</kbd>   | `ⓦ`        | w          | whitespace mode
-<kbd>SPC t C-w</kbd> |             |            | global
+<kbd>SPC t C-w</kbd> |             |            | global whitespace
 <kbd>SPC t y</kbd>   | `ⓨ`        | y          | [yasnippet][yasnippet] mode
 
 # Commands
@@ -969,7 +1004,7 @@ If you are not familiar with the `Vim` way of editing text you can try the
 ### Escaping
 
 `Spacemacs` uses [evil-escape][] to easily switch between `insert state` and
-`normal state` by quickly pressing the `fd` keys.
+`normal state` by quickly pressing the <kbd>fd</kbd> keys.
 
 The choice of `fd` was made to be able to use the same sequence to escape from
 "everything" in Emacs:
@@ -986,6 +1021,11 @@ The choice of `fd` was made to be able to use the same sequence to escape from
 - quit paradox
 - quit gist-list menu
 - hide neotree buffer
+
+If you find yourself in a buffer where the `Spacemacs` (<kbd>SPC</kbd>) or Vim
+keybindings don't work you can use this to get back to `normal state` (for
+example in <kbd>SPC : customize</kbd> press <kbd>fd</kbd> to make
+<kbd>SPC b s</kbd> work again).
 
 This sequence can be customized in your `~/.spacemacs`. Example to set it
 to `jj` (it is important set the variable in `dotspacemacs/init`):
@@ -1043,38 +1083,44 @@ buffers, projects, search results, configuration layers, toggles and more...
 Mastering `Helm` will make you a `Spacemacs` power user. Do not hesitate
 to read the [Helm documentation wiki][helm-doc].
 
+### C-z and Tab switch
+
+The command bound to C-z is much more useful than the one bound to Tab, so it
+makes sense to swap them.  It's also recommended [here][tuhdo-tuto].
+
 ### Helm micro-state
 
 `Spacemacs` defines a [micro-state](#micro-states) for `Helm` to make it
 work like [Vim's Unite][] plugin.
 
-Initiate the micro-state with <kbd>C-SPC</kbd> while in a `Helm` buffer.
-Use <kbd>C-SPC</kbd> again to exit from the micro-state.
+Initiate the micro-state with <kbd>M-SPC</kbd> or <kbd>s-M-SPC</kbd>
+while in a `Helm` buffer.
 
-Key Binding           | Description
-----------------------|------------------------------------------------------------
-<kbd>C-SPC</kbd>      | initiate or leave the micro-state
-<kbd>TAB</kbd>        | switch to actions page and leave the micro-state
-<kbd>1</kbd>          | execute action 0
-<kbd>2</kbd>          | execute action 1
-<kbd>3</kbd>          | execute action 2
-<kbd>4</kbd>          | execute action 3
-<kbd>5</kbd>          | execute action 4
-<kbd>6</kbd>          | execute action 5
-<kbd>7</kbd>          | execute action 6
-<kbd>8</kbd>          | execute action 7
-<kbd>9</kbd>          | execute action 8
-<kbd>0</kbd>          | execute action 9
-<kbd>a</kbd>          | switch to actions page
-<kbd>g</kbd>          | go to first candidate
-<kbd>G</kbd>          | go to last candidate
-<kbd>h</kbd>          | go to previous source
-<kbd>j</kbd>          | select next candidate
-<kbd>k</kbd>          | select previous candidate
-<kbd>l</kbd>          | go to next source
-<kbd>t</kbd>          | mark current candidate
-<kbd>T</kbd>          | mark all candidates
-<kbd>v</kbd>          | execute persistent action
+Key Binding                            | Description
+---------------------------------------|------------------------------------------------------------
+<kbd>M-SPC</kbd> or <kbd>s-M-SPC</kbd> | initiate or leave the micro-state
+<kbd>TAB</kbd>                         | switch to actions page and leave the micro-state
+<kbd>1</kbd>                           | execute action 0
+<kbd>2</kbd>                           | execute action 1
+<kbd>3</kbd>                           | execute action 2
+<kbd>4</kbd>                           | execute action 3
+<kbd>5</kbd>                           | execute action 4
+<kbd>6</kbd>                           | execute action 5
+<kbd>7</kbd>                           | execute action 6
+<kbd>8</kbd>                           | execute action 7
+<kbd>9</kbd>                           | execute action 8
+<kbd>0</kbd>                           | execute action 9
+<kbd>a</kbd>                           | switch to actions page
+<kbd>g</kbd>                           | go to first candidate
+<kbd>G</kbd>                           | go to last candidate
+<kbd>h</kbd>                           | go to previous source
+<kbd>j</kbd>                           | select next candidate
+<kbd>k</kbd>                           | select previous candidate
+<kbd>l</kbd>                           | go to next source
+<kbd>q</kbd>                           | quit micro-state
+<kbd>t</kbd>                           | mark current candidate
+<kbd>T</kbd>                           | mark all candidates
+<kbd>v</kbd>                           | execute persistent action
 
 ## Discovering
 
@@ -1110,6 +1156,7 @@ thusly:
 
 Key Binding          |                 Description
 ---------------------|------------------------------------------------------------------
+<kbd>SPC h d b</kbd> | describe bindings in a `helm` buffer
 <kbd>SPC h d c</kbd> | describe current character under point
 <kbd>SPC h d f</kbd> | describe a function
 <kbd>SPC h d k</kbd> | describe a key
@@ -1294,7 +1341,7 @@ Key Binding                               |                 Description
 <kbd>SPC w K</kbd>                        | move window to the top
 <kbd>SPC w l</kbd>                        | move to window on the right
 <kbd>SPC w L</kbd>                        | move window to the right
-<kbd>SPC w m</kbd>                        | maximize/minimize a window (maximize is equivalent to delete otehr windows)
+<kbd>SPC w m</kbd>                        | maximize/minimize a window (maximize is equivalent to delete other windows)
 <kbd>SPC w M</kbd>                        | maximize/minimize a window, when maximized the buffer is centered
 <kbd>SPC w o</kbd>                        | cycle and focus between frames
 <kbd>SPC w p m</kbd>                      | open messages buffer in a popup window
@@ -1370,38 +1417,40 @@ The mode can be toggled on and off with:
 
 ### Buffers and Files
 
-`Spacemacs` uses `ido` for opening files since `ido` way to navigate
-the file system is better than `helm` in my opinion (especially because `ido` can
-remember the last selected directories and buffers, maybe helm can do this ?).
-`ido` is also used to kill buffers.
+Since `helm` is used everywhere, by default Spacemacs uses `helm` to open files.
+
+Some users prefer the `ido` way to navigate the file system because it can
+remember the last selected directories and buffers and <kbd>return</kbd> is
+used to open directories instead of <kbd>TAB</kbd> or <kbd>C-z</kbd> in `helm`.
+It is possible to use `ido` instead of `helm` by setting the variable
+`dotspacemacs-use-ido` to `t` in your dotfile.
 
 #### Buffers manipulation key bindings
 
 Buffer manipulation commands (start with `b`):
 
-Key Binding                               |              Description
-------------------------------------------|----------------------------------------------------------------
-<kbd>SPC b 0</kbd>                        | move to the beginning of buffer (useful in `emacs state` buffers)
-<kbd>SPC b $</kbd>                        | move to the end of buffer (useful in `emacs state` buffers)
-<kbd>SPC b b</kbd> or <kbd>SPC TAB</kbd>  | switch to alternate buffer (switch back and forth)
-<kbd>SPC b d</kbd>                        | kill the current buffer (does not delete the visited file)
-<kbd>SPC b e</kbd>                        | erase the content of the buffer (ask for confirmation)
-<kbd>SPC b h</kbd>                        | open `*spacemacs*` home buffer
-<kbd>SPC b k</kbd>                        | kill the current buffer
-<kbd>SPC b K</kbd>                        | kill all buffers except the current one
-<kbd>SPC b C-K</kbd>                      | kill all buffers matching the regexp
-<kbd>SPC b m h</kbd>                      | move a buffer to the left
-<kbd>SPC b m j</kbd>                      | move a buffer to the bottom
-<kbd>SPC b m k</kbd>                      | move a buffer to the top
-<kbd>SPC b m l</kbd>                      | move a buffer to the right
-<kbd>SPC b M</kbd>                        | swap windows using [ace-swap-window][ace-window]
-<kbd>SPC b n</kbd>                        | switch to next buffer
-<kbd>SPC b p</kbd>                        | switch to previous buffer
-<kbd>SPC b r</kbd>                        | rename the current buffer
-<kbd>SPC b R</kbd>                        | revert the current buffer (reload from disk)
-<kbd>SPC b s</kbd>                        | switch to a buffer using `helm`
-<kbd>SPC b w</kbd>                        | toggle read-only (writable state)
-<kbd>z f</kbd>                            | Make current function or comments visible in buffer as much as possible
+Key Binding            |              Description
+-----------------------|----------------------------------------------------------------
+<kbd>SPC TAB</kbd>     | switch to alternate buffer (switch back and forth)
+<kbd>SPC b b</kbd>     | switch to a buffer using `helm`
+<kbd>SPC b d</kbd>     | kill the current buffer (does not delete the visited file)
+<kbd>SPC b e</kbd>     | erase the content of the buffer (ask for confirmation)
+<kbd>SPC b h</kbd>     | open `*spacemacs*` home buffer
+<kbd>SPC b k</kbd>     | kill the current buffer
+<kbd>SPC b K</kbd>     | kill all buffers except the current one
+<kbd>SPC b C-K</kbd>   | kill all buffers matching the regexp
+<kbd>SPC b m h</kbd>   | move a buffer to the left
+<kbd>SPC b m j</kbd>   | move a buffer to the bottom
+<kbd>SPC b m k</kbd>   | move a buffer to the top
+<kbd>SPC b m l</kbd>   | move a buffer to the right
+<kbd>SPC b M</kbd>     | swap windows using [ace-swap-window][ace-window]
+<kbd>SPC b n</kbd>     | switch to next buffer avoiding special buffers
+<kbd>SPC b p</kbd>     | switch to previous buffer avoiding special buffers
+<kbd>SPC b P</kbd>     | copy clipboard and replace buffer (useful when pasting from a browser)
+<kbd>SPC b R</kbd>     | revert the current buffer (reload from disk)
+<kbd>SPC b w</kbd>     | toggle read-only (writable state)
+<kbd>SPC b Y</kbd>     | copy whole buffer to clipboard (useful when copying to a browser)
+<kbd>z f</kbd>         | Make current function or comments visible in buffer as much as possible
 
 #### Buffers manipulation manipulation micro-state
 
@@ -1416,6 +1465,13 @@ Key Binding         | Description
 <kbd>N</kbd>        | go to previous buffer (avoid special buffers)
 Any other key       | leave the micro-state
 
+#### Special Buffers
+
+Unlike vim, emacs creates many buffers that most people do not need to see.
+Some examples are `*Messages*` and `*Compile-Log*`. Spacemacs tries to automatically
+ignore buffers that are not useful. However, you may want to change the way
+Spacemacs marks buffers as useful. For instructions, see the [special buffer howto][].
+
 #### Files manipulations key bindings
 
 Files manipulation commands (start with `f`):
@@ -1423,10 +1479,11 @@ Files manipulation commands (start with `f`):
 Key Binding                               |                 Description
 ------------------------------------------|----------------------------------------------------------------
 <kbd>SPC f D</kbd>                        | delete a file and the associated buffer (ask for confirmation)
-<kbd>SPC f f</kbd>                        | open a file using `ido`
-<kbd>SPC f F</kbd>                        | open a file under point using `helm`
+<kbd>SPC f f</kbd>                        | open file with `helm` (or `ido`)
+<kbd>SPC f F</kbd>                        | try to open the file under point `helm`
 <kbd>SPC f j</kbd>                        | jump to the current buffer file in dired
 <kbd>SPC f o</kbd>                        | open a file using the default external program
+<kbd>SPC f R</kbd>                        | rename the current file
 <kbd>SPC f s</kbd>                        | save a file
 <kbd>SPC f S</kbd>                        | save all files
 <kbd>SPC f r</kbd>                        | open a recent file with `helm`
@@ -1442,9 +1499,12 @@ Key Binding                               |                 Description
 ------------------------------------------|----------------------------------------------------------------
 <kbd>SPC f e c</kbd>                      | open `ido` in the `contrib` folder
 <kbd>SPC f e d</kbd>                      | open the spacemacs dotfile (`~/.spacemacs`)
+<kbd>SPC f e D</kbd>                      | open `ediff` buffer of `~/.spacemacs` and `.spacemacs.template`
 <kbd>SPC f e h</kbd>                      | discover `Spacemacs` layers and packages using `helm`
 <kbd>SPC f e i</kbd>                      | open the all mighty `init.el`
+<kbd>SPC f e R</kbd>                      | resync the dotfile with spacemacs
 <kbd>SPC f e s</kbd>                      | open `ido` in the `spacemacs` layer folder
+<kbd>SPC f e v</kbd>                      | display and copy the spacemacs version
 
 ### Ido
 
@@ -1479,26 +1539,27 @@ Key Binding             |                 Description
 
 `Spacemacs` defines a [micro-state](#micro-states) for `ido`.
 
-Initiate the micro-state with <kbd>C-SPC</kbd> while in a `ido` buffer.
-Use <kbd>C-SPC</kbd> again to exit from the micro-state.
+Initiate the micro-state with <kbd>M-SPC</kbd> or <kbd>s-M-SPC</kbd>
+while in a `ido` buffer.
 
-Key Binding           | Description
-----------------------|------------------------------------------------------------
-<kbd>C-SPC</kbd>      | initiate or leave the micro-state
-<kbd>?</kbd>          | display help
-<kbd>e</kbd>          | open dired
-<kbd>h</kbd>          | delete backward or parent directory
-<kbd>j</kbd>          | next match
-<kbd>J</kbd>          | sub directory
-<kbd>k</kbd>          | previous match
-<kbd>K</kbd>          | parent directory
-<kbd>l</kbd>          | select match
-<kbd>n</kbd>          | next directory in history
-<kbd>o</kbd>          | open in other window
-<kbd>p</kbd>          | previous directory in history
-<kbd>s</kbd>          | open in a new horizontal split
-<kbd>t</kbd>          | open in other frame
-<kbd>v</kbd>          | open in a new vertical split
+Key Binding                            | Description
+---------------------------------------|------------------------------------------------------------
+<kbd>M-SPC</kbd> or <kbd>s-M-SPC</kbd> | initiate or leave the micro-state
+<kbd>?</kbd>                           | display help
+<kbd>e</kbd>                           | open dired
+<kbd>h</kbd>                           | delete backward or parent directory
+<kbd>j</kbd>                           | next match
+<kbd>J</kbd>                           | sub directory
+<kbd>k</kbd>                           | previous match
+<kbd>K</kbd>                           | parent directory
+<kbd>l</kbd>                           | select match
+<kbd>n</kbd>                           | next directory in history
+<kbd>o</kbd>                           | open in other window
+<kbd>p</kbd>                           | previous directory in history
+<kbd>q</kbd>                           | quit micro-state
+<kbd>s</kbd>                           | open in a new horizontal split
+<kbd>t</kbd>                           | open in other frame
+<kbd>v</kbd>                           | open in a new vertical split
 
 ### NeoTree file tree
 
@@ -1567,24 +1628,6 @@ The mode-line has the following format `[x/y] d (D:a, F:b)` where:
 - `d` the name of the current directory
 - `a` the number of directories in the current directory
 - `b` the number of files in the current directory
-
-### Shells
-
-#### Key bindings
-
-Key Binding         |                 Description
---------------------|----------------------------------------------------------------
-<kbd>C-j</kbd>      | next item in history
-<kbd>C-k</kbd>      | previous item in history
-<kbd>SPC m h</kbd>  | browse history with `helm` (works in `eshell` and `shell`)
-
-#### Staying in insert state
-
-Navigating in shell buffers can be tricky because it is not possible to use the
-leader in `insert state`. Switching back and forth between normal and insert
-states can be tedious. The solution to this is to use <kbd>C-o</kbd> then use
-the leader key. <kbd>C-o</kbd> set the next key to be evaluated in
-`normal state`.
 
 ### Bookmarks
 
@@ -1814,9 +1857,13 @@ Key Binding            |                    Description
 
 ### Paste text
 
-Whenever you paste some text a `paste` micro-state is initiated. Pressing
-<kbd>p</kbd> again will replace the pasted text with the previous
-yanked (copied) text on the kill ring.
+#### Paste Micro-state
+
+The paste micro-state can be enabled by settings the variable
+`dotspacemacs-enable-paste-micro-state` to `t`. By default it is disabled.
+
+When the micro-state is enabled, pressing <kbd>p</kbd> again will replace the
+pasted text with the previous yanked (copied) text on the kill ring.
 
 For example if you copy `foo` and `bar` then press <kbd>p</kbd> the text `bar`
 will be pasted, pressing <kbd>p</kbd> again will replace `bar` with `foo`.
@@ -1829,8 +1876,14 @@ Key Binding                   |                    Description
 <kbd>.</kbd>                  | paste the same text and leave the micro-state
 Any other key                 | leave the micro-state
 
-This micro-state can be disabled by setting
-`dotspacemacs-enable-paste-micro-state` to `nil` in `~/.spacemacs`.
+#### Auto-indent pasted text
+
+By default any pasted text will be auto-indented. To paste text un-indented
+use the universal argument.
+
+It is possible to disable the auto-indentation for specific major-modes by
+adding a major-mode to the variable `spacemacs-indent-sensitive-modes` in
+your `dotspacemacs/config` function.
 
 ### Text manipulation commands
 
@@ -1844,8 +1897,8 @@ Text related commands (start with `x`):
 <kbd>SPC x g l</kbd>   | set languages used by translate commands
 <kbd>SPC x g t</kbd>   | translate current word using Google Translate
 <kbd>SPC x g T</kbd>   | reverse source and target languages
-<kbd>SPC x m j</kbd>   | move down a line of text
-<kbd>SPC x m k</kbd>   | move up a line of text
+<kbd>SPC x J</kbd>     | move down a line of text (enter micro-state)
+<kbd>SPC x K</kbd>     | move up a line of text (enter micro-state)
 <kbd>SPC x t c</kbd>   | swap (transpose) the current character with the previous one
 <kbd>SPC x t w</kbd>   | swap (transpose) the current word with the previous one
 <kbd>SPC x t l</kbd>   | swap (transpose) the current line with the previous one
@@ -2233,31 +2286,31 @@ To search in a project see [project searching](#searching-in-a-project).
 
 `projectile` commands start with <kbd>p</kbd>:
 
-    Key Binding     |                 Description
---------------------|------------------------------------------------------------
-<kbd>SPC p /</kbd>  | run `ag`
-<kbd>SPC p !</kbd>  | run shell command in root
-<kbd>SPC p &</kbd>  | run async shell command in root
-<kbd>SPC p a</kbd>  | run `ag`
-<kbd>SPC p A</kbd>  | run `ack`
-<kbd>SPC p b</kbd>  | switch to project buffer
-<kbd>SPC p c</kbd>  | compile project using `projectile`
-<kbd>SPC p d</kbd>  | find directory
-<kbd>SPC p D</kbd>  | open project root in `dired`
-<kbd>SPC p f</kbd>  | find file
-<kbd>SPC p g</kbd>  | run `grep`
-<kbd>SPC p h</kbd>  | find file using `helm`
-<kbd>SPC p I</kbd>  | invalidate the projectile cache
-<kbd>SPC p k</kbd>  | kill all project buffers
-<kbd>SPC p o</kbd>  | run `multi-occur`
-<kbd>SPC p p</kbd>  | switch project
-<kbd>SPC p R</kbd>  | regenerate the project's [e|g]tags
-<kbd>SPC p r</kbd>  | replace a string
-<kbd>SPC p s</kbd>  | see [search in project](#searching-in-a-project)
-<kbd>SPC p t</kbd>  | open `NeoTree` in `projectile` root
-<kbd>SPC p T</kbd>  | find test files
-<kbd>SPC p v</kbd>  | open project root in `vc-dir` or `magit`
-<kbd>SPC p y</kbd>  | find tags
+    Key Binding      |                 Description
+---------------------|------------------------------------------------------------
+<kbd>SPC /</kbd>     | search in project with the best search tool available
+<kbd>SPC p !</kbd>   | run shell command in root
+<kbd>SPC p &</kbd>   | run async shell command in root
+<kbd>SPC p s a</kbd> | run `ag`
+<kbd>SPC p s k</kbd> | run `ack`
+<kbd>SPC p b</kbd>   | switch to project buffer
+<kbd>SPC p c</kbd>   | compile project using `projectile`
+<kbd>SPC p d</kbd>   | find directory
+<kbd>SPC p D</kbd>   | open project root in `dired`
+<kbd>SPC p f</kbd>   | find file
+<kbd>SPC p s g</kbd> | run `grep`
+<kbd>SPC p h</kbd>   | find file using `helm`
+<kbd>SPC p I</kbd>   | invalidate the projectile cache
+<kbd>SPC p k</kbd>   | kill all project buffers
+<kbd>SPC p o</kbd>   | run `multi-occur`
+<kbd>SPC p p</kbd>   | switch project
+<kbd>SPC p R</kbd>   | regenerate the project's [e|g]tags
+<kbd>SPC p r</kbd>   | replace a string
+<kbd>SPC p s</kbd>   | see [search in project](#searching-in-a-project)
+<kbd>SPC p t</kbd>   | open `NeoTree` in `projectile` root
+<kbd>SPC p T</kbd>   | find test files
+<kbd>SPC p v</kbd>   | open project root in `vc-dir` or `magit`
+<kbd>SPC p y</kbd>   | find tags
 
 ## Registers
 
@@ -2402,18 +2455,6 @@ open a [Github issue][issues] with the backtrace.
 You have to manually copy the `~/.emacs.d/core/templates/.spacemacs.template`
 file to `~/.spacemacs`
 
-# Tips
-
-## evil-lisp-state as default state
-
-To Make `lisp state` the default state in `Emacs Lisp` buffers, insert in
-your `~/.spacemacs` the following snippet:
-
-```elisp
-(defun dotspacemacs/config ()
-  (add-hook 'emacs-lisp-mode-hook 'evil-lisp-state))
-```
-
 # Achievements
 
 ## Issues
@@ -2439,13 +2480,17 @@ Achievements                                         | Account
 [200th pull request][200th-PR]                       | [smt][]
 [300th pull request][300th-PR]                       | [BrianHicks][]
 [400th pull request][400th-PR]                       | [cpaulik][]
+[500th pull request][500th-PR]                       | [tuhdo][]
+[600th pull request][600th-PR]                       | [trishume][]
 
-## Stars and forks
+## Stars, forks and watchers
 
 Achievements                                         | Account
 -----------------------------------------------------|------------------------
+100th watcher                                        | [adouzzy][]
 100th fork                                           | [balajisivaraman][]
 200th fork                                           | [alcol80][]
+300th fork                                           | [mlopes][]
 100th star                                           | [Jackneill][]
 200th star                                           | [jb55][]
 400th star                                           | [dbohdan][]
@@ -2453,6 +2498,7 @@ Achievements                                         | Account
 700th star                                           | [kendall][]
 800th star                                           | [urso][]
 900th star                                           | [luisgerhorst][]
+1000th star!                                         | [rashly][]
 
 ## Specials
 
@@ -2466,6 +2512,7 @@ The Gunner (made 18 PRs in a row)                    | [ralesi][]
 The Saint (unlocked the holy-mode)                   | [trishume][]
 The Artist (made the spacemacs logo)                 | [nashamri][]
 The Meme Master (made the doge banner)               | [chrisbarrett][]
+The Helm captain (see [here][tuhdo-tuto])            | [tuhdo][]
 
 # Thank you
 
@@ -2513,7 +2560,6 @@ developers to elisp hackers!
 [hthemes]: https://github.com/syohex/emacs-helm-themes
 [projectile]: https://github.com/bbatsov/projectile
 [hdescbinds]: https://github.com/emacs-helm/helm-descbinds
-[hflyspell]: https://gist.github.com/cofi/3013327
 [iedit]: https://github.com/tsdh/iedit
 [evil-iedit-state]: https://github.com/syl20bnr/evil-iedit-state
 [evil-indent-textobject]: https://github.com/cofi/evil-indent-textobject
@@ -2557,6 +2603,7 @@ developers to elisp hackers!
 [guide-key-tip]: https://github.com/aki2o/guide-key-tip
 [gitter]: https://gitter.im/syl20bnr/spacemacs
 [CONTRIBUTE.md]: ./CONTRIBUTE.md
+[special buffer howto]: ./HOWTOs.md#change-special-buffer-rules
 [neotree]: https://github.com/jaypei/emacs-neotree
 [nerdtree]: https://github.com/scrooloose/nerdtree
 [anaconda-mode]: https://github.com/proofit404/anaconda-mode
@@ -2578,6 +2625,8 @@ developers to elisp hackers!
 [200th-PR]: https://github.com/syl20bnr/spacemacs/pull/418
 [300th-PR]: https://github.com/syl20bnr/spacemacs/pull/617
 [400th-PR]: https://github.com/syl20bnr/spacemacs/pull/806
+[500th-PR]: https://github.com/syl20bnr/spacemacs/pull/993
+[600th-PR]: https://github.com/syl20bnr/spacemacs/pull/1205
 [trishume]:https://github.com/trishume
 [nashamri]: https://github.com/nashamri
 [Wolfy87]:https://github.com/Wolfy87
@@ -2586,6 +2635,7 @@ developers to elisp hackers!
 [bjarkevad]:https://github.com/bjarkevad
 [jcpetkovich]:https://github.com/jcpetkovich
 [tuhdo]:https://github.com/tuhdo
+[tuhdo-tuto]:http://tuhdo.github.io/helm-intro.html
 [BrianHicks]:https://github.com/BrianHicks
 [cpaulik]: https://github.com/cpaulik
 [chrisbarrett]:https://github.com/chrisbarrett
@@ -2596,10 +2646,13 @@ developers to elisp hackers!
 [kendall]:https://github.com/kendall
 [urso]:https://github.com/urso
 [luisgerhorst]:https://github.com/luisgerhorst
+[rashly]:https://github.com/rashly
 [bru]:https://github.com/bru
 [smt]:https://github.com/smt
 [ralesi]:https://github.com/ralesi
 [alcol80]:https://github.com/alcol80
+[adouzzy]:https://github.com/adouzzy
+[mlopes]:https://github.com/mlopes
 [balajisivaraman]:https://github.com/balajisivaraman
 [Jackneill]:https://github.com/Jackneill
 [jb55]:https://github.com/jb55
