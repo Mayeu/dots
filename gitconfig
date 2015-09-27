@@ -30,7 +30,6 @@
    a = add
    d = diff
    vimdiff = difftool -y -t vimdiff
-   fetch-pr = "!f() { git fetch $1 refs/pull/$2/head:refs/remotes/pr/$2; }; f"
 
 [push]
    default = current
@@ -40,13 +39,20 @@
 
 [github]
    user = Mayeu
+
 [identity "cast"]
-	name = Cast
-	email = cast@nothing.ch
+   name = Cast
+   email = cast@nothing.ch
+
 [identity "mayeu"]
-	name = Mayeu
-	email = m@6x9.fr
+   name = Mayeu
+   email = m@6x9.fr
+
 [svn]
-	rmdir = true
+   rmdir = true
+
 [credential]
-	helper = cache --timeout=3600
+   helper = cache --timeout=3600
+
+[remote "origin"]
+   fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
