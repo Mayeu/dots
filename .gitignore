@@ -7,9 +7,7 @@ vim/.VimballRecord
 *.weechatlog
 *.log
 weechat_fifo*
-emacs.d*/backups
-emacs.d*/elpa
-emacs.d*/auto-save-list
+emacs.d
 bookmarks
 ido.last
 org-clock-save.el
