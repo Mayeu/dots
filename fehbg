@@ -1,1 +1,2 @@
-feh  --bg-fill '/home/m/pics/wallpaper/very_looooong_time_by_gavade.png' 
+#!/bin/sh
+feh  --bg-fill '/home/m/Downloads/sucking-at-something.jpg' 
