@@ -10,17 +10,15 @@
 ;;
 ;;; License: GPLv3
 
-(defvar notmuch-pre-extensions
+(setq notmuch-pre-extensions
   '(
     ;; pre extension notmuchs go here
-    )
-  "List of all extensions to load before the packages.")
+    ))
 
-(defvar notmuch-post-extensions
+(setq notmuch-post-extensions
   '(
     ;; post extension notmuchs go here
-    )
-  "List of all extensions to load after the packages.")
+    ))
 
 ;; For each extension, define a function notmuch/init-<extension-notmuch>
 ;;

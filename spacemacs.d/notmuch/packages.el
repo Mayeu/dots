@@ -6,16 +6,13 @@
 ;;
 ;;; License: GPLv3
 
-(defvar notmuch-packages
+(setq notmuch-packages
   '(
     ;; package notmuchs go here
     notmuch
-    )
-  "List of all packages to install and/or initialize. Built-in packages
-which require an initialization must be listed explicitly in the list.")
+    ))
 
-(defvar notmuch-excluded-packages '()
-  "List of packages to exclude.")
+(setq notmuch-excluded-packages '())
 
 ;; For each package, define a function notmuch/init-<package-notmuch>
 ;;
@@ -44,8 +41,8 @@ which require an initialization must be listed explicitly in the list.")
                                         ;(evilify notmuch-show-mode notmuch-show-mode-map
                                         ;         (kbd "N") 'notmuch-show-next-message
                                         ;         (kbd "n") 'notmuch-show-next-open-message)
-      (evilify notmuch-tree-mode notmuch-tree-mode-map)
-      (evilify notmuch-search-mode notmuch-search-mode-map)
+      ;;(evilify notmuch-tree-mode notmuch-tree-mode-map)
+      ;;(evilify notmuch-search-mode notmuch-search-mode-map)
 
       ;; 'd' delete stuff in both search and show mode
       (define-key notmuch-show-mode-map "d"
@@ -73,6 +70,17 @@ which require an initialization must be listed explicitly in the list.")
           (notmuch-search-tag (list "-inbox" "-unread"))
           (next-line)))
 
+      (define-key notmuch-show-mode-map "t"
+        (lambda ()
+          (interactive)
+          (notmuch-show-tag (list "-inbox" "+toread"))
+          (notmuch-bury-or-kill-this-buffer)
+          (notmuch-refresh-this-buffer)))
+      (define-key notmuch-search-mode-map "t"
+        (lambda ()
+          (interactive)
+          (notmuch-search-tag (list "-inbox" "+toread"))
+          (next-line)))
 
       (define-key notmuch-show-mode-map "r" 'notmuch-show-reply)
       (define-key notmuch-show-mode-map "R" 'notmuch-show-reply-sender)
