@@ -36,9 +36,6 @@
               ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
               ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
-;; Save all buffer hourly
-(run-at-time "00:59" 3600 'org-save-all-org-buffers)
-
 ;; --------------------------------------------------------
 ;; Clocking configuration & behaviour
 ;; --------------------------------------------------------
@@ -57,11 +54,10 @@
 (setq org-clock-out-when-done t)
 ;; Save the running clock and all clock history when exiting Emacs, load it on startup
 (setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
 ;; Do not prompt to resume an active clock
 ;;(setq org-clock-persist-query-resume nil)
 ;; Enable auto clock resolution for finding open clocks
-(setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
+(setq org-clock-auto-clock-resolution 'when-no-clock-is-running)
 ;; Include current clocking task in clock reports
 (setq org-clock-report-include-clocking-task t)
 ;; Change tasks to NEXT when clocking in
@@ -78,20 +74,25 @@
 (setq org-capture-templates
       (quote (("t" "todo" entry (file "~/org/refile.org")
                "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("r" "respond" entry (file "~/org/refile.org")
-               "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-              ("n" "note" entry (file "~/org/refile.org")
-               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("j" "Journal" entry (file+datetree "~/org/diary.org")
-               "* %?\n%U\n" :clock-in t :clock-resume t)
-              ("w" "org-protocol" entry (file "~/org/refile.org")
-               "* TODO Review %c\n%U\n" :immediate-finish t)
-              ("m" "Meeting" entry (file "~/org/refile.org")
-               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+              ;;("r" "respond" entry (file "~/org/refile.org")
+              ;; "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+              ("r" "reading" entry (file "~/org/read.org")
+               "* TODO %?\n%U\n")
+              ("n" "note" entry (file "~/org/references.org")
+               "* %? :NOTE:\n%U\n")
+              ("w" "watch" entry (file "~/org/watch.org")
+               "* TODO %?\n%U\n")
+              ;;("j" "Journal" entry (file+datetree "~/org/diary.org")
+              ;; "* %?\n%U\n" :clock-in t :clock-resume t)
+              ;;("w" "org-protocol" entry (file "~/org/refile.org")
+              ;; "* TODO Review %c\n%U\n" :immediate-finish t)
+              ;;("m" "Meeting" entry (file "~/org/refile.org")
+              ;; "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
               ("p" "Phone call" entry (file "~/org/refile.org")
                "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
-              ("h" "Habit" entry (file "~/org/refile.org")
-               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+              ;;("h" "Habit" entry (file "~/org/refile.org")
+              ;; "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
+              )))
 
 ;; --------------------------------------------------------
 ;; Agenda
@@ -101,3 +102,27 @@
 (setq org-agenda-dim-blocked-tasks nil)
 ;; Compact the block agenda view
 (setq org-agenda-compact-blocks t)
+
+;; --------------------------------------------------------
+;; Refile config
+;; --------------------------------------------------------
+
+;; Refile on top of file max
+(setq org-refile-use-outline-path 'file)
+;; Seems that the multistep nature of the path to refile selection is not
+;; compatible with helm. So deactivating this.
+;; https://github.com/syl20bnr/spacemacs/issues/3094
+(setq org-outline-path-complete-in-steps nil)
+;; use a depth level of 3 max for now
+(setq org-refile-targets
+      '((nil . (:maxlevel . 3))
+        (org-agenda-files . (:maxlevel . 3))))
+
+
+;; --------------------------------------------------------
+;; Wiki (WIP)
+;; --------------------------------------------------------
+
+;; Link abbreviations
+(setq org-link-abbrev-alist
+'(("wiki" . "file:/home/m/org/wiki/%s.org")))

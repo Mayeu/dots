@@ -10,15 +10,14 @@
 ;;
 ;;; License: GPLv3
 
-(defvar my-org-packages
+(setq my-org-packages
   '(
-    ;; package my-orgs go here
-    )
-  "List of all packages to install and/or initialize. Built-in packages
-which require an initialization must be listed explicitly in the list.")
+    ;; org is installed by `org-plus-contrib'
+    (org :location built-in)
+    (org-plus-contrib :step pre)
+    ))
 
-(defvar my-org-excluded-packages '()
-  "List of packages to exclude.")
+(setq my-org-excluded-packages '())
 
 ;; For each package, define a function my-org/init-<package-my-org>
 ;;
@@ -30,3 +29,21 @@ which require an initialization must be listed explicitly in the list.")
 ;; For more info on `use-package', see readme:
 ;; https://github.com/jwiegley/use-package
 
+(defun my-org/pre-init-org()
+  (spacemacs|use-package-add-hook org-plus-contrib
+    :post-config
+    (progn
+       (org-clock-persistence-insinuate)
+       ;; Save all org buffer when idle 5 min
+       (run-with-idle-timer 360 t 'org-save-all-org-buffers)
+    )))
+
+(defun my-org/pre-init-org-plus-contrib ()
+  (spacemacs|use-package-add-hook org-plus-contrib
+    :post-config
+    (progn
+      ;; Checkbox reset from contrib
+      (require 'org-checklist)
+      ;; Notmuch integration
+      (require 'org-notmuch)
+      )))

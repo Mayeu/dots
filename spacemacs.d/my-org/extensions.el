@@ -10,19 +10,17 @@
 ;;
 ;;; License: GPLv3
 
-(defvar my-org-pre-extensions
+(setq my-org-pre-extensions
   '(
     ;; pre extension my-orgs go here
-    )
-  "List of all extensions to load before the packages.")
+    ))
 
-(defvar my-org-post-extensions
+(setq my-org-post-extensions
   '(
     ;; post extension my-orgs go here
-    org-checklist ;; For automatic reset of checkbox
-    org-notmuch   ;; Notmuch integration
-    )
-  "List of all extensions to load after the packages.")
+    ;;org-checklist ;; For automatic reset of checkbox
+    ;;org-notmuch   ;; Notmuch integration
+    ))
 
 ;; For each extension, define a function my-org/init-<extension-my-org>
 ;;
@@ -34,8 +32,8 @@
 ;; For more info on `use-package', see readme:
 ;; https://github.com/jwiegley/use-package
 
-(defun my-org/init-org-checklist ()
-  (require 'org-checklist))
-
-(defun my-org/init-org-notmuch ()
-  (require 'org-notmuch))
+;;(defun my-org/init-org-checklist ()
+;;  (require 'org-checklist))
+;;
+;;(defun my-org/init-org-notmuch ()
+;;  (require 'org-notmuch))
