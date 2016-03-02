@@ -21,18 +21,24 @@
                       auto-completion-enable-company-yasnippet t
                       auto-completion-enable-company-help-tooltip t)
      ;; better-defaults
-     erlang-elixir
-     (extra-lang :variables
-                 nix-mode t
-                 yaml-mode t)
-     (git :variables
-          git-gutter-use-fringe t)
+     clojure
+     elixir
+     elm
+     emoji
+     extra-langs
      finance
+     git
+     html
+     idris
      markdown
+     nixos
      org
-     syntax-checking
      racket
      ruby
+     rust
+     spell-checking
+     syntax-checking
+     version-control
 
      ;; --------------------------------------------------------
      ;; My layer
@@ -65,7 +71,7 @@ before layers configuration."
    ;; directory. A string value must be a path to a .PNG file.
    ;; If the value is nil then no banner is displayed.
    ;; dotspacemacs-startup-banner 'official
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner 'doge
    ;; t if you always want to see the changelog at startup
    dotspacemacs-always-show-changelog t
    ;; List of items to show in the startup buffer. If nil it is disabled.
@@ -146,15 +152,19 @@ before layers configuration."
    dotspacemacs-default-package-repository nil
    )
   ;; User initialization goes here
-  (add-to-list 'load-path "~/code/org-mode/contrib/lisp")
+  ;;(add-to-list 'load-path "~/code/org-mode/contrib/lisp")
   )
 
-(defun dotspacemacs/config ()
+(defun dotspacemacs/user-config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
   (spacemacs/toggle-fill-column-indicator)
   (setq-default yas-snippet-dirs '("~/.spacemacs.d/snippets"))
+  ;; Show the current org-mode task in the mode line
+  ;;(spacemacs/toggle-mode-line-org-clock-current-task-on)
+  ;; Activate the golden ratio windows resize
+  (spacemacs/toggle-golden-ratio)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -169,6 +179,7 @@ layers configuration."
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
+ '(paradox-github-token t)
  '(ring-bell-function (quote ignore) t)
  '(send-mail-function (quote sendmail-send-it)))
 (custom-set-faces
