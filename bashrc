@@ -18,22 +18,10 @@ if [ -d ~/etc/bash_completion.d ] ; then
    done
 fi
 
-# GPG agent
-# ---------
-
-if [ -f "${HOME}/.gnupg/gpg-agent.env" ]; then
-   . "${HOME}/.gnupg/gpg-agent.env"
-   export GPG_AGENT_INFO
-   export GPG_TTY=$(tty)
-   export SSH_AUTH_SOCK
-   export SSH_AGENT_PID
-fi
-
 ## bash history config
 shopt -s histappend # as inside vim
 export HISTCONTROL=ignoredups #ignore duplicate command in history
 export HISTSIZE=10000
-#export HISTIGNORE='&:[bf]g:exit:history*:rm*:cl:clear:resource:source*' #ignore some command
 export HISTIGNORE='exit:history:' #ignore some command
 
 
@@ -150,7 +138,7 @@ fi
 TERMWIDTH=${COLUMNS}
 
 #   Add all the accessories below ...
-local temp="--(${usernam}@${hostnam}:${PWD})---$(__git_ps1 | sed -e 's/ (\(.*\))/\1/')--(xx:xx)--"
+local temp="--(${usernam}@${hostnam}:${PWD})-----(xx:xx)--"
 
 let fillsize=${TERMWIDTH}-${#temp}
 if [ "$fillsize" -gt "0" ]
@@ -174,7 +162,7 @@ fi
 
 export PS1="\n$PIPE\[\033(0\]lu\[\033(B\]$NCOL\
 \u@\h:\${newPWD}\
-$PIPE\[\033(0\]tqu\[\033(B\]$NCOL\$(__git_ps1 | sed -e 's/ (\(.*\))/\1/')$PIPE\[\033(0\]t\${fill}\[\033(B\]\[\033(0\]u\[\033(B\]$NCOL\
+$PIPE\[\033(0\]tqu\[\033(B\]$NCOL\$$PIPE\[\033(0\]t\${fill}\[\033(B\]\[\033(0\]u\[\033(B\]$NCOL\
 \$(date +%H:%M)\
 $PIPE\[\033(0\]tq\[\033(B\]$NCOL\
 \n$PIPE\[\033(0\]mqu\[\033(B\]$NCOL"
