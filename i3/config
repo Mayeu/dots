@@ -39,7 +39,7 @@ client.background #002b36
 floating_modifier Mod4
 
 # start a terminal
-bindsym Mod4+Return exec urxvt
+bindsym Mod4+Return exec termite
 bindsym Mod4+e exec emacs
 
 # kill focused window
@@ -124,6 +124,8 @@ bindsym Mod4+Shift+9 move workspace 9
 bindsym Mod4+Shift+0 move workspace 10
 
 # Move workspace amoung screen Mod1 = Alt
+bindsym Mod4+Shift+Mod1+Up move workspace to output up
+bindsym Mod4+Shift+Mod1+Down move workspace to output down
 bindsym Mod4+Shift+Mod1+Left move workspace to output left
 bindsym Mod4+Shift+Mod1+Right move workspace to output right
 
