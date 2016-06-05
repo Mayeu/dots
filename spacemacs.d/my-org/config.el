@@ -72,16 +72,26 @@
 
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 (setq org-capture-templates
-      (quote (("t" "todo" entry (file "~/org/refile.org")
-               "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+      (quote (("i" "inbox" entry (file "~/org/refile.org")
+               "* TODO %?\n%U\n\n" :clock-in t :clock-resume t)
+              ("t" "todo" entry (file "~/org/tasks.org")
+               "* TODO %?\n%U\n\n" :clock-in t :clock-resume t)
               ;;("r" "respond" entry (file "~/org/refile.org")
               ;; "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-              ("r" "reading" entry (file "~/org/read.org")
-               "* TODO %?\n%U\n")
+              ("r" "read" entry (file "~/org/read.org")
+               "* %?\n%U\n")
               ("n" "note" entry (file "~/org/references.org")
                "* %? :NOTE:\n%U\n")
               ("w" "watch" entry (file "~/org/watch.org")
-               "* TODO %?\n%U\n")
+               "* %?\n%U\n")
+              ("m" "maybe" entry (file "~/org/maybe.org")
+               "* %?\n%U\n")
+              ("o" "oneday" entry (file "~/org/oneday.org")
+               "* %?\n%U\n")
+              ("e" "email" entry (file "~/org/refile.org")
+               "* TODO %?\n%U\nSource: %c\n%i")
+              ("x" "org-protocol" entry (file "~/org/refile.org")
+               "* TODO Review %c\n%U\n%i\n" :immediate-finish)
               ;;("j" "Journal" entry (file+datetree "~/org/diary.org")
               ;; "* %?\n%U\n" :clock-in t :clock-resume t)
               ;;("w" "org-protocol" entry (file "~/org/refile.org")
@@ -103,6 +113,11 @@
 ;; Compact the block agenda view
 (setq org-agenda-compact-blocks t)
 
+;; Custom agenda command
+(setq org-agenda-custom-commands
+      '(("w" todo "NEXT")))
+
+
 ;; --------------------------------------------------------
 ;; Refile config
 ;; --------------------------------------------------------
@@ -115,7 +130,7 @@
 (setq org-outline-path-complete-in-steps nil)
 ;; use a depth level of 3 max for now
 (setq org-refile-targets
-      '((nil . (:maxlevel . 3))
+      '(;;(nil . (:maxlevel . 1))
         (org-agenda-files . (:maxlevel . 3))))
 
 
@@ -125,4 +140,20 @@
 
 ;; Link abbreviations
 (setq org-link-abbrev-alist
-'(("wiki" . "file:/home/m/org/wiki/%s.org")))
+      '(("wiki" . "file:/home/m/org/wiki/%s.org")))
+
+;; --------------------------------------------------------
+;; Mutt e-mail support
+;; --------------------------------------------------------
+
+(defun open-mail-in-mutt (message)
+  "Open a mail message in Mutt, using an external terminal.
+  Message can be specified either by a path pointing inside a
+  Maildir, or by Message-ID."
+  (interactive "MPath or Message-ID: ")
+  (shell-command
+   (format "termite -e \"%s %s\""
+           (substitute-in-file-name "$HOME/bin/mutt-open") message)))
+
+;; add support for "mutt:ID" links
+;;(org-add-link-type "mutt" 'open-mail-in-mutt)

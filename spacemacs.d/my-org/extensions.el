@@ -20,6 +20,7 @@
     ;; post extension my-orgs go here
     ;;org-checklist ;; For automatic reset of checkbox
     ;;org-notmuch   ;; Notmuch integration
+    org-protocol
     ))
 
 ;; For each extension, define a function my-org/init-<extension-my-org>
@@ -37,3 +38,6 @@
 ;;
 ;;(defun my-org/init-org-notmuch ()
 ;;  (require 'org-notmuch))
+
+(defun my-org/init-org-protocol ()
+  (require 'org-protocol))

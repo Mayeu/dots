@@ -2,7 +2,7 @@
 ;; Global keybindings
 ;; --------------------------------------------------------
 ;; F6 open my perso.org
-(global-set-key [f6] (lambda () (interactive) (find-file "~/org/next.org")))
+(global-set-key [f6] (lambda () (interactive) (find-file "~/org/tasks.org")))
 ;; F12 open the agenda
 ;;(global-set-key (kbd "<f12>") 'org-agenda)
 ;; I use C-c c to start capture mode
