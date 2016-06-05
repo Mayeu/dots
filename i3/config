@@ -197,6 +197,9 @@ bar {
       inactive_workspace #002b36 #586e75 #fdf6e3
       urgent_workspace   #002b36 $red #fdf6e3
    }
+   # Deactivate the switch screen by scrolling feature
+   wheel_up_cmd nop
+   wheel_down_cmd nop
 }
 
 for_window [class="Steam"] floating enable
