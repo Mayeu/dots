@@ -13,7 +13,7 @@ let
         "Syntastic" "vim-nix" "vim-dispatch"
         "vim-dispatch-neovim" "vim-elixir"
         "vim-projectionist" "vim-phoenix"
-        "vim-ledger" "vim-wiki" "vim-ruby"
+        "vim-ledger" "vim-ruby"
         ];
       }
       # only load when opening a .nix file
