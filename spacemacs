@@ -20,30 +20,15 @@
                       auto-completion-use-tab-instead-of-enter t
                       auto-completion-enable-company-yasnippet t
                       auto-completion-enable-company-help-tooltip t)
-     ;; better-defaults
-     clojure
-     elixir
-     elm
      emoji
-     extra-langs
-     finance
      git
-     html
-     idris
-     markdown
-     nixos
      org
-     racket
-     ruby
-     rust
      spell-checking
-     syntax-checking
      version-control
 
      ;; --------------------------------------------------------
      ;; My layer
      ;; --------------------------------------------------------
-     notmuch
      my-org
      )
    ;; A list of packages and/or extensions that will not be install and loaded
