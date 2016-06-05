@@ -42,6 +42,10 @@ floating_modifier Mod4
 bindsym Mod4+Return exec termite
 bindsym Mod4+e exec emacs
 
+# Floating capture windows for org-mode
+bindsym Mod4+c exec emacsclient -n -e '(make-capture-frame)'
+for_window [title="^capture"] floating enable
+
 # kill focused window
 bindsym Mod4+Shift+q kill
 
