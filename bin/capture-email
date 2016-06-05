@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+#
+# Helper for mutt to capture mails in Emacs' Org mode
+#
+# Example of mutt macro :
+#  macro index \eR "|~/bin/remember-mail\n"
+#
+# Dependencies:
+#   - python, for the url encoding :(
+#   - formail, for all the e-mail heavy lifting
+
+set -euo pipefail
+IFS=$'\n\t'
+
+# Some setup
+############
+
+_formail="formail"
+email=$(mktemp)
+
+# Read the whole e-mail
+while IFS= read -r line
+do
+  echo "$line" >> ${email}
+done
+IFS=$'\n\t'
+
+# Exit trap
+finish() {
+  # Delete the tmp file
+  rm -rf ${email}
+}
+
+trap finish EXIT
+
+urlencode() {
+  python -c "import sys, urllib as ul; \
+    print ul.quote_plus(sys.argv[1])" "$1"
+}
+
+extract_message_id() {
+  formail -cx message-id: |
+  sed -e 's/ //g' \
+      -e 's/^<//' \
+      -e 's/>$//'
+}
+
+extract_subject() {
+  formail -cx Subject: |
+  sed -e 's/^\s*//g'
+}
+
+extract_from() {
+  formail -x From: |
+  sed -e 's/^\s*//g'
+}
+
+# Extract the stuff
+message_id="$(cat $email | extract_message_id)"
+echo $message_id
+subject="$(cat $email | extract_subject)"
+echo $subject
+from="$(cat $email | extract_from)"
+echo $from
+# would be cool to extract the body as well, butt I'll have to deal with html e-mail first
+
+#note=$(urlencode "From: ${from}\nSubject: ${subject}")
+note="
+From: ${from}
+Subject: ${subject}"
+
+floating-capture "e/mutt:${message_id}/email/${note}"
+
