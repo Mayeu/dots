@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Desc : Deploy dotfiles from repository to home dir.
 # Author: Vivien Didelot aka v0n
 # Slight modification: Matthieu Maury aka Mayeu
