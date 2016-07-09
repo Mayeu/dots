@@ -31,6 +31,9 @@
    d = diff
    dt = difftool -y -t vimdiff
 
+[diff]
+   compactionHeuristic = true
+
 [push]
    default = current
 
