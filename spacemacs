@@ -17,14 +17,16 @@
      ;; Uncomment a layer name and press C-c C-c to install it
      ;; --------------------------------------------------------
      (auto-completion :variables
-                      auto-completion-use-tab-instead-of-enter t
-                      auto-completion-enable-company-yasnippet t
-                      auto-completion-enable-company-help-tooltip t)
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-tab-key-behavior 'complete
+                      auto-completion-enable-sort-by-usage t)
      emoji
      git
      org
      spell-checking
+     syntax-checking
      version-control
+     elixir
 
      ;; --------------------------------------------------------
      ;; My layer
@@ -71,7 +73,7 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Fira Mono"
+   dotspacemacs-default-font '("hack"
                                :size 26
                                :weight normal
                                :width normal
@@ -145,12 +147,12 @@ before layers configuration."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
   (spacemacs/toggle-fill-column-indicator)
-  (setq-default yas-snippet-dirs '("~/.spacemacs.d/snippets"))
+  ;;(setq-default yas-snippet-dirs '("~/.spacemacs.d/snippets"))
   ;; Show the current org-mode task in the mode line
   ;;(spacemacs/toggle-mode-line-org-clock-current-task-on)
   ;; Activate the golden ratio windows resize
   (spacemacs/toggle-golden-ratio)
-)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
