@@ -35,6 +35,27 @@ client.focused_inactive #002b36 #002b36 #fdf6e3 #dc322f
 client.unfocused #002b36 #002b36 #fdf6e3 #dc322f
 client.background #002b36
 
+
+set $black       #212121
+set $darkblack   #000000
+set $red         #fb4934
+set $darkred     #cc241d
+set $green       #b8bb26
+set $darkgreen   #98971a
+set $yellow      #fabd2f
+set $darkyellow  #d79921
+set $blue        #83a598
+set $darkblue    #458588
+set $magenta     #d3869b
+set $darkmagenta #b16286
+set $cyan        #8ec07c
+set $darkcyan    #689d6a
+set $white       #ebdbb2
+set $darkwhite   #a89984
+# set $background  #000000
+set $transparent #1d202100
+
+
 # use Mouse+Mod4 to drag floating windows to their wanted position
 floating_modifier Mod4
 
