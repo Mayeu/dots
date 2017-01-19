@@ -36,7 +36,8 @@ export PATH=~/script/:~/script/python/:~/bin/:$PATH
 export LEDGER_FILE=~/account.ldg
 
 # LS_Option
-export LS_ARG='--color=auto'
+#export LS_ARG='--color=auto'
+export LS_ARG=''
 
 ## Alias
 alias pseg='ps -e | grep '

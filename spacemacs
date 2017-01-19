@@ -12,6 +12,8 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     javascript
+     html
      ;; --------------------------------------------------------
      ;; Example of useful layers you may want to use right away
      ;; Uncomment a layer name and press C-c C-c to install it
@@ -20,13 +22,15 @@
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'complete
                       auto-completion-enable-sort-by-usage t)
-     emoji
+     ;;emoji
      git
      org
      spell-checking
      syntax-checking
      version-control
      elixir
+     elm
+     finance
 
      ;; --------------------------------------------------------
      ;; My layer
@@ -161,13 +165,16 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ahs-case-fold-search nil)
- '(ahs-default-range (quote ahs-range-whole-buffer))
- '(ahs-idle-interval 0.25)
+ '(ahs-case-fold-search nil t)
+ '(ahs-default-range (quote ahs-range-whole-buffer) t)
+ '(ahs-idle-interval 0.25 t)
  '(ahs-idle-timer 0 t)
- '(ahs-inhibit-face-list nil)
+ '(ahs-inhibit-face-list nil t)
+ '(package-selected-packages
+   (quote
+    (livid-mode skewer-mode json-mode js2-refactor multiple-cursors company-tern dash-functional web-beautify simple-httpd json-snatcher json-reformat js2-mode js-doc tern coffee-mode powerline bind-key bind-map pos-tip dash company-web web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode web-completion-data uuidgen org-projectile pcache org-download ob-elixir link-hint hide-comnt git-link flyspell-correct-helm flyspell-correct flycheck-mix eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff dumb-jump column-enforce-mode request hydra spinner projectile git-gutter iedit s yasnippet elixir-mode auto-complete company highlight anzu smartparens flycheck helm helm-core magit magit-popup git-commit with-editor async alert package-build evil ledger-mode flycheck-ledger flycheck-elm elm-mode f ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toc-org spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle ruby-end restart-emacs rainbow-delimiters quelpa popwin persp-mode pcre2el paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree move-text magit-gitflow lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu emoji-cheat-sheet-plus diff-hl define-word company-statistics company-quickhelp company-emoji clean-aindent-mode buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-dictionary alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
- '(ring-bell-function (quote ignore) t)
+ '(ring-bell-function (quote ignore))
  '(send-mail-function (quote sendmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

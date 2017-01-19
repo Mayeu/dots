@@ -14,6 +14,7 @@ let
         "vim-dispatch-neovim" "vim-elixir"
         "vim-projectionist" "vim-phoenix"
         "vim-ledger" "vim-ruby"
+        "elm-vim"
         ];
       }
       # only load when opening a .nix file
