@@ -157,3 +157,15 @@
 
 ;; add support for "mutt:ID" links
 ;;(org-add-link-type "mutt" 'open-mail-in-mutt)
+
+;; --------------------------------------------------------
+;; Babel thingy
+;; --------------------------------------------------------
+
+(setq org-babel-load-languages
+ '((emacs-lisp . t)
+   (org . t)
+   (sh . t)
+   (ruby . t)
+   (makefile . t)
+   (elixir . t)))
