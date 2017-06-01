@@ -57,7 +57,11 @@ syntax on
 "Colorscheme
 set t_Co=256
 set background=light
-colorscheme solarized
+" True color for nvim
+set termguicolors
+"let g:gruvbox_contrast='hard'
+let g:gruvbox_contrast_light='hard'
+colorscheme gruvbox
 
 " General stuff
 "set nu "Numbered Line

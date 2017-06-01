@@ -31,6 +31,9 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     lua
+     javascript
+     finance
      html
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -48,11 +51,15 @@ values."
             shell-default-height 30
             shell-default-position 'bottom
             shell-default-shell 'ansi-term)
+     (elm :variables
+          elm-sort-imports-on-save t
+          elm-format-on-save t)
      spell-checking
      syntax-checking
      version-control
      terraform
      elixir
+     git
 
      ;; ----------------------------------------------------------------
      ;; My layer
@@ -141,8 +148,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Monoid"
-                               :size 12
+   dotspacemacs-default-font '("Fira Code"
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -319,7 +326,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (elixir-mode haml-mode web-completion-data xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help terraform-mode hcl-mode org alert log4e gntp mmm-mode markdown-toc markdown-mode fringe-helper git-gutter+ git-commit with-editor git-gutter gh-md flyspell-correct-ivy flyspell-correct pos-tip flycheck company yasnippet auto-complete wgrep smex macrostep ivy-hydra elisp-slime-nav counsel-projectile counsel swiper ivy auto-compile packed ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline solarized-theme smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pug-mode popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file ob-elixir neotree move-text magit-gitflow lorem-ipsum livid-mode linum-relative link-hint less-css-mode ledger-mode json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ flyspell-correct-helm flycheck-pos-tip flycheck-mix flycheck-ledger flycheck-elm flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elm-mode dumb-jump diff-hl define-word company-web company-tern company-statistics column-enforce-mode coffee-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (lua-mode highlight projectile async skewer-mode simple-httpd json-snatcher json-reformat multiple-cursors js2-mode dash-functional tern helm smartparens evil avy gitignore-mode magit magit-popup dash request helm-core elixir-mode haml-mode web-completion-data xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help terraform-mode hcl-mode org alert log4e gntp mmm-mode markdown-toc markdown-mode fringe-helper git-gutter+ git-commit with-editor git-gutter gh-md flyspell-correct-ivy flyspell-correct pos-tip flycheck company yasnippet auto-complete wgrep smex macrostep ivy-hydra elisp-slime-nav counsel-projectile counsel swiper ivy auto-compile packed ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline solarized-theme smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pug-mode popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree move-text magit-gitflow lorem-ipsum livid-mode linum-relative link-hint less-css-mode ledger-mode json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ flyspell-correct-helm flycheck-pos-tip flycheck-mix flycheck-ledger flycheck-elm flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elm-mode dumb-jump diff-hl define-word company-web company-tern company-statistics column-enforce-mode coffee-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

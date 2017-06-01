@@ -1,5 +1,6 @@
 {
   allowUnfree = true;
+  allowBroken = true;
   #build-use-chroot = true;
 
   #vim.python=true;
