@@ -55,9 +55,6 @@
 [svn]
    rmdir = true
 
-[credential]
-	helper = osxkeychain
-
 #[remote "origin"]
 #   fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 
