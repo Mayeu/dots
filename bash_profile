@@ -15,4 +15,3 @@ fi
 # Load nix environment
 . /Users/m/.nix-profile/etc/profile.d/nix.sh
 
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
