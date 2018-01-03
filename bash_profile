@@ -15,3 +15,5 @@ fi
 # Load nix environment
 . /Users/m/.nix-profile/etc/profile.d/nix.sh
 
+if [ -e /home/m/.nix-profile/etc/profile.d/nix.sh ]; then . /home/m/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
