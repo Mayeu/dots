@@ -17,3 +17,5 @@ fi
 
 if [ -e /home/m/.nix-profile/etc/profile.d/nix.sh ]; then . /home/m/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
+# Load azure stuff
+test -e "${HOME}/.local/share/azure-cli/az.completion" && source "${HOME}/.local/share/azure-cli/az.completion"
