@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+# Get borg backup passphrase
+export BORG_PASSPHRASE="`pass show backup/hdd.borg-repository`"
+
+# Backup the shit
+sudo -E borgmatic -c .config/borgmatic/hdd.yaml --create
+
+# Prune the stuff
+#sudo -E borgmatic -c .config/borgmatic/hdd.yaml --prune
