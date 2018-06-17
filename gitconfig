@@ -18,10 +18,6 @@
    changed = green
    untracked = cyan
 
-[user]
-   name = Mayeu
-   email = m@mayeu.me
-
 [alias]
    s = status
    c = commit
@@ -43,14 +39,6 @@
 
 [github]
    user = Mayeu
-
-[identity "cast"]
-   name = Cast
-   email = cast@nothing.ch
-
-[identity "mayeu"]
-   name = Mayeu
-   email = m@6x9.fr
 
 [svn]
    rmdir = true
