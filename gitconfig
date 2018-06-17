@@ -25,10 +25,16 @@
    co = checkout
    a = add
    d = diff
-   dt = difftool -y -t vimdiff
+   dc = diff --cached
+   dt = difftool
+   fetach = fetch
+
+[difftool]
+   prompt = false
 
 [diff]
    compactionHeuristic = true
+   tool = vimdiff
 
 [push]
    default = current
