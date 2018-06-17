@@ -1,10 +1,58 @@
 #! /usr/bin/env bash
 
-# Get borg backup passphrase
-export BORG_PASSPHRASE="`pass show backup/hdd.borg-repository`"
+set -euox pipefail
 
-# Backup the shit
-sudo -E borgmatic -c .config/borgmatic/hdd.yaml --create
+## Default variable
+export VERBOSE_FLAG=""
+command=local_backup
 
-# Prune the stuff
-#sudo -E borgmatic -c .config/borgmatic/hdd.yaml --prune
+## Parse options
+OPTIONS=$(getopt -n "$0" -o hrv --long "help,remote,verbose" -- "$@")
+eval set -- "$OPTIONS"
+
+while true ; do
+  case "$1" in
+    -v|--verbose)
+      export VERBOSE_FLAG="--verbosity 2"
+      shift ;;
+    -r|--remote)
+      command=remote_backup
+      shift ;;
+    -h|--help) help; exit 0 ;;
+    --) shift ; break ;;
+    *) help; exit 1;;
+esac
+done
+
+function help() {
+  echo "usage: $(basename $0) [--remote|--help] [--verbose]"
+}
+
+function get_password() {
+  # Get borg backup passphrase
+  export BORG_PASSPHRASE="$(pass show ${1})"
+}
+
+function remote_backup () {
+  get_password backup/rsync.net.borg-repository
+  # Backup the shit
+  $(borgmatic -c ~/.config/borgmatic/rsync.net.yaml --create ${VERBOSE_FLAG})
+
+  # Prune after the backup, I find that way better
+  $(borgmatic -c ~/.config/borgmatic/rsync.net.yaml --prune ${VERBOSE_FLAG})
+}
+
+function local_backup() {
+  get_password backup/hdd.borg-repository
+
+  # This is done to allow only one sudo for both steps
+  sudo -E bash -c "
+    # Backup the shit
+    borgmatic -c .config/borgmatic/hdd.yaml --create $VERBOSE_FLAG
+    # Prune the stuff
+    borgmatic -c .config/borgmatic/hdd.yaml --prune $VERBOSE_FLAG
+    "
+}
+
+# Run the script
+$command
