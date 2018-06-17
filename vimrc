@@ -172,3 +172,15 @@ let g:elm_format_autosave = 1
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 "let g:elm_syntastic_show_warnings = 1
+
+" ALE
+" ---------
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_fixers['json'] = ['prettier']
+let g:ale_fixers['elixir'] = ['mix_format']
+let g:ale_fix_on_save = 1
+let g:ale_javascript_prettier_use_local_config = 1
+
+
