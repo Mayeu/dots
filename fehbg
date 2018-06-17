@@ -1,2 +1,2 @@
 #!/bin/sh
-'feh' '--bg-fill' '/home/m/pictures/wallpapers/current-wallpaper' 
+feh --bg-fill '/home/m/pictures/wallpapers/current-wallpaper' 
