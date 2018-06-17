@@ -41,6 +41,9 @@ filetype on
 filetype plugin on
 filetype indent on
 
+" clipboard stuff
+set clipboard=unnamedplus
+
 " File encoding of new & saved file
 set encoding=utf8
 set fileencoding=utf8
