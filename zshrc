@@ -60,7 +60,7 @@ source $ZSH/oh-my-zsh.sh
 
 . /home/m/.nix-profile/etc/profile.d/nix.sh
 
-export PATH=~/script/:~/script/python/:~/bin/:$PATH
+export PATH=~/bin:$PATH
 # Add my fork to nixpath
 export NIX_PATH=mynixpkgs=$HOME/nixpkgs:$NIX_PATH
 nix(){ nix-env -qa \* -P | fgrep -i "$1"; }
@@ -120,8 +120,6 @@ alias dots="pushd ~/.dots"
 alias dokku='bash $HOME/bin/dokku_client.sh'
 
 export PATH="$HOME/.yarn/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-export RBENV_ROOT=/usr/local/var/rbenv
 source /usr/share/nvm/init-nvm.sh
 
 export PATH=/home/m/.local/bin:$PATH
@@ -133,8 +131,3 @@ export PATH=/home/m/.local/bin:$PATH
 # Autojump
 [ -f /usr/share/autojump/autojump.zsh ] && . /usr/share/autojump/autojump.zsh
 eval "$(ntfy shell-integration)"
-
-# BEGIN SNIPPET: Platform.sh CLI configuration
-HOME=${HOME:-'/home/m'}
-export PATH="$HOME/"'.platformsh/bin':"$PATH"
-if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
