@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
+#set -x
 
-is_options() {
-  grep -q "^--" <<<"${1}"
+is_options(){
+  grep --quiet "^--" <<< "$1"
 }
 
 # Ignore any first arg with --
-if test is_options;
+if is_options "$1";
 then
   shift
 fi

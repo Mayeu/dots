@@ -2,14 +2,14 @@
 
 #set -x
 
-readonly script_name=$(basename $0)
+readonly script_name=$(basename "$0")
 
 # Find an executable that match the pattern given in input
 #
 # Usage:
 #  find_executable pattern
 #
-find_executable() {
+_dlgtr_find_executable() {
   pattern="$1"
   IFS=':'
   find $PATH -maxdepth 1 -type f -executable -name "${pattern}" 2>/dev/null | sort | uniq
@@ -20,15 +20,15 @@ find_executable() {
 # Usage:
 #  find_all_executables
 #
-find_all_executables() {
-  find_executable "${script_name}-*" | sort | uniq
+_dlgtr_find_all_executables() {
+  _dlgtr_find_executable "${script_name}-*" | sort | uniq
 }
 
 _dlgtr_command_short_help() {
-  for sub in $(find_all_executables);
+  for sub in $(_dlgtr_find_all_executables);
   do
-    executable=$(sed -e 's/dlgtr-//' $sub)
-    echo "  $(basename $sub): $($sub --short-help)"
+    executable="$(basename $sub | sed -e "s/${script_name}-//")"
+    echo "  ${executable}: $($sub --short-help)"
   done
 }
 
@@ -54,6 +54,6 @@ if test -z "$subcommand";
 then
   _dlgtr_usage
 else
-  to_exec="$(find_executable "dlgtr-${subcommand}") $@"
+  to_exec="$(_dlgtr_find_executable "${script_name}-${subcommand}") $@"
   $to_exec
 fi
