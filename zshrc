@@ -113,6 +113,9 @@ alias ssh='sshrc'
 # Alias git
 alias gs='g s'
 
+# Alias dots
+alias dots="pushd ~/.dots"
+
 # dokku
 alias dokku='bash $HOME/bin/dokku_client.sh'
 
