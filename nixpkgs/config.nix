@@ -13,6 +13,8 @@
         ledger
         jitsi
         nixnote2
+        astroid
+        borgbackup
       ];
     };
   };
