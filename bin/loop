@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+readonly number=$1
+shift
+readonly command=$@
+
+for (( i=1; i<=$number; i++))
+do
+  $@
+done
+
+
