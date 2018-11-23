@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+# A small template engine for your shell
+
+#set -eu
+
+readonly script_name=$(basename $0)
+
+# Find an executable that match the pattern given in input
+#
+# Usage:
+#  find_executable pattern
+#
+_dlgtr_find_executable() {
+  pattern="$1"
+  IFS=':'
+  find $PATH -maxdepth 1 -type f -executable -name "${pattern}" 2>/dev/null | sort | uniq
+}
+
+# Find all executables of this cli tool
+#
+# Usage:
+#  find_all_executables
+#
+_dlgtr_find_all_executables() {
+  _dlgtr_find_executable "${script_name}-*" | sort | uniq
+}
+
+_dlgtr_command_short_help() {
+  for sub in $(_dlgtr_find_all_executables);
+  do
+    executable="$(basename $sub | sed -e "s/${script_name}-//")"
+    echo "  ${executable}: $($sub --short-help)"
+  done
+}
+
+# Build usage
+#
+_dlgtr_usage() {
+  cat <<EOF
+Delegator is a bash cli framework that delegate the work.
+
+Usage:
+  ${script_name} command [OPTIONS] [ARG]
+
+Availlable commands:
+
+$(_dlgtr_command_short_help)
+EOF
+}
+
+readonly subcommand="$1"
+shift
+
+if test -z "$subcommand";
+then
+  _dlgtr_usage
+else
+  to_exec="$(_dlgtr_find_executable "${script_name}-${subcommand}") $@"
+  $to_exec
+fi

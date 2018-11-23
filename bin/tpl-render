@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+#set -eux
+
+readonly TEMPLATE_PATH=~/.local/share/tpl/templates
+
+is_options() {
+  grep -q "^--" <<< "$1"
+}
+
+# Ignore any first arg with --
+if is_options "$1";
+then
+  echo "render a template"
+  exit 0
+fi
+
+template="$1"
+
+render_template(){
+  local template="$*"
+  eval $'cat <<EOF\n'"$(<"$template")"$'\nEOF'
+}
+
+find_template(){
+  local template="$*"
+  find $TEMPLATE_PATH -maxdepth 1 -name "${template}.tpl"
+}
+
+template_exist(){
+  local template="$*"
+  if test "$(find_template) | wc -l" > 0;
+  then
+    true
+  else
+    false
+  fi
+}
+
+usage(){
+  echo "Usage:"
+  echo "  tpl ${scritp_name} {TEMPLATE NAME|PATH TO FILE}"
+}
+
+if test -z "$template";
+then
+  usage
+  exit 1
+fi
+
+if test -e "$template";
+then
+  render_template "$template"
+elif test $(find_template "$template");
+then
+  render_template "$(find_template $template)"
+else
+  echo "Can't find template by that name."
+fi
+
