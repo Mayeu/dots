@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+API_USER=`pass show api/habitica/user`
+API_KEY=`pass show api/habitica/secret`
+
+content_type_json='Content-Type:application/json'
+
+
+if test "$1" = "fireball";
+then
+  curl https://habitica.com/api/v3/user/class/cast/fireball\?targetId\=3672b5e3-661a-4046-8cda-36673470dcc2 \
+    -X POST --compressed -H "${content_type_json}"           \
+    -H "x-api-user:${API_USER}"                              \
+    -H "x-api-key: ${API_KEY}"                               \
+    -d '{"targetId": "3672b5e3-661a-4046-8cda-36673470dcc2"}'
+elif test "$1" = "allocate-bulk";
+then
+  if test $2 = "int";
+  then
+    curl -X POST --compressed -H "${content_type_json}"            \
+        -H "x-api-user:${API_USER}"                                \
+        -H "x-api-key: ${API_KEY}"                                 \
+        -d '{"stats": {"int": 100, "str": 0, "con": 0, "per": 0}}' \
+        https://habitica.com/api/v3/user/allocate-bulk
+  else
+    echo "Not supported"
+  fi
+else
+  echo "Command unknown";
+fi
