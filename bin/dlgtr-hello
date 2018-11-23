@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+
+is_options() {
+  grep -q "^--" <<<"${1}"
+}
+
+# Ignore any first arg with --
+if test is_options;
+then
+  shift
+fi
+
+subject="$@"
+
+if test -z "$subject";
+then
+  echo "Hello World!"
+else
+  echo "Hello ${subject}!"
+fi
+
