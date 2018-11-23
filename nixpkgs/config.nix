@@ -15,6 +15,7 @@
         nixnote2
         astroid
         borgbackup
+        mblaze
       ];
     };
   };
