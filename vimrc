@@ -169,18 +169,25 @@ let g:vimwiki_list = [{'path': '~/wiki/', 'syntax': 'markdown',
 
 " elm
 let g:elm_format_autosave = 1
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:elm_syntastic_show_warnings = 1
 
 " ALE
 " ---------
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['typescript'] = ['prettier']
-let g:ale_fixers['json'] = ['prettier']
-let g:ale_fixers['elixir'] = ['mix_format']
+"let g:ale_fixers = {}
+" Deactivating elixir since it is buggy
+let g:ale_fixers = {
+\ 'javascript': ['prettier'],
+\ 'typescript': ['tslint'],
+\ 'json' :      ['prettier'],
+\ 'elixir':     []
+\}
+
+" Deactivating elixir since it is buggy
+let g:ale_linters = {
+\ 'elixir': []
+\}
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
 
-
+" shfmt on save
+"let g:shfmt_fmt_on_save = 1
+let g:shfmt_extra_args = '-i 2 -sr'
