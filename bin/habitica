@@ -13,6 +13,15 @@ then
     -H "x-api-user:${API_USER}"                              \
     -H "x-api-key: ${API_KEY}"                               \
     -d '{"targetId": "3672b5e3-661a-4046-8cda-36673470dcc2"}'
+
+elif test "$1" = "sleep"
+then
+    curl -X POST --compressed -H "${content_type_json}"            \
+        -H "x-api-user:${API_USER}"                                \
+        -H "x-api-key: ${API_KEY}"                                 \
+        -d ''                                                      \
+        https://habitica.com/api/v3/user/sleep
+
 elif test "$1" = "allocate-bulk";
 then
   if test $2 = "int";
