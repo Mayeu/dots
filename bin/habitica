@@ -8,11 +8,11 @@ content_type_json='Content-Type:application/json'
 
 if test "$1" = "fireball";
 then
-  curl https://habitica.com/api/v3/user/class/cast/fireball\?targetId\=3672b5e3-661a-4046-8cda-36673470dcc2 \
+  curl https://habitica.com/api/v3/user/class/cast/fireball\?targetId\=4f0c994d-2c5f-4fcc-a57e-83221d63f064 \
     -X POST --compressed -H "${content_type_json}"           \
     -H "x-api-user:${API_USER}"                              \
     -H "x-api-key: ${API_KEY}"                               \
-    -d '{"targetId": "3672b5e3-661a-4046-8cda-36673470dcc2"}'
+    -d '{"targetId": "4f0c994d-2c5f-4fcc-a57e-83221d63f064"}'
 
 elif test "$1" = "sleep"
 then
