@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/m/.oh-my-zsh
+export ZSH=/Users/m/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -129,5 +129,11 @@ export PATH=/home/m/.local/bin:$PATH
 [[ -f /home/m/documents/code/trellis/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/m/documents/code/trellis/node_modules/tabtab/.completions/electron-forge.zsh
 
 # Autojump
-[ -f /usr/share/autojump/autojump.zsh ] && . /usr/share/autojump/autojump.zsh
-eval "$(ntfy shell-integration)"
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+#eval "$(ntfy shell-integration)"
+
+# iterm2 integration
+source ~/.iterm2_shell_integration.zsh
+
+# ASDF loading
+source /usr/local/opt/asdf/asdf.sh
