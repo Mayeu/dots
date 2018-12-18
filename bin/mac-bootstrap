@@ -1,0 +1,93 @@
+#! /usr/bin/env bash
+
+#/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew analytics off
+export HOMEBREW_NO_ANALYTICS=1
+
+brew cask install    \
+  iterm2             \
+  firefox            \
+  omnifocus          \
+  bartender          \
+  blockblock         \
+  carbon-copy-cloner \
+  little-snitch      \
+  syncthing-app      \
+  alfred             \
+  keka               \
+  timing             \
+  macpass \
+  osxfuse \
+  protonmail-bridge \
+  karabiner-elements \
+  signal \
+  flux \
+  borgbackup \
+  evernote \
+  keybase \
+  daisydisk \
+  docker \
+  dash \
+  patchwork \
+  spotify \
+  calibre \
+  virtualbox \
+  virtualbox-extension-pack \
+  vagrant \
+  gimp \
+  appcleaner \
+  zoomus \
+  tor-browser \
+  superduper \
+  gpg-suite \
+  transmission \
+  transmission-remote-gui \
+  protonvpn \
+  sublime-merge \
+  vagrant-manager \
+  now
+
+brew install      \
+  git             \
+  git-extras      \
+  bash            \
+  zsh             \
+  fish            \
+  wget            \
+  curl            \
+  node            \
+  nvm             \
+  pass \
+  sshfs \
+  vagrant-completion \
+  terraform \
+  nomad \
+  autojump \
+  ext4fuse \
+  rsync \
+  ripgrep \
+  ansible \
+  homebrew/cask-fonts/font-fira-code \
+  sshrc \
+  asdf \
+  elixir \
+  bat \
+  selecta
+
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+
+# You will need to add:
+#    #{HOMEBREW_PREFIX}/bin/fish
+# to /etc/shells.
+# Then run:
+#    chsh -s #{HOMEBREW_PREFIX}/bin/fish
+# to make fish your default shell.
+
+cd ~/ && git clone https://github.com/Mayeu/dots .dots
+
+## Install a fish package manager
+## Install bass https://github.com/edc/bass
+## Configure nvm to use bass
+## Check awesome fish https://github.com/jorgebucaran/awesome-fish-shell
+## Check awesome cli app https://github.com/agarrharr/awesome-cli-apps#macos
