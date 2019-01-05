@@ -15,7 +15,6 @@ brew cask install    \
   syncthing-app      \
   alfred             \
   keka               \
-  timing             \
   macpass \
   osxfuse \
   protonmail-bridge \
@@ -45,7 +44,18 @@ brew cask install    \
   protonvpn \
   sublime-merge \
   vagrant-manager \
-  now
+  now \
+  libreoffice \
+  steam \
+  vlc \
+  setapp \
+  imageoptim \
+  xld \
+  chromium \
+  rocket \
+  viscosity
+
+brew install imagemagick --with-libheif
 
 brew install      \
   git             \
@@ -57,7 +67,7 @@ brew install      \
   curl            \
   node            \
   nvm             \
-  pass \
+  gopass \
   sshfs \
   vagrant-completion \
   terraform \
@@ -72,7 +82,16 @@ brew install      \
   asdf \
   elixir \
   bat \
-  selecta
+  selecta \
+  terminal-notifier \
+  jq \
+  forego \
+  yarn \
+  imageoptim-cli \
+  weboob \
+  youtube-dl \
+  ffmpeg \
+  tmux
 
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
