@@ -91,7 +91,9 @@ brew install      \
   weboob \
   youtube-dl \
   ffmpeg \
-  tmux
+  tmux \
+  htop \
+  shellcheck
 
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
