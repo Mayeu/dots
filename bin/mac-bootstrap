@@ -53,7 +53,13 @@ brew cask install    \
   xld \
   chromium \
   rocket \
-  viscosity
+  viscosity \
+  mattermost \
+  owncloud \
+  tunnelblick \
+  flowsync \
+  handbrake \
+  ocenaudio
 
 brew install imagemagick --with-libheif
 
@@ -79,7 +85,6 @@ brew install      \
   ansible \
   homebrew/cask-fonts/font-fira-code \
   sshrc \
-  asdf \
   elixir \
   bat \
   selecta \
@@ -93,7 +98,15 @@ brew install      \
   ffmpeg \
   tmux \
   htop \
-  shellcheck
+  shellcheck \
+  watch \
+  gnu-getopt
+
+# Force link some gnu tools
+#brew link --force gnu-getopt
+
+# SSHpass
+brew install http://git.io/sshpass.rb
 
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
