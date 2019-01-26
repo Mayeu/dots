@@ -34,6 +34,23 @@ then
   else
     echo "Not supported"
   fi
+elif test "$1" = "create"
+then
+    todo="$2"
+    curl -X POST --compressed -H "${content_type_json}"            \
+        -H "x-api-user:${API_USER}"                                \
+        -H "x-api-key: ${API_KEY}"                                 \
+        -d "{\"text\": \"${todo}\", \"type\": \"todo\"}"           \
+        https://habitica.com/api/v3/tasks/user
+elif test "$1" = "done"
+then
+    task_id="$2"
+    curl -X POST --compressed -H "${content_type_json}"            \
+        -H "x-api-user:${API_USER}"                                \
+        -H "x-api-key: ${API_KEY}"                                 \
+        -d ""                                                      \
+        "https://habitica.com/api/v3/tasks/${task_id}/score/up"
+
 else
   echo "Command unknown";
 fi
