@@ -1,0 +1,105 @@
+[color]
+  ui     = true
+  diff   = auto
+  status = auto
+  branch = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow
+  frag = magenta
+  old = red
+  new = green
+  whitespace = red reverse
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[alias]
+  br = branch
+  co = checkout
+  dc = diff --cached
+  dt = difftool
+  count = shortlog -sn
+  g = grep --break --heading --line-number
+  gi = grep --break --heading --line-number -i
+  changed = show --pretty=\"format:\" --name-only
+  #fm = fetch-merge
+  #pr = open-pr
+  #please = push --force-with-lease
+  commend = commit --amend --no-edit
+  #fpr = fetch-pr
+  lt = log --tags --decorate --simplify-by-decoration --oneline
+
+  # The typo part
+  fetach = fetch
+
+[diff]
+   compactionHeuristic = true
+   tool = vimdiff
+
+[difftool]
+   prompt = false
+
+[difftool "diffmerge"]
+  cmd = diffmerge $LOCAL $REMOTE
+
+#[merge]
+#  tool = diffmerge
+#
+#[mergetool "diffmerge"]
+#  cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
+#  trustExitCode = true
+#  keepBackup = false
+
+[push]
+  default = current
+
+[core]
+  # So I can share with other tools using cvsignore as "standard"
+  excludesfile = ~/.cvsignore
+  editor = vim
+  autocrlf = input
+  whitespace = trailing-space,space-before-tab
+  # Apparently useful for mixed environment
+  precomposeUnicode = true
+
+[github]
+   user = Mayeu
+
+[svn]
+   rmdir = true
+
+# for $deity's sake, check that anything we're getting is complete and sane on
+# a regular basis
+[transfer]
+   fsckobjects = true
+[fetch]
+   fsckobjects = true
+[receive]
+   fsckObjects = true
+
+[credential]
+  helper = /usr/bin/pass-git-helper
+
+[grep]
+  patternType = perl
+  lineNumber = true
+
+[help]
+  autocorrect = 1
+
+[submodule]
+  fetchJobs = 4
+
+[commit]
+  template = ~/.dots/git/template.txt
+
+[log]
+  showSignature = false

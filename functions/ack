@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+ack() {
+  echo "Nope. Use rg."
+  exit 1
+}
