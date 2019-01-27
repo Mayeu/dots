@@ -7,6 +7,7 @@ export VERBOSE_FLAG=""
 command=local_backup
 
 ## Parse options
+# Require gnu-getopt
 OPTIONS=$(getopt -n "$0" -o hrv --long "help,remote,verbose" -- "$@")
 eval set -- "$OPTIONS"
 
