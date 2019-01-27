@@ -1,6 +1,6 @@
-#!/bin/zsh
+#!/bin/sh
 
 ack() {
   echo "Nope. Use rg."
-  exit 1
+  false
 }
