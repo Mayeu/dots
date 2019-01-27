@@ -1,0 +1,6 @@
+#!/bin/sh
+
+j() {
+  echo "Nope. Use z."
+  false
+}
