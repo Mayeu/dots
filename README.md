@@ -28,5 +28,5 @@ fatal: index-pack failed
 
 (and no, I don't consider deactivating the fsck check a solution to this issue.)
 
-[caarlos-dots](https://github.com/caarlos0/dotfiles)
-[caarlos-docs](https://github.com/caarlos0/dotfiles/tree/master/docs)
+[caarlos-dots]: https://github.com/caarlos0/dotfiles
+[caarlos-docs]: https://github.com/caarlos0/dotfiles/tree/master/docs
