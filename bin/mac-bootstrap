@@ -100,7 +100,9 @@ brew install      \
   htop \
   shellcheck \
   watch \
-  gnu-getopt
+  gnu-getopt \
+  mysql-client \
+  yamllint
 
 # Force link some gnu tools
 #brew link --force gnu-getopt
