@@ -1,0 +1,25 @@
+#!/bin/sh
+
+mkdots() {
+  readonly folder="$1"
+  if test -z "$DOTFILES";
+  then
+    echo 'Error: "$DOTFILES" is empty or does not exist.'
+    false
+    return
+  fi
+
+  if test -z "$folder";
+  then
+    echo "Usage: ${0} folder-to-create"
+    false
+    return
+  fi
+
+  readonly dotpath="${DOTFILES}/${folder}"
+
+  # Create the folder and some basic files
+  mkdir -p "${dotpath}"
+  touch "${dotpath}/aliases.zsh"
+  touch "${dotpath}/config.zsh"
+}
