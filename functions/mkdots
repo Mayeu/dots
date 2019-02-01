@@ -19,7 +19,8 @@ mkdots() {
   readonly dotpath="${DOTFILES}/${folder}"
 
   # Create the folder and some basic files
-  mkdir -p "${dotpath}"
+  mkdir -p "$dotpath"
   touch "${dotpath}/aliases.zsh"
   touch "${dotpath}/config.zsh"
+  pushd "$dotpath" || return
 }
