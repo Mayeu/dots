@@ -135,3 +135,11 @@ sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
 ## Configure nvm to use bass
 ## Check awesome fish https://github.com/jorgebucaran/awesome-fish-shell
 ## Check awesome cli app https://github.com/agarrharr/awesome-cli-apps#macos
+
+# Setup my dots
+make link
+
+# Setup my shell to be homebrew zsh
+export zshpath="$(brew --prefix)/bin/zsh"
+grep -q "^${zshpath}" /etc/shells || sudo -E sh -c "echo '$zshpath' >> /etc/shells"
+chsh -s "$zshpath"
