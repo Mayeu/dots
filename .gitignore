@@ -1,3 +1,5 @@
+antibody/zsh_plugins.sh
+
 .DS_Store
 .*.sw*
 vim/undodir/*

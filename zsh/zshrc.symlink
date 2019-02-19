@@ -27,7 +27,7 @@ done
 #antibody bundle < ~/.zsh_plugins.txt
 
 # Static loading of Antibody
-source ~/.zsh_plugins.sh
+source ${DOTFILES}/antibody/zsh_plugins.sh
 
 # load everything but the path and completion files
 for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
