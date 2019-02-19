@@ -8,7 +8,6 @@ brew cask install    \
   iterm2             \
   firefox            \
   omnifocus          \
-  bartender          \
   blockblock         \
   carbon-copy-cloner \
   little-snitch      \
