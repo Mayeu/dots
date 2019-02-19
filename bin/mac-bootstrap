@@ -52,15 +52,15 @@ brew cask install    \
   imageoptim \
   xld \
   chromium \
-  rocket \
-  viscosity \
   mattermost \
   owncloud \
   tunnelblick \
   flowsync \
   handbrake \
-  ocenaudio
+  resilio-sync \
+  programmer-dvorak
 
+  #ocenaudio \
 brew install imagemagick --with-libheif
 
 brew install      \
@@ -73,6 +73,7 @@ brew install      \
   curl            \
   node            \
   nvm             \
+  pass \
   gopass \
   sshfs \
   vagrant-completion \
@@ -121,6 +122,9 @@ brew install emacs-plus
 # to make fish your default shell.
 
 cd ~/ && git clone https://github.com/Mayeu/dots .dots
+
+# Make sure dvp is my login keyboard
+sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
 
 ## Install a fish package manager
 ## Install bass https://github.com/edc/bass
