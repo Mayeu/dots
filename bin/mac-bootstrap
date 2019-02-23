@@ -57,7 +57,8 @@ brew cask install    \
   flowsync \
   handbrake \
   resilio-sync \
-  programmer-dvorak
+  programmer-dvorak \
+  java
 
   #ocenaudio \
 brew install imagemagick --with-libheif
@@ -107,7 +108,8 @@ brew install      \
   mayeu/mayeu/borgmatic \
   mayeu/mayeu/beancount \
   mayeu/mayeu/beancount-scripts \
-  mayeu/mayeu/fava
+  mayeu/mayeu/fava \
+  signal-cli
 
 # Force link some gnu tools
 #brew link --force gnu-getopt
