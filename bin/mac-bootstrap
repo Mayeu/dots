@@ -61,7 +61,6 @@ brew cask install    \
   java
 
   #ocenaudio \
-brew install imagemagick --with-libheif
 
 brew install      \
   git             \
@@ -109,7 +108,8 @@ brew install      \
   mayeu/mayeu/beancount \
   mayeu/mayeu/beancount-scripts \
   mayeu/mayeu/fava \
-  signal-cli
+  signal-cli \
+  imagemagick
 
 # Force link some gnu tools
 #brew link --force gnu-getopt
