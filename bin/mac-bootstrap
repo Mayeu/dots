@@ -127,6 +127,9 @@ brew install emacs-plus
 
 cd ~/ && git clone https://github.com/Mayeu/dots .dots
 
+# Install spacemacs
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
 # Make sure dvp is my login keyboard
 sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
 
