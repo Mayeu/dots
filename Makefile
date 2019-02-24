@@ -21,6 +21,12 @@ ${HOME}/.spacemacs: spacemacs/spacemacs.symlink
 ${HOME}/.spacemacs.d: spacemacs/spacemacs.d.symlink
 	ln -sv `pwd`/$< $@
 
+${HOME}/.vimrc: vim/vimrc.symlink
+	ln -sv `pwd`/$< $@
+
+${HOME}/.vim-addons: vim/vim-addons.symlink
+	ln -sv `pwd`/$< $@
+
 .PHONY=link
-link: ${HOME}/.gitconfig ${HOME}/.zshrc ${HOME}/bin antibody/zsh_plugins.sh ${HOME}/.spacemacs ${HOME}/.spacemacs.d
+link: ${HOME}/.gitconfig ${HOME}/.zshrc ${HOME}/bin antibody/zsh_plugins.sh ${HOME}/.spacemacs ${HOME}/.spacemacs.d ${HOME}/.vimrc ${HOME}/.vim-addons
 
