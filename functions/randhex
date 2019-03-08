@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Hexdump formating comes from this stackoverflow question:
+# https://stackoverflow.com/questions/15553493/how-to-print-only-the-hex-values-from-hexdump-without-line-numbers-or-ascii-tabl
+
+randhex() {
+  dd if=/dev/random bs=8 count=1 2> /dev/null | hexdump -e '16/8 "%x" ""'
+}
