@@ -54,11 +54,12 @@ brew cask install    \
   mattermost \
   owncloud \
   tunnelblick \
-  flowsync \
   handbrake \
   resilio-sync \
   programmer-dvorak \
-  java
+  java \
+  lingon-x \
+  mailmate
 
   #ocenaudio \
 
@@ -108,8 +109,24 @@ brew install      \
   mayeu/mayeu/beancount \
   mayeu/mayeu/beancount-scripts \
   mayeu/mayeu/fava \
+  mayeu/mayeu/run-one \
+  mayeu/mayeu/flock \
+  mayeu/mayeu/habitica \
   signal-cli \
-  imagemagick
+  imagemagick \
+  parallel \
+  elm \
+  elm-format \
+  pandoc \
+  neovim \
+  make \
+  ctags \
+  python@2 
+
+# Install / upgrade python support for neovim
+# No need to pass any flag during the compilation or install
+pip2 install --user --upgrade pynvim
+pip3 install --user --upgrade pynvim
 
 # Force link some gnu tools
 #brew link --force gnu-getopt
@@ -148,3 +165,16 @@ make link
 export zshpath="$(brew --prefix)/bin/zsh"
 grep -q "^${zshpath}" /etc/shells || sudo -E sh -c "echo '$zshpath' >> /etc/shells"
 chsh -s "$zshpath"
+
+# MailMate configuration
+defaults write com.freron.MailMate MmAutomaticallyExpandThreadsEnabled -bool YES
+defaults write com.freron.MailMate MmAutomaticallyExpandOnlyWhenCounted -bool YES
+
+# The first one makes MailMate always expand all threads. Combined with the
+# second one, only threads with emails “counted” are expanded. That might seem
+# strange, but it means that if you have a mailbox with an unread count in the
+# mailbox list then only threads with unread messages are going to be expanded
+# (or the parts of the threads with unread messages). New messages also trigger
+# auto-expansion. (Note: It might be changed how this works. In particular,
+# these features could be more independent of each other.)
+
