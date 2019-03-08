@@ -42,7 +42,7 @@
 
 [diff]
    compactionHeuristic = true
-   tool = vimdiff
+   tool = nvim -d
 
 [difftool]
    prompt = false
@@ -64,7 +64,7 @@
 [core]
   # So I can share with other tools using cvsignore as "standard"
   excludesfile = ~/.cvsignore
-  editor = vim
+  editor = nvim
   autocrlf = input
   whitespace = trailing-space,space-before-tab
   # Apparently useful for mixed environment
