@@ -59,7 +59,11 @@ brew cask install    \
   programmer-dvorak \
   java \
   lingon-x \
-  mailmate
+  mailmate \
+  nightowl \
+  kobo \
+  font-firacode-nerd-font \
+  minikube
 
   #ocenaudio \
 
@@ -121,7 +125,22 @@ brew install      \
   neovim \
   make \
   ctags \
-  python@2 
+  python@2 \
+  rancher-cli \
+  rancher-compose \
+  kubectl \
+  pwgen \
+  kubernetes-helm \
+  vault \
+  docker-machine-driver-hyperkit \
+  pinentry-mac
+
+## To use pinentry-mac it must be added as "pinentry-program" in the
+`~/.gnupg/gpg-agent.conf` configuration
+
+## This is to give root right to the hyperkit driver of docker
+sudo chown root:wheel /usr/local/opt/docker-machine-driver-hyperkit/bin/docker-machine-driver-hyperkit
+sudo chmod u+s /usr/local/opt/docker-machine-driver-hyperkit/bin/docker-machine-driver-hyperkit
 
 # Install / upgrade python support for neovim
 # No need to pass any flag during the compilation or install
