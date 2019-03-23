@@ -1,0 +1,5 @@
+#!/bin/sh
+
+newdailylog () {
+  open "bear://x-callback-url/create?title=Log `gdate -I`&new_window=yes&float=yes&edit=yes&pin=yes&show_window=no&tags=2. Areas/2. Journal"
+}
