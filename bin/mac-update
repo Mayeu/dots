@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# TODO:
+# - add the global npm stuff
+# - add the rubygem
+# - add the python stuff
+
 echo "📝 Upgrade SpaceVim & Plugin"
 git -C ~/.SpaceVim pull && nvim
 
