@@ -10,6 +10,10 @@ template (don't dream too much, I have a lot of other stuff to do!)
 
 The docs currently still live in [@caarlos0][caarlos-docs] repository.
 
+## Some useful commands
+
+* `reload!`: reload your shell
+
 ## Why not a fork?
 
 This repository is not a fork of @caarlos0 one, because his repository has some
