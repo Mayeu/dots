@@ -1,9 +1,12 @@
 #! /usr/bin/env bash
+#set -e
 
 #/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+echo "👁  Turn off homebrew analytics"
 brew analytics off
 export HOMEBREW_NO_ANALYTICS=1
 
+echo "🍺 Install Cask apps"
 brew cask install    \
   iterm2             \
   firefox            \
@@ -41,7 +44,6 @@ brew cask install    \
   transmission \
   transmission-remote-gui \
   protonvpn \
-  sublime-merge \
   vagrant-manager \
   now \
   libreoffice \
@@ -63,10 +65,20 @@ brew cask install    \
   nightowl \
   kobo \
   font-firacode-nerd-font \
-  minikube
+  minikube \
+  homebrew/cask-drivers/logitech-options \
+  google-cloud-sdk \
+  darktable \
+  google-chrome \
+  gitup \
+  xquartz \
+  inkscape \
+  postman \
+  openinterminal
 
   #ocenaudio \
 
+echo "🍺 Install cli apps"
 brew install      \
   git             \
   git-extras      \
@@ -115,7 +127,7 @@ brew install      \
   mayeu/mayeu/fava \
   mayeu/mayeu/run-one \
   mayeu/mayeu/flock \
-  mayeu/mayeu/habitica \
+  mayeu/mayeu/habitica-cli \
   signal-cli \
   imagemagick \
   parallel \
@@ -133,17 +145,38 @@ brew install      \
   kubernetes-helm \
   vault \
   docker-machine-driver-hyperkit \
-  pinentry-mac
+  pinentry-mac \
+  pgcli \
+  hugo \
+  atomicparsley `# Pour embedded les images dans les m4a de youtube-dl` \
+  rust \
+  upx `# executable compressor` \
+  bats `# bash testing` \
+  pv \
+  fortune \
+  hardlink-osx \
+  packer \
+  ruby \
+  shfmt \
+  xmlstarlet \
+  libnettle \
+  tor
+
+gem install --force bundler
+
+# Splitline comments: https://stackoverflow.com/a/12797512/1423984
 
 ## To use pinentry-mac it must be added as "pinentry-program" in the
-`~/.gnupg/gpg-agent.conf` configuration
+# `~/.gnupg/gpg-agent.conf` configuration
 
 ## This is to give root right to the hyperkit driver of docker
+echo "🐳 Give some root right to the hyperkit docker driver"
 sudo chown root:wheel /usr/local/opt/docker-machine-driver-hyperkit/bin/docker-machine-driver-hyperkit
 sudo chmod u+s /usr/local/opt/docker-machine-driver-hyperkit/bin/docker-machine-driver-hyperkit
 
 # Install / upgrade python support for neovim
 # No need to pass any flag during the compilation or install
+echo "🐍 Install python deps for nvim"
 pip2 install --user --upgrade pynvim
 pip3 install --user --upgrade pynvim
 
@@ -152,9 +185,6 @@ pip3 install --user --upgrade pynvim
 
 # SSHpass
 brew install http://git.io/sshpass.rb
-
-brew tap d12frosted/emacs-plus
-brew install emacs-plus
 
 # You will need to add:
 #    #{HOMEBREW_PREFIX}/bin/fish
@@ -165,10 +195,8 @@ brew install emacs-plus
 
 cd ~/ && git clone https://github.com/Mayeu/dots .dots
 
-# Install spacemacs
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-
 # Make sure dvp is my login keyboard
+echo "⌨️  Update my login keyboard"
 sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
 
 ## Install a fish package manager
@@ -178,14 +206,17 @@ sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
 ## Check awesome cli app https://github.com/agarrharr/awesome-cli-apps#macos
 
 # Setup my dots
+echo "🔗 Link my dotfiles"
 make link
 
 # Setup my shell to be homebrew zsh
+echo "🐚 Setup my shell to homebrew zsh"
 export zshpath="$(brew --prefix)/bin/zsh"
 grep -q "^${zshpath}" /etc/shells || sudo -E sh -c "echo '$zshpath' >> /etc/shells"
 chsh -s "$zshpath"
 
 # MailMate configuration
+echo "📧 Configure mailmate"
 defaults write com.freron.MailMate MmAutomaticallyExpandThreadsEnabled -bool YES
 defaults write com.freron.MailMate MmAutomaticallyExpandOnlyWhenCounted -bool YES
 
