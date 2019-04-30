@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+echo "📝 Upgrade SpaceVim & Plugin"
+git -C ~/.SpaceVim pull && nvim
+
+echo "🍺 Upgrade homebrew"
+brew update                             \
+       && brew upgrade                  \
+       && brew cask upgrade             \
+       && brew cask reinstall gpg-suite \
+       && brew cleanup --prune 60
+
+echo "🐚 Upgrade the shell"
+antibody update
+
+echo "🍎 Upgrade the system"
+sudo softwareupdate -i -a 
+
+# Make sure dvp is my login keyboard
+echo "⌨️  Update my login keyboard"
+sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
