@@ -60,7 +60,6 @@ brew cask install    \
   resilio-sync \
   programmer-dvorak \
   java \
-  lingon-x \
   mailmate \
   nightowl \
   kobo \
@@ -71,10 +70,15 @@ brew cask install    \
   darktable \
   google-chrome \
   gitup \
-  xquartz \
-  inkscape \
   postman \
-  openinterminal
+  openinterminal \
+  macvim \
+  beaker-browser \
+  brave-browser \
+  contexts \
+  notion \
+  mumble \
+  sublime-merge
 
   #ocenaudio \
 
@@ -94,6 +98,7 @@ brew install      \
   sshfs \
   vagrant-completion \
   terraform \
+  terragrunt \
   nomad \
   autojump \
   ext4fuse \
@@ -121,13 +126,14 @@ brew install      \
   mysql-client \
   yamllint \
   getantibody/tap/antibody \
-  mayeu/mayeu/borgmatic \
-  mayeu/mayeu/beancount \
-  mayeu/mayeu/beancount-scripts \
-  mayeu/mayeu/fava \
-  mayeu/mayeu/run-one \
-  mayeu/mayeu/flock \
-  mayeu/mayeu/habitica-cli \
+  mayeu/tap/borgmatic \
+  mayeu/tap/beancount \
+  mayeu/tap/beancount-scripts \
+  mayeu/tap/fava \
+  mayeu/tap/run-one \
+  mayeu/tap/flock \
+  mayeu/tap/habitica-cli \
+  mayeu/tap/lmt
   signal-cli \
   imagemagick \
   parallel \
@@ -160,7 +166,15 @@ brew install      \
   shfmt \
   xmlstarlet \
   libnettle \
-  tor
+  tor \
+  sloccount \
+  ipfs \
+  asciinema \
+  the_silver_searcher \
+  swaks \
+  postgres \
+  gitlab-runner \
+  telnet
 
 gem install --force bundler
 
@@ -228,3 +242,5 @@ defaults write com.freron.MailMate MmAutomaticallyExpandOnlyWhenCounted -bool YE
 # auto-expansion. (Note: It might be changed how this works. In particular,
 # these features could be more independent of each other.)
 
+echo "🔍 Activate the locate database"
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist

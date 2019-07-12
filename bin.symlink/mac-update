@@ -6,7 +6,7 @@
 # - add the python stuff
 
 echo "📝 Upgrade SpaceVim & Plugin"
-git -C ~/.SpaceVim pull && nvim
+vim -c 'call dein#update() | quit'
 
 echo "🍺 Upgrade homebrew"
 brew update                             \
@@ -14,6 +14,9 @@ brew update                             \
        && brew cask upgrade             \
        && brew cask reinstall gpg-suite \
        && brew cleanup --prune 60
+
+echo "🚢 Upgrade Platform CLI"
+platform update
 
 echo "🐚 Upgrade the shell"
 antibody update
@@ -24,3 +27,4 @@ sudo softwareupdate -i -a
 # Make sure dvp is my login keyboard
 echo "⌨️  Update my login keyboard"
 sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
+sudo chmod 644 /Library/Preferences/com.apple.HIToolbox.plist
