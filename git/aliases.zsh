@@ -5,6 +5,7 @@
 
 alias g='git'
 #alias gl='git pull --prune'
+alias gpu='git pull --prune'
 alias glg="git log --graph --decorate --oneline --abbrev-commit"
 alias glog='glg'
 alias glga="glg --all"
@@ -14,6 +15,7 @@ alias gd='git diff'
 alias gc='git commit'
 alias gca='git commit -a'
 alias gco='git checkout'
+alias gcob='git checkout -b'
 alias gb='git branch -v'
 alias ga='git add'
 #alias gaa='git add -A'
@@ -32,5 +34,5 @@ alias grrf='git rm -rf'
 #fi
 
 gi() {
-  curl -s "https://www.gitignore.io/api/$*"
+	curl -s "https://www.gitignore.io/api/$*"
 }
