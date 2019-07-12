@@ -1,5 +1,3 @@
 #!/bin/sh
 
-alias vim='nvim'
-# Rebuild my vim config based on nix
-#alias revim='nix-env -iA nixpkgs.my_neovim'
+alias vim='nvim -u ~/.vimrc'
