@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# A make wrapper
+#
+# Tested with GNU Make.
+#
+# Features
+# - Try to find a Makefile 5 level deep
+#
+# Maybe one day
+# - subcommand via target name convention
+# - easier argument passing when using the Makefile
+# - search for Makefile until the home folder
+
+set -euo pipefail
+IFS=$'\n\t'
+
+find-real-make() {
+  # whereis lists all the command that match `make`
+  # The grep command filter out any entry that match our path
+  # We only keep the first element of the list
+  whereis make | grep -v "$0" | head -n1
+}
+
+readonly real_make="$(find-real-make)"
+
+find-makefile() {
+  if test -f Makefile; then
+    echo "$(realpath Makefile)"
+  elif test -f ../Makefile; then
+    echo "$(realpath ../Makefile)"
+  elif test -f ../../Makefile; then
+    echo "$(realpath ../../Makefile)"
+  elif test -f ../../../Makefile; then
+    echo "$(realpath ../../../Makefile)"
+  elif test -f ../../../../Makefile; then
+    echo "$(realpath ../../../../Makefile)"
+  else
+    echo "No Makefile around" >&2
+    exit 1
+  fi
+}
+
+readonly makefile="$(find-makefile)"
+
+list-target() {
+  local makepath="$1"
+  grep "^\w" "$makepath" | grep : | grep -v = | grep -v "^\." | cut -f 1 -d:
+}
+
+# Dirty but easy
+launch-make() {
+  "$real_make" -C "$(dirname "$makefile")" "$@"
+}
+
+makew() {
+  launch-make "$@"
+}
+
+makew "$@"
