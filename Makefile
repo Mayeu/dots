@@ -1,32 +1,21 @@
+# Find all the file/folder ending with .symlink
+file_to_symlink := $(shell find . -name '*.symlink')
+# Extract just the name.symlink from the previous list
+symlinks := $(patsubst %.symlink, %, $(shell basename $(file_to_symlink)))
+# Generate the complete list of symlink target we need
+symlinks_path := $(addprefix ${HOME}/., $(symlinks))
 
-# Git Config
-${HOME}/.gitconfig: git/gitconfig.symlink
-	ln -sv `pwd`/$<  $@
+# All directory to search for *.symlink files/folder
+dir := $(shell find . -type d -not -path '*/\.*')
+# VPATH tell make to search this list of folder when using the % pattern
+VPATH = $(dir)
+
+install: $(symlinks_path) antibody/zsh_plugins.sh
+
+# Create all symlink
+${HOME}/.%: %.symlink
+	ln -s $(abspath $<) $@
 
 # ZSH
 antibody/zsh_plugins.sh: antibody/zsh_plugins.txt
 	antibody bundle < $< > $@
-
-${HOME}/.zshrc: zsh/zshrc.symlink
-	ln -sv `pwd`/$<  $@
-
-# My Bin
-${HOME}/bin: bin
-	ln -sv `pwd`/$< $@
-
-# Spacemacs
-${HOME}/.spacemacs: spacemacs/spacemacs.symlink
-	ln -sv `pwd`/$< $@
-
-${HOME}/.spacemacs.d: spacemacs/spacemacs.d.symlink
-	ln -sv `pwd`/$< $@
-
-${HOME}/.vimrc: vim/vimrc.symlink
-	ln -sv `pwd`/$< $@
-
-${HOME}/.vim-addons: vim/vim-addons.symlink
-	ln -sv `pwd`/$< $@
-
-.PHONY=link
-link: ${HOME}/.gitconfig ${HOME}/.zshrc ${HOME}/bin antibody/zsh_plugins.sh ${HOME}/.spacemacs ${HOME}/.spacemacs.d ${HOME}/.vimrc ${HOME}/.vim-addons
-
