@@ -2,8 +2,9 @@
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 rupa/z
+lukechilds/zsh-nvm
 
-# these should be at last!
+# these should be last!
 #sindresorhus/pure
 denysdovhan/spaceship-prompt
 zsh-users/zsh-syntax-highlighting
