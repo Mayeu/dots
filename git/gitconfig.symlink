@@ -64,7 +64,7 @@
 [core]
   # So I can share with other tools using cvsignore as "standard"
   excludesfile = ~/.cvsignore
-  editor = nvim
+  editor = nvim -u ~/.vimrc
   autocrlf = input
   whitespace = trailing-space,space-before-tab
   # Apparently useful for mixed environment
@@ -103,3 +103,6 @@
 
 [log]
   showSignature = false
+
+[pull]
+  rebase = true
