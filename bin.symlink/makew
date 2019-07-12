@@ -24,6 +24,7 @@ find-real-make() {
 
 readonly real_make="$(find-real-make)"
 
+# Dirty but easy
 find-makefile() {
   if test -f Makefile; then
     echo "$(realpath Makefile)"
@@ -48,7 +49,6 @@ list-target() {
   grep "^\w" "$makepath" | grep : | grep -v = | grep -v "^\." | cut -f 1 -d:
 }
 
-# Dirty but easy
 launch-make() {
   "$real_make" -C "$(dirname "$makefile")" "$@"
 }
