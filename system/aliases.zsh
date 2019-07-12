@@ -6,3 +6,6 @@ alias dots="pushd ${DOTFILES}"
 
 # Upload something to my fav paste service
 alias paste.cccp.io="~/bin/goploader --lifetime=1w"
+
+# Get the current week number
+alias weeknumber="date +%V"
