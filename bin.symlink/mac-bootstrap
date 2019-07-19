@@ -174,7 +174,8 @@ brew install      \
   swaks \
   postgres \
   gitlab-runner \
-  telnet
+  telnet \
+  fswatch
 
 gem install --force bundler
 
