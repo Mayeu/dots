@@ -78,7 +78,10 @@ brew cask install    \
   contexts \
   notion \
   mumble \
-  sublime-merge
+  sublime-merge \
+  flotato \
+  anki \
+  go64
 
   #ocenaudio \
 
@@ -167,15 +170,18 @@ brew install      \
   xmlstarlet \
   libnettle \
   tor \
+  postgresql \
   sloccount \
   ipfs \
   asciinema \
   the_silver_searcher \
   swaks \
-  postgres \
   gitlab-runner \
   telnet \
-  fswatch
+  fswatch \
+  azure-cli \
+  tealdeer \
+  adr-tools
 
 gem install --force bundler
 
