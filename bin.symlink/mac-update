@@ -7,13 +7,14 @@
 
 echo "📝 Upgrade VIM's Plugin"
 vim -c 'call dein#update() | quit'
+vim -c 'call dein#recache_runtimepath() | quit'
 
 echo "🍺 Upgrade homebrew"
-brew update &&
-  brew upgrade &&
-  brew cask upgrade &&
-  brew cask reinstall gpg-suite &&
-  brew cleanup --prune 60
+brew update
+brew upgrade
+brew cask upgrade
+brew cask reinstall gpg-suite
+brew cleanup --prune 60
 
 echo "🚢 Upgrade Platform CLI"
 platform update
