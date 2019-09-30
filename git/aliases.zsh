@@ -12,6 +12,7 @@ alias glga="glg --all"
 alias gp='git push'
 alias gpa='git push origin --all'
 alias gd='git diff'
+alias gdc='git diff --cached'
 alias gc='git commit'
 alias gca='git commit -a'
 alias gco='git checkout'
