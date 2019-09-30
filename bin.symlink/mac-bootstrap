@@ -19,7 +19,6 @@ brew cask install    \
   keka               \
   macpass \
   osxfuse \
-  protonmail-bridge \
   karabiner-elements \
   signal \
   flux \
@@ -81,7 +80,8 @@ brew cask install    \
   sublime-merge \
   flotato \
   anki \
-  go64
+  go64 \
+  timeular
 
   #ocenaudio \
 
@@ -158,7 +158,6 @@ brew install      \
   pgcli \
   hugo \
   atomicparsley `# Pour embedded les images dans les m4a de youtube-dl` \
-  rust \
   upx `# executable compressor` \
   bats `# bash testing` \
   pv \
@@ -181,7 +180,8 @@ brew install      \
   fswatch \
   azure-cli \
   tealdeer \
-  adr-tools
+  adr-tools \
+  rmlint
 
 gem install --force bundler
 
