@@ -81,7 +81,8 @@ brew cask install    \
   flotato \
   anki \
   go64 \
-  timeular
+  timeular \
+  force-paste
 
   #ocenaudio \
 
