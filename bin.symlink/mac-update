@@ -32,3 +32,9 @@ sudo softwareupdate -i -a
 echo "⌨️  Update my login keyboard"
 sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
 sudo chmod 644 /Library/Preferences/com.apple.HIToolbox.plist
+
+# Do some manual check
+echo "⚠️  Please close iterm, and then check if the git status thingy still works"
+echo "If not, add the following to the update script:"
+echo ""
+echo "    sudo xcode-select -s /Applications/Xcode.app/Contents/Developer"
