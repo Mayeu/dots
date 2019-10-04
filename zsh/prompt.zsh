@@ -3,7 +3,7 @@
 SPACESHIP_PROMPT_ORDER=(
   user # Username section
   #  dir           # Current directory section
-  #  git           # Git section (git_branch + git_status)
+  git # Git section (git_branch + git_status)
   venv # virtualenv section
   conda # conda virtualenv section
   pyenv # Pyenv section
