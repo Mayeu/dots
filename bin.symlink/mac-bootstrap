@@ -209,7 +209,8 @@ brew install      \
   rmlint \
   gawk \
   pigz \
-  bindfs
+  bindfs \
+  zsh-completion
 
 gem install --force bundler
 
@@ -263,6 +264,16 @@ echo "🐚 Setup my shell to homebrew zsh"
 export zshpath="$(brew --prefix)/bin/zsh"
 grep -q "^${zshpath}" /etc/shells || sudo -E sh -c "echo '$zshpath' >> /etc/shells"
 chsh -s "$zshpath"
+
+# setup ZSH
+echo "🐚 Setup zsh"
+# Force rebuilding of autocompletion
+rm -f ~/.zcompdump; compinit
+
+# Setup VIM
+echo "✅ Setup VIM package manager"
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
+sh /tmp/installer.sh ~/.cache/dein
 
 # iterm2 configuration
 echo "🐚 Configure iterm2 to sync preferences"
