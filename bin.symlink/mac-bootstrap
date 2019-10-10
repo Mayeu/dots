@@ -1,6 +1,22 @@
 #! /usr/bin/env bash
 #set -e
 
+echo "👥 Create a group for me, myslef, and I"
+MY_GROUP=me_myself_and_i
+# -q = no interaction
+# -o = operation to do
+# -a = record to add
+# -t = type of the record
+sudo dseditgroup -q -o create "$MY_GROUP"
+sudo dseditgroup -o edit -a m -t user "$MY_GROUP"
+sudo dseditgroup -o edit -a cast -t user "$MY_GROUP"
+
+# Setup the configuration share
+SETTING_SHARE="/Volumes/Shared Settings"
+echo "⚒  Give read/write access to me, myself, and I to the setting share"
+sudo chown -R m:"$MY_GROUP" "$SETTING_SHARE"
+sudo chmod -R +a "group:${MY_GROUP} allow list,add_file,search,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr,readsecurity,file_inherit,directory_inherit" "$SETTING_SHARE"
+
 #/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 echo "👁  Turn off homebrew analytics"
 brew analytics off
