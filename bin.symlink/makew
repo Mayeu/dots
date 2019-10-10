@@ -33,15 +33,15 @@ readonly real_make="$(find-real-make)"
 # Dirty but easy
 find-makefile() {
   if test -f Makefile; then
-    echo "$(realpath Makefile)"
+    realpath Makefile
   elif test -f ../Makefile; then
-    echo "$(realpath ../Makefile)"
+    realpath ../Makefile
   elif test -f ../../Makefile; then
-    echo "$(realpath ../../Makefile)"
+    realpath ../../Makefile
   elif test -f ../../../Makefile; then
-    echo "$(realpath ../../../Makefile)"
+    realpath ../../../Makefile
   elif test -f ../../../../Makefile; then
-    echo "$(realpath ../../../../Makefile)"
+    realpath ../../../../Makefile
   else
     echo "No Makefile around" >&2
     exit 1
