@@ -16,10 +16,16 @@ set -euo pipefail
 IFS=$'\n\t'
 
 find-real-make() {
-  # whereis lists all the command that match `make`
-  # The grep command filter out any entry that match our path
-  # We only keep the first element of the list
-  whereis make | grep -v "$0" | head -n1
+
+  if test -f "$MAKE_PATH"; then
+    echo "$MAKE_PATH"
+  else
+    # 1. whereis lists all the command that match `make`. Does not work well
+    #    with brew
+    # 2. The grep command filter out any entry that match our path
+    # 3. We only keep the first element of the list
+    whereis make | grep -v "$0" | head -n1
+  fi
 }
 
 readonly real_make="$(find-real-make)"
