@@ -258,6 +258,18 @@ export zshpath="$(brew --prefix)/bin/zsh"
 grep -q "^${zshpath}" /etc/shells || sudo -E sh -c "echo '$zshpath' >> /etc/shells"
 chsh -s "$zshpath"
 
+# iterm2 configuration
+# Use a custom folder for the preferences
+defaults write com.googlecode.iterm2 PrefsCustomFolder "/Volumes/Shared Settings/iterm2"
+# Load preferences from a custom folder
+defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder 1
+# Save config on the custom folder when quitting
+defaults write com.googlecode.iterm2 "NoSyncNeverRemindPrefsChangesLostForFile_selection" 0
+
+# Alfred Configuration
+# Use a sync folder
+defaults write com.runningwithcrayons.Alfred-Preferences syncfolder "/Volumes/Shared Settings/alfred"
+
 # MailMate configuration
 echo "📧 Configure mailmate"
 defaults write com.freron.MailMate MmAutomaticallyExpandThreadsEnabled -bool YES
