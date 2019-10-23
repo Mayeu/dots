@@ -210,7 +210,8 @@ brew install      \
   gawk \
   pigz \
   bindfs \
-  zsh-completion
+  zsh-completion \
+  netlify-cli
 
 gem install --force bundler
 
