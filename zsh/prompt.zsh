@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 SPACESHIP_PROMPT_ORDER=(
+  begin # Just begin again section
   user # Username section
   #  dir           # Current directory section
   git # Git section (git_branch + git_status)
