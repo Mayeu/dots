@@ -3,7 +3,7 @@
 #set -x
 
 # Uncomment for profiling
-zmodload zsh/zprof
+#zmodload zsh/zprof
 
 # shortcut to this dotfiles path is $DOTFILES
 export DOTFILES="$HOME/.dots"
@@ -84,5 +84,5 @@ zle -N insert-selecta-path-in-command-line
 bindkey "^S" "insert-selecta-path-in-command-line"
 
 # Uncomment for profiling
-zprof
+#zprof
 
