@@ -211,7 +211,8 @@ brew install      \
   pigz \
   bindfs \
   zsh-completion \
-  netlify-cli
+  netlify-cli \
+  CleverCloud/homebrew-tap/clever-tools
 
 gem install --force bundler
 
