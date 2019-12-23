@@ -35,7 +35,7 @@ spaceship_begin() {
 
   random="$(shuf -i 1-100 -n 1)"
 
-  if [[ $random -le 5 ]]; then
+  if [[ $random -le 1 ]]; then
     begin_status="Breath, and just begin again 🙏"
   fi
 
