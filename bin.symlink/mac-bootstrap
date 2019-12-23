@@ -106,7 +106,9 @@ brew cask install    \
   force-paste \
   chrysalis \
   arduino \
-  nextcloud
+  nextcloud \
+  rocket \
+  typora
 
   #ocenaudio \
 
@@ -212,7 +214,10 @@ brew install      \
   bindfs \
   zsh-completion \
   netlify-cli \
-  CleverCloud/homebrew-tap/clever-tools
+  CleverCloud/homebrew-tap/clever-tools \
+  pnpm \
+  consul \
+  nim
 
 gem install --force bundler
 
