@@ -9,3 +9,6 @@ alias paste.cccp.io="${BIN_DIR}/goploader --lifetime=1w"
 
 # Get the current week number
 alias weeknumber="date +%V"
+
+# Jump to my infrastructure project
+alias zi="z infra"
