@@ -217,7 +217,9 @@ brew install      \
   CleverCloud/homebrew-tap/clever-tools \
   pnpm \
   consul \
-  nim
+  nim \
+  pyenv-virtualenvwrapper \
+  sshuttle
 
 gem install --force bundler
 
