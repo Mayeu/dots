@@ -219,7 +219,8 @@ brew install      \
   consul \
   nim \
   pyenv-virtualenvwrapper \
-  sshuttle
+  sshuttle \
+  picocom
 
 gem install --force bundler
 
