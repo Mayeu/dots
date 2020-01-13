@@ -19,9 +19,6 @@ brew cleanup --prune 60
 echo "⬢  Upgrade NodeJS related stuff"
 nvm upgrade
 
-echo "🚢 Upgrade Platform CLI"
-platform update -y
-
 echo "🐚 Upgrade the shell"
 antibody update
 
