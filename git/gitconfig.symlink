@@ -43,6 +43,7 @@
 [diff]
    compactionHeuristic = true
    tool = nvim -d
+	noprefix = true
 
 [difftool]
    prompt = false
