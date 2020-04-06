@@ -22,6 +22,9 @@ nvm upgrade
 echo "🐚 Upgrade the shell"
 antibody update
 
+echo "Ⓖ  Upgrade Google CLI"
+gcloud components update
+
 echo "🍎 Upgrade the system"
 sudo softwareupdate -i -a
 
