@@ -29,6 +29,7 @@ alias gs='git status'
 #alias glnext='git log --oneline $(git describe --tags --abbrev=0 @^)..@'
 alias gfa='git fetch --all'
 alias grrf='git rm -rf'
+alias gsc='git switch -c'
 
 #if command -v svu >/dev/null 2>&1; then
 #  alias gtpatch='echo `svu p`; git tag `svu p`'
@@ -36,5 +37,5 @@ alias grrf='git rm -rf'
 #fi
 
 gi() {
-	curl -s "https://www.gitignore.io/api/$*"
+  curl -s "https://www.gitignore.io/api/$*"
 }
