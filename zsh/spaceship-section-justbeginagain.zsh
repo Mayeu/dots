@@ -37,6 +37,8 @@ spaceship_begin() {
 
   if [[ $random -le 1 ]]; then
     begin_status="Breath, and just begin again 🙏"
+  elif test $random -le 2 && test $random -gt 1; then
+    begin_status="Observer les  moments de résistance Ω"
   fi
 
   # Exit section if variable is empty
