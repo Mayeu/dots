@@ -223,7 +223,10 @@ brew install      \
   sshuttle \
   picocom \
   git-lfs \
-  bfg
+  bfg \
+  ripgrep \
+  coreutils \
+  fd
 
 gem install --force bundler
 
