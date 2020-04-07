@@ -226,7 +226,10 @@ brew install      \
   bfg \
   ripgrep \
   coreutils \
-  fd
+  fd \
+  d12frosted/emacs-plus/emacs-plus \
+  librsvg \
+  jansson
 
 gem install --force bundler
 
