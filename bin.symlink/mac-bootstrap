@@ -108,7 +108,8 @@ brew cask install    \
   arduino \
   nextcloud \
   rocket \
-  typora
+  typora \
+  mark-text
 
   #ocenaudio \
 
@@ -220,7 +221,9 @@ brew install      \
   nim \
   pyenv-virtualenvwrapper \
   sshuttle \
-  picocom
+  picocom \
+  git-lfs \
+  bfg
 
 gem install --force bundler
 
