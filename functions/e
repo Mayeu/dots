@@ -1,0 +1,8 @@
+#! /usr/bin/env zsh
+
+# Try to launch emacsclient, without waiting for the server
+emacsclient -n $@ 2>/dev/null
+# If it fails, open emacs
+if [[ $? == 1 ]]; then
+	/Applications/Emacs.app/Contents/MacOS/Emacs $@
+fi
