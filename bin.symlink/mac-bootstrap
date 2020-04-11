@@ -64,7 +64,6 @@ brew cask install    \
   transmission \
   transmission-remote-gui \
   protonvpn \
-  vagrant-manager \
   now \
   libreoffice \
   steam \
@@ -91,7 +90,6 @@ brew cask install    \
   google-chrome \
   gitup \
   postman \
-  openinterminal \
   macvim \
   beaker-browser \
   brave-browser \
@@ -112,6 +110,9 @@ brew cask install    \
   mark-text
 
   #ocenaudio \
+
+echo "👁 Disagle gcloud cli reporting"
+gcloud config set disable_usage_reporting false
 
 echo "🍺 Install cli apps"
 brew install      \
@@ -229,7 +230,8 @@ brew install      \
   fd \
   d12frosted/emacs-plus/emacs-plus \
   librsvg \
-  jansson
+  jansson \
+  editorconfig
 
 gem install --force bundler
 

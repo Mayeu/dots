@@ -9,6 +9,9 @@ echo "📝 Upgrade VIM's Plugin"
 vim -c 'call dein#update() | quit'
 vim -c 'call dein#recache_runtimepath() | quit'
 
+echo "👹 Upgrade Doom Emacs"
+doom upgrade
+
 echo "🍺 Upgrade homebrew"
 brew update
 brew upgrade
@@ -23,7 +26,7 @@ echo "🐚 Upgrade the shell"
 antibody update
 
 echo "Ⓖ  Upgrade Google CLI"
-gcloud components update
+gcloud components update --quiet
 
 echo "🍎 Upgrade the system"
 sudo softwareupdate -i -a
