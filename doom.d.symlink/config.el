@@ -60,5 +60,9 @@
 ;; Local leader key
 (setq doom-localleader-key ",")
 
+;; Org-mode configuration
 ;; Clojure configuration
-(setq org-babel-clojure-backend 'cider)
+(setq org-babel-clojure-backend 'cider
+      auto-save-interval 20
+      auto-save-timeout 5)
+(add-hook 'auto-save-hook 'org-save-all-org-buffers)
