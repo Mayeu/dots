@@ -107,7 +107,8 @@ brew cask install    \
   nextcloud \
   rocket \
   typora \
-  mark-text
+  mark-text \
+  twist
 
   #ocenaudio \
 
