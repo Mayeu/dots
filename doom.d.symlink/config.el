@@ -57,6 +57,9 @@
 ;; Global Word Wrapping
 (global-visual-line-mode t)
 
+;; Set space as default indentation
+(setq-default indent-tabs-mode nil)
+
 ;; Local leader key
 (setq doom-localleader-key ",")
 
@@ -66,3 +69,6 @@
       auto-save-interval 20
       auto-save-timeout 5)
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
+
+;; Shell programming
+(setq-hook! 'sh-mode-hook indent-tabs-mode nil)
