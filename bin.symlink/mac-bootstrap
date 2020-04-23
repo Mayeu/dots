@@ -108,7 +108,8 @@ brew cask install    \
   rocket \
   typora \
   mark-text \
-  twist
+  twist \
+  drawio
 
   #ocenaudio \
 
@@ -232,7 +233,8 @@ brew install      \
   d12frosted/emacs-plus/emacs-plus \
   librsvg \
   jansson \
-  editorconfig
+  editorconfig \
+  yq
 
 gem install --force bundler
 
