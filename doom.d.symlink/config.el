@@ -57,7 +57,7 @@
 ;; Global Word Wrapping
 (global-visual-line-mode t)
 
-;; Set space as default indentation
+;; Set space as default indentation everywhere
 (setq-default indent-tabs-mode nil)
 
 ;; Local leader key
