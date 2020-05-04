@@ -109,7 +109,9 @@ brew cask install    \
   typora \
   mark-text \
   twist \
-  drawio
+  drawio \
+  vcv-rack \
+  discord
 
   #ocenaudio \
 
