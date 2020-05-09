@@ -69,6 +69,7 @@
       auto-save-interval 20
       auto-save-timeout 5)
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
+(setq-default auto-save-no-message t)
 
 ;; Shell programming
 (setq-hook! 'sh-mode-hook indent-tabs-mode nil)
