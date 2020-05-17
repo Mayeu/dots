@@ -79,5 +79,9 @@
 
 (add-hook 'auto-save-hook 'my-org-save-all-org-buffers)
 
+;; Remove line-numbers from text-mode (which include org-mode)
+(remove-hook! '(text-mode-hook)
+              #'display-line-numbers-mode)
+
 ;; Shell programming
 (setq-hook! 'sh-mode-hook indent-tabs-mode nil)
