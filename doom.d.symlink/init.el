@@ -143,7 +143,6 @@
        ;;ocaml             ; an objective camel
        (org               ; organize your plain life in plain text
         +dragndrop        ; Drag & drop files/images into org buffers
-        +babel
         +roam
         )
        ;;perl              ; write code no one else can comprehend
