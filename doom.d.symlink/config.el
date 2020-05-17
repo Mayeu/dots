@@ -66,11 +66,18 @@
 
 ;; Org-mode configuration
 ;; Clojure configuration
+(setq-default auto-save-no-message t)
 (setq org-babel-clojure-backend 'cider
       auto-save-interval 20
       auto-save-timeout 5)
-(add-hook 'auto-save-hook 'org-save-all-org-buffers)
-(setq-default auto-save-no-message t)
+
+(defun my-org-save-all-org-buffers ()
+  "Save all Org buffers without user confirmation, and without f*cking messages"
+  (interactive)
+  (save-some-buffers t (lambda () (derived-mode-p 'org-mode)))
+  (when (featurep 'org-id) (org-id-locations-save)))
+
+(add-hook 'auto-save-hook 'my-org-save-all-org-buffers)
 
 ;; Shell programming
 (setq-hook! 'sh-mode-hook indent-tabs-mode nil)
