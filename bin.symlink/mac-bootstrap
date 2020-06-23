@@ -236,7 +236,8 @@ brew install      \
   librsvg \
   jansson \
   editorconfig \
-  yq
+  yq \
+  terraformer
 
 gem install --force bundler
 
