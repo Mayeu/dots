@@ -161,9 +161,9 @@ brew install      \
   yamllint \
   getantibody/tap/antibody \
   mayeu/tap/borgmatic \
-  mayeu/tap/beancount \
+  beancount \
   mayeu/tap/beancount-scripts \
-  mayeu/tap/fava \
+  fava \
   mayeu/tap/run-one \
   mayeu/tap/flock \
   mayeu/tap/habitica-cli \
