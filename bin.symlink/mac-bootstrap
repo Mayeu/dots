@@ -24,9 +24,7 @@ brew analytics off
 export HOMEBREW_NO_ANALYTICS=1
 
 echo "🍺 Configure Homebrew to be shared with me, myself, and I"
-sudo chmod -R +a "group:${MY_GROUP} allow list,add_file,search,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr,readsecurity,file_inherit,directory_inherit" /usr/local/*
-sudo chgrp -R "$MY_GROUP" "/usr/local/"
-sudo chmod -R g+rwX "/usr/local/"
+fix-homebrew-right
 
 echo "🍺 Install Cask apps"
 brew cask install    \
