@@ -235,7 +235,10 @@ brew install      \
   jansson \
   editorconfig \
   yq \
-  terraformer
+  terraformer \
+  watchexec \
+  lrzip \
+  git-subrepo
 
 gem install --force bundler
 
