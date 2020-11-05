@@ -13,7 +13,9 @@ echo "👹 Upgrade Doom Emacs"
 doom upgrade
 
 echo "🍺 Upgrade homebrew"
+fix-homebrew-right
 brew update
+brew cleanup --prune 30
 brew upgrade
 brew cask upgrade
 brew cask reinstall gpg-suite
