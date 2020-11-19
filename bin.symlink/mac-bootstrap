@@ -36,7 +36,6 @@ brew cask install    \
   little-snitch      \
   syncthing-app      \
   alfred             \
-  keka               \
   macpass \
   osxfuse \
   karabiner-elements \
@@ -81,6 +80,7 @@ brew cask install    \
   nightowl \
   kobo \
   font-firacode-nerd-font \
+  font-fira-code \
   minikube \
   homebrew/cask-drivers/logitech-options \
   google-cloud-sdk \
@@ -109,7 +109,9 @@ brew cask install    \
   twist \
   drawio \
   vcv-rack \
-  discord
+  discord \
+  vscodium \
+  the-unarchiver
 
   #ocenaudio \
 
@@ -238,7 +240,10 @@ brew install      \
   terraformer \
   watchexec \
   lrzip \
-  git-subrepo
+  git-subrepo \
+  mosh \
+  smartmontools \
+  testssl
 
 gem install --force bundler
 
