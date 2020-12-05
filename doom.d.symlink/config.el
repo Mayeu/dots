@@ -86,3 +86,6 @@
 
 ;; Shell programming
 (setq-hook! 'sh-mode-hook indent-tabs-mode nil)
+
+;; Projectile
+(setq projectile-project-search-path '("~/Documents/code"))
