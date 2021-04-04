@@ -21,8 +21,8 @@
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "FuraCode Nerd Font" :size 14))
 
-(if (eq system-type 'darwin)
-    (mac-auto-operator-composition-mode))
+;;(if (eq system-type 'darwin)
+    ;;(mac-auto-operator-composition-mode))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -89,3 +89,6 @@
 
 ;; Projectile
 (setq projectile-project-search-path '("~/Documents/code"))
+
+;; C# et Unity
+(setq omnisharp-server-executable-path "/usr/local/bin/omnisharp")
