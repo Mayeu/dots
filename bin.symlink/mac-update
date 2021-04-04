@@ -1,45 +1,23 @@
 #!/usr/bin/env bash
 
-# TODO:
-# - add the global npm stuff
-# - add the rubygem
-# - add the python stuff
+# TODO: I don't think topgrade does it correctly here
+#echo "📝 Upgrade VIM's Plugin"
+#vim -c 'call dein#update() | quit'
+#vim -c 'call dein#recache_runtimepath() | quit'
 
-echo "📝 Upgrade VIM's Plugin"
-vim -c 'call dein#update() | quit'
-vim -c 'call dein#recache_runtimepath() | quit'
-
-echo "👹 Upgrade Doom Emacs"
-doom upgrade
-
-echo "🍺 Upgrade homebrew"
+echo "🍺 Fix Homebrew right"
 fix-homebrew-right
-brew update
+
+echo "🛩  Run topgrade"
+topgrade
+
+echo "🔐 Fix gpg"
+brew reinstall gpg-suite
+
+echo "🍺 Cleanup brew cache"
 brew cleanup --prune 30
-brew upgrade
-brew cask upgrade
-brew cask reinstall gpg-suite
-brew cleanup --prune 30
-
-echo "⬢  Upgrade NodeJS related stuff"
-nvm upgrade
-
-echo "🐚 Upgrade the shell"
-antibody update
-
-echo "Ⓖ  Upgrade Google CLI"
-gcloud components update --quiet
-
-echo "🍎 Upgrade the system"
-sudo softwareupdate -i -a
 
 # Make sure dvp is my login keyboard
 echo "⌨️  Update my login keyboard"
 sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
 sudo chmod 644 /Library/Preferences/com.apple.HIToolbox.plist
-
-# Do some manual check
-echo "⚠️  Please close iterm, and then check if the git status thingy still works"
-echo "If not, add the following to the update script:"
-echo ""
-echo "    sudo xcode-select -s /Applications/Xcode.app/Contents/Developer"
