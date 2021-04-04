@@ -54,7 +54,7 @@ brew cask install    \
   virtualbox-extension-pack \
   vagrant \
   appcleaner \
-  zoomus \
+  zoom \
   tor-browser \
   superduper \
   gpg-suite \
@@ -84,7 +84,6 @@ brew cask install    \
   minikube \
   homebrew/cask-drivers/logitech-options \
   google-cloud-sdk \
-  darktable \
   google-chrome \
   gitup \
   postman \
@@ -102,21 +101,23 @@ brew cask install    \
   force-paste \
   chrysalis \
   arduino \
-  nextcloud \
   rocket \
   typora \
-  mark-text \
   twist \
   drawio \
   vcv-rack \
   discord \
   vscodium \
-  the-unarchiver
+  the-unarchiver \
+  electrum \
+  kodi
 
   #ocenaudio \
 
 echo "👁 Disagle gcloud cli reporting"
 gcloud config set disable_usage_reporting false
+
+brew tap boltops-tools/software
 
 echo "🍺 Install cli apps"
 brew install      \
@@ -243,7 +244,9 @@ brew install      \
   git-subrepo \
   mosh \
   smartmontools \
-  testssl
+  testssl \
+  terraspace \
+  topgrade
 
 gem install --force bundler
 
