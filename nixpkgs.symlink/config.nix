@@ -9,13 +9,8 @@
       name = "all";
 
       paths = [
-        heroku
-        ledger
-        jitsi
-        nixnote2
-        astroid
-        borgbackup
-        mblaze
+        #borgbackup
+        #mblaze
       ];
     };
   };
