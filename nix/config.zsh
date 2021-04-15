@@ -1,2 +1,5 @@
 # Nix configuration loading
-#. /home/m/.nix-profile/etc/profile.d/nix.sh
+if [ -e /Users/m/.nix-profile/etc/profile.d/nix.sh ];
+then
+	. /Users/m/.nix-profile/etc/profile.d/nix.sh;
+fi
