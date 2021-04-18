@@ -25,5 +25,6 @@ sudo chmod 644 /Library/Preferences/com.apple.HIToolbox.plist
 echo "🅽  Updating nix"
 sudo nix-channel --update
 
+# 2021-04-18 TODO: Only path the specific variable nix & nix-darwin needs 
 echo "👹 Updating nix-darwin"
-darwin-rebuild build
+sudo -E darwin-rebuild switch
