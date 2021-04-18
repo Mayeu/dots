@@ -9,7 +9,7 @@ echo "🍺 Fix Homebrew right"
 fix-homebrew-right
 
 echo "🛩  Run topgrade"
-topgrade
+topgrade --disable nix
 
 echo "🔐 Fix gpg"
 brew reinstall gpg-suite
@@ -21,3 +21,9 @@ brew cleanup --prune 30
 echo "⌨️  Update my login keyboard"
 sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
 sudo chmod 644 /Library/Preferences/com.apple.HIToolbox.plist
+
+echo "🅽  Updating nix"
+sudo nix-channel --update
+
+echo "👹 Updating nix-darwin"
+darwin-rebuild build
