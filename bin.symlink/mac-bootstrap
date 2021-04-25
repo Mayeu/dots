@@ -233,7 +233,6 @@ brew install      \
   ripgrep \
   coreutils \
   fd \
-  d12frosted/emacs-plus/emacs-plus \
   librsvg \
   jansson \
   editorconfig \
