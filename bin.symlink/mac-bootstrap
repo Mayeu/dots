@@ -27,7 +27,7 @@ echo "🍺 Configure Homebrew to be shared with me, myself, and I"
 fix-homebrew-right
 
 echo "🍺 Install Cask apps"
-brew cask install    \
+brew install --cask  \
   iterm2             \
   firefox            \
   omnifocus          \
