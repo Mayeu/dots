@@ -55,6 +55,7 @@
           "ale" # ALE (linting, syntax error, fix on save)
           "vim-yaml"
           "vim-terraform" "vim-terraform-completion"
+          "vim-ruby"
         ]; }
       ];
 
