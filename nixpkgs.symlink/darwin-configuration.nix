@@ -56,6 +56,7 @@
           "vim-yaml"
           "vim-terraform" "vim-terraform-completion"
           "vim-ruby"
+          "auto-pairs" # Auto close pairs character
         ]; }
       ];
 
