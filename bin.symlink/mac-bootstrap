@@ -37,7 +37,7 @@ brew install --cask  \
   syncthing-app      \
   alfred             \
   macpass \
-  osxfuse \
+  macfuse \
   karabiner-elements \
   signal \
   flux \
@@ -132,7 +132,7 @@ brew install      \
   nvm             \
   pass \
   gopass \
-  sshfs \
+  gromgit/fuse/sshfs
   vagrant-completion \
   terraform \
   terragrunt \
