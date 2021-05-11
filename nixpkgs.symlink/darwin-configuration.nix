@@ -1,9 +1,26 @@
 { config, pkgs, ... }:
+let
+  vimCustomPlugins = {
+    # Exemple:
+    #vim-selecta = pkgs.vimUtils.buildVimPlugin {
+    #  name = "vim-selecta";
+    #  src = pkgs.fetchFromGitHub {
+    #    owner = "paulbellamy";
+    #    repo = "selecta.nvim";
+    #    rev ="3e3ebc0b302785bcecd5ec32c9c74c803d441a50";
+    #    sha256 = "dmYL1GNyAIYyTOrhQm293tF19licm/Kix0kC5KkTi7Y=";
+    #  };
+    #};
+    # use nix-prefetch-github to have those info
+  };
 
-{
+in
+  {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = [];
+  environment.systemPackages = with pkgs; [
+    nix-prefetch-github
+  ];
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
@@ -17,7 +34,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-   };
+  };
 
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.zsh.enable = true;  # default shell on catalina
@@ -52,6 +69,7 @@
     enable = true;
     enableSensible = true;
 
+    extraKnownPlugins = vimCustomPlugins;
     plugins = [
       {
         names = [
@@ -63,11 +81,15 @@
           "vim-terraform" "vim-terraform-completion"
           "vim-ruby"
           "auto-pairs" # Auto close pairs character
+          "fzfWrapper"
           "coc-nvim" # Fancy auto completion and stuff, include nodejs
-        ]; }
-      ];
+          "fzf-vim"
+          "coc-fzf"
+        ];
+      }
+    ];
 
-      vimConfig = ''
+    vimConfig = ''
         " Define my leader key as SPC
         let mapleader=" "
 
@@ -83,6 +105,9 @@
         set termguicolors
         set background=light   " Setting light mode
         colorscheme gruvbox
+
+        "Shell
+        set shell=${pkgs.zsh}/bin/zsh
 
         " ALE:
         let g:ale_sign_error = 'X'
@@ -116,7 +141,16 @@
 
         " Shell config ----------------------------
         autocmd FileType zsh setlocal expandtab shiftwidth=2 softtabstop=0 syn=sh ft=sh
-      '';
 
-    };
-  }
+        " FzF configuration -------------------
+        nmap <leader><space> :Files<CR>
+
+        " Default hotkeys
+        "nmap <leader>ff <Plug>(selecta-file)
+        "nmap <leader>fv :vnew<CR><Plug>(selecta-file)
+        "nmap <leader>fh :new<CR><Plug>(selecta-file)
+        "nmap <leader>b <Plug>(selecta-buffer)
+    '';
+
+  };
+}
