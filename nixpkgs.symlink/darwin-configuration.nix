@@ -67,12 +67,12 @@ in
 
   programs.vim = {
     enable = true;
-    enableSensible = true;
 
     extraKnownPlugins = vimCustomPlugins;
     plugins = [
       {
         names = [
+          "vim-sensible" # Sensible default for VIM by tpope
           "vim-nix" "vim-addon-nix" # For Nix
           "editorconfig-vim"
           "gruvbox" # My fav theme
