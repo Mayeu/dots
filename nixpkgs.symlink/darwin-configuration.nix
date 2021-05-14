@@ -20,6 +20,7 @@ in
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     nix-prefetch-github
+    exiftool
   ];
 
   # Use a custom configuration.nix location.
