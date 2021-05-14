@@ -110,7 +110,8 @@ brew install --cask  \
   vscodium \
   the-unarchiver \
   electrum \
-  kodi
+  kodi \
+  darktable
 
   #ocenaudio \
 
