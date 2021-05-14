@@ -101,6 +101,20 @@ in
         set splitbelow
         set splitright
 
+        " Line numbering
+        " This turn hybrid line numbers on, by turning both number &
+        " relativenumber on by default
+        " Then, we define an autocommand to use relative number line only in
+        " the currently focused buffer and out of insert mode
+
+        set number relativenumber
+
+        augroup numbertoggle
+          autocmd!
+          autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+          autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+        augroup END
+
         " Colors & colorscheme --------------------
         set termguicolors
         set background=light   " Setting light mode
