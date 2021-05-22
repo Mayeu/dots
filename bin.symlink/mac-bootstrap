@@ -242,7 +242,6 @@ brew install      \
   watchexec \
   lrzip \
   git-subrepo \
-  mosh \
   smartmontools \
   testssl \
   terraspace \

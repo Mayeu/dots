@@ -16,11 +16,15 @@ let
 
 in
   {
+  environment.variables.LC_ALL = "en_US.UTF-8";
+  # TODO: date format, local money?
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     nix-prefetch-github
     exiftool
+    mosh
   ];
 
   # Use a custom configuration.nix location.
