@@ -78,6 +78,7 @@ in
       {
         names = [
           "vim-sensible" # Sensible default for VIM by tpope
+          "vim-surround"
           "vim-nix" "vim-addon-nix" # For Nix
           "editorconfig-vim"
           "gruvbox" # My fav theme
