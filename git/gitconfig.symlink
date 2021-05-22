@@ -86,8 +86,9 @@
 [receive]
    fsckObjects = true
 
-[credential]
-  helper = /usr/bin/pass-git-helper
+# TODO: use `gitAndTools.pass-git-helper` from nix here
+#[credential]
+#  helper = /usr/bin/pass-git-helper
 
 [grep]
   patternType = perl
