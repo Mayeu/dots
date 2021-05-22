@@ -10,7 +10,7 @@ export BIN_DIR="${HOME}/.bin"
 #  - Homebrew specific override
 #  - yarn `bin` folder
 #  - the rest of the PATH
-export PATH="${BIN_DIR}:/usr/local/opt/mysql-client/bin:/usr/local/opt/make/libexec/gnubin:/usr/local/opt/gnu-getopt/bin:{$HOME}/.yarn/bin:$PATH"
+export PATH="${BIN_DIR}:/usr/local/opt/mysql-client/bin:/usr/local/opt/make/libexec/gnubin:/usr/local/opt/gnu-getopt/bin:{$HOME}/.yarn/bin:/usr/local/sbin:$PATH"
 
 # MANPATH
 #  - include homebrew man
