@@ -112,7 +112,6 @@ in
         " relativenumber on by default
         " Then, we define an autocommand to use relative number line only in
         " the currently focused buffer and out of insert mode
-
         set number relativenumber
 
         augroup numbertoggle
@@ -120,6 +119,12 @@ in
           autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
           autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
         augroup END
+
+        "Sudo Write
+        "
+        " `command`: create a command
+        " `W`: the new command name
+        command W w !sudo tee "%" > /dev/null
 
         " Colors & colorscheme --------------------
         set termguicolors
