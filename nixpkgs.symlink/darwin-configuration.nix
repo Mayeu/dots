@@ -25,6 +25,7 @@ in
     nix-prefetch-github
     exiftool
     mosh
+    tree
   ];
 
   # Use a custom configuration.nix location.
