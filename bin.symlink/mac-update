@@ -11,8 +11,8 @@ fix-homebrew-right
 echo "🛩  Run topgrade"
 topgrade --disable nix
 
-echo "🔐 Fix gpg"
-brew reinstall gpg-suite
+#echo "🔐 Fix gpg"
+#brew reinstall gpg-suite
 
 echo "🍺 Cleanup brew cache"
 brew cleanup --prune 30

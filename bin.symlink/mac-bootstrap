@@ -57,7 +57,6 @@ brew install --cask  \
   zoom \
   tor-browser \
   superduper \
-  gpg-suite \
   transmission \
   transmission-remote-gui \
   protonvpn \
