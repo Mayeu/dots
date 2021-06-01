@@ -4,8 +4,8 @@
 #
 # Usage: zim <pattern>
 #
-# This functions open in vim the first match of z with the given pattern
+# Open in vim the first match of z with the given pattern
 
 function zim {
-  vim $(z -e $1)
+  vim "$(z -e "$1")"
 }
