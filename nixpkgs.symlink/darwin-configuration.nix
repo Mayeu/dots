@@ -26,6 +26,28 @@ in
     exiftool
     mosh
     tree
+    git
+    git-extras
+    git-subrepo
+    antibody
+    bash
+    wget
+    curl
+    terraform
+    terragrunt
+    nomad
+    rsync
+    ripgrep
+    elixir
+    bat
+    jq
+    yarn
+    python39Packages.weboob
+    youtube-dl
+    ffmpeg
+    tmux
+    shellcheck
+    mysql-client
   ];
 
   # Use a custom configuration.nix location.

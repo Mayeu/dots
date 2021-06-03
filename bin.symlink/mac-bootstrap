@@ -121,48 +121,24 @@ brew tap boltops-tools/software
 
 echo "🍺 Install cli apps"
 brew install      \
-  git             \
-  git-extras      \
-  bash            \
-  zsh             \
-  fish            \
-  wget            \
-  curl            \
   node            \
   nvm             \
   pass \
   gopass \
   gromgit/fuse/sshfs
   vagrant-completion \
-  terraform \
-  terragrunt \
-  nomad \
-  autojump \
   ext4fuse \
-  rsync \
-  ripgrep \
   ansible \
   homebrew/cask-fonts/font-fira-code \
   sshrc \
-  elixir \
-  bat \
-  selecta \
   terminal-notifier \
-  jq \
   forego \
-  yarn \
   imageoptim-cli \
-  weboob \
-  youtube-dl \
-  ffmpeg \
-  tmux \
   htop \
-  shellcheck \
-  watch \
   gnu-getopt \
-  mysql-client \
+  zsh
+  selecta \
   yamllint \
-  getantibody/tap/antibody \
   mayeu/tap/borgmatic \
   beancount \
   mayeu/tap/beancount-scripts \
