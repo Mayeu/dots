@@ -110,7 +110,9 @@ brew install --cask  \
   the-unarchiver \
   electrum \
   kodi \
-  darktable
+  darktable \
+  stellarium \
+  phd2
 
   #ocenaudio \
 
@@ -220,7 +222,8 @@ brew install      \
   smartmontools \
   testssl \
   terraspace \
-  topgrade
+  topgrade \
+  siril
 
 gem install --force bundler
 
