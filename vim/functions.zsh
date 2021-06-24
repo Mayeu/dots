@@ -1,4 +1,4 @@
-#! /usr/bin/env zsh
+#! /usr/bin/env bash
 
 # zim
 #
@@ -6,6 +6,10 @@
 #
 # Open in vim the first match of z with the given pattern
 
-function zim {
-  vim "$(z -e "$1")"
+zim() {
+  local target
+  target="$(z -e "$1")"
+
+  cd "$target"
+  vim "$target"
 }
