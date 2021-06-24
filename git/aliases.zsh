@@ -6,9 +6,10 @@
 alias g='git'
 #alias gl='git pull --prune'
 alias gpu='git pull --prune'
-alias glg="git log --graph --decorate --oneline --abbrev-commit"
-alias glog='glg'
-alias glga="glg --all"
+alias glog="echo Nope, use gl or glp"
+alias gl="git log --graph --decorate --oneline --abbrev-commit"
+alias glp="gl -p"
+alias gla="gl --all"
 alias gp='git push'
 alias gpa='git push origin --all'
 alias gd='git diff'
