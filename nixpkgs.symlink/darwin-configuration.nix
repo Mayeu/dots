@@ -48,6 +48,8 @@ in
     tmux
     shellcheck
     mysql-client
+    borgbackup
+    #borgmatic # Currently broken on macos
   ];
 
   # Use a custom configuration.nix location.
