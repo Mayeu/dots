@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 let
+  unstable = import <unstable> {};
   vimCustomPlugins = {
     # Exemple:
     #vim-selecta = pkgs.vimUtils.buildVimPlugin {
@@ -33,7 +34,7 @@ in
     bash
     wget
     curl
-    terraform
+    unstable.terraform # Necessary because on stable TF is 0.12 🤦
     terragrunt
     nomad
     rsync
@@ -60,6 +61,7 @@ in
   services.nix-daemon.enable = true;
   # nix.package = pkgs.nix;
   nix = {
+       # package = pkgs.nixUnstable;
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -75,9 +77,9 @@ in
   system.stateVersion = 4;
 
   # This overlays the default nixpkgs
-  # In this case, it's only for the  vim_configurable package (used in the programs.vim),
-  # so that it is built with gui support but with darwin support.
-  # This is mostly to fix the clipboard issue.
+  # In this case, it's only for the  vim_configurable,_ package (used in the programs.vim),
+  # so that it is built without gui support but with darwin support.
+  # This fix the clipboard issue on macOS wich require darwin support.
   #
   # This
   # https://github.com/hardselius/dotfiles/blob/98691fc1e8d664765a4840361a839d10c5bb2c9c/overlays/20-vim.nix,
@@ -116,6 +118,7 @@ in
           "coc-nvim" # Fancy auto completion and stuff, include nodejs
           "fzf-vim"
           "coc-fzf"
+          "vim-elixir"
         ];
       }
     ];
