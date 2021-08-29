@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 let
+  # Use nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable to add it
   unstable = import <unstable> {};
   vimCustomPlugins = {
     # Exemple:
