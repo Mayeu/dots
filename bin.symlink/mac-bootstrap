@@ -222,7 +222,8 @@ brew install      \
   testssl \
   terraspace \
   topgrade \
-  siril
+  siril \
+  q
 
 gem install --force bundler
 
