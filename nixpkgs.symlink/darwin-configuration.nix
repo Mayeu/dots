@@ -52,6 +52,7 @@ in
     mysql-client
     borgbackup
     #borgmatic # Currently broken on macos
+    #reptyr # Reattach a orphan process to the terminal. Linux only :(
   ];
 
   # Use a custom configuration.nix location.
@@ -120,6 +121,7 @@ in
           "fzf-vim"
           "coc-fzf"
           "vim-elixir"
+          "tabmerge"
         ];
       }
     ];
@@ -135,6 +137,12 @@ in
         " More natural split
         set splitbelow
         set splitright
+
+        " Tab management
+        ca tn tabnew
+        ca th tabp
+        ca tl tabn
+        ca tc tabclose
 
         " Line numbering
         " This turn hybrid line numbers on, by turning both number &
@@ -204,6 +212,7 @@ in
         "nmap <leader>fv :vnew<CR><Plug>(selecta-file)
         "nmap <leader>fh :new<CR><Plug>(selecta-file)
         "nmap <leader>b <Plug>(selecta-buffer)
+
     '';
 
   };
