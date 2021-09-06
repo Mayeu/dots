@@ -15,3 +15,11 @@ export PATH="${BIN_DIR}:/usr/local/opt/mysql-client/bin:/usr/local/opt/make/libe
 # MANPATH
 #  - include homebrew man
 export MANPATH="/usr/local/share/man:$MANPATH"
+
+# XDG config
+# Some apps (mostly linux oriented) expect XDG* variable to be set, and don't follow
+# the defaults in the specs
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_STATE_HOME="${HOME}/.local/state"
+export XDG_CACHE_HOME="${HOME}/.cache"
