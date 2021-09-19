@@ -108,6 +108,7 @@ in
       {
         names = [
           "vim-sensible" # Sensible default for VIM by tpope
+          "vim-eunuch" # :Move, Rename, etc.
           "vim-surround"
           "vim-nix" "vim-addon-nix" # For Nix
           "editorconfig-vim"
