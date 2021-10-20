@@ -54,7 +54,9 @@ in
     #borgmatic # Currently broken on macos
     #reptyr # Reattach a orphan process to the terminal. Linux only :(
     unstable.k9s
+    dhall
     dhall-json
+    dhall-lsp-server
   ];
 
   # Use a custom configuration.nix location.
@@ -125,6 +127,8 @@ in
           "coc-fzf"
           "vim-elixir"
           "tabmerge"
+          "dhall-vim"
+          "LanguageClient-neovim"
         ];
       }
     ];
@@ -216,6 +220,21 @@ in
         "nmap <leader>fh :new<CR><Plug>(selecta-file)
         "nmap <leader>b <Plug>(selecta-buffer)
 
+        " LanguageClient-neovim ------------------
+        " TODO: Consider removing CoC and only using this?
+
+        let g:LanguageClient_serverCommands = {
+          \ 'dhall': ['dhall-lsp-server'],
+          \ }
+
+        " comment the next line to disable automatic format on save
+        let g:dhall_format=1
+
+        " Always draw sign column. Prevent buffer moving when adding/deleting sign.
+        set signcolumn=yes
+
+        " Required for operations modifying multiple buffers like rename.
+        set hidden
     '';
 
   };
