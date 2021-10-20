@@ -54,6 +54,7 @@ in
     #borgmatic # Currently broken on macos
     #reptyr # Reattach a orphan process to the terminal. Linux only :(
     unstable.k9s
+    dhall-json
   ];
 
   # Use a custom configuration.nix location.
