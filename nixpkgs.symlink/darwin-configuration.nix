@@ -57,6 +57,9 @@ in
     dhall
     dhall-json
     dhall-lsp-server
+    #elmPackages.elm
+    elmPackages.elm-live
+    #kube3d # Don't support macOS in nix apparently
   ];
 
   # Use a custom configuration.nix location.
@@ -129,6 +132,7 @@ in
           "tabmerge"
           "dhall-vim"
           "LanguageClient-neovim"
+          "elm-vim"
         ];
       }
     ];
