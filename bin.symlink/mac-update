@@ -9,7 +9,7 @@ echo "🍺 Fix Homebrew right"
 fix-homebrew-right
 
 echo "🛩  Run topgrade"
-topgrade --disable nix --disable node
+topgrade --disable nix --disable node --disable pnpm
 
 #echo "🔐 Fix gpg"
 #brew reinstall gpg-suite
