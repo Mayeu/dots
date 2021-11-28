@@ -60,6 +60,7 @@ in
     #elmPackages.elm
     elmPackages.elm-live
     #kube3d # Don't support macOS in nix apparently
+    tfk8s
   ];
 
   # Use a custom configuration.nix location.
