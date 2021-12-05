@@ -152,6 +152,7 @@ in
         set splitright
 
         " Tab management
+        " `ca` for `:cabbrev` which abreviate command-line mode command only
         ca tn tabnew
         ca th tabp
         ca tl tabn
@@ -178,7 +179,7 @@ in
 
         " Colors & colorscheme --------------------
         set termguicolors
-        set background=light   " Setting light mode
+        set background=dark
         colorscheme gruvbox
 
         "Shell
