@@ -61,6 +61,7 @@ in
     elmPackages.elm-live
     #kube3d # Don't support macOS in nix apparently
     tfk8s
+    broot # https://dystroy.org/broot/
   ];
 
   # Use a custom configuration.nix location.
