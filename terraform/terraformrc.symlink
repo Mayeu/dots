@@ -1,2 +1,3 @@
 plugin_cache_dir   = "$HOME/.cache/terraform"
 disable_checkpoint = true
+credentials_helper "env" {}
