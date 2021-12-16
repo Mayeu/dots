@@ -45,7 +45,8 @@ in
     jq
     yarn
     python39Packages.weboob
-    youtube-dl
+    unstable.youtube-dl
+    unstable.yt-dlp
     ffmpeg
     tmux
     shellcheck
