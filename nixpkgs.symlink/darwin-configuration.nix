@@ -40,7 +40,7 @@ in
     nomad
     rsync
     ripgrep
-    elixir
+    unstable.elixir
     bat
     jq
     yarn
