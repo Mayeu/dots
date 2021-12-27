@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   # Use nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable to add it
   unstable = import <unstable> {};
@@ -58,11 +58,24 @@ in
     dhall
     dhall-json
     dhall-lsp-server
-    #elmPackages.elm
+    elmPackages.elm
+    elmPackages.elm-format
     elmPackages.elm-live
     #kube3d # Don't support macOS in nix apparently
     tfk8s
     broot # https://dystroy.org/broot/
+    #t # A command-line power tool for Twitter. Commented because I'm not sure it match my usecase
+    yq # Command line yaml processor, like jq
+    silver-searcher # Similar to ack, but faster
+    tldr # simplified community driven man pages
+    packer
+    vagrant
+    kubectl
+    kubernetes-helm
+    gnumake
+    gopass
+    pass
+    fd # alternative to find
   ];
 
   # Use a custom configuration.nix location.
@@ -80,13 +93,51 @@ in
     '';
   };
 
-  # Create /etc/bashrc that loads the nix-darwin environment.
+  # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;  # default shell on catalina
   # programs.fish.enable = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
+
+  programs.gnupg = {
+    agent.enable = true;
+    agent.enableSSHSupport = true;
+  };
+
+  # Setup Path for GUI app, so they correctly find my app installed via Nix
+  #launchd.user.envVariables.PATH = config.environment.systemPath;
+
+  # This don't work, because the config is loaded after the Dock & Spotlight.
+  # But we can't make it a system thing, because $HOME don't make sense at the system level
+  #launchd.user.agents.test-env = {
+  #  serviceConfig.ProgramArguments = [
+  #    "${pkgs.zsh}/bin/zsh"
+  #    "-c"
+  #    "launchctl setenv PATH ${config.environment.systemPath}"
+  #  ];
+  #  serviceConfig.RunAtLoad = true;
+  #  serviceConfig.StandardOutPath = "/tmp/test.log";
+  #};
+
+  # This don't work either
+  #launchd.agents.test-env = {
+  #  serviceConfig.ProgramArguments = [
+  #    "launchctl"
+  #    "setenv"
+  #    "PATH"
+  #    "/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin"
+  #  ];
+  #  serviceConfig.RunAtLoad = true;
+  #  serviceConfig.StandardOutPath = "/tmp/test.log";
+  #};
+
+  # The only way to setup the GUI path variable > Catalina is by using:
+  # launchctl config system path /run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
+  # (same for user).
+  # The pb is that it does require a reboot to work
+  # Via: https://stackoverflow.com/a/3756686
 
   # This overlays the default nixpkgs
   # In this case, it's only for the  vim_configurable,_ package (used in the programs.vim),

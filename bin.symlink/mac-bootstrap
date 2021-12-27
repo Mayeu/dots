@@ -51,7 +51,6 @@ brew install --cask  \
   calibre \
   virtualbox \
   virtualbox-extension-pack \
-  vagrant \
   appcleaner \
   zoom \
   tor-browser \
@@ -79,7 +78,6 @@ brew install --cask  \
   kobo \
   font-firacode-nerd-font \
   font-fira-code \
-  minikube \
   homebrew/cask-drivers/logitech-options \
   google-cloud-sdk \
   google-chrome \
@@ -97,9 +95,6 @@ brew install --cask  \
   go64 \
   timeular \
   force-paste \
-  chrysalis \
-  arduino \
-  rocket \
   typora \
   twist \
   drawio \
@@ -124,8 +119,6 @@ echo "🍺 Install cli apps"
 brew install      \
   node            \
   nvm             \
-  pass \
-  gopass \
   gromgit/fuse/sshfs
   vagrant-completion \
   ext4fuse \
@@ -137,7 +130,6 @@ brew install      \
   imageoptim-cli \
   htop \
   gnu-getopt \
-  zsh
   selecta \
   yamllint \
   mayeu/tap/borgmatic \
@@ -155,16 +147,12 @@ brew install      \
   elm-format \
   pandoc \
   neovim \
-  make \
   ctags \
   python@2 \
   rancher-cli \
   rancher-compose \
-  kubectl \
   pwgen \
-  kubernetes-helm \
   vault \
-  docker-machine-driver-hyperkit \
   pinentry-mac \
   pgcli \
   hugo \
@@ -174,7 +162,6 @@ brew install      \
   pv \
   fortune \
   hardlink-osx \
-  packer \
   ruby \
   shfmt \
   xmlstarlet \
@@ -184,7 +171,6 @@ brew install      \
   sloccount \
   ipfs \
   asciinema \
-  the_silver_searcher \
   swaks \
   gitlab-runner \
   telnet \
@@ -198,7 +184,6 @@ brew install      \
   bindfs \
   zsh-completion \
   netlify-cli \
-  CleverCloud/homebrew-tap/clever-tools \
   pnpm \
   consul \
   nim \
