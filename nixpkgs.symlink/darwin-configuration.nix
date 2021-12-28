@@ -2,6 +2,8 @@
 let
   # Use nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable to add it
   unstable = import <unstable> {};
+
+  # A list of custom plugins for vim
   vimCustomPlugins = {
     # Exemple:
     #vim-selecta = pkgs.vimUtils.buildVimPlugin {
