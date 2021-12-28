@@ -1,0 +1,7 @@
+#! /usr/bin/env zsh
+
+# Fancy diff viewer for git, based on fzf
+fd() {
+  preview="git diff $@ --color=always -- {-1} | diff-so-fancy"
+  git diff $@ --name-only | fzf -m --ansi --preview $preview
+}

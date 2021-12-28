@@ -47,6 +47,7 @@ in
     git-extras
     git-subrepo
     diff-so-fancy # Fancy diff for git
+    fzf
     antibody
     bash
     wget
