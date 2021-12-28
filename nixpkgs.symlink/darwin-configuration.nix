@@ -82,6 +82,8 @@ in
     gopass
     pass
     fd # alternative to find
+    direnv # Automate env loading, but more importently, nix shell loading
+    unstable.nix-direnv # 2021-12-28: at that time the flake option is only in unstable
   ];
 
   # Use a custom configuration.nix location.
@@ -90,12 +92,21 @@ in
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
+
+  # Add those path to the current system
+  # TODO: use this for broot as well. Maybe? Direct link to derivation could be better no?
+  environment.pathsToLink = [
+    "/share/nix-direnv"
+  ];
+
   # nix.package = pkgs.nix;
   nix = {
        # package = pkgs.nixUnstable;
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
+      keep-outputs = true
+      keep-derivations = true
     '';
   };
 
@@ -162,6 +173,8 @@ in
         guiSupport = "no";
         darwinSupport = true;
       };
+
+      nix-direnv = pkgs.nix-direnv.override { enableFlakes = true; };
     }
     )
   ];
