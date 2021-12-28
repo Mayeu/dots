@@ -58,6 +58,7 @@
   whitespace = trailing-space,space-before-tab
   # Apparently useful for mixed OS environment
   precomposeUnicode = true
+  pager = diff-so-fancy | less --tabs=4 -RFX
 
 [github]
    user = Mayeu
@@ -106,3 +107,6 @@
 
 [init]
   defaultBranch = main
+
+[interactive]
+	diffFilter = diff-so-fancy --patch
