@@ -42,8 +42,8 @@
   fetach = fetch
 
 [diff]
-   tool = vim -d
-   noprefix = true
+  tool = vim -d
+  noprefix = true
 
 [diff "ansible-vault"]
   textconv = ansible-vault view
@@ -110,4 +110,4 @@
   defaultBranch = main
 
 [interactive]
-	diffFilter = diff-so-fancy --patch
+  diffFilter = diff-so-fancy --patch
