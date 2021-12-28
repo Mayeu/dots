@@ -29,6 +29,9 @@ nix-channel --update
 echo "👹 Updating nix-darwin"
 darwin-rebuild switch
 
+echo "👹 Updating comma index: warning, horrendously slow"
+, --update
+
 # 2021-04-20 TODO: Migrate everything to Nix to don't have this at all anymore?
 echo "🔏 Fix right for compinit"
 compaudit | xargs chmod g-w

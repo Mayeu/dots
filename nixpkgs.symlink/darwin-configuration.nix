@@ -20,7 +20,15 @@ let
 
   # This fetch a tarball containing a default.nix and use it as package later on.
   # The {} is the magic that correctly turn it into a package
-  comma = import (fetchTarball "https://github.com/nix-community/comma/archive/master.tar.gz") {};
+  comma = import (
+    # TODO: the nix used in this emit warning about flakes support. Try to fix
+    pkgs.fetchFromGitHub {
+        owner = "DavHau";
+        repo = "comma";
+        rev = "7eca596248e8d808617103d0eb515074b994bff0";
+        sha256 = "F95bKzwc/9hhhvzNW3OX9TBeUnq89ZhebYFS2Q1mrc8=";
+        fetchSubmodules = true;
+    }) {};
 
 in
   {
