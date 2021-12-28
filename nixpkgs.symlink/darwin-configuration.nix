@@ -84,8 +84,8 @@ in
     tldr # simplified community driven man pages
     packer
     vagrant
-    kubectl
-    kubernetes-helm
+    #kubectl
+    #kubernetes-helm
     gnumake
     gopass
     pass
