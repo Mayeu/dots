@@ -30,12 +30,13 @@
   g = grep --break --heading --line-number
   gi = grep --break --heading --line-number -i
   changed = show --pretty=\"format:\" --name-only
+  commend = commit --amend --no-edit
+  lt = log --tags --decorate --simplify-by-decoration --oneline
+
+  #fpr = fetch-pr
   #fm = fetch-merge
   #pr = open-pr
   #please = push --force-with-lease
-  commend = commit --amend --no-edit
-  #fpr = fetch-pr
-  lt = log --tags --decorate --simplify-by-decoration --oneline
 
   # The typo part
   fetach = fetch
