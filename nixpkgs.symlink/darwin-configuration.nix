@@ -16,6 +16,10 @@ let
     # use nix-prefetch-github to have those info
   };
 
+  # This fetch a tarball containing a default.nix and use it as package later on.
+  # The {} is the magic that correctly turn it into a package
+  comma = import (fetchTarball "https://github.com/nix-community/comma/archive/master.tar.gz") {};
+
 in
   {
   environment.variables.LC_ALL = "en_US.UTF-8";
@@ -24,6 +28,7 @@ in
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    comma
     nix-prefetch-github
     exiftool
     mosh
