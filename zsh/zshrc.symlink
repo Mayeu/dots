@@ -81,9 +81,8 @@ zle -N insert-selecta-path-in-command-line
 # Bind the key to the newly created widget
 bindkey "^S" "insert-selecta-path-in-command-line"
 
-# Uncomment for profiling
-#zprof
-
-
 # Created by `userpath` on 2020-09-06 00:21:17
 export PATH="$PATH:/Users/m/.local/bin"
+
+# Uncomment for profiling
+#zprof
