@@ -41,23 +41,11 @@
   fetach = fetch
 
 [diff]
-   compactionHeuristic = true
    tool = vim -d
-	noprefix = true
+   noprefix = true
 
-[difftool]
-   prompt = false
-
-[difftool "diffmerge"]
-  cmd = diffmerge $LOCAL $REMOTE
-
-#[merge]
-#  tool = diffmerge
-#
-#[mergetool "diffmerge"]
-#  cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
-#  trustExitCode = true
-#  keepBackup = false
+[diff "ansible-vault"]
+  textconv = ansible-vault view
 
 [push]
   default = current
@@ -68,7 +56,7 @@
   editor = vim
   autocrlf = input
   whitespace = trailing-space,space-before-tab
-  # Apparently useful for mixed environment
+  # Apparently useful for mixed OS environment
   precomposeUnicode = true
 
 [github]
@@ -91,6 +79,7 @@
 #  helper = /usr/bin/pass-git-helper
 
 [grep]
+  # Better regex for git grep
   patternType = perl
   lineNumber = true
 
@@ -110,11 +99,10 @@
   rebase = true
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[diff "ansible-vault"]
-	textconv = ansible-vault view
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
 [init]
-	defaultBranch = main
+  defaultBranch = main
