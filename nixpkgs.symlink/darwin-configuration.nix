@@ -50,7 +50,6 @@ in
     unstable.elixir
     bat
     jq
-    yarn
     python39Packages.weboob
     unstable.youtube-dl
     unstable.yt-dlp
