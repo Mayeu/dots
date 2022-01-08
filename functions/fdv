@@ -1,7 +1,8 @@
 #! /usr/bin/env zsh
 
 # Fancy diff viewer for git, based on fzf
-fd() {
+# Source: https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb
+fdv() {
   preview="git diff $@ --color=always -- {-1} | diff-so-fancy"
   git diff $@ --name-only | fzf -m --ansi --preview $preview
 }
