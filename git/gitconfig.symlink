@@ -35,6 +35,7 @@
 
   #fpr = fetch-pr
   #fm = fetch-merge
+  # No need for this alias, git-pr is provided by git-extra
   #pr = open-pr
   #please = push --force-with-lease
 
