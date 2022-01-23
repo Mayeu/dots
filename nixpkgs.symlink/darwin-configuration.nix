@@ -23,16 +23,16 @@ let
   comma = import (
     # TODO: the nix used in this emit warning about flakes support. Try to fix
     pkgs.fetchFromGitHub {
-        owner = "DavHau";
-        repo = "comma";
-        rev = "7eca596248e8d808617103d0eb515074b994bff0";
-        sha256 = "F95bKzwc/9hhhvzNW3OX9TBeUnq89ZhebYFS2Q1mrc8=";
-        fetchSubmodules = true;
+      owner = "DavHau";
+      repo = "comma";
+      rev = "7eca596248e8d808617103d0eb515074b994bff0";
+      sha256 = "F95bKzwc/9hhhvzNW3OX9TBeUnq89ZhebYFS2Q1mrc8=";
+      fetchSubmodules = true;
     }) {};
 
 in
   {
-  environment.variables.LC_ALL = "en_US.UTF-8";
+    environment.variables.LC_ALL = "en_US.UTF-8";
   # TODO: date format, local money?
 
   # List packages installed in system profile. To search by name, run:
