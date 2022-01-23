@@ -25,12 +25,12 @@ sudo chmod 644 /Library/Preferences/com.apple.HIToolbox.plist
 echo "🅽  Updating nix"
 nix-channel --update
 
-# 2021-04-18 TODO: Only path the specific variable nix & nix-darwin needs
-echo "👹 Updating nix-darwin"
-darwin-rebuild switch
-
-echo "👹 Updating comma index: warning, horrendously slow"
-, --update
+## 2021-04-18 TODO: Only path the specific variable nix & nix-darwin needs
+#echo "👹 Updating nix-darwin"
+#darwin-rebuild switch
+#
+#echo "👹 Updating comma index: warning, horrendously slow"
+#, --update
 
 # 2021-04-20 TODO: Migrate everything to Nix to don't have this at all anymore?
 echo "🔏 Fix right for compinit"
