@@ -62,7 +62,6 @@ in
     bat
     jq
     python39Packages.weboob
-    unstable.youtube-dl
     unstable.yt-dlp
     ffmpeg
     tmux
