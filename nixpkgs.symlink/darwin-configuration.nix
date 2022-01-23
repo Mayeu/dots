@@ -100,8 +100,6 @@ in
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
 
   # Add those path to the current system
   # TODO: use this for broot as well. Maybe? Direct link to derivation could be better no?
@@ -109,19 +107,34 @@ in
     "/share/nix-direnv"
   ];
 
+  services.nix-daemon.enable = true;
+
   # nix.package = pkgs.nix;
   nix = {
-       # package = pkgs.nixUnstable;
-    package = pkgs.nixFlakes;
+    #package = pkgs.nixUnstable;
+    #package = pkgs.nixFlakes;
+    package = unstable.nix; # Necessary to get 2.5, with Flake support and some bugfix for shell.nix. But conflict with zsh, see later
+    #autoOptimiseStore = true;
     extraOptions = ''
+      auto-optimise-store = true
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
+      keep-failed = true
+      keep-going = true
     '';
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh = {
+    enable = true;  # default shell on catalina
+    # This is necessary to avoid a completion clash with nix.
+    # For some reason both zsh and nix >= 2.4 provide the _nix folder with completion
+    # and this lead to a clash preventing install.
+    # To work around this we remove the completion from zsh, but activate it anyway manually
+    enableCompletion = false;
+    interactiveShellInit = "autoload -U compinit && compinit";
+  };
   # programs.fish.enable = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
