@@ -46,6 +46,7 @@ in
     git
     git-extras
     git-subrepo
+    unstable.git-secret # Unstable to get 0.4
     diff-so-fancy # Fancy diff for git
     fzf
     antibody
@@ -70,7 +71,7 @@ in
     borgbackup
     #borgmatic # Currently broken on macos
     #reptyr # Reattach a orphan process to the terminal. Linux only :(
-    unstable.k9s
+    k9s
     dhall
     dhall-json
     dhall-lsp-server
