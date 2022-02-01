@@ -10,39 +10,79 @@ jobs:
       uses: actions/checkout@v2
     - name: Install Nix
       uses: cachix/install-nix-action@v16
-        #with:
-        #  nix_path: nixpkgs=channel:nixpkgs-21.11-darwin
 
-        #- name: Set up cache
-        #  uses: zombiezen/setup-nix-cache-action@v0.1.0
-        #  with:
-        #    substituters: s3://mdots?endpoint=https://https://mdots.s3.fr-par.scw.cloud/
-        #    secret_keys: ${{ secrets.NIX_PRIVATE_KEY }}
-        #    aws_access_key_id: ${{ secrets.SCALEWAY_S3_ACCESS_KEY}}
-        #    aws_secret_access_key: ${{ secrets.SCALEWAY_S3_SECRET_KEY }}
     - name: Setup AWS profile
       run: |
-        mkdir ~/.aws
-        cat <<EOF > ~/.aws/credentials
+        cat <<EOF > /Users/Shared/.aws-credentials
         [default]
         aws_access_key_id=${{ secrets.SCALEWAY_S3_ACCESS_KEY }}
         aws_secret_access_key=${{ secrets.SCALEWAY_S3_SECRET_KEY }}
         EOF
+
+        mkdir ~/.aws
+        cp /Users/Shared/.aws-credentials ~/.aws/credentials
+        sudo mkdir /var/root/.aws
+        sudo cp /Users/Shared/.aws-credentials /var/root/.aws/credentials
+        sudo chmod -R go-rx /var/root/.aws
+        # Most likely it's never needed to actually stop it
+        #sudo launchctl stop org.nixos.nix-daemon || true
+        # It may even not being needed to start it
+        #sudo launchctl start org.nixos.nix-daemon
+
+
         #- name: Check AWS config
         #  run: |
         #    cat ~/.aws/credentials
         #    cat /etc/nix/nix.conf
+
     - name: Add nix channels
       run: |
         nix-channel --add https://channels.nixos.org/nixpkgs-21.11-darwin nixpkgs
         nix-channel --add https://channels.nixos.org/nixpkgs-unstable unstable
         nix-channel --update
+
+    - name: Add Nix private key
+      run: |
+        sudo bash -c "echo '${{ secrets.NIX_PRIVATE_KEY }}' >/etc/nix/key.private"
+
+    - name: Add Nix build hook
+      run: |
+        cat <<EOF > upload-to-cache.sh
+        #!/bin/sh
+
+        set -eu
+        set -f # disable globbing
+        export IFS=' '
+
+        export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
+
+        echo "Signing paths" \$OUT_PATHS
+        /nix/var/nix/profiles/default/bin/nix store sign --key-file /etc/nix/key.private \$OUT_PATHS
+        echo "Uploading paths" \$OUT_PATHS
+        exec /nix/var/nix/profiles/default/bin/nix copy --to '${{ secrets.S3_URL }}' \$OUT_PATHS
+        EOF
+
+        sudo mv upload-to-cache.sh /etc/nix/./
+        sudo chmod +x /etc/nix/upload-to-cache.sh
+
+    - name: Configure Nix to use our S3 as cache
+      run: |
+        cat <<EOF | sudo tee -a /etc/nix/nix.conf
+        substituters = https://cache.nixos.org/ ${{ secrets.S3_URL }}
+        trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= mdots:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs=
+        post-build-hook = /etc/nix/upload-to-cache.sh
+        EOF
+
+        sudo launchctl kickstart -k system/org.nixos.nix-daemon
+
     - name: Install Nix Darwin
       run: |
+        export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
         nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
         ./result/bin/darwin-installer
+
     - name: Build my system
       run: |
+        export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
         source /etc/static/bashrc
         darwin-rebuild build -I darwin-config=nixpkgs.symlink/darwin-configuration.nix
-      #--extra-substituters=s3://mdots?endpoint=https://https://mdots.s3.fr-par.scw.cloud/
