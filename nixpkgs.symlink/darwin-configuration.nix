@@ -113,8 +113,11 @@ in
   nix = {
     #package = pkgs.nixUnstable;
     #package = pkgs.nixFlakes;
-    package = unstable.nix; # Necessary to get 2.5, with Flake support and some bugfix for shell.nix. But conflict with zsh, see later
-    #autoOptimiseStore = true;
+    package = unstable.nix; # Necessary to get >=2.5, with Flake support and some bugfix for shell.nix. But conflict with zsh, see later
+
+    binaryCaches = ["https://cache.nixos.org/" "s3://mdots?endpoint=https://s3.fr-par.scw.cloud/&region=fr-par"];
+    binaryCachePublicKeys = ["mdots:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs="];
+
     extraOptions = ''
       auto-optimise-store = true
       experimental-features = nix-command flakes
