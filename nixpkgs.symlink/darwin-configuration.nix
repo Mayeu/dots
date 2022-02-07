@@ -70,7 +70,7 @@ in
     borgbackup
     #borgmatic # Currently broken on macos
     #reptyr # Reattach a orphan process to the terminal. Linux only :(
-    k9s
+    unstable.k9s
     dhall
     dhall-json
     dhall-lsp-server
@@ -94,6 +94,7 @@ in
     fd # alternative to find
     direnv # Automate env loading, but more importently, nix shell loading
     unstable.nix-direnv # 2021-12-28: at that time the flake option is only in unstable
+    sshuttle
   ];
 
   # Use a custom configuration.nix location.
