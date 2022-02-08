@@ -93,6 +93,7 @@ in
     pass
     fd # alternative to find
     direnv # Automate env loading, but more importently, nix shell loading
+    rclone
     unstable.nix-direnv # 2021-12-28: at that time the flake option is only in unstable
     sshuttle
   ];
