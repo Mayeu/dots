@@ -132,13 +132,7 @@ in
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh = {
-    enable = true;  # default shell on catalina
-    # This is necessary to avoid a completion clash with nix.
-    # For some reason both zsh and nix >= 2.4 provide the _nix folder with completion
-    # and this lead to a clash preventing install.
-    # To work around this we remove the completion from zsh, but activate it anyway manually
-    enableCompletion = false;
-    interactiveShellInit = "autoload -U compinit && compinit";
+    enable = true;
   };
   # programs.fish.enable = true;
 
