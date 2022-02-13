@@ -26,8 +26,8 @@ echo "🅽  Updating nix"
 nix-channel --update
 
 ## 2021-04-18 TODO: Only path the specific variable nix & nix-darwin needs
-#echo "👹 Updating nix-darwin"
-#darwin-rebuild switch
+echo "👹 Updating nix-darwin"
+darwin-rebuild switch
 #
 #echo "👹 Updating comma index: warning, horrendously slow"
 #, --update
