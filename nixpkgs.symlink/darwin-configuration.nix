@@ -96,6 +96,7 @@ in
     rclone
     unstable.nix-direnv # 2021-12-28: at that time the flake option is only in unstable
     sshuttle
+    sleepyhead
   ];
 
   # Use a custom configuration.nix location.
