@@ -126,7 +126,7 @@ in
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
-      keep-failed = true
+      keep-failed = false
       keep-going = true
     '';
   };
