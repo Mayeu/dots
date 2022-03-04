@@ -81,7 +81,7 @@ in
     tfk8s
     broot # https://dystroy.org/broot/
     #t # A command-line power tool for Twitter. Commented because I'm not sure it match my usecase
-    yq # Command line yaml processor, like jq
+    unstable.yq-go # Command line yaml processor, like jq
     silver-searcher # Similar to ack, but faster
     tldr # simplified community driven man pages
     packer
