@@ -6,7 +6,7 @@
 #vim -c 'call dein#recache_runtimepath() | quit'
 
 echo "🍺 Fix Homebrew right"
-fix-homebrew-right
+#fix-homebrew-right
 
 echo "🛩  Run topgrade"
 topgrade --disable nix --disable node --disable pnpm

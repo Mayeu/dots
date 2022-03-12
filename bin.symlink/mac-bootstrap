@@ -27,87 +27,85 @@ echo "🍺 Configure Homebrew to be shared with me, myself, and I"
 fix-homebrew-right
 
 echo "🍺 Install Cask apps"
-brew install --cask  \
-  iterm2             \
-  firefox            \
-  omnifocus          \
-  blockblock         \
-  carbon-copy-cloner \
-  little-snitch      \
-  syncthing-app      \
-  alfred             \
-  macpass \
-  macfuse \
-  karabiner-elements \
-  signal \
-  flux \
-  evernote \
-  keybase \
-  daisydisk \
-  docker \
-  dash \
-  patchwork \
-  spotify \
-  calibre \
-  virtualbox \
-  virtualbox-extension-pack \
-  appcleaner \
-  zoom \
-  tor-browser \
-  superduper \
-  transmission \
-  transmission-remote-gui \
-  protonvpn \
-  now \
-  libreoffice \
-  steam \
-  vlc \
-  setapp \
-  imageoptim \
-  xld \
-  chromium \
-  mattermost \
-  owncloud \
-  tunnelblick \
-  handbrake \
-  resilio-sync \
-  programmer-dvorak \
-  java \
-  mailmate \
-  nightowl \
-  kobo \
-  font-firacode-nerd-font \
-  font-fira-code \
-  homebrew/cask-drivers/logitech-options \
-  google-cloud-sdk \
-  google-chrome \
-  gitup \
-  postman \
-  macvim \
-  beaker-browser \
-  brave-browser \
-  contexts \
-  notion \
-  mumble \
-  sublime-merge \
-  flotato \
-  anki \
-  go64 \
-  timeular \
-  force-paste \
-  typora \
-  drawio \
-  vcv-rack \
-  discord \
-  vscodium \
-  the-unarchiver \
-  electrum \
-  kodi \
-  darktable \
-  stellarium \
-  phd2
+brew install --cask \
+	iterm2 \
+	firefox \
+	omnifocus \
+	blockblock \
+	carbon-copy-cloner \
+	little-snitch \
+	syncthing-app \
+	alfred \
+	macpass \
+	macfuse \
+	karabiner-elements \
+	signal \
+	flux \
+	evernote \
+	keybase \
+	daisydisk \
+	docker \
+	dash \
+	patchwork \
+	spotify \
+	calibre \
+	virtualbox \
+	virtualbox-extension-pack \
+	appcleaner \
+	zoom \
+	tor-browser \
+	superduper \
+	transmission \
+	transmission-remote-gui \
+	protonvpn \
+	now \
+	libreoffice \
+	steam \
+	vlc \
+	setapp \
+	imageoptim \
+	xld \
+	chromium \
+	mattermost \
+	owncloud \
+	tunnelblick \
+	handbrake \
+	programmer-dvorak \
+	java \
+	mailmate \
+	nightowl \
+	kobo \
+	font-firacode-nerd-font \
+	font-fira-code \
+	homebrew/cask-drivers/logitech-options \
+	google-chrome \
+	gitup \
+	postman \
+	macvim \
+	beaker-browser \
+	brave-browser \
+	contexts \
+	notion \
+	mumble \
+	sublime-merge \
+	flotato \
+	anki \
+	go64 \
+	timeular \
+	force-paste \
+	typora \
+	drawio \
+	vcv-rack \
+	discord \
+	vscodium \
+	the-unarchiver \
+	electrum \
+	kodi \
+	darktable \
+	stellarium \
+	phd2
 
-  #ocenaudio \
+#ocenaudio \
 
 echo "👁 Disagle gcloud cli reporting"
 gcloud config set disable_usage_reporting false
@@ -115,102 +113,42 @@ gcloud config set disable_usage_reporting false
 brew tap boltops-tools/software
 
 echo "🍺 Install cli apps"
-brew install      \
-  node            \
-  nvm             \
-  gromgit/fuse/sshfs
-  vagrant-completion \
-  ext4fuse \
-  ansible \
-  homebrew/cask-fonts/font-fira-code \
-  sshrc \
-  terminal-notifier \
-  forego \
-  imageoptim-cli \
-  htop \
-  gnu-getopt \
-  selecta \
-  yamllint \
-  mayeu/tap/borgmatic \
-  beancount \
-  mayeu/tap/beancount-scripts \
-  fava \
-  mayeu/tap/run-one \
-  mayeu/tap/flock \
-  mayeu/tap/habitica-cli \
-  mayeu/tap/lmt \
-  signal-cli \
-  imagemagick \
-  parallel \
-  elm \
-  elm-format \
-  pandoc \
-  neovim \
-  ctags \
-  python@2 \
-  rancher-cli \
-  rancher-compose \
-  pwgen \
-  vault \
-  pinentry-mac \
-  pgcli \
-  hugo \
-  atomicparsley `# Pour embedded les images dans les m4a de youtube-dl` \
-  upx `# executable compressor` \
-  bats `# bash testing` \
-  pv \
-  fortune \
-  hardlink-osx \
-  ruby \
-  shfmt \
-  xmlstarlet \
-  libnettle \
-  tor \
-  postgresql \
-  sloccount \
-  ipfs \
-  asciinema \
-  swaks \
-  gitlab-runner \
-  telnet \
-  fswatch \
-  azure-cli \
-  tealdeer \
-  adr-tools \
-  rmlint \
-  gawk \
-  pigz \
-  bindfs \
-  zsh-completion \
-  netlify-cli \
-  pnpm \
-  consul \
-  nim \
-  pyenv-virtualenvwrapper \
-  sshuttle \
-  picocom \
-  git-lfs \
-  bfg \
-  ripgrep \
-  coreutils \
-  fd \
-  librsvg \
-  jansson \
-  editorconfig \
-  yq \
-  terraformer \
-  watchexec \
-  lrzip \
-  git-subrepo \
-  smartmontools \
-  testssl \
-  topgrade \
-  siril \
-  q
-
-gem install --force bundler
-
-# Splitline comments: https://stackoverflow.com/a/12797512/1423984
+brew install \
+	node \
+	nvm \
+	gromgit/fuse/sshfs \
+	vagrant-completion \
+	ext4fuse \
+	ansible \
+	homebrew/cask-fonts/font-fira-code \
+	sshrc \
+	terminal-notifier \
+	imageoptim-cli \
+	gnu-getopt \
+	selecta \
+	mayeu/tap/borgmatic \
+	beancount \
+	mayeu/tap/beancount-scripts \
+	fava \
+	mayeu/tap/run-one \
+	mayeu/tap/flock \
+	mayeu/tap/habitica-cli \
+	mayeu/tap/lmt \
+	vault \
+	pinentry-mac \
+	hugo \
+	hardlink-osx \
+	libnettle \
+	telnet \
+	adr-tools \
+	gawk \
+	bindfs \
+	zsh-completion \
+	pyenv-virtualenvwrapper \
+	editorconfig \
+	testssl \
+	topgrade \
+	siril
 
 ## To use pinentry-mac it must be added as "pinentry-program" in the
 # `~/.gnupg/gpg-agent.conf` configuration
@@ -220,24 +158,8 @@ echo "🐳 Give some root right to the hyperkit docker driver"
 sudo chown root:wheel /usr/local/opt/docker-machine-driver-hyperkit/bin/docker-machine-driver-hyperkit
 sudo chmod u+s /usr/local/opt/docker-machine-driver-hyperkit/bin/docker-machine-driver-hyperkit
 
-# Install / upgrade python support for neovim
-# No need to pass any flag during the compilation or install
-echo "🐍 Install python deps for nvim"
-pip2 install --user --upgrade pynvim
-pip3 install --user --upgrade pynvim
-
 # Force link some gnu tools
 #brew link --force gnu-getopt
-
-# SSHpass
-brew install http://git.io/sshpass.rb
-
-# You will need to add:
-#    #{HOMEBREW_PREFIX}/bin/fish
-# to /etc/shells.
-# Then run:
-#    chsh -s #{HOMEBREW_PREFIX}/bin/fish
-# to make fish your default shell.
 
 cd ~/ && git clone https://github.com/Mayeu/dots .dots
 
@@ -264,12 +186,8 @@ chsh -s "$zshpath"
 # setup ZSH
 echo "🐚 Setup zsh"
 # Force rebuilding of autocompletion
-rm -f ~/.zcompdump; compinit
-
-# Setup VIM
-echo "✅ Setup VIM package manager"
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
-sh /tmp/installer.sh ~/.cache/dein
+rm -f ~/.zcompdump
+compinit
 
 # iterm2 configuration
 echo "🐚 Configure iterm2 to sync preferences"

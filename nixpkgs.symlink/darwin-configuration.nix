@@ -61,6 +61,8 @@ in
     unstable.elixir
     bat
     jq
+    unstable.yq # Command line yaml processor, like jq
+    xmlstarlet # Command line xml processor
     python39Packages.weboob
     unstable.yt-dlp
     ffmpeg
@@ -71,19 +73,16 @@ in
     #borgmatic # Currently broken on macos
     #reptyr # Reattach a orphan process to the terminal. Linux only :(
     unstable.k9s
-    dhall
-    dhall-json
-    dhall-lsp-server
+    #dhall
+    #dhall-json
+    #dhall-lsp-server
     elmPackages.elm
     elmPackages.elm-format
     elmPackages.elm-live
     #kube3d # Don't support macOS in nix apparently
     tfk8s
     broot # https://dystroy.org/broot/
-    #t # A command-line power tool for Twitter. Commented because I'm not sure it match my usecase
-    unstable.yq-go # Command line yaml processor, like jq
     silver-searcher # Similar to ack, but faster
-    tldr # simplified community driven man pages
     packer
     vagrant
     #kubectl
@@ -97,6 +96,40 @@ in
     unstable.nix-direnv # 2021-12-28: at that time the flake option is only in unstable
     sshuttle
     sleepyhead
+    #jless # A JSON viewer in the cli
+    pwgen
+    pgcli
+    upx
+    pv
+    shfmt
+    unstable.ipfs
+    lrzip
+    unstable.ruby_3_1
+    coreutils
+    pigz
+    pandoc
+    imagemagick
+    picocom
+    htop
+    # siril # Not supported on macOS yet
+    atomicparsley # Pour embedded les images dans les m4a de youtube-dl TODO: not sure it's needed with yt-dlp
+    tor
+    sshpass
+    google-cloud-sdk
+    sshuttle
+    # virtualboxWithExtpack # Not supported by macOS yet
+    ctags # Not sure I really need that as a root package
+    python2
+    fswatch
+    tealdeer
+    rmlint
+    git-lfs
+    fd
+    watchexec
+    smartmontools
+    # testssl # Marked as insecure because depend of Openssl 1.0.2
+    go
+    dep
   ];
 
   # Use a custom configuration.nix location.
