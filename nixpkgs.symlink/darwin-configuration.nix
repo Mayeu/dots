@@ -62,6 +62,7 @@ in
     bat
     jq
     unstable.yq # Command line yaml processor, like jq
+    unstable.fq # jq for binaries
     xmlstarlet # Command line xml processor
     python39Packages.weboob
     unstable.yt-dlp
