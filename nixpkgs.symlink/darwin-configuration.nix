@@ -73,7 +73,7 @@ in
     borgbackup
     #borgmatic # Currently broken on macos
     #reptyr # Reattach a orphan process to the terminal. Linux only :(
-    unstable.k9s
+      unstable.k9s
     #dhall
     #dhall-json
     #dhall-lsp-server
@@ -131,6 +131,11 @@ in
     # testssl # Marked as insecure because depend of Openssl 1.0.2
     go
     dep
+    unstable.kitty # Terminal emulator
+    # Terminal emulator in rust, support Kitty img & iterm2
+    ( unstable.wezterm.overrideAttrs (_: {
+      meta.broken = false;
+    }))
   ];
 
   # Use a custom configuration.nix location.
@@ -232,8 +237,32 @@ in
       };
 
       nix-direnv = pkgs.nix-direnv.override { enableFlakes = true; };
-    }
-    )
+
+      wezterm = pkgs.wezterm.override {
+        buildInputs = with pkgs; [
+          fontconfig
+          zlib
+        ] ++ lib.optionals stdenv.isLinux [
+          libX11
+          libxcb
+          libxkbcommon
+          openssl
+          wayland
+          xcbutil
+          xcbutilimage
+          xcbutilkeysyms
+          xcbutilwm # contains xcb-ewmh among others
+        ] ++ lib.optionals stdenv.isDarwin [
+          Cocoa
+          CoreGraphics
+          Foundation
+          libiconv
+        ] ++ (stdenv.isDarwin && (builtins.hasAttr "UserNotifications" darwin.apple_sdk.frameworks)) [
+          darwin.apple_sdk.frameworks.UserNotifications
+        ];
+
+      };
+    })
   ];
 
   programs.vim = {
