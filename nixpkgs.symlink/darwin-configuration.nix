@@ -131,7 +131,7 @@ in
     # testssl # Marked as insecure because depend of Openssl 1.0.2
     go
     dep
-    #unstable.kitty # Terminal emulator
+    unstable.kitty # Terminal emulator
     # Terminal emulator in rust, support Kitty img & iterm2
     #( unstable.wezterm.overrideAttrs (_: {
     #  meta.broken = false;
