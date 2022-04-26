@@ -339,6 +339,12 @@ in
         set background=dark
         colorscheme gruvbox
 
+        " Set Invisible character
+        " nbsp: non breaking space
+        " trail: trailling space
+        set list
+        set listchars=tab:▸\ ,nbsp:␣,trail:•
+
         "Shell
         set shell=${pkgs.zsh}/bin/zsh
 
