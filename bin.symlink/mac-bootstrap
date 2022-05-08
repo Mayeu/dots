@@ -10,7 +10,6 @@ MY_GROUP=me_myself_and_i
 # -t = type of the record
 sudo dseditgroup -q -o create "$MY_GROUP"
 sudo dseditgroup -o edit -a m -t user "$MY_GROUP"
-sudo dseditgroup -o edit -a cast -t user "$MY_GROUP"
 
 # Setup the configuration share
 SETTING_SHARE="/Volumes/Shared Settings"
