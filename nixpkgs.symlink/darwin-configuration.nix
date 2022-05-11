@@ -370,6 +370,7 @@ in
             \   'zsh': ['shfmt'],
             \   'elixir': ['mix_format'],
             \   'terraform': ['terraform'],
+            \   'bats': ['shfmt']
             \}
 
         let g:ale_fix_on_save = 1
@@ -381,6 +382,15 @@ in
 
         " Shell config ----------------------------
         autocmd FileType zsh setlocal expandtab shiftwidth=2 softtabstop=0 syn=sh ft=sh
+
+        " Bats config -----------------------------
+        " Set the shfmt option on ALE to make it work with bats
+        " Also set the filetype type to bats but use the bash syntax highlighting.
+        " Inverting those two will not work, setting filetype after syntax override the
+        " syntax highlighting
+        autocmd BufRead,BufNewFile *.bats
+                          \ let b:ale_sh_shfmt_options='-ln bats -i 4'
+                          \ | setlocal filetype=bats syntax=bash
 
         " FzF configuration -------------------
         nmap <leader><space> :Files<CR>
