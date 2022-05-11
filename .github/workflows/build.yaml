@@ -60,6 +60,9 @@ jobs:
 
         export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
 
+        # Exit if the out path is empty
+        [[ -z $OUT_PATHS ]] && exit
+
         echo "Signing paths \$OUT_PATHS"
         /nix/var/nix/profiles/default/bin/nix store sign --key-file /etc/nix/key.private \$OUT_PATHS
         echo "Uploading paths \$OUT_PATHS"
