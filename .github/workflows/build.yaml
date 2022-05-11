@@ -60,9 +60,9 @@ jobs:
 
         export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
 
-        echo "Signing paths" \$OUT_PATHS
+        echo "Signing paths \$OUT_PATHS"
         /nix/var/nix/profiles/default/bin/nix store sign --key-file /etc/nix/key.private \$OUT_PATHS
-        echo "Uploading paths" \$OUT_PATHS
+        echo "Uploading paths \$OUT_PATHS"
         exec /nix/var/nix/profiles/default/bin/nix copy --to '${{ secrets.S3_URL }}' \$OUT_PATHS
         EOF
 
