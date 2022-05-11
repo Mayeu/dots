@@ -13,7 +13,10 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
     - name: Install Nix
-      uses: cachix/install-nix-action@v16
+      uses: cachix/install-nix-action@v17
+      with:
+        # TODO: Remove when Nix >2.8.0 will be out (out_path bug)
+       install_url: https://releases.nixos.org/nix/nix-2.7.0/install
 
     - name: Setup AWS profile
       run: |
@@ -60,9 +63,14 @@ jobs:
 
         export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
 
-        echo "Signing paths" \$OUT_PATHS
-        /nix/var/nix/profiles/default/bin/nix store sign --key-file /etc/nix/key.private \$OUT_PATHS
-        echo "Uploading paths" \$OUT_PATHS
+        # Exit if the out path is empty
+        #test -z "$OUT_PATHS" && exit
+
+        # Without OUT_PATHS things kind of work most of the time.
+        # Thus, let just or true and exit, so that if it works, it works, if it doesn't it just ignore
+        echo "Signing paths \$OUT_PATHS"
+        /nix/var/nix/profiles/default/bin/nix store sign --key-file /etc/nix/key.private \$OUT_PATHS || (true && exit)
+        echo "Uploading paths \$OUT_PATHS"
         exec /nix/var/nix/profiles/default/bin/nix copy --to '${{ secrets.S3_URL }}' \$OUT_PATHS
         EOF
 
