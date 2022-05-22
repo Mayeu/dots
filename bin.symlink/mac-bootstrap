@@ -109,8 +109,6 @@ brew install --cask \
 echo "👁 Disagle gcloud cli reporting"
 gcloud config set disable_usage_reporting false
 
-brew tap boltops-tools/software
-
 echo "🍺 Install cli apps"
 brew install \
 	node \
