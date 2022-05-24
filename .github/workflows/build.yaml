@@ -8,10 +8,13 @@ name: Build
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         os: [macos-10.15, macos-11, macos-12]
+
     name: Build
     runs-on: ${{ matrix.os }}
+
     steps:
     - name: Check out code
       uses: actions/checkout@v2
@@ -19,7 +22,7 @@ jobs:
       uses: cachix/install-nix-action@v17
       with:
         # TODO: Remove when Nix >2.8.0 will be out (out_path bug)
-       install_url: https://releases.nixos.org/nix/nix-2.7.0/install
+       install_url: https://releases.nixos.org/nix/nix-2.8.1/install
 
     - name: Setup AWS profile
       run: |
