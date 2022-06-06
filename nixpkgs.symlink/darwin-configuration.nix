@@ -96,6 +96,7 @@ in
     direnv # Automate env loading, but more importently, nix shell loading
     rclone
     unstable.nix-direnv # 2021-12-28: at that time the flake option is only in unstable
+    openssh
     sshuttle
     sleepyhead
     #jless # A JSON viewer in the cli

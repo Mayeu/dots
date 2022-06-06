@@ -1,3 +1,3 @@
 #!/bin/sh
 # SSH
-alias ssh='sshrc'
+#alias ssh='sshrc'
