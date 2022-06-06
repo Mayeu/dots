@@ -50,7 +50,7 @@ jobs:
 
     - name: Add nix channels
       run: |
-        nix-channel --add https://channels.nixos.org/nixpkgs-21.11-darwin nixpkgs
+        nix-channel --add https://channels.nixos.org/nixpkgs-22.05-darwin nixpkgs
         nix-channel --add https://channels.nixos.org/nixpkgs-unstable unstable
         nix-channel --update
 
