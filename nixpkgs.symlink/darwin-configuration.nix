@@ -59,7 +59,6 @@ in
     nomad
     rsync
     ripgrep
-    unstable.elixir
     bat
     jq
     unstable.yq-go # Command line yaml processor, like jq
@@ -289,7 +288,7 @@ in
           "coc-nvim" # Fancy auto completion and stuff, include nodejs
           "fzf-vim"
           "coc-fzf"
-          "vim-elixir"
+          "vim-elixir" "alchemist-vim"
           "tabmerge"
           "dhall-vim"
           "LanguageClient-neovim"
