@@ -61,6 +61,9 @@
   # Apparently useful for mixed OS environment
   precomposeUnicode = true
   pager = diff-so-fancy | less --tabs=4 -RFX
+  # Monitor the filesystem to cache changes
+  # Speed up git commands for big repository
+  fsmonitor = true
 
 [github]
    user = Mayeu
