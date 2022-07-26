@@ -242,6 +242,7 @@ in
       wezterm = pkgs.wezterm.override {
         buildInputs = with pkgs; [
           fontconfig
+          inconsolata
           zlib
         ] ++ lib.optionals stdenv.isLinux [
           libX11
