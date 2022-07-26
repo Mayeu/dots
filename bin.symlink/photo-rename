@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+# nullglob make sure the glob return empty data instead of erroring out if the pattern don't match at all
+shopt -s nullglob
+# Case incensitive globs
+shopt -s nocaseglob
+
+path=${1:-"."}
+
+extract_creation_date() {
+	local file="${1:-}"
+	exiftool "$file" -CreateDate -S | cut -d' ' -f 2 | sed -e 's/:/-/g'
+}
+
+get_name() {
+	local file="$(basename "${1:-}")"
+	echo "${file%.*}"
+}
+
+get_ext() {
+	local file="$(basename "${1:-}")"
+	echo "${file##*.}"
+}
+
+main() {
+	for image in "${path}"/*.{CR2,ARW}; do
+
+		name="$(get_name "$image")"
+		ext="$(get_ext "$image")"
+		date="$(extract_creation_date "$image")"
+
+		# Test if the name already has the date prefixed
+		if [[ "$name" != $date* ]]; then
+			new_name="${date}_${name}.${ext}"
+			echo "IMAGE: $(basename "$image") -> ${new_name}"
+			mv "$image" "${path}/${new_name}"
+
+			# Find the buddy / sidecar file
+			for sidecar in "${path}"/"${name}"*; do
+				# Filter for the $image itself
+				if test "$sidecar" != "$image"; then
+					name="$(get_name "$sidecar")"
+					ext="$(get_ext "$sidecar")"
+					new_name="${date}_${name}.${ext}"
+					echo "SIDECAR: $(basename "$sidecar") -> ${new_name}"
+					mv "$sidecar" "${path}/${new_name}"
+				fi
+			done
+		fi
+	done
+}
+
+main
