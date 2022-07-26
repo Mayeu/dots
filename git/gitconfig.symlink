@@ -63,7 +63,7 @@
   pager = diff-so-fancy | less --tabs=4 -RFX
   # Monitor the filesystem to cache changes
   # Speed up git commands for big repository
-  fsmonitor = true
+  fsmonitor = false
 
 [github]
    user = Mayeu
