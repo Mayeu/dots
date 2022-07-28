@@ -137,6 +137,7 @@ in
     #( unstable.wezterm.overrideAttrs (_: {
     #  meta.broken = false;
     #}))
+    gphoto2
   ];
 
   # Use a custom configuration.nix location.
