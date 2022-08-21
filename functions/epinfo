@@ -2,5 +2,5 @@
 
 epinfo() {
   ffmpeg -i "$@" 2>&1 | grep Duration | cut -d ' ' -f 4 | cut -d '.' -f 1 | sed -e 's/,//'
-  wc -c "$@" | cut -d' ' -f 2
+  wc -c "$@" | cut -d' ' -f 1
 }
