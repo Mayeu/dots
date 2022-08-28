@@ -138,6 +138,7 @@ in
     #  meta.broken = false;
     #}))
     gphoto2
+    #python310Packages.pipx
   ];
 
   # Use a custom configuration.nix location.
@@ -159,8 +160,10 @@ in
     #package = pkgs.nixFlakes;
     package = unstable.nix; # Necessary to get >=2.5, with Flake support.
 
-    binaryCaches = ["s3://mdots?endpoint=https://s3.fr-par.scw.cloud/&region=fr-par"];
-    binaryCachePublicKeys = ["mdots-1:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs="];
+    settings = {
+      substituters = ["s3://mdots?endpoint=https://s3.fr-par.scw.cloud/&region=fr-par"];
+      trusted-public-keys = ["mdots:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs="];
+    };
 
     extraOptions = ''
       auto-optimise-store = true
