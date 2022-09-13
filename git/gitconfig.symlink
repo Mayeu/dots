@@ -115,3 +115,5 @@
 
 [interactive]
   diffFilter = diff-so-fancy --patch
+[rerere]
+	enabled = true
