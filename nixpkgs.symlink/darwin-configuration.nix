@@ -73,15 +73,9 @@ in
     borgbackup
     #borgmatic # Currently broken on macos
     #reptyr # Reattach a orphan process to the terminal. Linux only :(
-      unstable.k9s
-    #dhall
-    #dhall-json
-    #dhall-lsp-server
-    elmPackages.elm
-    elmPackages.elm-format
-    elmPackages.elm-live
+    #unstable.k9s
     #kube3d # Don't support macOS in nix apparently
-    tfk8s
+    #tfk8s
     broot # https://dystroy.org/broot/
     silver-searcher # Similar to ack, but faster
     packer
