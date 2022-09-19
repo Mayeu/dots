@@ -1,0 +1,5 @@
+#!/bin/sh
+
+code() {
+	cd ~/Documents/code
+}
