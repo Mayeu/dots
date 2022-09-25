@@ -52,6 +52,7 @@ in
     fzf
     antibody
     bash
+    nushell
     wget
     curl
     unstable.terraform # Necessary because on stable TF is 0.12 🤦
