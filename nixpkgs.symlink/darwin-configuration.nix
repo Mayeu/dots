@@ -92,7 +92,7 @@ in
     unstable.nix-direnv # 2021-12-28: at that time the flake option is only in unstable
     openssh
     sshuttle
-    sleepyhead
+    OSCAR
     #jless # A JSON viewer in the cli
     pwgen
     pgcli
