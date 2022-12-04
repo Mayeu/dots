@@ -22,7 +22,7 @@ jobs:
       uses: cachix/install-nix-action@v17
       with:
         # TODO: Remove when Nix >2.8.0 will be out (out_path bug)
-       install_url: https://releases.nixos.org/nix/nix-2.8.1/install
+       install_url: https://releases.nixos.org/nix/nix-2.11.1/install
 
     - name: Setup AWS profile
       run: |
@@ -50,7 +50,7 @@ jobs:
 
     - name: Add nix channels
       run: |
-        nix-channel --add https://channels.nixos.org/nixpkgs-22.05-darwin nixpkgs
+        nix-channel --add https://channels.nixos.org/nixpkgs-22.11-darwin nixpkgs
         nix-channel --add https://channels.nixos.org/nixpkgs-unstable unstable
         nix-channel --update
 
