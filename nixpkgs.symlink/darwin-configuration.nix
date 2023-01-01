@@ -1,4 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config,
+#pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/feda52be1d59.tar.gz") {},
+pkgs,
+lib,
+... }:
 let
   # Use nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable to add it
   unstable = import <unstable> {};
@@ -50,7 +54,7 @@ in
     unstable.git-secret # Unstable to get 0.4
     diff-so-fancy # Fancy diff for git
     fzf
-    antibody
+    #antidote # broken on darwin, and not maintained anymore. It's successory (antidote) is not in nixpgks https://github.com/mattmc3/antidote
     bash
     unstable.nushell
     wget
@@ -92,7 +96,7 @@ in
     unstable.nix-direnv # 2021-12-28: at that time the flake option is only in unstable
     openssh
     sshuttle
-    OSCAR
+    #OSCAR
     #jless # A JSON viewer in the cli
     pwgen
     pgcli
@@ -161,7 +165,7 @@ in
     };
 
     extraOptions = ''
-      auto-optimise-store = true
+      #auto-optimise-store = true
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
