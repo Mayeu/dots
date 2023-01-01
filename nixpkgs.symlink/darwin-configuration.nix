@@ -51,6 +51,7 @@ in
     git
     git-extras
     git-subrepo
+    git-bug
     unstable.git-secret # Unstable to get 0.4
     diff-so-fancy # Fancy diff for git
     fzf
@@ -138,6 +139,7 @@ in
     #}))
     gphoto2
     #python310Packages.pipx
+    unstable.elixir_1_14 # until I pin my version and have cache, make it common for my projects using it.
   ];
 
   # Use a custom configuration.nix location.
