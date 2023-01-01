@@ -4,8 +4,8 @@ let
   my_plugins = pkgs.callPackage ./plugins.nix {};
   vimConfig = {
     customRC = builtins.readFile ~/.vimrc;
-    vam.knownPlugins = pkgs.vimPlugins // my_plugins; # optional
-    vam.pluginDictionaries = [
+    packages.knownPlugins = pkgs.vimPlugins // my_plugins; # optional
+    packages.pluginDictionaries = [
       # load always
       { names = [
         "idris-vim" "UltiSnips" "vim-snippets"
