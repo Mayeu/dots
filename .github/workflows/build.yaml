@@ -48,12 +48,6 @@ jobs:
         #    cat ~/.aws/credentials
         #    cat /etc/nix/nix.conf
 
-    - name: Add nix channels
-      run: |
-        nix-channel --add https://channels.nixos.org/nixpkgs-22.11-darwin nixpkgs
-        nix-channel --add https://channels.nixos.org/nixpkgs-unstable unstable
-        nix-channel --update
-
     - name: Add Nix private key
       run: |
         sudo bash -c "echo '${{ secrets.NIX_PRIVATE_KEY }}' >/etc/nix/key.private"
@@ -92,6 +86,12 @@ jobs:
         EOF
 
         sudo launchctl kickstart -k system/org.nixos.nix-daemon
+
+    - name: Add nix channels
+      run: |
+        nix-channel --add https://channels.nixos.org/nixpkgs-22.11-darwin nixpkgs
+        nix-channel --add https://channels.nixos.org/nixpkgs-unstable unstable
+        nix-channel --update
 
     - name: Install Nix Darwin
       run: |
