@@ -51,9 +51,10 @@ in
     git
     git-extras
     git-subrepo
-    git-bug
+    unstable.git-bug
     unstable.git-secret # Unstable to get 0.4
     diff-so-fancy # Fancy diff for git
+    git-lfs
     fzf
     #antidote # broken on darwin, and not maintained anymore. It's successory (antidote) is not in nixpgks https://github.com/mattmc3/antidote
     bash
@@ -125,7 +126,6 @@ in
     fswatch
     tealdeer
     rmlint
-    git-lfs
     fd
     watchexec
     smartmontools
