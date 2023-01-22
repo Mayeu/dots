@@ -35,6 +35,9 @@ darwin-rebuild switch
 echo "👹 Collect nix garbage"
 sudo nix-collect-garbage --delete-older-than 14d
 
+echo "👹 Dedup nix store"
+sudo nix store optimise
+
 # 2021-04-20 TODO: Migrate everything to Nix to don't have this at all anymore?
 echo "🔏 Fix right for compinit"
 compaudit | xargs chmod g-w
