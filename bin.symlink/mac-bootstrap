@@ -41,7 +41,6 @@ brew install --cask \
 	signal \
 	flux \
 	evernote \
-	keybase \
 	daisydisk \
 	docker \
 	dash \
@@ -66,8 +65,6 @@ brew install --cask \
 	xld \
 	chromium \
 	mattermost \
-	owncloud \
-	tunnelblick \
 	handbrake \
 	programmer-dvorak \
 	java \
@@ -76,7 +73,6 @@ brew install --cask \
 	kobo \
 	font-firacode-nerd-font \
 	font-fira-code \
-	homebrew/cask-drivers/logitech-options \
 	google-chrome \
 	gitup \
 	postman \
@@ -90,7 +86,6 @@ brew install --cask \
 	flotato \
 	anki \
 	go64 \
-	timeular \
 	force-paste \
 	typora \
 	drawio \
