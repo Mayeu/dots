@@ -32,11 +32,17 @@ alias gfa='git fetch --all'
 alias grrf='git rm -rf'
 alias gsc='git switch -c'
 
+# Git Bug
+alias gblc='git bug ls status:open label:critical'
+# gb{r,s}: git bug {receive,send}
+alias gbr='git bug bridge pull'
+alias gbs='git bug bridge push'
+
 #if command -v svu >/dev/null 2>&1; then
 #  alias gtpatch='echo `svu p`; git tag `svu p`'
 #  alias gtminor='echo `svu m`; git tag `svu m`'
 #fi
 
 gi() {
-  curl -s "https://www.gitignore.io/api/$*"
+	curl -s "https://www.gitignore.io/api/$*"
 }
