@@ -186,6 +186,11 @@ in
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
+  # System defaults setting
+  # it's not automagically setting those up. One as to dev them apparently
+  #system.defaults."org.gpgtools.common".DisableKeychain = true;
+  #system.defaults."org.gpgtools.common".UseKeychain = false;
+
   programs.gnupg = {
     agent.enable = true;
     agent.enableSSHSupport = true;
