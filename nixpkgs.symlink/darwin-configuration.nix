@@ -323,6 +323,12 @@ in
         set splitbelow
         set splitright
 
+        " Exit quickly from normal and insert
+        nmap qq :wqa<CR>
+        imap qq <ESC>:wqa<CR>
+        " Replace esc by hh in insert
+        imap hh <ESC>
+
         " Tab management
         " `ca` for `:cabbrev` which abreviate command-line mode command only
         ca tn tabnew
