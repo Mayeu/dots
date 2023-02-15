@@ -140,6 +140,9 @@ in
     gphoto2
     #python310Packages.pipx
     unstable.elixir_1_14 # until I pin my version and have cache, make it common for my projects using it.
+    ntfs3g
+    bindfs
+    sshfs
   ];
 
   # Use a custom configuration.nix location.
