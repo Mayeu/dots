@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/ && git clone https://github.com/Mayeu/dots .dots
+#cd ~/ && git clone https://github.com/Mayeu/dots .dots
 
 #echo "📦 Installing nix"
 sh <(curl -L https://nixos.org/nix/install)
