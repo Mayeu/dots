@@ -2,14 +2,14 @@
 #set -e
 set -u
 
-echo "👥 Create a group for me, myslef, and I"
-MY_GROUP=me_myself_and_i
-# -q = no interaction
-# -o = operation to do
-# -a = record to add
-# -t = type of the record
-sudo dseditgroup -q -o create "$MY_GROUP"
-sudo dseditgroup -o edit -a m -t user "$MY_GROUP"
+#echo "👥 Create a group for me, myslef, and I"
+#MY_GROUP=me_myself_and_i
+## -q = no interaction
+## -o = operation to do
+## -a = record to add
+## -t = type of the record
+#sudo dseditgroup -q -o create "$MY_GROUP"
+#sudo dseditgroup -o edit -a m -t user "$MY_GROUP"
 
 # Setup the configuration share
 SETTING_SHARE="/Volumes/Shared Settings"
@@ -37,14 +37,14 @@ brew install --cask \
 	alfred \
 	macpass \
 	macfuse \
-	karabiner-elements \
+	\ #karabiner-elements \
 	signal \
-	flux \
-	evernote \
+	\ #flux \
+	\ #evernote \
 	daisydisk \
 	docker \
-	dash \
-	patchwork \
+	\ #dash \
+	\ #patchwork \
 	spotify \
 	calibre \
 	virtualbox \
@@ -56,48 +56,48 @@ brew install --cask \
 	transmission \
 	transmission-remote-gui \
 	protonvpn \
-	now \
-	libreoffice \
-	steam \
+	\ #now \
+	\ #libreoffice \
+	\ #steam \
 	vlc \
 	setapp \
 	imageoptim \
 	xld \
 	chromium \
-	mattermost \
+	\ #mattermost \
 	handbrake \
 	programmer-dvorak \
 	java \
 	mailmate \
-	nightowl \
+	\ #nightowl \
 	kobo \
 	font-firacode-nerd-font \
-	font-fira-code \
+	\ #font-fira-code \
 	google-chrome \
 	gitup \
-	postman \
+	\ #postman \
 	macvim \
 	beaker-browser \
 	brave-browser \
-	contexts \
+	\ #contexts \
 	notion \
 	mumble \
-	sublime-merge \
-	flotato \
+	\ #sublime-merge \
+	\ #flotato \
 	anki \
-	go64 \
+	\ #go64 \
 	force-paste \
-	typora \
+	\ #typora \
 	drawio \
 	vcv-rack \
 	discord \
-	vscodium \
+	\ #vscodium \
 	the-unarchiver \
-	electrum \
+	\ #electrum \
 	kodi \
 	darktable \
-	stellarium \
-	phd2
+	\ #stellarium \
+	\ #phd2
 
 #ocenaudio \
 
@@ -106,19 +106,18 @@ gcloud config set disable_usage_reporting false
 
 echo "🍺 Install cli apps"
 brew install \
-	node \
-	nvm \
-	gromgit/fuse/sshfs \
-	vagrant-completion \
+	\ #node \
+	\ #nvm \
+	\ #gromgit/fuse/sshfs \
+	\ #vagrant-completion \
 	ext4fuse \
 	ansible \
 	homebrew/cask-fonts/font-fira-code \
-	sshrc \
-	terminal-notifier \
+	\ #sshrc \
+	\ #terminal-notifier \
 	imageoptim-cli \
-	gnu-getopt \
 	selecta \
-	mayeu/tap/borgmatic \
+	borgmatic \
 	beancount \
 	mayeu/tap/beancount-scripts \
 	fava \
@@ -126,20 +125,20 @@ brew install \
 	mayeu/tap/flock \
 	mayeu/tap/habitica-cli \
 	mayeu/tap/lmt \
-	vault \
+	\ #vault \
 	pinentry-mac \
-	hugo \
+	\ #hugo \
 	hardlink-osx \
 	libnettle \
 	telnet \
 	adr-tools \
 	gawk \
-	bindfs \
-	zsh-completion \
+	\ #bindfs \
+	\ #zsh-completion \
 	pyenv-virtualenvwrapper \
 	editorconfig \
-	testssl \
-	topgrade \
+	\ #testssl \
+	\ #topgrade \
 	siril
 
 ## To use pinentry-mac it must be added as "pinentry-program" in the
@@ -149,9 +148,6 @@ brew install \
 echo "🐳 Give some root right to the hyperkit docker driver"
 sudo chown root:wheel /usr/local/opt/docker-machine-driver-hyperkit/bin/docker-machine-driver-hyperkit
 sudo chmod u+s /usr/local/opt/docker-machine-driver-hyperkit/bin/docker-machine-driver-hyperkit
-
-# Force link some gnu tools
-#brew link --force gnu-getopt
 
 cd ~/ && git clone https://github.com/Mayeu/dots .dots
 
@@ -169,31 +165,31 @@ sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
 echo "🔗 Link my dotfiles"
 make link
 
-# Setup my shell to be homebrew zsh
-echo "🐚 Setup my shell to homebrew zsh"
-export zshpath="$(brew --prefix)/bin/zsh"
-grep -q "^${zshpath}" /etc/shells || sudo -E sh -c "echo '$zshpath' >> /etc/shells"
-chsh -s "$zshpath"
+## Setup my shell to be homebrew zsh
+#echo "🐚 Setup my shell to homebrew zsh"
+#export zshpath="$(brew --prefix)/bin/zsh"
+#grep -q "^${zshpath}" /etc/shells || sudo -E sh -c "echo '$zshpath' >> /etc/shells"
+#chsh -s "$zshpath"
 
-# setup ZSH
-echo "🐚 Setup zsh"
-# Force rebuilding of autocompletion
-rm -f ~/.zcompdump
-compinit
+## setup ZSH
+#echo "🐚 Setup zsh"
+## Force rebuilding of autocompletion
+#rm -f ~/.zcompdump
+#compinit
 
-# iterm2 configuration
-echo "🐚 Configure iterm2 to sync preferences"
-# Use a custom folder for the preferences
-defaults write com.googlecode.iterm2 PrefsCustomFolder "/Volumes/Shared Settings/iterm2"
-# Load preferences from a custom folder
-defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder 1
-# Save config on the custom folder when quitting
-defaults write com.googlecode.iterm2 "NoSyncNeverRemindPrefsChangesLostForFile_selection" 0
-
-# Alfred Configuration
-echo "🤵 Configure Alfred to share settings"
-# Use a sync folder
-defaults write com.runningwithcrayons.Alfred-Preferences syncfolder "/Volumes/Shared Settings/alfred"
+## iterm2 configuration
+#echo "🐚 Configure iterm2 to sync preferences"
+## Use a custom folder for the preferences
+#defaults write com.googlecode.iterm2 PrefsCustomFolder "/Volumes/Shared Settings/iterm2"
+## Load preferences from a custom folder
+#defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder 1
+## Save config on the custom folder when quitting
+#defaults write com.googlecode.iterm2 "NoSyncNeverRemindPrefsChangesLostForFile_selection" 0
+#
+## Alfred Configuration
+#echo "🤵 Configure Alfred to share settings"
+## Use a sync folder
+#defaults write com.runningwithcrayons.Alfred-Preferences syncfolder "/Volumes/Shared Settings/alfred"
 
 # MailMate configuration
 echo "📧 Configure mailmate"

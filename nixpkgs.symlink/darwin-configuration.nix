@@ -143,6 +143,9 @@ in
     ntfs3g
     bindfs
     sshfs
+    terminal-notifier
+    testssl
+    siril
   ];
 
   # Use a custom configuration.nix location.
