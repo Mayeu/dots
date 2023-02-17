@@ -146,6 +146,7 @@ in
     sshfs
     terminal-notifier
     testssl
+    zsh-completions
   ];
 
   # Use a custom configuration.nix location.
@@ -185,6 +186,17 @@ in
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh = {
     enable = true;
+    enableCompletions = true;
+    enableSyntaxHighlighting = true;
+
+    shellInit = with pkgs; ''
+      source "${zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+      source "${zsh-z}/share/zsh-z/zsh-z.plugin.zsh"
+
+      #"${zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+      source "${zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+      source "${spaceship-prompt}/lib/spaceship-prompt/spaceship.zsh"
+      '';
   };
   # programs.fish.enable = true;
 
