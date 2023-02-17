@@ -145,6 +145,7 @@ in
     terminal-notifier
     testssl
     zsh-completions
+    nodejs # saddly, it's necessary for Vim's coc...
   ];
 
   # Use a custom configuration.nix location.
