@@ -101,8 +101,8 @@ brew install --cask \
 
 #ocenaudio \
 
-echo "👁 Disagle gcloud cli reporting"
-gcloud config set disable_usage_reporting false
+#echo "👁 Disagle gcloud cli reporting"
+#gcloud config set disable_usage_reporting false
 
 echo "🍺 Install cli apps"
 brew install \
@@ -148,8 +148,6 @@ brew install \
 echo "🐳 Give some root right to the hyperkit docker driver"
 sudo chown root:wheel /usr/local/opt/docker-machine-driver-hyperkit/bin/docker-machine-driver-hyperkit
 sudo chmod u+s /usr/local/opt/docker-machine-driver-hyperkit/bin/docker-machine-driver-hyperkit
-
-cd ~/ && git clone https://github.com/Mayeu/dots .dots
 
 # Make sure dvp is my login keyboard
 echo "⌨️  Update my login keyboard"

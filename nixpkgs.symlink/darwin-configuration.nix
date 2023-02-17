@@ -165,7 +165,7 @@ in
   nix = {
     #package = pkgs.nixUnstable;
     #package = pkgs.nixFlakes;
-    package = unstable.nix; # Necessary to get >=2.5, with Flake support.
+    #package = unstable.nix; # Necessary to get >=2.5, with Flake support.
 
     settings = {
       substituters = ["s3://mdots?endpoint=https://s3.fr-par.scw.cloud/&region=fr-par"];
