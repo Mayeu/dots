@@ -145,7 +145,6 @@ in
     sshfs
     terminal-notifier
     testssl
-    siril
   ];
 
   # Use a custom configuration.nix location.

@@ -6,7 +6,7 @@
 sh <(curl -L https://nixos.org/nix/install)
 
 echo "⤴️ Loading nix"
-source /etc/static/bashrc
+source /etc/bashrc
 
 echo "🚇 Adding my channels"
 nix-channel --add https://channels.nixos.org/nixpkgs-22.11-darwin nixpkgs

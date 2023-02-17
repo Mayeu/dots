@@ -33,7 +33,7 @@ brew install --cask \
 	blockblock \
 	carbon-copy-cloner \
 	little-snitch \
-	syncthing-app \
+	syncthing \
 	alfred \
 	macpass \
 	macfuse \
@@ -42,8 +42,6 @@ brew install --cask \
 	docker \
 	spotify \
 	calibre \
-	virtualbox \
-	virtualbox-extension-pack \
 	appcleaner \
 	zoom \
 	tor-browser \
@@ -58,10 +56,9 @@ brew install --cask \
 	chromium \
 	handbrake \
 	programmer-dvorak \
-	java \
 	mailmate \
 	kobo \
-	font-firacode-nerd-font \
+	font-fira-code-nerd-font \
 	google-chrome \
 	gitup \
 	macvim \
@@ -72,11 +69,14 @@ brew install --cask \
 	anki \
 	force-paste \
 	drawio \
-	vcv-rack \
 	discord \
 	the-unarchiver \
 	kodi \
 	darktable
+#vcv-rack \
+# java
+#virtualbox
+#virtualbox-extension-pack \
 #vscodium \
 #electrum \
 #stellarium \
@@ -106,27 +106,23 @@ brew install --cask \
 echo "🍺 Install cli apps"
 brew install \
 	ext4fuse \
-	ansible \
 	homebrew/cask-fonts/font-fira-code \
 	imageoptim-cli \
 	selecta \
 	borgmatic \
 	beancount \
-	mayeu/tap/beancount-scripts \
 	fava \
 	mayeu/tap/run-one \
 	mayeu/tap/flock \
-	mayeu/tap/habitica-cli \
-	mayeu/tap/lmt \
 	pinentry-mac \
-	hardlink-osx \
+	hardlink \
 	libnettle \
 	telnet \
 	adr-tools \
 	gawk \
-	pyenv-virtualenvwrapper \
 	editorconfig \
 	siril
+#ansible \
 #node \
 #nvm \
 #gromgit/fuse/sshfs \
@@ -139,6 +135,8 @@ brew install \
 #zsh-completion \
 #testssl \
 #topgrade \
+#pyenv-virtualenvwrapper \
+#mayeu/tap/beancount-scripts \
 
 ## To use pinentry-mac it must be added as "pinentry-program" in the
 # `~/.gnupg/gpg-agent.conf` configuration
