@@ -3,8 +3,8 @@
 
   inputs = {
       std.url = "github:divnix/std";
-      #nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-22.11-darwin";
-      nixpkgs.url = "github:NixOS/nixpkgs/master";
+      #nixpkgs.url = "nixpkgs/nixpkgs-22.11-darwin";
+      nixpkgs.url = "nixpkgs/nixos-unstable";
       #home-manager.url = "github:nix-community/home-manager";
       #home-manager.inputs.nixpkgs.follows = "nixpkgs";
       darwin.url = "github:lnl7/nix-darwin";
