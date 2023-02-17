@@ -1,12 +1,11 @@
 { config,
 #pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/feda52be1d59.tar.gz") {},
 pkgs,
-#unstable,
 lib,
 ... }:
 let
   # Use nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable to add it
-  unstable = import <unstable> {};
+  #unstable = import <unstable> {};
 
   # A list of custom plugins for vim
   vimCustomPlugins = {
@@ -52,28 +51,28 @@ in
     git
     git-extras
     git-subrepo
-    unstable.git-bug
-    unstable.git-secret # Unstable to get 0.4
+    git-bug
+    git-secret
     diff-so-fancy # Fancy diff for git
     git-lfs
     fzf
     #antidote # broken on darwin, and not maintained anymore. It's successory (antidote) is not in nixpgks https://github.com/mattmc3/antidote
     bash
-    unstable.nushell
+    nushell
     wget
     curl
-    unstable.terraform # Necessary because on stable TF is 0.12 🤦
+    terraform # Necessary because on stable TF is 0.12 🤦
     terragrunt
     nomad
     rsync
     ripgrep
     bat
     jq
-    unstable.yq-go # Command line yaml processor, like jq
-    unstable.fq # jq for binaries
+    yq-go # Command line yaml processor, like jq
+    fq # jq for binaries
     xmlstarlet # Command line xml processor
     python310Packages.woob
-    unstable.yt-dlp
+    yt-dlp
     ffmpeg
     tmux
     shellcheck
@@ -81,7 +80,7 @@ in
     borgbackup
     #borgmatic # Currently broken on macos
     #reptyr # Reattach a orphan process to the terminal. Linux only :(
-    #unstable.k9s
+    #k9s
     #kube3d # Don't support macOS in nix apparently
     #tfk8s
     broot # https://dystroy.org/broot/
@@ -96,7 +95,7 @@ in
     fd # alternative to find
     direnv # Automate env loading, but more importently, nix shell loading
     rclone
-    unstable.nix-direnv # 2021-12-28: at that time the flake option is only in unstable
+    nix-direnv
     openssh
     sshuttle
     #OSCAR
@@ -106,9 +105,9 @@ in
     upx
     pv
     shfmt
-    unstable.ipfs
+    ipfs
     lrzip
-    unstable.ruby_3_1
+    ruby_3_1
     coreutils
     pigz
     pandoc
@@ -123,7 +122,7 @@ in
     sshuttle
     # virtualboxWithExtpack # Not supported by macOS yet
     ctags # Not sure I really need that as a root package
-    python2
+    #python2
     fswatch
     tealdeer
     rmlint
@@ -133,14 +132,14 @@ in
     # testssl # Marked as insecure because depend of Openssl 1.0.2
     go
     dep
-    #unstable.kitty # Terminal emulator
+    #kitty # Terminal emulator
     # Terminal emulator in rust, support Kitty img & iterm2
-    #( unstable.wezterm.overrideAttrs (_: {
+    #( wezterm.overrideAttrs (_: {
     #  meta.broken = false;
     #}))
     gphoto2
     #python310Packages.pipx
-    unstable.elixir_1_14 # until I pin my version and have cache, make it common for my projects using it.
+    elixir_1_14 # until I pin my version and have cache, make it common for my projects using it.
     ntfs3g
     bindfs
     sshfs
