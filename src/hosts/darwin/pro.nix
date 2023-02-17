@@ -4,8 +4,6 @@ pkgs,
 lib,
 ... }:
 let
-  # Use nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable to add it
-  #unstable = import <unstable> {};
 
   # A list of custom plugins for vim
   vimCustomPlugins = {
@@ -21,18 +19,6 @@ let
     #};
     # use nix-prefetch-github to have those info
   };
-
-  # This fetch a tarball containing a default.nix and use it as package later on.
-  # The {} is the magic that correctly turn it into a package
-  #comma = import (
-  #  # TODO: the nix used in this emit warning about flakes support. Try to fix
-  #  pkgs.fetchFromGitHub {
-  #    owner = "DavHau";
-  #    repo = "comma";
-  #    rev = "7eca596248e8d808617103d0eb515074b994bff0";
-  #    sha256 = "F95bKzwc/9hhhvzNW3OX9TBeUnq89ZhebYFS2Q1mrc8=";
-  #    fetchSubmodules = true;
-  #  }) {};
 
 in
   {
@@ -52,53 +38,38 @@ in
     git-extras
     git-subrepo
     git-bug
-    git-secret
     diff-so-fancy # Fancy diff for git
     git-lfs
     fzf
-    #antidote # broken on darwin, and not maintained anymore. It's successory (antidote) is not in nixpgks https://github.com/mattmc3/antidote
     bash
     nushell
     wget
     curl
-    terraform # Necessary because on stable TF is 0.12 🤦
-    terragrunt
-    nomad
     rsync
     ripgrep
     bat
     jq
     yq-go # Command line yaml processor, like jq
     fq # jq for binaries
-    xmlstarlet # Command line xml processor
+    #xmlstarlet # Command line xml processor
     python310Packages.woob
     yt-dlp
     ffmpeg
     tmux
     shellcheck
-    mysql-client
     borgbackup
     #borgmatic # Currently broken on macos
-    #reptyr # Reattach a orphan process to the terminal. Linux only :(
-    #k9s
-    #kube3d # Don't support macOS in nix apparently
-    #tfk8s
     broot # https://dystroy.org/broot/
     silver-searcher # Similar to ack, but faster
-    packer
     vagrant
-    #kubectl
-    #kubernetes-helm
     gnumake
     gopass
     pass
     fd # alternative to find
     direnv # Automate env loading, but more importently, nix shell loading
-    rclone
     nix-direnv
     openssh
     sshuttle
-    #OSCAR
     #jless # A JSON viewer in the cli
     pwgen
     pgcli
@@ -107,10 +78,8 @@ in
     shfmt
     ipfs
     lrzip
-    ruby_3_1
     coreutils
     pigz
-    pandoc
     imagemagick
     picocom
     htop
@@ -118,10 +87,9 @@ in
     atomicparsley # Pour embedded les images dans les m4a de youtube-dl TODO: not sure it's needed with yt-dlp
     tor
     sshpass
-    google-cloud-sdk
     sshuttle
     # virtualboxWithExtpack # Not supported by macOS yet
-    ctags # Not sure I really need that as a root package
+    #ctags # Not sure I really need that as a root package
     #python2
     fswatch
     tealdeer
@@ -129,14 +97,12 @@ in
     fd
     watchexec
     smartmontools
-    go
-    dep
     #kitty # Terminal emulator
     # Terminal emulator in rust, support Kitty img & iterm2
     #( wezterm.overrideAttrs (_: {
     #  meta.broken = false;
     #}))
-    gphoto2
+    #gphoto2
     #python310Packages.pipx
     elixir_1_14 # until I pin my version and have cache, make it common for my projects using it.
     ntfs3g
@@ -197,7 +163,6 @@ in
       source "${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
       source "${pkgs.spaceship-prompt}/lib/spaceship-prompt/spaceship.zsh"
       '';
-
   };
   # programs.fish.enable = true;
 
