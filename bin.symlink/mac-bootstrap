@@ -37,14 +37,9 @@ brew install --cask \
 	alfred \
 	macpass \
 	macfuse \
-	\ #karabiner-elements \
 	signal \
-	\ #flux \
-	\ #evernote \
 	daisydisk \
 	docker \
-	\ #dash \
-	\ #patchwork \
 	spotify \
 	calibre \
 	virtualbox \
@@ -56,49 +51,53 @@ brew install --cask \
 	transmission \
 	transmission-remote-gui \
 	protonvpn \
-	\ #now \
-	\ #libreoffice \
-	\ #steam \
 	vlc \
 	setapp \
 	imageoptim \
 	xld \
 	chromium \
-	\ #mattermost \
 	handbrake \
 	programmer-dvorak \
 	java \
 	mailmate \
-	\ #nightowl \
 	kobo \
 	font-firacode-nerd-font \
-	\ #font-fira-code \
 	google-chrome \
 	gitup \
-	\ #postman \
 	macvim \
 	beaker-browser \
 	brave-browser \
-	\ #contexts \
 	notion \
 	mumble \
-	\ #sublime-merge \
-	\ #flotato \
 	anki \
-	\ #go64 \
 	force-paste \
-	\ #typora \
 	drawio \
 	vcv-rack \
 	discord \
-	\ #vscodium \
 	the-unarchiver \
-	\ #electrum \
 	kodi \
-	darktable \
-	\ #stellarium \
-	\ #phd2
-
+	darktable
+#vscodium \
+#electrum \
+#stellarium \
+#phd2
+#nightowl \
+#font-fira-code \
+#postman \
+#contexts \
+#sublime-merge \
+#flotato \
+#go64 \
+#typora \
+#karabiner-elements \
+#flux \
+#evernote \
+#dash \
+#patchwork \
+#now \
+#libreoffice \
+#steam \
+#mattermost \
 #ocenaudio \
 
 #echo "👁 Disagle gcloud cli reporting"
@@ -106,15 +105,9 @@ brew install --cask \
 
 echo "🍺 Install cli apps"
 brew install \
-	\ #node \
-	\ #nvm \
-	\ #gromgit/fuse/sshfs \
-	\ #vagrant-completion \
 	ext4fuse \
 	ansible \
 	homebrew/cask-fonts/font-fira-code \
-	\ #sshrc \
-	\ #terminal-notifier \
 	imageoptim-cli \
 	selecta \
 	borgmatic \
@@ -125,21 +118,27 @@ brew install \
 	mayeu/tap/flock \
 	mayeu/tap/habitica-cli \
 	mayeu/tap/lmt \
-	\ #vault \
 	pinentry-mac \
-	\ #hugo \
 	hardlink-osx \
 	libnettle \
 	telnet \
 	adr-tools \
 	gawk \
-	\ #bindfs \
-	\ #zsh-completion \
 	pyenv-virtualenvwrapper \
 	editorconfig \
-	\ #testssl \
-	\ #topgrade \
 	siril
+#node \
+#nvm \
+#gromgit/fuse/sshfs \
+#vagrant-completion \
+#sshrc \
+#terminal-notifier \
+#vault \
+#hugo \
+#bindfs \
+#zsh-completion \
+#testssl \
+#topgrade \
 
 ## To use pinentry-mac it must be added as "pinentry-program" in the
 # `~/.gnupg/gpg-agent.conf` configuration
