@@ -129,7 +129,6 @@ in
     fd
     watchexec
     smartmontools
-    # testssl # Marked as insecure because depend of Openssl 1.0.2
     go
     dep
     #kitty # Terminal emulator
@@ -145,6 +144,7 @@ in
     sshfs
     terminal-notifier
     testssl
+    zsh-completions
   ];
 
   # Use a custom configuration.nix location.
@@ -184,6 +184,19 @@ in
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh = {
     enable = true;
+
+    enableCompletion = true;
+    enableSyntaxHighlighting = true;
+
+    promptInit = "";
+    interactiveShellInit = ''
+      source "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+      source "${pkgs.zsh-z}/share/zsh-z/zsh-z.plugin.zsh"
+
+      source "${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+      source "${pkgs.spaceship-prompt}/lib/spaceship-prompt/spaceship.zsh"
+      '';
+
   };
   # programs.fish.enable = true;
 

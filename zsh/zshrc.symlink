@@ -32,7 +32,7 @@ done
 export NVM_LAZY_LOAD=true
 
 # Static loading of Antibody
-source ${DOTFILES}/antibody/zsh_plugins.sh
+#source ${DOTFILES}/antibody/zsh_plugins.sh
 
 # load everything but the path and completion files
 for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
