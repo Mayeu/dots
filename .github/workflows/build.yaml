@@ -18,6 +18,7 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
+
     - name: Install Nix
       uses: cachix/install-nix-action@v17
       with:
@@ -105,4 +106,5 @@ jobs:
 
         export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
         source /etc/static/bashrc
-        darwin-rebuild build -I darwin-config=nixpkgs.symlink/darwin-configuration.nix
+        #darwin-rebuild build -I darwin-config=nixpkgs.symlink/darwin-configuration.nix
+        darwin-rebuild build --flake .#pro
