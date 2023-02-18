@@ -9,9 +9,12 @@
       #home-manager.inputs.nixpkgs.follows = "nixpkgs";
       darwin.url = "github:lnl7/nix-darwin";
       darwin.inputs.nixpkgs.follows = "nixpkgs"; # ...
+
+      m.url = "gitlab:Mayeu/m";
+      m.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { std, self, nixpkgs, home-manager, darwin }@inputs:
+  outputs = { std, self, nixpkgs, home-manager, darwin, m }@inputs:
     std.growOn {
       inherit inputs;
 

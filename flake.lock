@@ -87,6 +87,21 @@
     },
     "flake-utils": {
       "locked": {
+        "lastModified": 1676283394,
+        "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3db36a8b464d0c4532ba1c7dda728f4576d6d073",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
         "lastModified": 1659877975,
         "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
         "owner": "numtide",
@@ -137,6 +152,27 @@
         "owner": "divnix",
         "repo": "incl",
         "type": "github"
+      }
+    },
+    "m": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1676681057,
+        "narHash": "sha256-3FyeK4jFsZGYWqpwkMCSRozk0p2Pskq0JFrFLAFjIko=",
+        "owner": "Mayeu",
+        "repo": "m",
+        "rev": "e906d306b13a24468eca4f454db74841bef9d3b6",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "Mayeu",
+        "repo": "m",
+        "type": "gitlab"
       }
     },
     "n2c": {
@@ -285,6 +321,7 @@
       "inputs": {
         "darwin": "darwin",
         "home-manager": "home-manager",
+        "m": "m",
         "nixpkgs": "nixpkgs_2",
         "std": "std"
       }
@@ -298,7 +335,7 @@
         "blank": "blank",
         "devshell": "devshell",
         "dmerge": "dmerge",
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "incl": "incl",
         "makes": [
           "std",

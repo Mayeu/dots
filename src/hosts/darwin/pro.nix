@@ -2,6 +2,7 @@
 #pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/feda52be1d59.tar.gz") {},
 pkgs,
 lib,
+m,
 ... }:
 let
 
@@ -112,6 +113,7 @@ in
     testssl
     zsh-completions
     nodejs # saddly, it's necessary for Vim's coc...
+    m.packages.${pkgs.system}.default
   ];
 
   # Use a custom configuration.nix location.

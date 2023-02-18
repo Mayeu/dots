@@ -1,4 +1,4 @@
-include src/make/boilerplate.mk
+include make/boilerplate.mk
 
 # Find all the file/folder ending with .symlink
 file_to_symlink := $(shell find . -name '*.symlink')
