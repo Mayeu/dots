@@ -106,6 +106,23 @@ in
   #system.defaults.CustomSystemPreferences = {
   #};
 
+  homebrew = {
+    enable = true;
+
+    taps = [
+      "homebrew/cask"
+    ];
+
+    caskArgs = {
+      appdir = "~/Applications";
+      require_sha = true;
+    };
+
+    casks = [
+      "obsidian"
+    ];
+  };
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
