@@ -115,7 +115,9 @@ in
     nix-zsh-completions
     nodejs # saddly, it's necessary for Vim's coc...
     m.packages.${pkgs.system}.default
+    topgrade
   ];
+
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
