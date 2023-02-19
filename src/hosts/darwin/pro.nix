@@ -92,8 +92,15 @@ in
     # GPG tools
     "org.gpgtools.common" = { "UseKeychain" = "NO"; };
     # Analog clock
-    "com.apple.menuextra.clock" = { "IsAnalog" = "1"; };
+    "com.apple.menuextra.clock" = { "IsAnalog" = 1; };
+
+    # Controlcenter
+    "com.apple.controlcenter" = {
+      # Only show the battery in the control center
+      "NSStatusItem Visible Battery" = 0;
+    };
   };
+
 
   # Custom system preferences
   #system.defaults.CustomSystemPreferences = {
