@@ -26,6 +26,67 @@ in
     environment.variables.LC_ALL = "en_US.UTF-8";
   # TODO: date format, local money?
 
+  # Show all files including hidden
+  system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
+  # Show all extensions in filename
+  system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
+  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
+  # Don't switch automatically between light and dark mode;
+  system.defaults.NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = false;
+  # Deactivate character substitutions and most of the spelling automated fix
+  system.defaults.NSGlobalDomain.NSAutomaticCapitalizationEnabled = false;
+  system.defaults.NSGlobalDomain.NSAutomaticDashSubstitutionEnabled = false;
+  system.defaults.NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
+  system.defaults.NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
+  system.defaults.NSGlobalDomain.NSAutomaticSpellingCorrectionEnabled = false;
+  # No autosave to cloud
+  system.defaults.NSGlobalDomain.NSDocumentSaveNewDocumentsToCloud = false;
+  # Access F1, F2, ... with the Fn key
+  system.defaults.NSGlobalDomain."com.apple.keyboard.fnState" = false;
+
+  # Use units that make sense
+  system.defaults.NSGlobalDomain.AppleMetricUnits = 1;
+  system.defaults.NSGlobalDomain.AppleTemperatureUnit = "Celsius";
+  system.defaults.NSGlobalDomain.AppleICUForce24HourTime = true;
+
+  # Don't hide the menubar
+  system.defaults.NSGlobalDomain._HIHideMenuBar = false;
+
+  # Dock configuration
+  system.defaults.dock.autohide = true;
+  system.defaults.dock.show-process-indicators = true;
+  system.defaults.dock.show-recents = false;
+  #system.defaults.dock.mru-spaces = false;
+
+  # Disable all control corner
+  system.defaults.dock.wvous-tl-corner = 1;
+  system.defaults.dock.wvous-bl-corner = 1;
+  system.defaults.dock.wvous-tr-corner = 1;
+  system.defaults.dock.wvous-br-corner = 1;
+
+  # Finder configuration
+  system.defaults.finder.AppleShowAllExtensions = true;
+  system.defaults.finder.ShowStatusBar = true;
+  system.defaults.finder.ShowPathbar = true;
+  # Change default search scope to currnt folder
+  system.defaults.finder.FXDefaultSearchScope = "SCcf";
+  # Change default view to list view
+  system.defaults.finder.FXPreferredViewStyle = "Nlsv";
+  # Don't show any icons on the desktop
+  system.defaults.finder.CreateDesktop = false;
+  # Don't warn when changing the extension of a file
+  system.defaults.finder.FXEnableExtensionChangeWarning = false;
+
+  # Keyboard configuration
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToEscape = true;
+
+  # Trackpad
+  # No tap to click
+  system.defaults.trackpad.Clicking = false;
+  # No tap to drag
+  system.defaults.trackpad.Dragging = false;
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
