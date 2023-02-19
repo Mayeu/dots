@@ -30,7 +30,6 @@ brew install --cask \
 	iterm2 \
 	firefox \
 	omnifocus \
-	blockblock \
 	carbon-copy-cloner \
 	little-snitch \
 	syncthing \
@@ -73,6 +72,7 @@ brew install --cask \
 	the-unarchiver \
 	kodi \
 	darktable
+#blockblock \
 #vcv-rack \
 # java
 #virtualbox
