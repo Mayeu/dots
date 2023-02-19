@@ -5,3 +5,6 @@ for topic_folder in $DOTFILES/*; do
 		fpath=($topic_folder $fpath)
 	fi
 done
+
+#add nix zsh share in fpath
+fpath=("/run/current-system/sw/share/zsh/site-functions/" $fpath)

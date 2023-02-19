@@ -112,6 +112,7 @@ in
     terminal-notifier
     testssl
     zsh-completions
+    nix-zsh-completions
     nodejs # saddly, it's necessary for Vim's coc...
     m.packages.${pkgs.system}.default
   ];
@@ -120,11 +121,12 @@ in
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
-
   # Add those path to the current system
   # TODO: use this for broot as well. Maybe? Direct link to derivation could be better no?
   environment.pathsToLink = [
     "/share/nix-direnv"
+    "/share/zsh"
+    "/libexec"
   ];
 
   services.nix-daemon.enable = true;
