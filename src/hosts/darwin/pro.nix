@@ -87,10 +87,17 @@ in
   # No tap to drag
   system.defaults.trackpad.Dragging = false;
 
-  # Custom system preferences
+  # Custom user preferences
   system.defaults.CustomUserPreferences = {
+    # GPG tools
     "org.gpgtools.common" = { "UseKeychain" = "NO"; };
+    # Analog clock
+    "com.apple.menuextra.clock" = { "IsAnalog" = "1"; };
   };
+
+  # Custom system preferences
+  #system.defaults.CustomSystemPreferences = {
+  #};
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
