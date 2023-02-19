@@ -87,6 +87,11 @@ in
   # No tap to drag
   system.defaults.trackpad.Dragging = false;
 
+  # Custom system preferences
+  system.defaults.CustomUserPreferences = {
+    "org.gpgtools.common" = { "UseKeychain" = "NO"; };
+  };
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
