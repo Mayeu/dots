@@ -86,6 +86,8 @@ in
   system.defaults.trackpad.Clicking = false;
   # No tap to drag
   system.defaults.trackpad.Dragging = false;
+  # Allow two finger click for right click on the trackpad
+  system.defaults.trackpad.TrackpadRightClick = true;
 
   # Custom user preferences
   system.defaults.CustomUserPreferences = {
