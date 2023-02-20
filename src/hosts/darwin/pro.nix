@@ -114,6 +114,10 @@ in
 
     taps = [
       "homebrew/cask"
+      {
+        name = "serokell/tezos-packaging-stable";
+        clone_target = "https://github.com/serokell/tezos-packaging-stable.git";
+      }
     ];
 
     caskArgs = {
@@ -123,6 +127,10 @@ in
 
     casks = [
       "obsidian"
+    ];
+
+    brews = [
+      "tezos-client"
     ];
   };
 
