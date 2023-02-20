@@ -12,6 +12,9 @@
 
       m.url = "gitlab:Mayeu/m";
       m.inputs.nixpkgs.follows = "nixpkgs";
+
+      # TODO: help bring tezos via nix on macOS
+      #tezos.url = "github:serokell/tezos-packaging";
   };
 
   outputs = { std, self, nixpkgs, home-manager, darwin, m }@inputs:
