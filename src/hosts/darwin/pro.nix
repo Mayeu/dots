@@ -95,10 +95,11 @@ in
     "com.apple.menuextra.clock" = { "IsAnalog" = 1; };
 
     # Controlcenter
-    "com.apple.controlcenter" = {
-      # Only show the battery in the control center
-      "NSStatusItem Visible Battery" = 0;
-    };
+    # Saddly this doesn't seems to work
+    #"com.apple.controlcenter" = {
+    #  # Only show the battery in the control center
+    #  "NSStatusItem Visible Battery" = 0;
+    #};
   };
 
 
