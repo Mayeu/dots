@@ -126,6 +126,7 @@ in
     };
 
     casks = [
+      "chrysalis" # For the Keyboard.io Model001
       "obsidian"
     ];
 
