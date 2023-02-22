@@ -29,7 +29,7 @@ in
   # Show all files including hidden
   system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
   # Show all extensions in filename
-  system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
+  system.defaults.NSGlobalDomain.AppleShowAllExtensions = false;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
   # Don't switch automatically between light and dark mode;
   system.defaults.NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = false;
@@ -95,7 +95,18 @@ in
     "org.gpgtools.common" = { "UseKeychain" = "NO"; };
     # Analog clock
     "com.apple.menuextra.clock" = { "IsAnalog" = 1; };
-
+    # Additional finder configuration
+    "com.apple.finder" = {
+      "ShowExternalHardDrivesOnDesktop" = 0;
+      "ShowRemovableMediaOnDesktop" = 0;
+      # This opens my home by default
+      "NewWindowTarget" = "FfHm";
+      "NewWindowTargetPath" = "file:///Users/m/";
+      # Remove iCloud moving warning
+      "FXEnableRemoveFromICloudDriveWarning" = 0;
+      # Automatically empty the trash after 30 days
+      "FXRemoveOldTrashItems" = 1;
+    };
     # Controlcenter
     # Saddly this doesn't seems to work
     #"com.apple.controlcenter" = {
