@@ -125,6 +125,9 @@ in
 
     taps = [
       "homebrew/cask"
+      "homebrew/cask-drivers"
+      "homebrew/cask-fonts"
+      "mayeu/tap"
       {
         name = "serokell/tezos-packaging-stable";
         clone_target = "https://github.com/serokell/tezos-packaging-stable.git";
@@ -133,18 +136,78 @@ in
 
     caskArgs = {
       appdir = "~/Applications";
-      require_sha = true;
+      require_sha = false;
     };
 
     casks = [
+      "alfred"
+      "anki"
+      "appcleaner"
+      "audio-hijack"
+      "beaker-browser"
+      "brave-browser"
+      "cameracontroller" # For my Razer Kyo
+      "calibre"
+      "carbon-copy-cloner"
+      "chromium"
       "chrysalis" # For the Keyboard.io Model001
+      "daisydisk"
+      "darktable"
+      "discord"
+      "docker"
+      "drawio"
+      "firefox"
+      "font-fira-code-nerd-font"
+      "force-paste"
+      "gitup"
+      "google-chrome"
+      "handbrake"
+      "imageoptim"
+      "iterm2"
+      "karabiner-elements"
+      "kobo"
+      "kodi"
+      "little-snitch"
+      "loopback"
+      "macpass"
+      "macfuse"
+      "macvim"
+      "mailmate"
+      "mumble"
+      "notion"
       "obsidian"
+      "omnifocus"
+      "programmer-dvorak"
+      "protonvpn"
+      "setapp"
+      "signal"
+      "spotify"
+      "superduper"
+      "syncthing"
+      "the-unarchiver"
+      "tor-browser"
+      "transmission"
+      "transmission-remote-gui"
+      "vlc"
+      "xld"
+      "zoom"
     ];
 
     brews = [
+      "adr-tools"
+      "beancount"
+      "borgmatic"
+      "ext4fuse"
+      "fava"
+      "imageoptim-cli"
+      "mayeu/tap/flock" # because of run-one
+      "mayeu/tap/run-one" # because of run-one
+      #"mayeu/tap/beancount-scripts"
+      "pinentry-mac"
+      "siril"
       "tezos-client"
     ];
-  };
+ };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -162,6 +225,7 @@ in
     diff-so-fancy # Fancy diff for git
     git-lfs
     fzf
+    flock
     bash
     nushell
     wget
@@ -211,7 +275,7 @@ in
     sshuttle
     # virtualboxWithExtpack # Not supported by macOS yet
     #ctags # Not sure I really need that as a root package
-    #python2
+    python2
     fswatch
     tealdeer
     rmlint
@@ -236,6 +300,10 @@ in
     nodejs # saddly, it's necessary for Vim's coc...
     m.packages.${pkgs.system}.default
     topgrade
+    util-linux # Lot of useful
+    inetutils
+    gawk
+    editorconfig-core-c
   ];
 
 
@@ -338,6 +406,10 @@ in
   # (same for user).
   # The pb is that it does require a reboot to work
   # Via: https://stackoverflow.com/a/3756686
+
+   nixpkgs.config.permittedInsecurePackages = [
+     "python-2.7.18.6" # For the pass Alferd Workflow
+   ];
 
   # This overlays the default nixpkgs
   # In this case, it's only for the  vim_configurable,_ package (used in the programs.vim),

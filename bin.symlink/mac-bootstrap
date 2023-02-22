@@ -12,131 +12,20 @@ set -u
 #sudo dseditgroup -o edit -a m -t user "$MY_GROUP"
 
 # Setup the configuration share
-SETTING_SHARE="/Volumes/Shared Settings"
-echo "⚒  Give read/write access to me, myself, and I to the setting share"
-sudo chown -R m:"$MY_GROUP" "$SETTING_SHARE"
-sudo chmod -R +a "group:${MY_GROUP} allow list,add_file,search,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr,readsecurity,file_inherit,directory_inherit" "$SETTING_SHARE"
-
+#SETTING_SHARE="/Volumes/Shared Settings"
+#echo "⚒  Give read/write access to me, myself, and I to the setting share"
+#sudo chown -R m:"$MY_GROUP" "$SETTING_SHARE"
+#sudo chmod -R +a "group:${MY_GROUP} allow list,add_file,search,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr,readsecurity,file_inherit,directory_inherit" "$SETTING_SHARE"
+#
 #/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 echo "👁  Turn off homebrew analytics"
 brew analytics off
 export HOMEBREW_NO_ANALYTICS=1
 
-echo "🍺 Configure Homebrew to be shared with me, myself, and I"
-fix-homebrew-right
-
-echo "🍺 Install Cask apps"
-brew install --cask \
-	iterm2 \
-	firefox \
-	omnifocus \
-	carbon-copy-cloner \
-	little-snitch \
-	syncthing \
-	alfred \
-	macpass \
-	macfuse \
-	signal \
-	daisydisk \
-	docker \
-	spotify \
-	calibre \
-	appcleaner \
-	zoom \
-	tor-browser \
-	superduper \
-	transmission \
-	transmission-remote-gui \
-	protonvpn \
-	vlc \
-	setapp \
-	imageoptim \
-	xld \
-	chromium \
-	handbrake \
-	programmer-dvorak \
-	mailmate \
-	kobo \
-	font-fira-code-nerd-font \
-	google-chrome \
-	gitup \
-	macvim \
-	beaker-browser \
-	brave-browser \
-	notion \
-	mumble \
-	anki \
-	force-paste \
-	drawio \
-	discord \
-	the-unarchiver \
-	kodi \
-	darktable
-#blockblock \
-#vcv-rack \
-# java
-#virtualbox
-#virtualbox-extension-pack \
-#vscodium \
-#electrum \
-#stellarium \
-#phd2
-#nightowl \
-#font-fira-code \
-#postman \
-#contexts \
-#sublime-merge \
-#flotato \
-#go64 \
-#typora \
-#karabiner-elements \
-#flux \
-#evernote \
-#dash \
-#patchwork \
-#now \
-#libreoffice \
-#steam \
-#mattermost \
-#ocenaudio \
-
 #echo "👁 Disagle gcloud cli reporting"
 #gcloud config set disable_usage_reporting false
 
-echo "🍺 Install cli apps"
-brew install \
-	ext4fuse \
-	homebrew/cask-fonts/font-fira-code \
-	imageoptim-cli \
-	selecta \
-	borgmatic \
-	beancount \
-	fava \
-	mayeu/tap/run-one \
-	mayeu/tap/flock \
-	pinentry-mac \
-	hardlink \
-	libnettle \
-	telnet \
-	adr-tools \
-	gawk \
-	editorconfig \
-	siril
-#ansible \
-#node \
-#nvm \
-#gromgit/fuse/sshfs \
-#vagrant-completion \
-#sshrc \
-#terminal-notifier \
-#vault \
-#hugo \
-#bindfs \
-#zsh-completion \
-#testssl \
-#topgrade \
-#pyenv-virtualenvwrapper \
-#mayeu/tap/beancount-scripts \
+#echo "🍺 Install cli apps"
 
 ## To use pinentry-mac it must be added as "pinentry-program" in the
 # `~/.gnupg/gpg-agent.conf` configuration
@@ -160,18 +49,6 @@ sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
 echo "🔗 Link my dotfiles"
 make link
 
-## Setup my shell to be homebrew zsh
-#echo "🐚 Setup my shell to homebrew zsh"
-#export zshpath="$(brew --prefix)/bin/zsh"
-#grep -q "^${zshpath}" /etc/shells || sudo -E sh -c "echo '$zshpath' >> /etc/shells"
-#chsh -s "$zshpath"
-
-## setup ZSH
-#echo "🐚 Setup zsh"
-## Force rebuilding of autocompletion
-#rm -f ~/.zcompdump
-#compinit
-
 ## iterm2 configuration
 #echo "🐚 Configure iterm2 to sync preferences"
 ## Use a custom folder for the preferences
@@ -180,7 +57,7 @@ make link
 #defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder 1
 ## Save config on the custom folder when quitting
 #defaults write com.googlecode.iterm2 "NoSyncNeverRemindPrefsChangesLostForFile_selection" 0
-#
+
 ## Alfred Configuration
 #echo "🤵 Configure Alfred to share settings"
 ## Use a sync folder
