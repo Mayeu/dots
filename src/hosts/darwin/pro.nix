@@ -120,8 +120,11 @@ in
   #system.defaults.CustomSystemPreferences = {
   #};
 
+  services.karabiner-elements.enable = true;
+
   homebrew = {
     enable = true;
+    onActivation.cleanup = "zap"; # Delete anything not managed by nix
 
     taps = [
       "homebrew/cask"
@@ -164,7 +167,6 @@ in
       "handbrake"
       "imageoptim"
       "iterm2"
-      "karabiner-elements"
       "kobo"
       "kodi"
       "little-snitch"
@@ -200,7 +202,6 @@ in
       "ext4fuse"
       "fava"
       "imageoptim-cli"
-      "mayeu/tap/flock" # because of run-one
       "mayeu/tap/run-one" # because of run-one
       #"mayeu/tap/beancount-scripts"
       "pinentry-mac"
@@ -323,9 +324,11 @@ in
 
   # nix.package = pkgs.nix;
   nix = {
-    #package = pkgs.nixUnstable;
-    #package = pkgs.nixFlakes;
-    #package = unstable.nix; # Necessary to get >=2.5, with Flake support.
+    gc = {
+      user = "root";
+      interval = { Hour = 23; Minute = 55; };
+      options = "--delete-older-than 14d";
+    };
 
     settings = {
       substituters = ["s3://mdots?endpoint=https://s3.fr-par.scw.cloud/&region=fr-par"];
@@ -333,7 +336,6 @@ in
     };
 
     extraOptions = ''
-      #auto-optimise-store = true
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
