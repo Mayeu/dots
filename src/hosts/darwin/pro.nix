@@ -120,8 +120,6 @@ in
   #system.defaults.CustomSystemPreferences = {
   #};
 
-  services.karabiner-elements.enable = true;
-
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap"; # Delete anything not managed by nix
@@ -167,13 +165,13 @@ in
       "handbrake"
       "imageoptim"
       "iterm2"
+      "karabiner-elements"
       "kobo"
       "kodi"
       "little-snitch"
       "loopback"
       "macpass"
       "macfuse"
-      "macvim"
       "mailmate"
       "mumble"
       "notion"
@@ -538,7 +536,7 @@ in
 
         " Colors & colorscheme --------------------
         set termguicolors
-        set background=dark
+        set background=light
         colorscheme gruvbox
 
         " Set Invisible character
