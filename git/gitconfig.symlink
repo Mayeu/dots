@@ -54,7 +54,7 @@
 
 [core]
   # So I can share with other tools using cvsignore as "standard"
-  excludesfile = ~/.cvsignore
+	excludesFile = ~/.gitignore
   editor = vim
   autocrlf = input
   whitespace = trailing-space,space-before-tab
