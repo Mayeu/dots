@@ -27,7 +27,7 @@ in
   # TODO: date format, local money?
 
   # Show all files including hidden
-  system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
+  system.defaults.NSGlobalDomain.AppleShowAllFiles = false;
   # Show all extensions in filename
   system.defaults.NSGlobalDomain.AppleShowAllExtensions = false;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
