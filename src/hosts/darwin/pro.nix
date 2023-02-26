@@ -293,7 +293,7 @@ in
     bindfs
     sshfs
     terminal-notifier
-    testssl
+    #testssl # Depends on libressl 3.4.3 which is marked as insecure
     zsh-completions
     nix-zsh-completions
     nodejs # saddly, it's necessary for Vim's coc...
