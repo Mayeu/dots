@@ -51,10 +51,11 @@
 
 [push]
   default = current
+  autoSetupRemote = true
 
 [core]
   # So I can share with other tools using cvsignore as "standard"
-	excludesFile = ~/.gitignore
+  excludesFile = ~/.gitignore
   editor = vim
   autocrlf = input
   whitespace = trailing-space,space-before-tab
@@ -115,5 +116,6 @@
 
 [interactive]
   diffFilter = diff-so-fancy --patch
+
 [rerere]
 	enabled = true
