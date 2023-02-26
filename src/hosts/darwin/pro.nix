@@ -129,6 +129,7 @@ in
       "homebrew/cask-drivers"
       "homebrew/cask-fonts"
       "mayeu/tap"
+      "withgraphite/tap"
       {
         name = "serokell/tezos-packaging-stable";
         clone_target = "https://github.com/serokell/tezos-packaging-stable.git";
@@ -199,6 +200,7 @@ in
       "borgmatic"
       "ext4fuse"
       "fava"
+      "withgraphite/tap/graphite"
       "imageoptim-cli"
       "mayeu/tap/run-one" # because of run-one
       #"mayeu/tap/beancount-scripts"
