@@ -1,36 +1,20 @@
 #!/usr/bin/env bash
 
-# TODO: I don't think topgrade does it correctly here
-#echo "📝 Upgrade VIM's Plugin"
-#vim -c 'call dein#update() | quit'
-#vim -c 'call dein#recache_runtimepath() | quit'
+cd ~/.dots
 
-echo "🍺 Fix Homebrew right"
-#fix-homebrew-right
+echo "❆ Update flake"
+nix flake update
 
-echo "🛩  Run topgrade"
-topgrade --disable nix --disable node --disable gem --disable gcloud --disable containers
-
-#echo "🔐 Fix gpg"
-#brew reinstall gpg-suite
-
-echo "🍺 Cleanup brew cache"
-brew cleanup --prune 30
-
-# Make sure dvp is my login keyboard
-echo "⌨️  Update my login keyboard"
-sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
-sudo chmod 644 /Library/Preferences/com.apple.HIToolbox.plist
-
-echo "🅽  Updating nix"
-nix-channel --update
+# Nix don't update brew as far as I understand
+echo "🍺 Updating brew"
+brew update
 
 ## 2021-04-18 TODO: Only path the specific variable nix & nix-darwin needs
 echo "👹 Updating nix-darwin"
-darwin-rebuild switch
-#
-#echo "👹 Updating comma index: warning, horrendously slow"
-#, --update
+m switch
+
+echo "🍺 Cleanup brew cache"
+brew cleanup --prune 14
 
 echo "👹 Collect nix garbage"
 sudo nix-collect-garbage --delete-older-than 14d
@@ -38,6 +22,7 @@ sudo nix-collect-garbage --delete-older-than 14d
 echo "👹 Dedup nix store"
 sudo nix store optimise
 
-# 2021-04-20 TODO: Migrate everything to Nix to don't have this at all anymore?
-echo "🔏 Fix right for compinit"
-compaudit | xargs chmod g-w
+# Make sure dvp is my login keyboard
+echo "⌨️  Update my login keyboard"
+sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist /Library/Preferences/
+sudo chmod 644 /Library/Preferences/com.apple.HIToolbox.plist
