@@ -23,8 +23,8 @@
 
       cellsFrom = ./src;
 
-      cellBlocks = [
-        (std.blockTypes.installables "packages" {ci.build = true;})
+      cellBlocks = with std.blockTypes; [
+        (installables "packages" {ci.build = true;})
       ];
 
     }
