@@ -107,6 +107,19 @@ in
       # Automatically empty the trash after 30 days
       "FXRemoveOldTrashItems" = 1;
     };
+
+    "com.apple.screencapture" = {
+      "location" = "/Users/m/Downloads";
+      "type" = "png";
+    };
+
+    "com.apple.dock" = {
+      # Enable the mouse hover highlight effect on stack in the dock
+      "mouse-over-hilite-stack" = true;
+      # Wipe the default app out of the dock. I don't use it to launch application
+      #"persistent-apps" = [];
+    };
+
     # Controlcenter
     # Saddly this doesn't seems to work
     #"com.apple.controlcenter" = {
@@ -155,6 +168,7 @@ in
       "chrysalis" # For the Keyboard.io Model001
       "daisydisk"
       "darktable"
+      "diffusionbee"
       "discord"
       "docker"
       "drawio"
