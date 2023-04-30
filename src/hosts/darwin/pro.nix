@@ -181,6 +181,7 @@ in
       "imageoptim"
       "iterm2"
       "karabiner-elements"
+      "kdrive"
       "kobo"
       "kodi"
       "little-snitch"
@@ -199,6 +200,7 @@ in
       "spotify"
       "superduper"
       "syncthing"
+      "steam"
       "the-unarchiver"
       "tor-browser"
       "transmission"
@@ -231,6 +233,7 @@ in
     comma
     nix-prefetch-github
     exiftool
+    mat2 # Metadata trasher
     mosh
     tree
     git
@@ -290,26 +293,26 @@ in
     sshuttle
     # virtualboxWithExtpack # Not supported by macOS yet
     #ctags # Not sure I really need that as a root package
-    python2
+    python2 # For the pass Alfred Workflow
     fswatch
     tealdeer
     rmlint
-    fd
+    fdupes
     watchexec
     smartmontools
     #kitty # Terminal emulator
     # Terminal emulator in rust, support Kitty img & iterm2
-    #( wezterm.overrideAttrs (_: {
-    #  meta.broken = false;
+    #(borgmatic.overrideAttrs (_: {
+    #    meta.platforms = lib.platforms.unix;
     #}))
     #gphoto2
     #python310Packages.pipx
-    elixir_1_14 # until I pin my version and have cache, make it common for my projects using it.
     ntfs3g
     bindfs
     sshfs
     terminal-notifier
     #testssl # Depends on libressl 3.4.3 which is marked as insecure
+    testdisk
     zsh-completions
     nix-zsh-completions
     nodejs # saddly, it's necessary for Vim's coc...
