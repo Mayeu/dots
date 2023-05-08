@@ -296,7 +296,7 @@ in
     fswatch
     tealdeer
     rmlint
-    fdupes
+    jdupes
     watchexec
     smartmontools
     #kitty # Terminal emulator
