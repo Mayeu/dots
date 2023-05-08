@@ -159,7 +159,6 @@ in
       "anki"
       "appcleaner"
       "audio-hijack"
-      "beaker-browser"
       "brave-browser"
       "cameracontroller" # For my Razer Kyo
       "calibre"
