@@ -260,7 +260,6 @@ in
     tmux
     shellcheck
     borgbackup
-    #borgmatic # Currently broken on macos
     broot # https://dystroy.org/broot/
     silver-searcher # Similar to ack, but faster
     vagrant
@@ -346,9 +345,11 @@ in
       options = "--delete-older-than 14d";
     };
 
+
     settings = {
       substituters = ["s3://mdots?endpoint=https://s3.fr-par.scw.cloud/&region=fr-par"];
       trusted-public-keys = ["mdots:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs="];
+      trusted-users = ["m"];
     };
 
     extraOptions = ''
@@ -357,7 +358,19 @@ in
       keep-derivations = true
       keep-failed = false
       keep-going = true
+      builders-use-substitutes = true
     '';
+
+    distributedBuilds = true;
+
+    buildMachines = [{
+      hostName = "purism";
+      system = "x86_64-linux";
+      # TODO: not yet supported by nix-darwin ?
+      #protocol = "ssh-ng";
+      maxJobs = 4;
+      supportedFeatures = ["kvm"];
+    }];
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
