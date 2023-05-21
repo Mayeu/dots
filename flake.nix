@@ -25,10 +25,14 @@
 
       cellBlocks = with std.blockTypes; [
         (installables "packages" {ci.build = true;})
+
+        # presets
+        (data "templates")
       ];
 
     }
     {
       packages = std.harvest self [ [ "hosts" "packages" ] ];
+      templates = std.pick inputs.self ["presets" "templates"];
     };
 }
