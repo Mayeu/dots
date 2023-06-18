@@ -22,12 +22,12 @@ rm /Library/LaunchDaemons/org.nixos.darwin-store.plist
 
 echo "🧹 Remove the files created by nix"
 rm -rf \
-	/etc/nix /var/root/.nix-profile \
-	/var/root/.nix-defexpr \
-	/var/root/.nix-channels \
-	~/.nix-profile \
-	~/.nix-defexpr \
-	~/.nix-channels
+  /etc/nix /var/root/.nix-profile \
+  /var/root/.nix-defexpr \
+  /var/root/.nix-channels \
+  ~/.nix-profile \
+  ~/.nix-defexpr \
+  ~/.nix-channels
 
 echo "🛑 Remove the groups created by nix"
 dscl . delete /Groups/nixbld

@@ -1,8 +1,9 @@
-{ pkgs, fetchgit }:
-let
+{
+  pkgs,
+  fetchgit,
+}: let
   buildVimPlugin = pkgs.vimUtils.buildVimPluginFrom2Nix;
 in {
-
   "vim-dispatch" = buildVimPlugin {
     name = "vim-dispatch";
     src = fetchgit {

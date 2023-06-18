@@ -1,11 +1,10 @@
-{ config,
-#pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/feda52be1d59.tar.gz") {},
-pkgs,
-lib,
-m,
-... }:
-let
-
+{
+  config,
+  pkgs,
+  lib,
+  m,
+  ...
+}: let
   # A list of custom plugins for vim
   vimCustomPlugins = {
     # Exemple:
@@ -20,10 +19,8 @@ let
     #};
     # use nix-prefetch-github to have those info
   };
-
-in
-  {
-    environment.variables.LC_ALL = "en_US.UTF-8";
+in {
+  environment.variables.LC_ALL = "en_US.UTF-8";
   # TODO: date format, local money?
 
   # Show all files including hidden
@@ -92,9 +89,9 @@ in
   # Custom user preferences
   system.defaults.CustomUserPreferences = {
     # GPG tools
-    "org.gpgtools.common" = { "UseKeychain" = "NO"; };
+    "org.gpgtools.common" = {"UseKeychain" = "NO";};
     # Analog clock
-    "com.apple.menuextra.clock" = { "IsAnalog" = 1; };
+    "com.apple.menuextra.clock" = {"IsAnalog" = 1;};
     # Additional finder configuration
     "com.apple.finder" = {
       "ShowExternalHardDrivesOnDesktop" = 0;
@@ -127,7 +124,6 @@ in
     #  "NSStatusItem Visible Battery" = 0;
     #};
   };
-
 
   # Custom system preferences
   #system.defaults.CustomSystemPreferences = {
@@ -225,7 +221,7 @@ in
       "siril"
       "tezos-client"
     ];
- };
+  };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -324,7 +320,6 @@ in
     editorconfig-core-c
   ];
 
-
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
@@ -343,10 +338,12 @@ in
   nix = {
     gc = {
       user = "root";
-      interval = { Hour = 23; Minute = 55; };
+      interval = {
+        Hour = 23;
+        Minute = 55;
+      };
       options = "--delete-older-than 14d";
     };
-
 
     settings = {
       substituters = ["s3://mdots?endpoint=https://s3.fr-par.scw.cloud/&region=fr-par"];
@@ -365,14 +362,16 @@ in
 
     distributedBuilds = true;
 
-    buildMachines = [{
-      hostName = "purism";
-      system = "x86_64-linux";
-      # TODO: not yet supported by nix-darwin ?
-      #protocol = "ssh-ng";
-      maxJobs = 4;
-      supportedFeatures = ["kvm"];
-    }];
+    buildMachines = [
+      {
+        hostName = "purism";
+        system = "x86_64-linux";
+        # TODO: not yet supported by nix-darwin ?
+        #protocol = "ssh-ng";
+        maxJobs = 4;
+        supportedFeatures = ["kvm"];
+      }
+    ];
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
@@ -443,9 +442,9 @@ in
   # The pb is that it does require a reboot to work
   # Via: https://stackoverflow.com/a/3756686
 
-   nixpkgs.config.permittedInsecurePackages = [
-     "python-2.7.18.6" # For the pass Alferd Workflow
-   ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "python-2.7.18.6" # For the pass Alferd Workflow
+  ];
 
   # This overlays the default nixpkgs
   # In this case, it's only for the  vim_configurable,_ package (used in the programs.vim),
@@ -465,39 +464,41 @@ in
         darwinSupport = true;
       };
 
-      nix-direnv = pkgs.nix-direnv.override { enableFlakes = true; };
+      nix-direnv = pkgs.nix-direnv.override {enableFlakes = true;};
 
       wezterm = pkgs.wezterm.override {
-        buildInputs = with pkgs; [
-          fontconfig
-          inconsolata
-          zlib
-        ] ++ lib.optionals stdenv.isLinux [
-          libX11
-          libxcb
-          libxkbcommon
-          openssl
-          wayland
-          xcbutil
-          xcbutilimage
-          xcbutilkeysyms
-          xcbutilwm # contains xcb-ewmh among others
-        ] ++ lib.optionals stdenv.isDarwin [
-          Cocoa
-          CoreGraphics
-          Foundation
-          libiconv
-        ] ++ (stdenv.isDarwin && (builtins.hasAttr "UserNotifications" darwin.apple_sdk.frameworks)) [
-          darwin.apple_sdk.frameworks.UserNotifications
-        ];
-
+        buildInputs = with pkgs;
+          [
+            fontconfig
+            inconsolata
+            zlib
+          ]
+          ++ lib.optionals stdenv.isLinux [
+            libX11
+            libxcb
+            libxkbcommon
+            openssl
+            wayland
+            xcbutil
+            xcbutilimage
+            xcbutilkeysyms
+            xcbutilwm # contains xcb-ewmh among others
+          ]
+          ++ lib.optionals stdenv.isDarwin [
+            Cocoa
+            CoreGraphics
+            Foundation
+            libiconv
+          ]
+          ++ (stdenv.isDarwin && (builtins.hasAttr "UserNotifications" darwin.apple_sdk.frameworks)) [
+            darwin.apple_sdk.frameworks.UserNotifications
+          ];
       };
     })
   ];
 
   programs.vim = {
     enable = true;
-
     extraKnownPlugins = vimCustomPlugins;
     plugins = [
       {
@@ -505,12 +506,14 @@ in
           "vim-sensible" # Sensible default for VIM by tpope
           "vim-eunuch" # :Move, Rename, etc.
           "vim-surround"
-          "vim-nix" "vim-addon-nix" # For Nix
+          "vim-nix"
+          "vim-addon-nix" # For Nix
           "editorconfig-vim"
           "gruvbox" # My fav theme
           "ale" # ALE (linting, syntax error, fix on save)
           "vim-yaml"
-          "vim-terraform" "vim-terraform-completion"
+          "vim-terraform"
+          "vim-terraform-completion"
           "vim-ruby"
           "vim-lua"
           "auto-pairs" # Auto close pairs character
@@ -518,7 +521,8 @@ in
           "coc-nvim" # Fancy auto completion and stuff, include nodejs
           "fzf-vim"
           "coc-fzf"
-          "vim-elixir" "alchemist-vim"
+          "vim-elixir"
+          "alchemist-vim"
           "tabmerge"
           "dhall-vim"
           "LanguageClient-neovim"
@@ -528,131 +532,130 @@ in
     ];
 
     vimConfig = ''
-        " Define my leader key as SPC
-        let mapleader=" "
+      " Define my leader key as SPC
+      let mapleader=" "
 
-        " Basic settings --------------------------
-        " Use the system clipboard by default.
-        set clipboard^=unnamed
+      " Basic settings --------------------------
+      " Use the system clipboard by default.
+      set clipboard^=unnamed
 
-        " More natural split
-        set splitbelow
-        set splitright
+      " More natural split
+      set splitbelow
+      set splitright
 
-        " Exit quickly from normal and insert
-        nmap qq :wqa<CR>
-        imap qq <ESC>:wqa<CR>
-        " Replace esc by hh in insert
-        imap hh <ESC>
+      " Exit quickly from normal and insert
+      nmap qq :wqa<CR>
+      imap qq <ESC>:wqa<CR>
+      " Replace esc by hh in insert
+      imap hh <ESC>
 
-        " Tab management
-        " `ca` for `:cabbrev` which abreviate command-line mode command only
-        ca tn tabnew
-        ca th tabp
-        ca tl tabn
-        ca tc tabclose
+      " Tab management
+      " `ca` for `:cabbrev` which abreviate command-line mode command only
+      ca tn tabnew
+      ca th tabp
+      ca tl tabn
+      ca tc tabclose
 
-        " Line numbering
-        " This turn hybrid line numbers on, by turning both number &
-        " relativenumber on by default
-        " Then, we define an autocommand to use relative number line only in
-        " the currently focused buffer and out of insert mode
-        set number relativenumber
+      " Line numbering
+      " This turn hybrid line numbers on, by turning both number &
+      " relativenumber on by default
+      " Then, we define an autocommand to use relative number line only in
+      " the currently focused buffer and out of insert mode
+      set number relativenumber
 
-        augroup numbertoggle
-          autocmd!
-          autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-          autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-        augroup END
+      augroup numbertoggle
+        autocmd!
+        autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+        autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+      augroup END
 
-        "Sudo Write
-        "
-        " `command`: create a command
-        " `W`: the new command name
-        command W w !sudo tee "%" > /dev/null
+      "Sudo Write
+      "
+      " `command`: create a command
+      " `W`: the new command name
+      command W w !sudo tee "%" > /dev/null
 
-        " Colors & colorscheme --------------------
-        set termguicolors
-        set background=light
-        colorscheme gruvbox
+      " Colors & colorscheme --------------------
+      set termguicolors
+      set background=light
+      colorscheme gruvbox
 
-        " Set Invisible character
-        " nbsp: non breaking space
-        " trail: trailling space
-        set list
-        set listchars=tab:▸\ ,nbsp:␣,trail:•
+      " Set Invisible character
+      " nbsp: non breaking space
+      " trail: trailling space
+      set list
+      set listchars=tab:▸\ ,nbsp:␣,trail:•
 
-        "Shell
-        set shell=${pkgs.zsh}/bin/zsh
+      "Shell
+      set shell=${pkgs.zsh}/bin/zsh
 
-        " ALE:
-        let g:ale_sign_error = 'X'
-        let g:ale_sign_warning = '!'
-        highlight link ALEWarningSign ErrorMsg
-        highlight link ALEErrorSign WarningMsg
-        nnoremap <silent> <leader>ne :ALENextWrap<CR>
-        nnoremap <silent> <leader>pe :ALEPreviousWrap<CR>
+      " ALE:
+      let g:ale_sign_error = 'X'
+      let g:ale_sign_warning = '!'
+      highlight link ALEWarningSign ErrorMsg
+      highlight link ALEErrorSign WarningMsg
+      nnoremap <silent> <leader>ne :ALENextWrap<CR>
+      nnoremap <silent> <leader>pe :ALEPreviousWrap<CR>
 
-        let g:ale_fixers = {
-            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-            \   'javascript': ['prettier'],
-            \   'javascript.jsx': ['prettier'],
-            \   'typescript': ['prettier'],
-            \   'json': ['prettier'],
-            \   'scss': ['prettier'],
-            \   'ruby': ['rubocop'],
-            \   'bash': ['shfmt'],
-            \   'sh': ['shfmt'],
-            \   'zsh': ['shfmt'],
-            \   'elixir': ['mix_format'],
-            \   'terraform': ['terraform'],
-            \   'bats': ['shfmt']
-            \}
+      let g:ale_fixers = {
+          \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+          \   'javascript': ['prettier'],
+          \   'javascript.jsx': ['prettier'],
+          \   'typescript': ['prettier'],
+          \   'json': ['prettier'],
+          \   'scss': ['prettier'],
+          \   'ruby': ['rubocop'],
+          \   'bash': ['shfmt'],
+          \   'sh': ['shfmt'],
+          \   'zsh': ['shfmt'],
+          \   'elixir': ['mix_format'],
+          \   'terraform': ['terraform'],
+          \   'bats': ['shfmt']
+          \}
 
-        let g:ale_fix_on_save = 1
+      let g:ale_fix_on_save = 1
 
-        " Terraform config ------------------------
-        " Currently there is no good hcl plugins, so I use terraform for syntax highlight
-        autocmd BufRead,BufNewFile *.hcl set filetype=terraform
-        autocmd BufRead,BufNewFile *.tf set filetype=terraform
+      " Terraform config ------------------------
+      " Currently there is no good hcl plugins, so I use terraform for syntax highlight
+      autocmd BufRead,BufNewFile *.hcl set filetype=terraform
+      autocmd BufRead,BufNewFile *.tf set filetype=terraform
 
-        " Shell config ----------------------------
-        autocmd FileType zsh setlocal expandtab shiftwidth=2 softtabstop=0 syn=sh ft=sh
+      " Shell config ----------------------------
+      autocmd FileType zsh setlocal expandtab shiftwidth=2 softtabstop=0 syn=sh ft=sh
 
-        " Bats config -----------------------------
-        " Set the shfmt option on ALE to make it work with bats
-        " Also set the filetype type to bats but use the bash syntax highlighting.
-        " Inverting those two will not work, setting filetype after syntax override the
-        " syntax highlighting
-        autocmd BufRead,BufNewFile *.bats
-                          \ let b:ale_sh_shfmt_options='-ln bats -i 4'
-                          \ | setlocal filetype=bats syntax=bash
+      " Bats config -----------------------------
+      " Set the shfmt option on ALE to make it work with bats
+      " Also set the filetype type to bats but use the bash syntax highlighting.
+      " Inverting those two will not work, setting filetype after syntax override the
+      " syntax highlighting
+      autocmd BufRead,BufNewFile *.bats
+                        \ let b:ale_sh_shfmt_options='-ln bats -i 4'
+                        \ | setlocal filetype=bats syntax=bash
 
-        " FzF configuration -------------------
-        nmap <leader><space> :Files<CR>
+      " FzF configuration -------------------
+      nmap <leader><space> :Files<CR>
 
-        " Default hotkeys
-        "nmap <leader>ff <Plug>(selecta-file)
-        "nmap <leader>fv :vnew<CR><Plug>(selecta-file)
-        "nmap <leader>fh :new<CR><Plug>(selecta-file)
-        "nmap <leader>b <Plug>(selecta-buffer)
+      " Default hotkeys
+      "nmap <leader>ff <Plug>(selecta-file)
+      "nmap <leader>fv :vnew<CR><Plug>(selecta-file)
+      "nmap <leader>fh :new<CR><Plug>(selecta-file)
+      "nmap <leader>b <Plug>(selecta-buffer)
 
-        " LanguageClient-neovim ------------------
-        " TODO: Consider removing CoC and only using this?
+      " LanguageClient-neovim ------------------
+      " TODO: Consider removing CoC and only using this?
 
-        let g:LanguageClient_serverCommands = {
-          \ 'dhall': ['dhall-lsp-server'],
-          \ }
+      let g:LanguageClient_serverCommands = {
+        \ 'dhall': ['dhall-lsp-server'],
+        \ }
 
-        " comment the next line to disable automatic format on save
-        let g:dhall_format=1
+      " comment the next line to disable automatic format on save
+      let g:dhall_format=1
 
-        " Always draw sign column. Prevent buffer moving when adding/deleting sign.
-        set signcolumn=yes
+      " Always draw sign column. Prevent buffer moving when adding/deleting sign.
+      set signcolumn=yes
 
-        " Required for operations modifying multiple buffers like rename.
-        set hidden
+      " Required for operations modifying multiple buffers like rename.
+      set hidden
     '';
-
   };
 }
