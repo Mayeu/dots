@@ -19,7 +19,7 @@
 # Load personal env.local.sh override
 ##
 if test -e env.local.sh; then
-	source env.local.sh
+  source env.local.sh
 fi
 
 ##

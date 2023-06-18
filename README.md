@@ -12,7 +12,7 @@ The docs currently still live in [@caarlos0][caarlos-docs] repository.
 
 ## Some useful commands
 
-* `reload!`: reload your shell
+- `reload!`: reload your shell
 
 ## Why not a fork?
 

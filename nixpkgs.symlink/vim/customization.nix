@@ -1,20 +1,34 @@
-{ pkgs }:
-
-let
+{pkgs}: let
   my_plugins = pkgs.callPackage ./plugins.nix {};
   vimConfig = {
     customRC = builtins.readFile ~/.vimrc;
     packages.knownPlugins = pkgs.vimPlugins // my_plugins; # optional
     packages.pluginDictionaries = [
       # load always
-      { names = [
-        "idris-vim" "UltiSnips" "vim-snippets"
-        "fugitive" "Solarized" "vim-airline"
-        "Syntastic" "vim-nix" "vim-dispatch"
-        "vim-dispatch-neovim" "vim-elixir"
-        "vim-projectionist" "vim-phoenix"
-        "vim-ledger" "vim-ruby"
-        "elm-vim" "gruvbox"
+      {
+        names = [
+          # Theme
+          #"Solarized" # Theme
+          "gruvbox" # Theme
+
+          # UI
+          "vim-airline"
+
+          # Tools
+          "fugitive" # Tpope git stuff
+          "UltiSnips" # Snippets
+          "vim-snippets" # Snippets
+          "vim-dispatch" # Async adapter by tpope
+          "vim-dispatch-neovim"
+          "vim-projectionist" # Project management
+          "Syntastic" # Syntax checking
+
+          # Lang
+          "vim-nix" #
+          "vim-elixir"
+          "vim-phoenix"
+          "vim-ledger"
+          "vim-ruby"
         ];
       }
       # only load when opening a .nix file
@@ -25,4 +39,7 @@ let
     ];
   };
 in
-  pkgs.neovim.override {vimAlias = true; configure = vimConfig;}
+  pkgs.neovim.override {
+    vimAlias = true;
+    configure = vimConfig;
+  }
