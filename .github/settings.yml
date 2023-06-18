@@ -1,0 +1,15 @@
+repository:
+  allow_merge_commit: false
+  allow_rebase_merge: true
+  allow_squash_merge: false
+  default_branch: main
+  delete_branch_on_merge: true
+  description: My system configuration
+  has_downloads: true
+  has_issues: true
+  has_projects: true
+  has_wiki: false
+  homepage: https://objkt.com
+  name: infrastructure
+  private: true
+  topics: objkt, infrastructure, deployment, nix
