@@ -2,22 +2,29 @@
   description = "My system configuration";
 
   inputs = {
-      std.url = "github:divnix/std";
-      #nixpkgs.url = "nixpkgs/nixpkgs-22.11-darwin";
-      nixpkgs.url = "nixpkgs/nixos-unstable";
-      #home-manager.url = "github:nix-community/home-manager";
-      #home-manager.inputs.nixpkgs.follows = "nixpkgs";
-      darwin.url = "github:lnl7/nix-darwin";
-      darwin.inputs.nixpkgs.follows = "nixpkgs"; # ...
+    #nixpkgs.url = "nixpkgs/nixos-unstable";
+    # TODO: Until the perl po4 build issue is fixed
+    nixpkgs.url = "github:nixos/nixpkgs/3005f20ce0aaa58169cdee57c8aa12e5f1b6e1b3";
 
-      m.url = "gitlab:Mayeu/m";
-      m.inputs.nixpkgs.follows = "nixpkgs";
+    std.url = "github:divnix/std";
+    std.inputs.nixpkgs.follows = "nixpkgs";
 
-      # TODO: help bring tezos via nix on macOS
-      #tezos.url = "github:serokell/tezos-packaging";
+    darwin.url = "github:lnl7/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    m.url = "gitlab:Mayeu/m";
+    m.inputs.nixpkgs.follows = "nixpkgs";
+
+    # TODO: help bring tezos via nix on macOS
+    #tezos.url = "github:serokell/tezos-packaging";
   };
 
-  outputs = { std, self, nixpkgs, home-manager, darwin, m }@inputs:
+  outputs = {
+    std,
+    self,
+    nixpkgs,
+    ...
+  } @ inputs:
     std.growOn {
       inherit inputs;
 
@@ -29,7 +36,6 @@
         # presets
         (data "templates")
       ];
-
     }
     {
       devShells = std.harvest self ["repo" "shells"];
