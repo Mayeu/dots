@@ -32,7 +32,8 @@
 
       cellBlocks = with std.blockTypes; [
         (installables "packages" {ci.build = true;})
-
+        (devshells "shells" {ci.build = true;})
+        (nixago "config")
         # presets
         (data "templates")
       ];
