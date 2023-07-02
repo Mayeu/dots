@@ -2,12 +2,13 @@
   description = "My system configuration";
 
   inputs = {
-    #nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     # TODO: Until the perl po4 build issue is fixed
-    nixpkgs.url = "github:nixos/nixpkgs/3005f20ce0aaa58169cdee57c8aa12e5f1b6e1b3";
+    #nixpkgs.url = "github:nixos/nixpkgs/3005f20ce0aaa58169cdee57c8aa12e5f1b6e1b3";
 
-    std.url = "github:divnix/std";
+    std.url = "github:divnix/std/v0.23.2";
     std.inputs.nixpkgs.follows = "nixpkgs";
+    std.inputs.devshell.url = "github:numtide/devshell";
 
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
