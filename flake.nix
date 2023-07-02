@@ -32,7 +32,8 @@
 
     }
     {
-      packages = std.harvest self [ [ "hosts" "packages" ] ];
+      devShells = std.harvest self ["repo" "shells"];
+      packages = std.harvest self [["hosts" "packages"] ["apps" "packages"]];
       templates = std.pick inputs.self ["presets" "templates"];
     };
 }

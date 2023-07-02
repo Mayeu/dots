@@ -185,6 +185,7 @@ in
       "kodi"
       "little-snitch"
       "loopback"
+      "love"
       "macpass"
       "macfuse"
       "mailmate"
@@ -200,6 +201,7 @@ in
       "superduper"
       "syncthing"
       "steam"
+      "tiled"
       "the-unarchiver"
       "tor-browser"
       "transmission"
@@ -382,12 +384,15 @@ in
 
     promptInit = "";
     interactiveShellInit = ''
+      # Load plugins
       source "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
       source "${pkgs.zsh-z}/share/zsh-z/zsh-z.plugin.zsh"
-
       source "${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
       source "${pkgs.spaceship-prompt}/lib/spaceship-prompt/spaceship.zsh"
-      '';
+
+      # Set extended glob
+      set -o EXTENDED_GLOB
+    '';
   };
   # programs.fish.enable = true;
 
@@ -507,6 +512,7 @@ in
           "vim-yaml"
           "vim-terraform" "vim-terraform-completion"
           "vim-ruby"
+          "vim-lua"
           "auto-pairs" # Auto close pairs character
           "fzfWrapper"
           "coc-nvim" # Fancy auto completion and stuff, include nodejs
