@@ -24,6 +24,7 @@ alias gap='git add -p'
 #alias gaa='git add -A'
 alias gcm='git commit -m'
 alias gcam='git commit -a -m'
+alias grc='git rebase --continue'
 alias gs='git status'
 #alias gs='git status -sb'
 #alias gpr='gp && git pr'
@@ -44,5 +45,5 @@ alias gbs='git bug bridge push'
 #fi
 
 gi() {
-	curl -s "https://www.gitignore.io/api/$*"
+  curl -s "https://www.gitignore.io/api/$*"
 }
