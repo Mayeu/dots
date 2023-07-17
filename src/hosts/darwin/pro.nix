@@ -202,6 +202,7 @@ in {
       "tor-browser"
       "transmission"
       "transmission-remote-gui"
+      "vcv-rack"
       "vlc"
       "xld"
       "zoom"
@@ -242,7 +243,7 @@ in {
     fzf
     flock
     bash
-    nushell
+    nushellFull
     wget
     curl
     rsync
