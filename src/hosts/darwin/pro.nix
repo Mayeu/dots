@@ -163,7 +163,6 @@ in {
       "chrysalis" # For the Keyboard.io Model001
       "daisydisk"
       "darktable"
-      "diffusionbee"
       "discord"
       "docker"
       "drawio"
