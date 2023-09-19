@@ -188,6 +188,7 @@ in {
       "notion"
       "obsidian"
       "omnifocus"
+      "processing"
       "programmer-dvorak"
       "protonvpn"
       "setapp"
@@ -258,6 +259,7 @@ in {
     tmux
     shellcheck
     borgbackup
+    restic
     broot # https://dystroy.org/broot/
     silver-searcher # Similar to ack, but faster
     vagrant
