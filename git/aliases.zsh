@@ -29,7 +29,7 @@ alias gs='git status'
 #alias gs='git status -sb'
 #alias gpr='gp && git pr'
 #alias glnext='git log --oneline $(git describe --tags --abbrev=0 @^)..@'
-alias gfa='git fetch --all'
+alias gfa='git fetch --all --prune'
 alias grrf='git rm -rf'
 alias gsc='git switch -c'
 
