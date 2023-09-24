@@ -291,7 +291,6 @@ in {
     sshuttle
     # virtualboxWithExtpack # Not supported by macOS yet
     #ctags # Not sure I really need that as a root package
-    python2 # For the pass Alfred Workflow
     fswatch
     tealdeer
     rmlint
@@ -304,7 +303,6 @@ in {
     #    meta.platforms = lib.platforms.unix;
     #}))
     #gphoto2
-    #python310Packages.pipx
     ntfs3g
     bindfs
     sshfs
@@ -444,10 +442,6 @@ in {
   # The pb is that it does require a reboot to work
   # Via: https://stackoverflow.com/a/3756686
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "python-2.7.18.6" # For the pass Alferd Workflow
-  ];
-
   # This overlays the default nixpkgs
   # In this case, it's only for the  vim_configurable,_ package (used in the programs.vim),
   # so that it is built without gui support but with darwin support.
@@ -461,7 +455,6 @@ in {
   nixpkgs.overlays = [
     (self: pkgs: {
       vim_configurable = pkgs.vim_configurable.override {
-        #python = pkgs.python3;
         guiSupport = "no";
         darwinSupport = true;
       };
