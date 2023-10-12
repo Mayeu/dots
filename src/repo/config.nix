@@ -41,7 +41,6 @@ A: (1) dotfile proliferation
       inputs.nixpkgs.nodePackages.prettier
       inputs.nixpkgs.nodePackages.prettier-plugin-toml
       inputs.nixpkgs.shfmt
-      inputs.nixpkgs.terraform
     ];
     devshell.startup.prettier-plugin-toml = inputs.nixpkgs.lib.stringsWithDeps.noDepEntry ''
       export NODE_PATH=${inputs.nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules:$NODE_PATH
@@ -73,11 +72,6 @@ A: (1) dotfile proliferation
           command = "shfmt";
           options = ["-i" "2" "-s" "-w"];
           includes = ["*.sh"];
-        };
-        terraform = {
-          command = "terraform";
-          options = ["fmt"];
-          includes = ["*.tf" "*.tfvars"];
         };
       };
     };
