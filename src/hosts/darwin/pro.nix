@@ -458,8 +458,6 @@ in {
         darwinSupport = true;
       };
 
-      nix-direnv = pkgs.nix-direnv.override {enableFlakes = true;};
-
       wezterm = pkgs.wezterm.override {
         buildInputs = with pkgs;
           [
