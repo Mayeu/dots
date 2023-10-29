@@ -242,7 +242,6 @@ in {
     git-lfs
     fzf
     flock
-    bash
     nushellFull
     wget
     curl
