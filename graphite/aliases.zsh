@@ -1,11 +1,15 @@
 #!/usr/bin/env zsh
 
 function gtss() {
-  gt stack submit
+  gt submit --stack
 }
 
 function gtsf() {
-  gt stack restack
+  echo 'Nope, use gtr'
+}
+
+function gtr() {
+  gt restack
 }
 
 function gts() {
