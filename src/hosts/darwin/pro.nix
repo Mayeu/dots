@@ -205,7 +205,6 @@ in {
       "vcv-rack"
       "vlc"
       "xld"
-      "zoom"
     ];
 
     brews = [
