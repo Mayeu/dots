@@ -160,12 +160,12 @@ in {
       "calibre"
       "carbon-copy-cloner"
       "chromium"
-      "chrysalis" # For the Keyboard.io Model001
+      #"chrysalis" # For the Keyboard.io Model001
       "daisydisk"
-      "darktable"
+      #"darktable"
       "discord"
       "docker"
-      "drawio"
+      #"drawio"
       "firefox"
       "font-fira-code-nerd-font"
       "force-paste"
@@ -176,15 +176,16 @@ in {
       "iterm2"
       "karabiner-elements"
       "kdrive"
-      "kobo"
+      #"kobo"
       "kodi"
       "little-snitch"
+      "logseq"
       "loopback"
-      "love"
+      #"love"
       "macpass"
       "macfuse"
       "mailmate"
-      "mumble"
+      #"mumble"
       "notion"
       "obsidian"
       "omnifocus"
@@ -194,10 +195,11 @@ in {
       "setapp"
       "signal"
       "spotify"
-      "superduper"
+      #"superduper"
+      "sublime-merge"
       "syncthing"
       "steam"
-      "tiled"
+      #"tiled"
       "the-unarchiver"
       "tor-browser"
       "transmission"
@@ -208,17 +210,13 @@ in {
     ];
 
     brews = [
-      "adr-tools"
-      "beancount"
-      "borgmatic"
       "ext4fuse"
-      "fava"
       "withgraphite/tap/graphite"
       "imageoptim-cli"
       "mayeu/tap/run-one" # because of run-one
       #"mayeu/tap/beancount-scripts"
       "pinentry-mac"
-      "siril"
+      #"siril"
       "tezos-client"
     ];
   };
@@ -228,7 +226,6 @@ in {
   environment.systemPackages = with pkgs; [
     gnutar
     comma
-    nix-prefetch-github
     exiftool
     mat2 # Metadata trasher
     mosh
@@ -248,19 +245,15 @@ in {
     ripgrep
     bat
     jq
-    yq-go # Command line yaml processor, like jq
-    fq # jq for binaries
+    # fq # jq for binaries
     #xmlstarlet # Command line xml processor
-    python310Packages.woob
     yt-dlp
     ffmpeg
     tmux
-    shellcheck
     borgbackup
     restic
     broot # https://dystroy.org/broot/
     silver-searcher # Similar to ack, but faster
-    vagrant
     gnumake
     gopass
     pass
@@ -284,7 +277,6 @@ in {
     htop
     # siril # Not supported on macOS yet
     atomicparsley # Pour embedded les images dans les m4a de youtube-dl TODO: not sure it's needed with yt-dlp
-    tor
     sshpass
     sshuttle
     # virtualboxWithExtpack # Not supported by macOS yet
@@ -302,7 +294,6 @@ in {
     #}))
     #gphoto2
     ntfs3g
-    bindfs
     sshfs
     terminal-notifier
     #testssl # Depends on libressl 3.4.3 which is marked as insecure
