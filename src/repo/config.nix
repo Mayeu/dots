@@ -11,9 +11,17 @@ A: (1) dotfile proliferation
    (2) have all the things in one place / format
    (3) potentially share / re-use configuration data - keeping it in sync
 */
-{
+let
+  inherit (inputs) nixpkgs;
+  inherit (inputs.std.lib.dev) mkNixago;
+  configs = inputs.std.lib.cfg;
+in {
+  conform = (mkNixago configs.conform) {
+    data = {inherit (inputs) cells;};
+  };
+
   # Tool Homepage: https://editorconfig.org/
-  editorconfig = {
+  editorconfig = (mkNixago configs.editorconfig) {
     data = {
       root = true;
       "*" = {
@@ -35,16 +43,13 @@ A: (1) dotfile proliferation
   };
 
   # Tool Homepage: https://numtide.github.io/treefmt/
-  treefmt = {
+  treefmt = (mkNixago configs.treefmt) {
     packages = [
       inputs.nixpkgs.alejandra # Nix formating
       inputs.nixpkgs.nodePackages.prettier
-      inputs.nixpkgs.nodePackages.prettier-plugin-toml
       inputs.nixpkgs.shfmt
     ];
-    devshell.startup.prettier-plugin-toml = inputs.nixpkgs.lib.stringsWithDeps.noDepEntry ''
-      export NODE_PATH=${inputs.nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules:$NODE_PATH
-    '';
+
     data = {
       formatter = {
         nix = {
@@ -53,7 +58,7 @@ A: (1) dotfile proliferation
         };
         prettier = {
           command = "prettier";
-          options = ["--plugin" "prettier-plugin-toml" "--write"];
+          options = ["--write"];
           includes = [
             "*.css"
             "*.html"
@@ -65,7 +70,7 @@ A: (1) dotfile proliferation
             "*.scss"
             "*.ts"
             "*.yaml"
-            "*.toml"
+            #"*.toml"
           ];
         };
         shell = {
@@ -78,7 +83,7 @@ A: (1) dotfile proliferation
   };
 
   # Tool Homepage: https://github.com/evilmartians/lefthook
-  lefthook = {
+  lefthook = (mkNixago configs.lefthook) {
     data = {
       commit-msg = {
         commands = {
@@ -104,7 +109,7 @@ A: (1) dotfile proliferation
 
   # Tool Hompeage: https://github.com/apps/settings
   # Install Setting App in your repo to enable it
-  githubsettings = {
+  githubsettings = (mkNixago configs.githubsettings) {
     data = {
       repository = {
         name = "infrastructure";
@@ -126,7 +131,7 @@ A: (1) dotfile proliferation
   };
 
   # Tool Homepage: https://rust-lang.github.io/mdBook/
-  mdbook = {
+  mdbook = (mkNixago configs.mdbook) {
     # add preprocessor packages here
     packages = [
       inputs.nixpkgs.mdbook-linkcheck
