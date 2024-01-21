@@ -237,7 +237,6 @@ in {
     diff-so-fancy # Fancy diff for git
     git-lfs
     fzf
-    flock
     nushellFull
     wget
     curl
