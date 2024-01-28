@@ -260,7 +260,6 @@ in {
     direnv # Automate env loading, but more importently, nix shell loading
     nix-direnv
     openssh
-    sshuttle
     #jless # A JSON viewer in the cli
     pwgen
     pgcli
