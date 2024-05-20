@@ -134,7 +134,6 @@ in {
     onActivation.cleanup = "zap"; # Delete anything not managed by nix
 
     taps = [
-      "homebrew/cask"
       "homebrew/cask-drivers"
       "homebrew/cask-fonts"
       "mayeu/tap"
@@ -186,6 +185,7 @@ in {
       "notion"
       "obsidian"
       "omnifocus"
+      "orbstack"
       "processing"
       "programmer-dvorak"
       "protonvpn"
@@ -201,10 +201,11 @@ in {
       "tor-browser"
       "transmission"
       "transmission-remote-gui"
-      "utm"
       "vcv-rack"
       "vlc"
       "xld"
+      "zoom"
+      "zed"
     ];
 
     brews = [
@@ -275,7 +276,6 @@ in {
     atomicparsley # Pour embedded les images dans les m4a de youtube-dl TODO: not sure it's needed with yt-dlp
     sshpass
     sshuttle
-    # virtualboxWithExtpack # Not supported by macOS yet
     #ctags # Not sure I really need that as a root package
     fswatch
     tealdeer
@@ -303,6 +303,7 @@ in {
     inetutils
     gawk
     editorconfig-core-c
+    helix
   ];
 
   # Use a custom configuration.nix location.
