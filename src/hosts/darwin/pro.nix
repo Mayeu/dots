@@ -162,6 +162,7 @@ in {
       #"chrysalis" # For the Keyboard.io Model001
       "daisydisk"
       "discord"
+      "digikam"
       "docker"
       "firefox"
       "font-fira-code-nerd-font"
@@ -236,7 +237,7 @@ in {
     diff-so-fancy # Fancy diff for git
     git-lfs
     fzf
-    nushellFull
+    nushell
     wget
     curl
     rsync
@@ -304,6 +305,7 @@ in {
     gawk
     editorconfig-core-c
     helix
+    pipx
   ];
 
   # Use a custom configuration.nix location.

@@ -81,5 +81,9 @@ bindkey "^S" "insert-selecta-path-in-command-line"
 # Created by `userpath` on 2020-09-06 00:21:17
 export PATH="$PATH:/Users/m/.local/bin"
 
+# Paperspace
+export PAPERSPACE_INSTALL="/Users/m/.paperspace"
+export PATH="$PAPERSPACE_INSTALL/bin:$PATH"
+
 # Uncomment for profiling
 #zprof
