@@ -165,6 +165,7 @@ in {
       "digikam"
       "docker"
       "firefox"
+      "fission"
       "font-fira-code-nerd-font"
       "force-paste"
       "gitup"
@@ -183,6 +184,7 @@ in {
       "macpass"
       "macfuse"
       "mailmate"
+      "netnewswire"
       "notion"
       "obsidian"
       "omnifocus"
@@ -206,7 +208,7 @@ in {
       "vlc"
       "xld"
       "zoom"
-      "zed"
+      "zed@preview"
     ];
 
     brews = [
