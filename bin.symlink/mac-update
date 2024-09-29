@@ -7,6 +7,7 @@ cd ~/.dots
 
 echo "👹 Updating nix channel"
 sudo nix-channel --update
+nix-channel --update
 
 echo "❆ Update flake"
 nix flake update
