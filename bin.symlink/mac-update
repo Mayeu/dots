@@ -26,6 +26,7 @@ echo "🍺 Cleanup brew cache"
 brew cleanup --prune 14
 
 echo "👹 Collect nix garbage"
+nix-collect-garbage --delete-older-than 14d
 sudo nix-collect-garbage --delete-older-than 14d
 
 echo "👹 Dedup nix store"
