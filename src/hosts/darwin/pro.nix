@@ -322,12 +322,9 @@ in {
     "/libexec"
   ];
 
-  services.nix-daemon.enable = true;
-
-  # nix.package = pkgs.nix;
   nix = {
+    enable = true;
     gc = {
-      user = "root";
       interval = {
         Hour = 23;
         Minute = 55;
