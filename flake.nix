@@ -6,7 +6,7 @@
     # Example of how to pin a nixpkgs commits
     #nixpkgs.url = "github:nixos/nixpkgs/3005f20ce0aaa58169cdee57c8aa12e5f1b6e1b3";
 
-    std.url = "github:divnix/std";
+    std.url = "github:divnix/std/369b8dc5b91becc372210ddcd73de84a294d1ee3";
     std.inputs.nixpkgs.follows = "nixpkgs";
     std.inputs.devshell.url = "github:numtide/devshell";
     std.inputs.nixago.url = "github:nix-community/nixago";
