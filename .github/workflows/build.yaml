@@ -2,7 +2,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: '18 10 * * *'
+    - cron: "18 10 * * *"
 
 name: Build
 jobs:
@@ -10,101 +10,101 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-12]
+        os: [macos-14]
 
     name: Build
     runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
 
-    - name: Install Nix
-      uses: cachix/install-nix-action@v17
-      with:
-        # TODO: Remove when Nix >2.8.0 will be out (out_path bug)
-       install_url: https://releases.nixos.org/nix/nix-2.11.1/install
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+        with:
+          # TODO: Remove when Nix >2.8.0 will be out (out_path bug)
+          install_url: https://releases.nixos.org/nix/nix-2.11.1/install
 
-    - name: Setup AWS profile
-      run: |
-        cat <<EOF > /Users/Shared/.aws-credentials
-        [default]
-        aws_access_key_id=${{ secrets.SCALEWAY_S3_ACCESS_KEY }}
-        aws_secret_access_key=${{ secrets.SCALEWAY_S3_SECRET_KEY }}
-        EOF
+      - name: Setup AWS profile
+        run: |
+          cat <<EOF > /Users/Shared/.aws-credentials
+          [default]
+          aws_access_key_id=${{ secrets.SCALEWAY_S3_ACCESS_KEY }}
+          aws_secret_access_key=${{ secrets.SCALEWAY_S3_SECRET_KEY }}
+          EOF
 
-        mkdir ~/.aws
-        cp /Users/Shared/.aws-credentials ~/.aws/credentials
-        sudo mkdir /var/root/.aws
-        sudo cp /Users/Shared/.aws-credentials /var/root/.aws/credentials
-        sudo chmod -R go-rx /var/root/.aws
-        # Most likely it's never needed to actually stop it
-        #sudo launchctl stop org.nixos.nix-daemon || true
-        # It may even not being needed to start it
-        #sudo launchctl start org.nixos.nix-daemon
+          mkdir ~/.aws
+          cp /Users/Shared/.aws-credentials ~/.aws/credentials
+          sudo mkdir /var/root/.aws
+          sudo cp /Users/Shared/.aws-credentials /var/root/.aws/credentials
+          sudo chmod -R go-rx /var/root/.aws
+          # Most likely it's never needed to actually stop it
+          #sudo launchctl stop org.nixos.nix-daemon || true
+          # It may even not being needed to start it
+          #sudo launchctl start org.nixos.nix-daemon
 
 
-        #- name: Check AWS config
-        #  run: |
-        #    cat ~/.aws/credentials
-        #    cat /etc/nix/nix.conf
+          #- name: Check AWS config
+          #  run: |
+          #    cat ~/.aws/credentials
+          #    cat /etc/nix/nix.conf
 
-    - name: Add Nix private key
-      run: |
-        sudo bash -c "echo '${{ secrets.NIX_PRIVATE_KEY }}' >/etc/nix/key.private"
+      - name: Add Nix private key
+        run: |
+          sudo bash -c "echo '${{ secrets.NIX_PRIVATE_KEY }}' >/etc/nix/key.private"
 
-    - name: Add Nix build hook
-      run: |
-        cat <<EOF > upload-to-cache.sh
-        #!/bin/sh
+      - name: Add Nix build hook
+        run: |
+          cat <<EOF > upload-to-cache.sh
+          #!/bin/sh
 
-        set -eu
-        set -f # disable globbing
-        export IFS=' '
+          set -eu
+          set -f # disable globbing
+          export IFS=' '
 
-        export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
+          export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
 
-        # Exit if the out path is empty
-        #test -z "$OUT_PATHS" && exit
+          # Exit if the out path is empty
+          #test -z "$OUT_PATHS" && exit
 
-        # Without OUT_PATHS things kind of work most of the time.
-        # Thus, let just or true and exit, so that if it works, it works, if it doesn't it just ignore
-        echo "Signing paths \$OUT_PATHS"
-        /nix/var/nix/profiles/default/bin/nix store sign --key-file /etc/nix/key.private \$OUT_PATHS || (true && exit)
-        echo "Uploading paths \$OUT_PATHS"
-        exec /nix/var/nix/profiles/default/bin/nix copy --to '${{ secrets.S3_URL }}' \$OUT_PATHS
-        EOF
+          # Without OUT_PATHS things kind of work most of the time.
+          # Thus, let just or true and exit, so that if it works, it works, if it doesn't it just ignore
+          echo "Signing paths \$OUT_PATHS"
+          /nix/var/nix/profiles/default/bin/nix store sign --key-file /etc/nix/key.private \$OUT_PATHS || (true && exit)
+          echo "Uploading paths \$OUT_PATHS"
+          exec /nix/var/nix/profiles/default/bin/nix copy --to '${{ secrets.S3_URL }}' \$OUT_PATHS
+          EOF
 
-        sudo mv upload-to-cache.sh /etc/nix/./
-        sudo chmod +x /etc/nix/upload-to-cache.sh
+          sudo mv upload-to-cache.sh /etc/nix/./
+          sudo chmod +x /etc/nix/upload-to-cache.sh
 
-    - name: Configure Nix to use our S3 as cache
-      run: |
-        cat <<EOF | sudo tee -a /etc/nix/nix.conf
-        substituters = https://cache.nixos.org/ ${{ secrets.S3_URL }}
-        trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= mdots:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs=
-        post-build-hook = /etc/nix/upload-to-cache.sh
-        EOF
+      - name: Configure Nix to use our S3 as cache
+        run: |
+          cat <<EOF | sudo tee -a /etc/nix/nix.conf
+          substituters = https://cache.nixos.org/ ${{ secrets.S3_URL }}
+          trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= mdots:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs=
+          post-build-hook = /etc/nix/upload-to-cache.sh
+          EOF
 
-        sudo launchctl kickstart -k system/org.nixos.nix-daemon
+          sudo launchctl kickstart -k system/org.nixos.nix-daemon
 
-    - name: Add nix channels
-      run: |
-        nix-channel --add https://channels.nixos.org/nixpkgs-22.11-darwin nixpkgs
-        nix-channel --add https://channels.nixos.org/nixpkgs-unstable unstable
-        nix-channel --update
+      - name: Add nix channels
+        run: |
+          nix-channel --add https://channels.nixos.org/nixpkgs-22.11-darwin nixpkgs
+          nix-channel --add https://channels.nixos.org/nixpkgs-unstable unstable
+          nix-channel --update
 
-    - name: Install Nix Darwin
-      run: |
-        export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
-        nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-        ./result/bin/darwin-installer
+      - name: Install Nix Darwin
+        run: |
+          export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
+          nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
+          ./result/bin/darwin-installer
 
-    - name: Build my system
-      run: |
-        nix-channel --list
+      - name: Build my system
+        run: |
+          nix-channel --list
 
-        export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
-        source /etc/static/bashrc
-        #darwin-rebuild build -I darwin-config=nixpkgs.symlink/darwin-configuration.nix
-        darwin-rebuild build --flake .#pro
+          export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
+          source /etc/static/bashrc
+          #darwin-rebuild build -I darwin-config=nixpkgs.symlink/darwin-configuration.nix
+          darwin-rebuild build --flake .#pro
