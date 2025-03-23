@@ -17,13 +17,13 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install Nix
-        uses: cachix/install-nix-action@v17
-        with:
-          # TODO: Remove when Nix >2.8.0 will be out (out_path bug)
-          install_url: https://releases.nixos.org/nix/nix-2.11.1/install
+        uses: cachix/install-nix-action@v31
+        #with:
+        #  # TODO: Remove when Nix >2.8.0 will be out (out_path bug)
+        #  install_url: https://releases.nixos.org/nix/nix-2.11.1/install
 
       - name: Setup AWS profile
         run: |
@@ -78,7 +78,7 @@ jobs:
           sudo mv upload-to-cache.sh /etc/nix/./
           sudo chmod +x /etc/nix/upload-to-cache.sh
 
-      - name: Configure Nix to use our S3 as cache
+      - name: Configure Nix to use my cache
         run: |
           cat <<EOF | sudo tee -a /etc/nix/nix.conf
           substituters = https://cache.nixos.org/ ${{ secrets.S3_URL }}
@@ -88,23 +88,12 @@ jobs:
 
           sudo launchctl kickstart -k system/org.nixos.nix-daemon
 
-      - name: Add nix channels
-        run: |
-          nix-channel --add https://channels.nixos.org/nixpkgs-22.11-darwin nixpkgs
-          nix-channel --add https://channels.nixos.org/nixpkgs-unstable unstable
-          nix-channel --update
-
-      - name: Install Nix Darwin
+      - name: Build my devShell
         run: |
           export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
-          nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-          ./result/bin/darwin-installer
+          nix build '.#devShells.aarch64-darwin.default'
 
       - name: Build my system
         run: |
-          nix-channel --list
-
           export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
-          source /etc/static/bashrc
-          #darwin-rebuild build -I darwin-config=nixpkgs.symlink/darwin-configuration.nix
-          darwin-rebuild build --flake .#pro
+          nix run nix-darwin/master#darwin-rebuild -- build --flake .#pro-m2
