@@ -32,6 +32,7 @@
   changed = show --pretty=\"format:\" --name-only
   commend = commit --amend --no-edit
   lt = log --tags --decorate --simplify-by-decoration --oneline
+  ri = rebase -i
 
   #fpr = fetch-pr
   #fm = fetch-merge
@@ -119,3 +120,8 @@
 
 [rerere]
 	enabled = true
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[safe]
+	directory = .
