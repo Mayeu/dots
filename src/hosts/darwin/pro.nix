@@ -136,7 +136,6 @@ in {
     taps = [
       "homebrew/cask-drivers"
       "homebrew/cask-fonts"
-      "mayeu/tap"
       "withgraphite/tap"
       {
         name = "serokell/tezos-packaging-stable";
@@ -155,11 +154,9 @@ in {
       "appcleaner"
       "audio-hijack"
       "brave-browser"
-      "cameracontroller" # For my Razer Kyo
       "calibre"
       "carbon-copy-cloner"
       "chromium"
-      #"chrysalis" # For the Keyboard.io Model001
       "daisydisk"
       "discord"
       "digikam"
@@ -167,6 +164,7 @@ in {
       "fission"
       "font-fira-code-nerd-font"
       "force-paste"
+      "fujifilm-tether-app"
       "gitup"
       "google-chrome"
       "handbrake"
@@ -177,6 +175,7 @@ in {
       #"kobo"
       "kodi"
       "little-snitch"
+      "livebook"
       "logseq"
       "loopback"
       #"love"
@@ -189,6 +188,7 @@ in {
       "obsidian"
       "omnifocus"
       "orbstack"
+      "orion"
       "programmer-dvorak"
       "protonvpn"
       "readwise-ibooks"
@@ -213,10 +213,7 @@ in {
 
     brews = [
       "ext4fuse"
-      "withgraphite/tap/graphite"
       "imageoptim-cli"
-      "mayeu/tap/run-one" # because of run-one
-      #"mayeu/tap/beancount-scripts"
       "pinentry-mac"
       #"siril"
       "tezos-client"
