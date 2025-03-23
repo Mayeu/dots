@@ -65,7 +65,7 @@ jobs:
           export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
 
           # Exit if the out path is empty
-          #test -z "$OUT_PATHS" && exit
+          test -z "$OUT_PATHS" && exit
 
           # Without OUT_PATHS things kind of work most of the time.
           # Thus, let just or true and exit, so that if it works, it works, if it doesn't it just ignore
@@ -84,6 +84,7 @@ jobs:
           substituters = https://cache.nixos.org/ ${{ secrets.S3_URL }}
           trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= mdots:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs=
           post-build-hook = /etc/nix/upload-to-cache.sh
+          trusted-users = $(whoami)
           EOF
 
           sudo launchctl kickstart -k system/org.nixos.nix-daemon
@@ -92,6 +93,12 @@ jobs:
         run: |
           export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
           nix build '.#devShells.aarch64-darwin.default'
+
+      - name: Simulate a direnv enter
+        run: |
+          brew install direnv
+          direnv allow
+          direnv reload
 
       - name: Build my system
         run: |
