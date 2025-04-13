@@ -500,15 +500,12 @@ in {
           "vim-lua"
           "auto-pairs" # Auto close pairs character
           "fzfWrapper"
-          "coc-nvim" # Fancy auto completion and stuff, include nodejs
           "fzf-vim"
-          "coc-fzf"
           "vim-elixir"
           "alchemist-vim"
           "tabmerge"
           "dhall-vim"
           "LanguageClient-neovim"
-          "elm-vim"
         ];
       }
     ];
