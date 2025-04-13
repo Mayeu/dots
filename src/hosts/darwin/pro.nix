@@ -350,12 +350,17 @@ in {
       {
         hostName = "purism";
         system = "x86_64-linux";
-        # TODO: not yet supported by nix-darwin ?
-        #protocol = "ssh-ng";
+        protocol = "ssh-ng";
         maxJobs = 4;
         supportedFeatures = ["kvm"];
       }
     ];
+
+    #linux-builder = {
+    #  enable = true;
+    #  maxJobs = 4;
+    #  systems = [ "x86_64-linux" ];
+    #};
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.

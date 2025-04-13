@@ -25,9 +25,43 @@ m switch
 echo "🍺 Cleanup brew cache"
 brew cleanup --prune 14
 
+#echo "🔄 Refresh all my shell.nix"
+#pushd ~/code
+#for folder in $(find "$HOME/code" -name 'shell.nix' -depth 3 -type f -execdir test ! -f flake.nix #\; -execdir pwd \;); do
+#  echo ">>> Jumping to $folder"
+#  pushd "$folder"
+#  echo ">>> Running direnv allow"
+#  direnv allow
+#  echo ">>> Running direnv reload"
+#  direnv reload
+#  echo ">>> Jumping out"
+#  popd
+#done
+#popd
+
+#echo "🔄 Refresh all my flake"
+#pushd ~/code
+#for folder in $(find "$HOME/code" -name 'flake.nix' -type f -not -path "*/node_modules/*" #-execdir pwd \;); do
+#  echo ">>> Jumping to $folder"
+#  pushd "$folder"
+#  echo ">>> Update"
+#  nix flake update
+#  echo ">>> Running direnv"
+#  direnv allow &&  direnv reload || true
+#  echo ">>> Jumping out"
+#  popd
+#done
+#popd
+
+echo "🧹 Delete old direnv drvs"
+rm -rf ~/code-des-autres/*/.direnv
+
 echo "👹 Collect nix garbage"
 nix-collect-garbage --delete-older-than 14d
 sudo nix-collect-garbage --delete-older-than 14d
+
+echo "☭ Fix the store"
+sudo nix-store --repair --verify --check-contents
 
 echo "👹 Dedup nix store"
 sudo nix store optimise
