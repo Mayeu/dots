@@ -6,17 +6,28 @@
     # Example of how to pin a nixpkgs commits
     #nixpkgs.url = "github:nixos/nixpkgs/3005f20ce0aaa58169cdee57c8aa12e5f1b6e1b3";
 
-    std.url = "github:divnix/std/369b8dc5b91becc372210ddcd73de84a294d1ee3";
-    std.inputs.nixpkgs.follows = "nixpkgs";
-    std.inputs.devshell.url = "github:numtide/devshell";
-    std.inputs.nixago.url = "github:nix-community/nixago";
+    std = {
+      #url = "github:divnix/std/369b8dc5b91becc372210ddcd73de84a294d1ee3";
+      url = "github:Mayeu/std/fix/treefmt";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.devshell.url = "github:numtide/devshell";
+      inputs.nixago.url = "github:nix-community/nixago";
+    };
 
-    darwin.url = "github:lnl7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    m.url = "gitlab:Mayeu/m";
-    m.inputs.nixpkgs.follows = "nixpkgs";
+    m = {
+      url = "gitlab:Mayeu/m";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    #nix-rosetta-builder = {
+    #  url = "github:cpick/nix-rosetta-builder";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
     # TODO: help bring tezos via nix on macOS
     #tezos.url = "github:serokell/tezos-packaging";
   };
