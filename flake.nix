@@ -24,10 +24,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #nix-rosetta-builder = {
-    #  url = "github:cpick/nix-rosetta-builder";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    nix-rosetta-builder = {
+      url = "github:cpick/nix-rosetta-builder";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # TODO: help bring tezos via nix on macOS
     #tezos.url = "github:serokell/tezos-packaging";
   };

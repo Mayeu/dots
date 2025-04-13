@@ -100,6 +100,11 @@ jobs:
           direnv allow
           direnv reload
 
+      - name: Switch to the ci system
+        run: |
+          export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
+          nix run nix-darwin/master#darwin-rebuild -- build --flake .#ci
+
       - name: Build my system
         run: |
           export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
