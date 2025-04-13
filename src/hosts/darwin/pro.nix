@@ -23,6 +23,8 @@ in {
   environment.variables.LC_ALL = "en_US.UTF-8";
   # TODO: date format, local money?
 
+  system.primaryUser = "m";
+
   # Show all files including hidden
   system.defaults.NSGlobalDomain.AppleShowAllFiles = false;
   # Show all extensions in filename
@@ -70,7 +72,7 @@ in {
   # Change default view to list view
   system.defaults.finder.FXPreferredViewStyle = "Nlsv";
   # Don't show any icons on the desktop
-  system.defaults.finder.CreateDesktop = false;
+  system.defaults.finder.CreateDesktop = true;
   # Don't warn when changing the extension of a file
   system.defaults.finder.FXEnableExtensionChangeWarning = false;
 
@@ -85,6 +87,9 @@ in {
   system.defaults.trackpad.Dragging = false;
   # Allow two finger click for right click on the trackpad
   system.defaults.trackpad.TrackpadRightClick = true;
+
+  # Calendar.app defaults
+  system.defaults.iCal."TimeZone support enabled" = true;
 
   # Custom user preferences
   system.defaults.CustomUserPreferences = {
@@ -176,6 +181,7 @@ in {
       "kodi"
       "little-snitch"
       "livebook"
+      "lm-studio"
       "logseq"
       "loopback"
       #"love"
@@ -212,7 +218,7 @@ in {
     ];
 
     brews = [
-      "ext4fuse"
+      #"ext4fuse"
       "imageoptim-cli"
       "pinentry-mac"
       #"siril"
@@ -321,6 +327,11 @@ in {
 
   nix = {
     enable = true;
+    linux-builder = {
+      enable = true;
+      config.virtualisation.cores = 4;
+    };
+
     gc = {
       interval = {
         Hour = 23;

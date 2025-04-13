@@ -65,7 +65,7 @@ jobs:
           export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
 
           # Exit if the out path is empty
-          test -z "$OUT_PATHS" && exit
+          test -z "$OUT_PATHS" && ( echo "OUT_PATHS is empty; exit)
 
           # Without OUT_PATHS things kind of work most of the time.
           # Thus, let just or true and exit, so that if it works, it works, if it doesn't it just ignore
@@ -80,14 +80,23 @@ jobs:
 
       - name: Configure Nix to use my cache
         run: |
-          cat <<EOF | sudo tee -a /etc/nix/nix.conf
+          #cat <<EOF | sudo tee -a /etc/nix/nix.conf
+          echo "NIX_CONFIG=experimental-features = nix-command flakes
           substituters = https://cache.nixos.org/ ${{ secrets.S3_URL }}
           trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= mdots:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs=
           post-build-hook = /etc/nix/upload-to-cache.sh
-          trusted-users = $(whoami)
-          EOF
+          trusted-users = $(whoami)" >> $GITHUB_ENV
+          #EOF
 
-          sudo launchctl kickstart -k system/org.nixos.nix-daemon
+          #sudo launchctl kickstart -k system/org.nixos.nix-daemon
+
+      - name: Switch to the ci system
+        run: |
+          export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
+          nix run nix-darwin/master#darwin-rebuild -- build --flake .#ci
+          mkdir -p /Users/Shared/nix/
+          sudo mv  /etc/nix/nix.conf /Users/Shared/nix/
+          sudo --preserve-env=NIX_CONFIG nix run nix-darwin/master#darwin-rebuild -- switch --flake .#ci
 
       - name: Build my devShell
         run: |

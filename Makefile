@@ -30,4 +30,4 @@ rebuild:
 	darwin-rebuild build --flake .#pro-m2
 
 switch:
-	darwin-rebuild switch --flake .#pro-m2
+	sudo darwin-rebuild switch --flake .#pro-m2
