@@ -106,8 +106,8 @@ jobs:
           nix run nix-darwin/master#darwin-rebuild -- build --flake .#ci
           mkdir -p /Users/Shared/nix/
           sudo mv  /etc/nix/nix.conf /Users/Shared/nix/
-          export NIX_CONFIG=/Users/Shared/nix/
-          sudo --preserve-env=NIX_CONFIG nix run nix-darwin/master#darwin-rebuild -- build --flake .#ci
+          export NIX_CONFIG_DIR=/Users/Shared/nix/
+          sudo --preserve-env=NIX_CONFIG_DIR nix run nix-darwin/master#darwin-rebuild -- build --flake .#ci
 
       - name: Build my system
         run: |
