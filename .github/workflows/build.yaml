@@ -103,7 +103,7 @@ jobs:
       - name: Switch to the ci system
         run: |
           export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
-          nix run nix-darwin/master#darwin-rebuild -- build --flake .#ci
+          nix run nix-darwin/master#darwin-rebuild -- switch --flake .#ci
 
       - name: Build my system
         run: |
