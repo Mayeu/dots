@@ -65,7 +65,7 @@ jobs:
           export AWS_SHARED_CREDENTIALS_FILE=/Users/Shared/.aws-credentials
 
           # Exit if the out path is empty
-          test -z "$OUT_PATHS" && exit
+          test -z "$OUT_PATHS" && ( echo "OUT_PATHS is empty; exit)
 
           # Without OUT_PATHS things kind of work most of the time.
           # Thus, let just or true and exit, so that if it works, it works, if it doesn't it just ignore
