@@ -81,6 +81,7 @@ jobs:
       - name: Configure Nix to use my cache
         run: |
           cat <<EOF | sudo tee -a /etc/nix/nix.conf
+          experimental-features = nix-command flakes
           substituters = https://cache.nixos.org/ ${{ secrets.S3_URL }}
           trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= mdots:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs=
           post-build-hook = /etc/nix/upload-to-cache.sh
