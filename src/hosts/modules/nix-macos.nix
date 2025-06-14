@@ -18,10 +18,10 @@
     linux-builder = {
       enable = true;
       systems = ["aarch64-linux"];
-      config = {
-        virtualisation.cores = 4;
-        services.openssh.enable = true;
-      };
+      #config = {
+      #  virtualisation.cores = 4;
+      #  services.openssh.enable = true;
+      #};
     };
 
     gc = {
