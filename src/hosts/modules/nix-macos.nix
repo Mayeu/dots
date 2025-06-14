@@ -8,7 +8,7 @@
     enable = true;
     linux-builder = {
       enable = true;
-      system = ["aarch64-linux"];
+      systems = ["aarch64-linux"];
       config = {
         virtualisation.cores = 4;
         services.openssh.enable = true;
