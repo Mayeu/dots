@@ -4,8 +4,17 @@
   lib,
   ...
 }: {
+  # Log access to the linux builder
+  launchd.daemons.linux-builder = {
+    serviceConfig = {
+      StandardOutPath = "/var/log/darwin-builder.log";
+      StandardErrorPath = "/var/log/darwin-builder.log";
+    };
+  };
+
   nix = {
     enable = true;
+
     linux-builder = {
       enable = true;
       systems = ["aarch64-linux"];
@@ -49,11 +58,5 @@
         supportedFeatures = ["kvm"];
       }
     ];
-
-    #linux-builder = {
-    #  enable = true;
-    #  maxJobs = 4;
-    #  systems = [ "x86_64-linux" ];
-    #};
   };
 }

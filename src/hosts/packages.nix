@@ -21,14 +21,14 @@ in {
     modules = [
       ./modules/nix-macos.nix
       ./darwin/pro.nix
-      nix-rosetta-builder.darwinModules.default
-      {
-        # see available options in module.nix's `options.nix-rosetta-builder`
-        nix-rosetta-builder = {
-          enable = true;
-          onDemand = true;
-        };
-      }
+      #nix-rosetta-builder.darwinModules.default
+      #{
+      #  # see available options in module.nix's `options.nix-rosetta-builder`
+      #  nix-rosetta-builder = {
+      #    enable = true;
+      #    onDemand = true;
+      #  };
+      #}
     ];
   };
 }
