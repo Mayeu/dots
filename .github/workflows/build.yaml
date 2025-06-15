@@ -85,7 +85,8 @@ jobs:
           substituters = https://cache.nixos.org/ ${{ secrets.S3_URL }}
           trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= mdots:h40b7TWhz9PqO04aqOAiAEEdulJ2Q9oJ3MxXQCgQVvs=
           post-build-hook = /etc/nix/upload-to-cache.sh
-          trusted-users = $(whoami)" >> $GITHUB_ENV
+          trusted-users = $(whoami)
+          access-tokens = github.com=$GITHUB_TOKEN" >> $GITHUB_ENV
           #EOF
 
           #sudo launchctl kickstart -k system/org.nixos.nix-daemon
