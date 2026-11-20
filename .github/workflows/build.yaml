@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Install Nix
-        uses: cachix/install-nix-action@v31
+        uses: cachix/install-nix-action@v32
         #with:
         #  # TODO: Remove when Nix >2.8.0 will be out (out_path bug)
         #  install_url: https://releases.nixos.org/nix/nix-2.11.1/install
